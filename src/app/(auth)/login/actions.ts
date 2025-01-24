@@ -8,7 +8,6 @@ import { createClient } from '@/utils/supabase/server'
 export async function login(formData: FormData) {
   const supabase = await createClient()
 
-  // Type-casting here for convenience
   const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
@@ -17,7 +16,7 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data)
 
   if (error) {
-    throw error // Throw error instead of returning
+    return { error: error.message }
   }
 
   revalidatePath('/', 'layout')
