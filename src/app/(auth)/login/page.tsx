@@ -5,9 +5,11 @@ import { login, signup } from './actions';
 import {getTranslations} from 'next-intl/server';
 import { useToast } from "@/components/ui/use-toast";
 import { useTranslations } from 'next-intl';
+import { Eye, EyeOff } from 'lucide-react';
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
   const t = useTranslations('Login');
 
@@ -60,14 +62,28 @@ export default function LoginPage() {
 
               {/* Password Input */}
               <div>
-                <label htmlFor='password' className='block text-sm font-medium text-gray-900'>
-                {t('password')}
-                </label>
+                <div className="flex items-center justify-between">
+                  <label htmlFor='password' className='block text-sm font-medium text-gray-900'>
+                    {t('password')}
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="text-gray-500 hover:text-gray-700"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </button>
+                </div>
                 <div className='mt-2'>
                   <input
                     id='password'
                     name='password'
-                    type='password'
+                    type={showPassword ? 'text' : 'password'}
                     required
                     autoComplete='current-password'
                     className='block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600'
