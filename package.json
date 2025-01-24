@@ -1,15 +1,12 @@
 {
-  "name": "SnapScreen",
-  "version": "0.1.0",
+  "name": "supacharger",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "NODE_OPTIONS='--trace-deprecation' next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "email:build": "email build",
-    "email:dev": "email dev --dir ./src/features/emails --port 3001",
-    "email:export": "email export",
     "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=default",
     "generate-types": "npx supabase gen types typescript --project-id vdytepbsknevxtcfzvpp --schema public > src/libs/supabase/types.ts",
     "supabase:link": "env-cmd -f ./.env.local supabase link --project-ref vdytepbsknevxtcfzvpp",
@@ -25,7 +22,6 @@
     "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-tabs": "^1.1.2",
     "@radix-ui/react-toast": "^1.2.4",
-    "@react-email/components": "^0.0.32",
     "@stripe/stripe-js": "^2.4.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.47.12",
@@ -38,7 +34,6 @@
     "next-route-handler-pipe": "^1.0.5",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "react-email": "^2.1.6",
     "react-icons": "^5.4.0",
     "resend": "^3.5.0",
     "stripe": "^14.25.0",
@@ -66,6 +61,7 @@
   },
   "overrides": {
     "@types/react": "19.0.4",
-    "@types/react-dom": "19.0.2"
+    "@types/react-dom": "19.0.2",
+     "whatwg-url": "^14.1.0"
   }
 }
