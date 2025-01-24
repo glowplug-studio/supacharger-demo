@@ -42,8 +42,14 @@ export function AccountMenu({ signOut }: { signOut: () => Promise<ActionResponse
         <IoPersonCircleOutline size={24} />
       </DropdownMenuTrigger>
       <DropdownMenuContent className='me-4'>
+      <DropdownMenuItem asChild>
+          <Link href='/dashboard'>Dashboard</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href='/account'>Account</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href='/account/billing'>Billing</Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={handleLogoutClick}>Log Out</DropdownMenuItem>
         <DropdownMenuArrow className='me-4 fill-white' />

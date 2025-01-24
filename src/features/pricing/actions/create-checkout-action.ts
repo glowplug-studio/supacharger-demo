@@ -3,22 +3,15 @@
 import { redirect } from 'next/navigation';
 
 import { getOrCreateCustomer } from '@/features/account/controllers/get-or-create-customer';
-import { getSession } from '@/features/account/controllers/get-session';
 import { Price } from '@/features/pricing/types';
 import { stripeAdmin } from '@/libs/stripe/stripe-admin';
-import { getURL } from '@/utils/get-url';
+import { getURL } from '@/utils/helpers';
 
 export async function createCheckoutAction({ price }: { price: Price }) {
   // 1. Get the user from session
-  const session = await getSession();
 
-  if (!session?.user) {
-    return redirect(`${getURL()}/signup`);
-  }
 
-  if (!session.user.email) {
-    throw Error('Could not get email');
-  }
+
 
   // 2. Retrieve or create the customer in Stripe
   const customer = await getOrCreateCustomer({

@@ -12,8 +12,8 @@ import { toast } from '@/components/ui/use-toast';
 import { ActionResponse } from '@/types/action-response';
 
 const titleMap = {
-  login: 'Login to UPDATE_THIS_WITH_YOUR_APP_DISPLAY_NAME',
-  signup: 'Join UPDATE_THIS_WITH_YOUR_APP_DISPLAY_NAME and start generating banners for free',
+  login: 'Login to process.env.CUSTOM_API_URL',
+  signup: 'Join ' + process.env.CUSTOM_API_URL + ' and start generating banners for free',
 } as const;
 
 export function AuthUI({

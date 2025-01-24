@@ -5,7 +5,10 @@ import { Container } from '@/components/container';
 import { Button } from '@/components/ui/button';
 import { PricingSection } from '@/features/pricing/components/pricing-section';
 
-export default async function HomePage() {
+import {useTranslations} from 'next-intl';
+
+export default function HomePage() {
+  const t = useTranslations('HomePage');
   return (
     <div className='flex flex-col gap-8 lg:gap-32'>
       <HeroSection />
