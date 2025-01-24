@@ -29,7 +29,7 @@ export async function Navigation() {
         <AccountMenu signOut={signOut} />
       ) : (
         <>
-          <Button variant='sexy' className='hidden flex-shrink-0 lg:flex' asChild>
+          <Button className='hidden flex-shrink-0 lg:flex' asChild>
             <Link href='/signup'>Get started for free</Link>
           </Button>
           <Sheet>
