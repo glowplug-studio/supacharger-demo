@@ -1,21 +1,24 @@
 import { login, signup } from './actions';
+import {getTranslations} from 'next-intl/server';
 
-export default function LoginPage() {
+export default async function LoginPage() {
+  const t = await getTranslations('Login');
+
   return (
     <div className='flex h-screen'>
       {/* Left Side - Form Section */}
       <div className='flex w-[40%] flex-col items-center justify-center bg-gray-100'>
         <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-          <h2 className='mt-6 text-center text-2xl font-bold tracking-tight text-gray-900'>Sign in to your account</h2>
+          <h2 className='mt-6 text-center text-2xl font-bold tracking-tight text-gray-900'>{t('title')}</h2>
         </div>
 
-        <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]'>
-          <div className='bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12'>
+        <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-[400px]'>
+          <div className='bg-white px-6 py-12 sm:rounded-2xl sm:px-12'>
             <form className='space-y-6'>
               {/* Email Input */}
               <div>
                 <label htmlFor='email' className='block text-sm font-medium text-gray-900'>
-                  Email address
+                {t('emailAddress')}
                 </label>
                 <div className='mt-2'>
                   <input
@@ -32,7 +35,7 @@ export default function LoginPage() {
               {/* Password Input */}
               <div>
                 <label htmlFor='password' className='block text-sm font-medium text-gray-900'>
-                  Password
+                {t('password')}
                 </label>
                 <div className='mt-2'>
                   <input
@@ -56,11 +59,11 @@ export default function LoginPage() {
                     className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
                   />
                   <label htmlFor='remember-me' className='block text-sm text-gray-900'>
-                    Remember me
+                  {t('rememberMe')}
                   </label>
                 </div>
                 <a href='#' className='text-sm font-semibold text-indigo-600 hover:text-indigo-500'>
-                  Forgot password?
+                {t('forgotPassword')}
                 </a>
               </div>
 
@@ -70,7 +73,7 @@ export default function LoginPage() {
                   formAction={login}
                   className='flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline focus:outline-indigo-600'
                 >
-                  Sign in
+                  {t('signIn')}
                 </button>
               </div>
             </form>
