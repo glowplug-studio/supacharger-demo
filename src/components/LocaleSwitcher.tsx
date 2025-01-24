@@ -13,7 +13,7 @@ import { Languages } from  'lucide-react'
 
 export default function LocaleSwitcher({ currentLocale }: { currentLocale: string }) {
     const handleLocaleChange = (locale: string) => {
-        document.cookie = `NEXT_LOCALE=${locale}; path=/`;
+        document.cookie = `supacharger_locale=${locale}; path=/`;
         window.location.reload(); // Reload to apply new locale
     };
 

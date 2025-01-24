@@ -4,5 +4,13 @@
     },
     "Billing": {
       "title": "Billing"
+    },
+    "Login": {
+      "title": "Sign In",
+      "emailAddress": "Email Address",
+      "password": "Password",
+      "rememberMe": "Remember Me",
+      "forgotPassword": "Forgot Password",
+      "signIn": "Sign In"
     }
   }

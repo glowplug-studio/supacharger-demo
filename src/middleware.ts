@@ -6,7 +6,7 @@ const locales = ['en', 'fr'];
 const defaultLocale = 'en';
 
 function getLocale(request: NextRequest): string {
-  const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
+  const cookieLocale = request.cookies.get('supacharger_locale')?.value;
   if (cookieLocale && locales.includes(cookieLocale)) {
       return cookieLocale;
   }
@@ -26,8 +26,8 @@ export async function middleware(request: NextRequest) {
     const response = await updateSession(request);
     const locale = getLocale(request);
 
-    if (!request.cookies.get('NEXT_LOCALE')) {
-        response.cookies.set('NEXT_LOCALE', locale, { path: '/' });
+    if (!request.cookies.get('supacharger_locale')) {
+        response.cookies.set('supacharger_locale', locale, { path: '/' });
     }
 
     return response;

@@ -14,7 +14,7 @@ export async function Navigation() {
 
    // Get the current locale from cookies
    const cookieStore = await cookies();
-   const currentLocale = cookieStore.get('NEXT_LOCALE')?.value || 'en'; // Default to 'en' if not set
+   const currentLocale = cookieStore.get('supacharger_locale')?.value || 'en'; // Default to 'en' if not set
 
    // Load translations for the current locale
    const messages = await import(`../../messages/${currentLocale}.json`).then((module) => module.default);
