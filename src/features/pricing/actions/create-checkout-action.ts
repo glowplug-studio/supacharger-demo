@@ -1,23 +1,22 @@
 'use server';
-
 import { redirect } from 'next/navigation';
-
 import { getOrCreateCustomer } from '@/features/account/controllers/get-or-create-customer';
 import { Price } from '@/features/pricing/types';
 import { stripeAdmin } from '@/libs/stripe/stripe-admin';
 import { getURL } from '@/utils/helpers';
+import { getUser } from '@/utils/supabase/server';
 
 export async function createCheckoutAction({ price }: { price: Price }) {
   // 1. Get the user from session
-
-
-
+  var userData = await getUser();
 
   // 2. Retrieve or create the customer in Stripe
   const customer = await getOrCreateCustomer({
-    userId: session.user.id,
-    email: session.user.email,
+    userId: userData.user.id,
+    email: userData.user.email,
   });
+
+
 
   // 3. Create a checkout session in Stripe
   const checkoutSession = await stripeAdmin.checkout.sessions.create({

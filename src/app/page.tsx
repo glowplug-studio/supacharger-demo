@@ -29,8 +29,8 @@ function HeroSection() {
             </span>
           </div>
           <h1>Instantly craft stunning Twitter banners.</h1>
-          <Button asChild variant='sexy'>
-            <Link href='/signup'>Get started for free</Link>
+          <Button asChild>
+            <Link href='/signup'>Sign Up</Link>
           </Button>
         </div>
       </Container>

@@ -40,8 +40,8 @@ export async function Navigation() {
               <SheetHeader>
                 <Logo />
                 <SheetDescription className='py-8'>
-                  <Button variant='sexy' className='flex-shrink-0' asChild>
-                    <Link href='/signup'>Get started for free</Link>
+                  <Button className='flex-shrink-0' asChild>
+                    <Link href='/signup'>Sgn Up</Link>
                   </Button>
                 </SheetDescription>
               </SheetHeader>

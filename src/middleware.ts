@@ -1,6 +1,5 @@
 import { type NextRequest } from 'next/server';
 import { updateSession } from '@/utils/supabase/middleware';
-import { NextResponse } from 'next/server';
 
 const locales = ['en', 'fr'];
 const defaultLocale = 'en';

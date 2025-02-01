@@ -3,8 +3,6 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { IoCheckmark } from 'react-icons/io5';
-
-import { SexyBoarder } from '@/components/sexy-boarder';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
@@ -47,7 +45,7 @@ export function PricingCard({
   const metadata = productMetadataSchema.parse(product.metadata);
   const buttonVariantMap = {
     basic: 'default',
-    pro: 'sexy',
+    pro: 'default',
     enterprise: 'orange',
   } as const;
 
