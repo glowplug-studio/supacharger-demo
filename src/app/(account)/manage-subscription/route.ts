@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation';
-
 import { getCustomerId } from '@/features/account/controllers/get-customer-id';
-import { getSession } from '@/features/account/controllers/get-session';
+import { getUser } from '@/utils/supabase/server';
 import { stripeAdmin } from '@/libs/stripe/stripe-admin';
 import { getURL } from '@/utils/helpers';
 
@@ -9,15 +8,19 @@ export const dynamic = 'force-dynamic';
 
 export async function GET() {
   // 1. Get the user from session
-  const session = await getSession();
+  const supaSession = await getUser();
 
-  if (!session || !session.user.id) {
-    throw Error('Could not get userId');
+  if ('user' in supaSession) {
+    if (!supaSession.user.id) {
+      throw new Error('Could not get userId');
+    }
+  } else {
+    throw new Error('Failed to retrieve user session');
   }
 
   // 2. Retrieve or create the customer in Stripe
   const customer = await getCustomerId({
-    userId: session.user.id,
+    userId: supaSession.user.id,
   });
 
   if (!customer) {

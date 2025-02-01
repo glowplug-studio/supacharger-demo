@@ -9,14 +9,14 @@ import { getUser } from '@/utils/supabase/server';
 
 export async function createCheckoutAction({ price }: { price: Price }) {
   // 1. Get the user from session
-  var userData = await getUser();
+  var supaSession = await getUser();
 
   // 2. Retrieve or create the customer in Stripe
   const customer = await getOrCreateCustomer({
     // @ts-ignore
-    userId: userData.user.id,
+    userId: supaSession.user.id,
     // @ts-ignore
-    email: userData.user.email,
+    email: supaSession.user.email,
   });
 
 
