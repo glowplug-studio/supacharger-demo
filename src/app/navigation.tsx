@@ -1,13 +1,16 @@
-import { isLoggedIn } from '@/utils/supabase/server';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { IoMenu } from 'react-icons/io5';
+
 import { AccountMenu } from '@/components/account-menu';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
-import { signOut } from './(auth)/auth-actions';
+import { isLoggedIn } from '@/utils/supabase/server';
+
 import LocaleSwitcher from '../components/LocaleSwitcher';
-import { cookies } from 'next/headers';
+
+import { signOut } from './(auth)/auth-actions';
 
 export async function Navigation() {
   const session = await isLoggedIn();

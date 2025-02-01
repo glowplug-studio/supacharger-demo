@@ -1,6 +1,7 @@
+import { cookies } from 'next/headers'
+
 import { createClient } from '@/utils/supabase/server';
 import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
 
 /**
  *  Get the base URL as a clean 

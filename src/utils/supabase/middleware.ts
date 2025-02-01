@@ -1,5 +1,6 @@
+import { type NextRequest,NextResponse } from 'next/server';
+
 import { createServerClient } from '@supabase/ssr';
-import { NextResponse, type NextRequest } from 'next/server';
 
 // Define an array of allowed paths that do not require session checks
 const allowedPaths = [

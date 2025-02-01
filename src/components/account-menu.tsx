@@ -2,16 +2,16 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { CircleUserRound, LogOut, Settings } from 'lucide-react';
 import { IoPersonCircleOutline } from 'react-icons/io5';
-import { LogOut, CircleUserRound, Settings } from 'lucide-react';
 
 import {
   DropdownMenu,
   DropdownMenuArrow,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { ActionResponse } from '@/types/action-response';
 

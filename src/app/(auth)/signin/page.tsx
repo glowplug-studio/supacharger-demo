@@ -1,11 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { login, signup } from './actions';
-import {getTranslations} from 'next-intl/server';
-import { useToast } from "@/components/ui/use-toast";
 import { useTranslations } from 'next-intl';
+import {getTranslations} from 'next-intl/server';
 import { Eye, EyeOff } from 'lucide-react';
+
+import { useToast } from "@/components/ui/use-toast";
+
+import { login, signup } from './actions';
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);

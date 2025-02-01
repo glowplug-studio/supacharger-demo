@@ -1,5 +1,7 @@
 'use client';
 
+import { Languages } from  'lucide-react'
+
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -8,7 +10,6 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Languages } from  'lucide-react'
 
 
 export default function LocaleSwitcher({ currentLocale }: { currentLocale: string }) {

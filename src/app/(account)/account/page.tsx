@@ -1,5 +1,6 @@
 import { PropsWithChildren, ReactNode } from 'react';
 import { redirect } from 'next/navigation';
+
 import { getSession } from '@/features/account/controllers/get-session';
 import { getSubscription } from '@/features/account/controllers/get-subscription';
 import { getProducts } from '@/features/pricing/controllers/get-products';

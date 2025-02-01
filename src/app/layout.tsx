@@ -1,15 +1,15 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
-import Link from 'next/link';
-import { IoLogoFacebook, IoLogoInstagram, IoLogoTwitter } from 'react-icons/io5';
 import { cookies } from 'next/headers';
+import Link from 'next/link';
+import { NextIntlClientProvider } from 'next-intl';
+import { IoLogoFacebook, IoLogoInstagram, IoLogoTwitter } from 'react-icons/io5';
+
 import { Logo } from '@/components/logo';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
-import { NextIntlClientProvider } from 'next-intl';
-
 
 import { Navigation } from './navigation';
 

@@ -1,6 +1,6 @@
-import { createClient } from '@/utils/supabase/server'
-
 import {getTranslations} from 'next-intl/server';
+
+import { createClient } from '@/utils/supabase/server'
 
 export default async function Dashboard() {
 
