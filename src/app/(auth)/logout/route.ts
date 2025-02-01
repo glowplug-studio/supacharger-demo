@@ -18,5 +18,5 @@ export async function GET() {
     }
 
     // Redirect to the login page after logging out
-    return NextResponse.redirect('/login');
+    return NextResponse.redirect('/signin');
 }

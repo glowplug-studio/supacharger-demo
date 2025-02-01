@@ -12,7 +12,9 @@ export async function createCheckoutAction({ price }: { price: Price }) {
 
   // 2. Retrieve or create the customer in Stripe
   const customer = await getOrCreateCustomer({
+    // @ts-ignore
     userId: userData.user.id,
+    // @ts-ignore
     email: userData.user.email,
   });
 

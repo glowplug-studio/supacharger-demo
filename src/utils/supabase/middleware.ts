@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 
 // Define an array of allowed paths that do not require session checks
 const allowedPaths = [
-    '/login',
+    '/signin',
     '/signup',
     '/public', 
     // Add any other paths you want to allow
@@ -52,7 +52,7 @@ export async function updateSession(request: NextRequest) {
     if (!user && !isAllowedPath) {
         // No user and not an allowed path, potentially respond by redirecting the user to the login page
         const url = request.nextUrl.clone();
-        url.pathname = '/login';
+        url.pathname = '/signin';
         return NextResponse.redirect(url);
     }
 
