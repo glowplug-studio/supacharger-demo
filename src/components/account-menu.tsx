@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { IoPersonCircleOutline } from 'react-icons/io5';
-import { LogOut, CreditCard, CircleUserRound, Settings } from 'lucide-react';
+import { LogOut, CircleUserRound, Settings } from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -49,9 +49,6 @@ export function AccountMenu({ signOut }: { signOut: () => Promise<ActionResponse
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href='/account'><Settings size="14" className='mr-2' /> My Account</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href='/account/billing'><CreditCard  size="14" className='mr-2' /> Billing</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogoutClick}><LogOut size="14" className='mr-2' /> Log Out</DropdownMenuItem>
