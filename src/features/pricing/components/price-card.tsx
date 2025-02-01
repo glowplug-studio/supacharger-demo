@@ -54,7 +54,7 @@ export function PricingCard({
   }
 
   return (
-    <WithSexyBorder variant={metadata.priceCardVariant} className='w-full flex-1'>
+    <div className='w-full flex-1'>
       <div className='flex w-full flex-col rounded-md border border-zinc-800 bg-black p-4 lg:p-8'>
         <div className='p-4'>
           <div className='mb-1 text-center font-alt text-xl font-bold'>{product.name}</div>
@@ -100,7 +100,7 @@ export function PricingCard({
           </div>
         )}
       </div>
-    </WithSexyBorder>
+    </div>
   );
 }
 
@@ -111,22 +111,6 @@ function CheckItem({ text }: { text: string }) {
       <p className='text-sm font-medium text-white first-letter:capitalize'>{text}</p>
     </div>
   );
-}
-
-export function WithSexyBorder({
-  variant,
-  className,
-  children,
-}: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant: PriceCardVariant }) {
-  if (variant === 'pro') {
-    return (
-      <SexyBoarder className={className} offset={100}>
-        {children}
-      </SexyBoarder>
-    );
-  } else {
-    return <div className={className}>{children}</div>;
-  }
 }
 
 function PricingSwitch({ onChange }: { onChange: (value: BillingInterval) => void }) {

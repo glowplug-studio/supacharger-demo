@@ -105,7 +105,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
          <body className={cn('font-sans antialiased', figtree.variable)}>
             <NextIntlClientProvider messages={messages}>
                <div className="m-auto flex h-full flex-col">
-                  <AppBar />
+                  <div className='container'>
+                    <AppBar />
+                  </div>
                   <main className="relative flex-1">
                      <div className="relative h-full">{children}</div>
                   </main>
@@ -121,7 +123,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 
 async function AppBar() {
    return (
-      <header className="container flex items-center justify-between py-8  px-4">
+      <header className="flex items-center justify-between py-8">
          <Logo />
          <Navigation />
       </header>

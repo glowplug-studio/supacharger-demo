@@ -1,6 +1,7 @@
 {
-    "HomePage": {
-      "title": "Bojour monde! je teme le chats"
+    "AuthedFeed": {
+      "title": "Fil d'actualité",
+      "explainer": "Des nouvelles codées en dur provenant d'utilisateurs que vous ne suivez pas vraiment."
     },
     "Billing": {
       "title": "Facturation"

@@ -29,8 +29,11 @@ export async function Navigation() {
         <AccountMenu signOut={signOut} />
       ) : (
         <>
-          <Button className='hidden flex-shrink-0 lg:flex' asChild>
-            <Link href='/signup'>Get started for free</Link>
+        <Button className='hidden flex-shrink-0 lg:flex' asChild>
+            <Link href='/signin'>Sign in</Link>
+          </Button>
+          <Button className='hidden flex-shrink-0 lg:flex bg-green-800' asChild>
+            <Link href='/signup'>Crete Account</Link>
           </Button>
           <Sheet>
             <SheetTrigger className='block lg:hidden'>
@@ -41,7 +44,7 @@ export async function Navigation() {
                 <Logo />
                 <SheetDescription className='py-8'>
                   <Button className='flex-shrink-0' asChild>
-                    <Link href='/signup'>Sgn Up</Link>
+                    <Link href='/signup'>Sign Up</Link>
                   </Button>
                 </SheetDescription>
               </SheetHeader>
