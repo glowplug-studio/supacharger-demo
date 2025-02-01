@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { IoPersonCircleOutline } from 'react-icons/io5';
+import { LogOut, CreditCard, CircleUserRound, Settings } from 'lucide-react';
 
 import {
   DropdownMenu,
@@ -10,6 +11,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { ActionResponse } from '@/types/action-response';
 
@@ -41,17 +43,18 @@ export function AccountMenu({ signOut }: { signOut: () => Promise<ActionResponse
       <DropdownMenuTrigger className='rounded-full'>
         <IoPersonCircleOutline size={24} />
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='me-4'>
-      <DropdownMenuItem asChild>
-          <Link href='/dashboard'>Dashboard</Link>
+        <DropdownMenuContent className='me-4'>
+        <DropdownMenuItem asChild>
+        <Link href='/profile'><CircleUserRound size="14" className='mr-2' />My Profile</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href='/account'>Account</Link>
+          <Link href='/account'><Settings size="14" className='mr-2' /> My Account</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href='/account/billing'>Billing</Link>
+          <Link href='/account/billing'><CreditCard  size="14" className='mr-2' /> Billing</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleLogoutClick}>Log Out</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={handleLogoutClick}><LogOut size="14" className='mr-2' /> Log Out</DropdownMenuItem>
         <DropdownMenuArrow className='me-4 fill-white' />
       </DropdownMenuContent>
     </DropdownMenu>
