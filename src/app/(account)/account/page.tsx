@@ -1,19 +1,16 @@
 import { PropsWithChildren, ReactNode } from 'react';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
-
-import { Button } from '@/components/ui/button';
 import { getSession } from '@/features/account/controllers/get-session';
 import { getSubscription } from '@/features/account/controllers/get-subscription';
-import { PricingCard } from '@/features/pricing/components/price-card';
 import { getProducts } from '@/features/pricing/controllers/get-products';
 import { Price, ProductWithPrices } from '@/features/pricing/types';
+
 
 export default async function AccountPage() {
   const [session, subscription, products] = await Promise.all([getSession(), getSubscription(), getProducts()]);
 
   if (!session) {
-    redirect('/login');
+    redirect('/signin');
   }
 
   let userProduct: ProductWithPrices | undefined;
@@ -78,6 +75,8 @@ function classNames(...classes: string[]): string {
 
           <hr></hr>
           <h2 className='text-xl'>Privacy</h2>
+
+          
 
           <hr></hr>
           <h2 className='text-xl'>Cancel Account</h2>

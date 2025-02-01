@@ -13,7 +13,7 @@ export default async function BillingPage() {
   const [session, subscription, products] = await Promise.all([getSession(), getSubscription(), getProducts()]);
 
   if (!session) {
-    redirect('/login');
+    redirect('/signin');
   }
 
   let userProduct: ProductWithPrices | undefined;
