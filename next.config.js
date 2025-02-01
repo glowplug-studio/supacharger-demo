@@ -10,6 +10,9 @@ const nextConfig = {
     env: {
         SITE_TITLE: 'Supacharger Starter',
     },
+    images: {
+        domains: ['images.unsplash.com'],
+      },
 };
 
 module.exports = withNextIntl(nextConfig);
