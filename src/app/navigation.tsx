@@ -1,4 +1,4 @@
-import { isLoggedIn } from '@/utils/helpers';
+import { isLoggedIn } from '@/utils/supabase/server';
 import Link from 'next/link';
 import { IoMenu } from 'react-icons/io5';
 import { AccountMenu } from '@/components/account-menu';

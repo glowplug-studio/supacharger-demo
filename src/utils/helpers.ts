@@ -16,35 +16,3 @@ export function getURL(path = '') {
     // Return the full URL.
     return cleanPath ? `${formattedURL}/${cleanPath}` : formattedURL;
   }
-
-  /**
- * Gets the user session
- * @returns {Object} The user data object or an error object.
- */
-export async function getUser() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.getUser();
-
-  if (error) {
-    console.log(error);
-    return (error);
-  }
-
-  return data;
-}
-
-/**
- * Check if there is a user session
- * @returns {boolean} `true` if the user session is valid, `false` 
- */
-export async function isLoggedIn() {
-  const supabase = await createClient();
-  const { data, error } = await supabase.auth.getUser();
-
-  if (error) {
-    console.log(error);
-    return (false);
-  }
-  
-  return (data.user.aud == 'authenticated') ? true : false; // (data == 'authenticated')? true : false;
-}
