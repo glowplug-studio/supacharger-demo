@@ -212,7 +212,13 @@ function HeroSection() {
                       <p className='mt-5 line-clamp-3 text-sm/6 '>{post.description}</p>
                     </div>
                     <div className='relative mt-8 flex items-center gap-x-4'>
-                      <img alt='' src={post.author.imageUrl} className='size-10 rounded-full bg-gray-600' />
+                      <Image
+                        alt=""
+                        src={post.author.imageUrl}
+                        className="size-10 rounded-full bg-gray-600"
+                        width={40}
+                        height={40}
+                      />
                       <div className='text-sm/6'>
                         <p className='font-semibold '>
                           <a href={post.author.href}>
