@@ -1,14 +1,10 @@
 // app/(auth)/logout/route.ts
 import { NextResponse } from 'next/server';
-
-import { createServerClient } from '@supabase/ssr';
+import { createClient } from '@/utils/supabase/server';
 
 export async function GET() {
     // Create Supabase client
-    const supabase = createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    );
+    const supabase = await createClient();
 
     // Sign out the user
     const { error } = await supabase.auth.signOut();
