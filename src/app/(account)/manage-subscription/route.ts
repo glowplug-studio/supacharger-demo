@@ -1,8 +1,9 @@
 import { redirect } from 'next/navigation';
+
 import { getCustomerId } from '@/features/account/controllers/get-customer-id';
-import { getUser } from '@/utils/supabase/server';
 import { stripeAdmin } from '@/libs/stripe/stripe-admin';
 import { getURL } from '@/utils/helpers';
+import { getUser } from '@/utils/supabase/server';
 
 export const dynamic = 'force-dynamic';
 
