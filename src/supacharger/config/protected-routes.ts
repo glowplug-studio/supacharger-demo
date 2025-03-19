@@ -6,6 +6,7 @@ export const noSessionUserAllowedPaths = [
     '/pricing',
     '/about',
     '/signin-magic',
+    '/',
     // Add any other paths you want to allow
 ];
 

@@ -25,7 +25,9 @@ export async function updateSession(request: NextRequest) {
           supabaseResponse = NextResponse.next({
             request,
           });
-          cookiesToSet.forEach(({ name, value, options }) => supabaseResponse.cookies.set(name, value, options));
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          );
         },
       },
     }
@@ -43,10 +45,20 @@ export async function updateSession(request: NextRequest) {
 
   // Check if the current path is in the allowed paths
   const pathname = request.nextUrl.pathname;
-  const isAllowedPath = noSessionUserAllowedPaths.some((path) => pathname.startsWith(path));
+  const isAllowedPath = noSessionUserAllowedPaths.some((path) => {
+    // Check for exact matches first
+    if (path === pathname) return true;
+    // Ignore root for startsWith check
+    if (path === '/') return false; 
+    return pathname.startsWith(path);
+  });
 
   // Redirect logged-in users from restricted paths
-  if (user && sessionUserDisallowedPaths.some((path) => pathname.startsWith(path))) {
+  if (user && sessionUserDisallowedPaths.some((path) => {
+    // Check for exact matches first
+    if (path === pathname) return true;
+    return pathname.startsWith(path);
+  })) {
     const url = request.nextUrl.clone();
     url.pathname = authedRedirectDestinaton;
     return NextResponse.redirect(url);
