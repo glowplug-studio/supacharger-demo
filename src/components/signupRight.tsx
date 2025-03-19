@@ -17,7 +17,7 @@ const slides: Slide[] = [
     id: 2,
     title: 'Powerful Features',
     slideStyle: {
-      backgroundImage: 'url(https://images.unsplash.com/photo-1688236043405-f0382db8ad3e?w=2000)',
+      backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1688236043405-f0382db8ad3e?w=2000)',
     },
     slideClasses: 'bg-gre-200 bg-center bg-cover',
     content: `
@@ -48,7 +48,8 @@ const slides: Slide[] = [
     id: 4,
     title: 'Get Started Today',
     slideStyle: {
-      backgroundImage: 'url(https://images.unsplash.com/photo-1727602483165-f9327b007a91?w=2500)',
+      backgroundImage:
+        'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1727602483165-f9327b007a91?w=2500)',
     },
     slideClasses: 'bg-gre-200 bg-center bg-cover',
     content: `
