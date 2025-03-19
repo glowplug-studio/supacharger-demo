@@ -112,32 +112,3 @@ export default async function RootLayout({ children }: PropsWithChildren) {
       </html>
    );
 }
-
-async function AppBar() {
-   return (
-      <header className="flex items-center justify-between py-8">
-         <Logo />
-         <Navigation />
-      </header>
-   );
-}
-
-function Footer() {
-   return (
-    <footer className="bg-gray-900">
-      <div className="mx-auto px-6 py-8 md:flex md:items-center md:justify-between lg:px-8">
-        <div className="flex justify-center gap-x-6 md:order-2">
-          {navigation.map((item) => (
-            <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-300">
-              <span className="sr-only">{item.name}</span>
-              <item.icon aria-hidden="true" className="size-6" />
-            </a>
-          ))}
-        </div>
-        <p className="mt-8 text-center  text-gray-400 md:order-1 md:mt-0">
-        Copyright {new Date().getFullYear()} &copy; {site_title}. Developed in Thailand by <Link className='font-bold' href="https://glowplug.studio">Glowplug</Link>
-        </p>
-      </div>
-    </footer>
-   );
-}

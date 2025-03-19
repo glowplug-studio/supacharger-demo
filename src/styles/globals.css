@@ -108,4 +108,18 @@
     @apply hover:underline;
     @apply font-bold
   }
+
+  .btn {
+    @apply inline-flex;
+    @apply justify-between;
+    @apply items-center;
+    @apply rounded-md;
+    @apply hover:bg-indigo-500;
+    @apply px-5;
+    @apply py-3;
+    @apply focus-visible:outline-2;
+    @apply focus-visible:outline-offset-2;
+    @apply focus-visible:outline-indigo-600;
+  }
 }
+

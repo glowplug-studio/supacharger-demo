@@ -1,7 +1,7 @@
 'use client';
 
 import { Logo } from '@/components/logo';
-import { SingupForm } from '@/supacharger/components/signupForm';
+import { SingupForm } from '@/supacharger/components/forms/signupForm';
 import { SignupRight } from '@/components/signupRight';
 
 export default function SignUp() {

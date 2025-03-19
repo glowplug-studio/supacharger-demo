@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { LogIn, Eye, EyeOff } from 'lucide-react';
+import { CircleArrowRight, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -57,6 +57,14 @@ export function SingupForm() {
   return (
     <>
       <h2 className='mb-8 text-2xl/9 font-bold tracking-tight text-gray-700'>Create an Account</h2>
+
+      <Link
+        href='/signin'
+        className='flex w-full justify-between rounded bg-gray-100  px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-200 hover:no-underline'
+      >
+        <span className='font-normal'>I already have an account</span>
+        <span className=''>Sign In</span>
+      </Link>
 
       <div className='mt-6 grid grid-cols-2 gap-4'>
         <a
@@ -157,7 +165,7 @@ export function SingupForm() {
               name='password'
               type={showPassword ? 'text' : 'password'}
               required
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none'
+              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none  mt-2'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -184,7 +192,7 @@ export function SingupForm() {
               name='password-again'
               type='password'
               required
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none'
+              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none mt-2'
               value={retypePassword}
               onChange={(e) => setRetypePassword(e.target.value)}
             />
@@ -192,32 +200,17 @@ export function SingupForm() {
         </motion.div>
 
         <div>
-          <button
-            type='submit'
-            className='shadow-xs flex w-full justify-center rounded-md bg-primary px-3  py-1.5 font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-          >
-            Sign Up
+          <button type='submit' className='btn w-full bg-primary text-white'>
+            Sign Up <CircleArrowRight size={18} className='' />
           </button>
 
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className={`shadow-xs flex w-full justify-center rounded-md bg-primary px-3  py-1.5 font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+            className={`shadow-xs flex w-full justify-between bg-primary font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
           />
         </div>
       </form>
-
-      <div className='mt-6'>
-        <Link
-          href='/signin'
-          className='flex w-full appearance-none justify-between rounded bg-gray-100  px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-200 hover:no-underline'
-        >
-          <span className='text-normal'>I already have an account</span>
-          <span className='font-bold'>
-            Sign In <LogIn size={14} className='inline' />
-          </span>
-        </Link>
-      </div>
     </>
   );
 }
