@@ -47,7 +47,7 @@ export default async function Dashboard() {
           </div>
         </div>
         <div className="mt-6 hidden min-w-0 flex-1 sm:block md:hidden">
-          <h1 className="truncate text-2xl font-bold text-gray-900">{data.user.email}</h1>
+          <h1 className="truncate text-2xl font-bold text-gray-700">{data.user.email}</h1>
         </div>
       </div>
     </div>

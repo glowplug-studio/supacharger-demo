@@ -39,7 +39,7 @@ export default function LoginPage() {
           {/* Left Side - Form Section */}
           <div className='flex w-[40%] flex-col items-center justify-center bg-gray-100'>
             <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-              <h2 className='mt-6 text-center text-2xl font-bold tracking-tight text-gray-900'>{t('title')}</h2>
+              <h2 className='mt-6 text-center text-2xl font-bold tracking-tight text-gray-700'>{t('title')}</h2>
             </div>
 
             <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-[400px]'>
@@ -50,7 +50,7 @@ export default function LoginPage() {
                 }} className='space-y-6'>
                   {/* Email Input */}
                   <div>
-                    <label htmlFor='email' className='block text-sm font-medium text-gray-900'>
+                    <label htmlFor='email' className='block text-sm font-medium text-gray-700'>
                     {t('emailAddress')}
                     </label>
                     <div className='mt-2'>
@@ -60,7 +60,7 @@ export default function LoginPage() {
                         name='email'
                         required
                         autoComplete='email'
-                        className='block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600'
+                        className='block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-700 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600'
                       />
                     </div>
                   </div>
@@ -68,7 +68,7 @@ export default function LoginPage() {
                   {/* Password Input */}
                   <div>
                     <div className="flex items-center justify-between">
-                      <label htmlFor='password' className='block text-sm font-medium text-gray-900'>
+                      <label htmlFor='password' className='block text-sm font-medium text-gray-700'>
                         {t('password')}
                       </label>
                       <button
@@ -91,7 +91,7 @@ export default function LoginPage() {
                         type={showPassword ? 'text' : 'password'}
                         required
                         autoComplete='current-password'
-                        className='block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600'
+                        className='block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-700 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600'
                       />
                     </div>
                   </div>
@@ -105,7 +105,7 @@ export default function LoginPage() {
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300  focus:ring-indigo-500'
                       />
-                      <label htmlFor='remember-me' className='block text-sm text-gray-900'>
+                      <label htmlFor='remember-me' className='block text-sm text-gray-700'>
                       {t('rememberMe')}
                       </label>
                     </div>
@@ -142,7 +142,7 @@ export default function LoginPage() {
                 <div className="mt-6 grid grid-cols-2 gap-4">
                       <a
                         href="#"
-                        className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
+                        className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
                       >
                         <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
                           <path
@@ -167,7 +167,7 @@ export default function LoginPage() {
 
                       <a
                         href="#"
-                        className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
+                        className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
                       >
                         <svg fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" className="size-5 fill-[#24292F]">
                           <path

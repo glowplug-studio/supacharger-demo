@@ -22,7 +22,7 @@ export function Logo({ showSiteTitle, darkMode }: LogoProps) {
       {
         showSiteTitle ? (
           <span
-          className={`${darkMode ? 'text-white' : 'text-gray-900'} text-xl font-semibold`}
+          className={`${darkMode ? 'text-white' : 'text-gray-700'} text-xl font-semibold`}
         >
           {site_title}
         </span>
