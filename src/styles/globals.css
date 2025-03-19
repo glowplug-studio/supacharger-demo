@@ -114,7 +114,7 @@
     @apply justify-between;
     @apply items-center;
     @apply rounded-md;
-    @apply hover:bg-indigo-500;
+    @apply hover:bg-secondary;
     @apply px-5;
     @apply py-3;
     @apply focus-visible:outline-2;

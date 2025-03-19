@@ -5,7 +5,7 @@ const slides: Slide[] = [
     id: 1,
     title: 'Welcome to Our Platform',
     content: `
-      <p class="text-xl mb-4">Experience the next generation of web development with our cutting-edge solutions.</p>
+      <p class="text-xl mb-4">Praesent pulvinar ligula a venenatis varius. Sed et ligula arcu. Class aptent taciti sociosqu.</p>
       <ul class="list-disc list-inside space-y-2">
         <li>Seamless Integration</li>
         <li>Advanced Features</li>
@@ -15,45 +15,45 @@ const slides: Slide[] = [
   },
   {
     id: 2,
-    title: 'Powerful Features',
+    title: 'Did you know...',
     slideStyle: {
       backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1688236043405-f0382db8ad3e?w=2000)',
     },
     slideClasses: 'bg-gre-200 bg-center bg-cover',
     content: `
-      <p class="text-xl mb-4">Unlock the full potential of your applications with our comprehensive toolkit.</p>
+      <p class="text-xl mb-4">Phasellus eleifend lorem at urna suscipit luctus. Mauris dapibus purus quis felis aliquet, at egestas odio tempus.</p>
       <div class="grid grid-cols-2 gap-4">
       </div>
     `,
   },
   {
     id: 3,
-    title: 'Powerful Features',
+    title: 'Get a Year Free',
     slideClasses: 'bg-green-700',
     content: `
-      <p class="text-xl mb-4">Unlock the full potential of your applications with our comprehensive toolkit.</p>
-      <div class="grid grid-cols-2 gap-4">
+      <p class="text-xl mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat mauris quis quam tempus cursus. Sed vulputate euismod est, nec elementum orci pharetra ut.</p>
+      <div class="grid grid-cols-2 gap-5">
         <div>
-          <h3 class="font-semibold mb-2">Development</h3>
-          <p>Fast and efficient development workflow</p>
+          <h3 class="font-semibold mb-2">Etiam Orci</h3>
+          <p>Nunc eu finibus mauris. Phasellus eleifend lorem at urna suscipit luctus. </p>
         </div>
         <div>
-          <h3 class="font-semibold mb-2">Deployment</h3>
-          <p>Simple and reliable deployment process</p>
+          <h3 class="font-semibold mb-2">Donec et Turpis</h3>
+          <p>Cras velit augue, sagittis et orci ut, hendrerit mattis nibh.</p>
         </div>
       </div>
     `,
   },
   {
     id: 4,
-    title: 'Get Started Today',
+    title: 'Take Off Today!',
     slideStyle: {
       backgroundImage:
         'linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1727602483165-f9327b007a91?w=2500)',
     },
     slideClasses: 'bg-gre-200 bg-center bg-cover',
     content: `
-      <p class="text-xl mb-4">Join thousands of developers who trust our platform.</p>
+      <p class="text-xl mb-4">Join thousands of users who trust our platform.</p>
     `,
   },
 ];
