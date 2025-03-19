@@ -11,7 +11,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
 
-import { Navigation } from './navigation';
+import { Navigation } from '../navigation';
 
 import '@/styles/globals.css';
 
@@ -98,18 +98,21 @@ export default async function RootLayout({ children }: PropsWithChildren) {
    const cookieStore = await cookies();
    const currentLocale = cookieStore.get('supacharger_locale')?.value || 'en'; // Default to 'en' if not set
    // Load translations for the current locale
-   const messages = await import(`../../messages/${currentLocale}.json`).then((module) => module.default);
+   const messages = await import(`../../../messages/${currentLocale}.json`).then((module) => module.default);
 
    return (
-      <html lang={currentLocale}>
-         <body className={cn('font-sans antialiased', figtree.variable)}>
-            <NextIntlClientProvider messages={messages}>
-            {children}
-               <Toaster />
-               <Analytics />
-            </NextIntlClientProvider>
-         </body>
-      </html>
+     
+               <div className="m-auto flex h-full flex-col">
+                  <div className='container'>
+                    <AppBar />
+                  </div>
+                  <main className="relative flex-1">
+                     <div className="relative h-full">{children}</div>
+                  </main>
+                  <Footer />
+               </div>
+     
+    
    );
 }
 

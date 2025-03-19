@@ -57,8 +57,8 @@ function classNames(...classes: string[]): string {
               <a
                 href={item.href}
                 className={classNames(
-                  item.current ? 'bg-gray-50 text-indigo-600' : 'text-white hover:bg-gray-50 hover:text-indigo-600',
-                  'group flex gap-x-3 rounded-md p-2 pl-3 text-sm/6 font-semibold',
+                  item.current ? 'bg-gray-50 ' : 'text-white hover:bg-gray-50 ',
+                  'group flex gap-x-3 rounded-md p-2 pl-3  font-semibold',
                 )}
               >
                  <CreditCard  size="14" className='mr-2' />

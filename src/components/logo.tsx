@@ -1,11 +1,13 @@
-import Image from 'next/image';
 import Link from 'next/link';
+interface LogoProps {
+  showSiteTitle?: boolean | null;
+  darkMode?: boolean | null;
+}
 
-export function Logo() {
+export function Logo({ showSiteTitle, darkMode }: LogoProps) {
   const site_title = process.env.SITE_TITLE;
 
   return (
-
     <Link href='/' className='flex w-fit items-center gap-2'>
       <svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="45" height="45" rx="12.2855" fill="#333333"/>
@@ -17,8 +19,15 @@ export function Logo() {
       </linearGradient>
       </defs>
       </svg>
-
-      <span className='font-alt text-xl text-white font-semibold'>{site_title}</span>
+      {
+        showSiteTitle ? (
+          <span
+          className={`${darkMode ? 'text-white' : 'text-gray-900'} text-xl font-semibold`}
+        >
+          {site_title}
+        </span>
+      ) : null 
+      }
     </Link>
   );
 }

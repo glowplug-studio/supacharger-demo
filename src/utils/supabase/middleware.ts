@@ -6,8 +6,10 @@ import { createServerClient } from '@supabase/ssr';
 const allowedPaths = [
     '/signin',
     '/signup',
-    '/public',
-    '/api/webhooks'
+    '/api/webhooks',
+    '/pricing',
+    '/about',
+    '/signin-magic'
     // Add any other paths you want to allow
 ];
 

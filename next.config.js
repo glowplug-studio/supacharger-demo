@@ -8,7 +8,7 @@ const nextConfig = {
         removeConsole: process.env.NODE_ENV === 'production',
       },
     env: {
-        SITE_TITLE: 'Supacharger Starter',
+        SITE_TITLE: 'Supacharger',
     },
     images: {
         domains: ['images.unsplash.com'],

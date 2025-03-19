@@ -35,8 +35,7 @@ export default function LoginPage() {
   return (
     <div className="flex">
       {/* Left Side - Form Section */}
-      <div className="flex-1">
-        <div className='flex h-screen'>
+      <div className='flex flex-1 h-screen'>
           {/* Left Side - Form Section */}
           <div className='flex w-[40%] flex-col items-center justify-center bg-gray-100'>
             <div className='sm:mx-auto sm:w-full sm:max-w-md'>
@@ -104,13 +103,13 @@ export default function LoginPage() {
                         id='remember-me'
                         name='remember-me'
                         type='checkbox'
-                        className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                        className='h-4 w-4 rounded border-gray-300  focus:ring-indigo-500'
                       />
                       <label htmlFor='remember-me' className='block text-sm text-gray-900'>
                       {t('rememberMe')}
                       </label>
                     </div>
-                    <a href='#' className='text-sm font-semibold text-indigo-600 hover:text-indigo-500'>
+                    <a href='#' className='text-sm font-semibold  hover:text-indigo-500'>
                     {t('forgotPassword')}
                     </a>
                   </div>
@@ -163,7 +162,7 @@ export default function LoginPage() {
                             fill="#34A853"
                           />
                         </svg>
-                        <span className="text-sm/6 font-semibold">Google</span>
+                        <span className=" font-semibold">Google</span>
                       </a>
 
                       <a
@@ -177,7 +176,7 @@ export default function LoginPage() {
                             fillRule="evenodd"
                           />
                         </svg>
-                        <span className="text-sm/6 font-semibold">Facebook</span>
+                        <span className=" font-semibold">Facebook</span>
                       </a>
                     </div>
 
@@ -186,19 +185,10 @@ export default function LoginPage() {
             </div>
           </div>
         </div>
-      </div>
 
       {/* Right Side - Image Section */}
-      <div
-        className='h-screen w-[60%] bg-cover bg-center'
-        style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1727602483165-f9327b007a91)' }}
-      >
-        <Image
-          alt=""
-          src="https://images.unsplash.com/photo-1727602483165-f9327b007a91"
-          layout="fill"
-          objectFit="cover"
-        />
+      <div className='h-screen w-[60%] bg-cover bg-center' style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1727602483165-f9327b007a91)' }}>
+        
       </div>
     </div>
   );

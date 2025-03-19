@@ -1,5 +1,6 @@
 'use client';
 
+import { Logo } from '@/components/logo';
 import { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,12 +12,8 @@ import { Input } from '@/components/ui/input';
 import { toast } from '@/components/ui/use-toast';
 import { ActionResponse } from '@/types/action-response';
 
-const titleMap = {
-  login: 'Login to process.env.CUSTOM_API_URL',
-  signup: 'Join ' + process.env.CUSTOM_API_URL + ' and start generating banners for free',
-} as const;
 
-export function AuthUI({
+export function SigninMagicUI({
   mode,
   signInWithOAuth,
   signInWithEmail,
@@ -64,10 +61,9 @@ export function AuthUI({
   }
 
   return (
-    <section className='mt-16 flex w-full flex-col gap-16 rounded-lg bg-black p-10 px-4 text-center'>
+    <section className='mt-16 flex w-full flex-col gap-16  p-10 px-4 text-center'>
       <div className='flex flex-col gap-4'>
-        <Image src='/logo.png' width={80} height={80} alt='' className='m-auto' />
-        <h1 className='text-lg'>{titleMap[mode]}</h1>
+      <Logo showSiteTitle={true} darkMode={true}></Logo>
       </div>
       <div className='flex flex-col gap-4'>
         <button

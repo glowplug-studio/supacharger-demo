@@ -77,6 +77,9 @@ const config: Config = {
         'accordion-up': 'accordion-up 0.2s ease-out',
         'spin-slow': 'spin 10s linear infinite',
       },
+      backgroundImage: {
+        'sc-gradient': 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],
