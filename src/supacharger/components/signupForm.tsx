@@ -61,7 +61,7 @@ export function SingupForm() {
       <div className='mt-6 grid grid-cols-2 gap-4'>
         <a
           href='#'
-          className='shadow-xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
+          className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
         >
           <svg viewBox='0 0 24 24' aria-hidden='true' className='h-5 w-5'>
             <path
@@ -86,7 +86,7 @@ export function SingupForm() {
 
         <a
           href='#'
-          className='shadow-xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
+          className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
         >
           <svg fill='currentColor' viewBox='0 0 20 20' aria-hidden='true' className='size-5 fill-[#24292F]'>
             <path
@@ -122,7 +122,7 @@ export function SingupForm() {
               name='name'
               type='text'
               required
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none'
+              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden'
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -140,7 +140,7 @@ export function SingupForm() {
               type='email'
               required
               autoComplete='email'
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none'
+              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -157,7 +157,7 @@ export function SingupForm() {
               name='password'
               type={showPassword ? 'text' : 'password'}
               required
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none'
+              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -184,7 +184,7 @@ export function SingupForm() {
               name='password-again'
               type='password'
               required
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none'
+              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden'
               value={retypePassword}
               onChange={(e) => setRetypePassword(e.target.value)}
             />
@@ -194,7 +194,7 @@ export function SingupForm() {
         <div>
           <button
             type='submit'
-            className='shadow-xs flex w-full justify-center rounded-md bg-primary px-3  py-1.5 font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+            className='shadow-2xs flex w-full justify-center rounded-md bg-primary px-3  py-1.5 font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
           >
             Sign Up
           </button>
@@ -202,7 +202,7 @@ export function SingupForm() {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className={`shadow-xs flex w-full justify-center rounded-md bg-primary px-3  py-1.5 font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+            className={`shadow-2xs flex w-full justify-center rounded-md bg-primary px-3  py-1.5 font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
           />
         </div>
       </form>

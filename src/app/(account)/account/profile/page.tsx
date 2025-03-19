@@ -47,7 +47,7 @@ export default async function BillingPage() {
       </div>
       <div className='container flex min-h-screen flex-col gap-8 py-8 lg:flex-row'>
         {/* Sidebar */}
-        <nav aria-label='Sidebar' className='w-full flex-shrink-0 lg:w-64'>
+        <nav aria-label='Sidebar' className='w-full shrink-0 lg:w-64'>
           <ul role='list' className='space-y-1'>
             {navigation.map((item) => (
               <li key={item.name}>

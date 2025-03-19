@@ -23,7 +23,7 @@ export async function Navigation() {
 
   return (
     <header className='bg-white'>
-      <div className='mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8'>
+      <div className='mx-auto max-w-(--breakpoint-xl) px-4 sm:px-6 lg:px-8'>
         <div className='flex h-16 items-center justify-between'>
           <div className='flex-1 md:flex md:items-center md:gap-12'>
             <a className='block text-teal-600' href='#'>
@@ -180,10 +180,10 @@ export async function Navigation() {
         <AccountMenu signOut={signOut} />
       ) : (
         <>
-          <Button className='hidden flex-shrink-0 lg:flex' asChild>
+          <Button className='hidden shrink-0 lg:flex' asChild>
             <Link href='/signin'>Sign in</Link>
           </Button>
-          <Button className='hidden flex-shrink-0 bg-green-800 lg:flex' asChild>
+          <Button className='hidden shrink-0 bg-green-800 lg:flex' asChild>
             <Link href='/signup'>Crete Account</Link>
           </Button>
           <Sheet>
@@ -194,7 +194,7 @@ export async function Navigation() {
               <SheetHeader>
                 <Logo />
                 <SheetDescription className='py-8'>
-                  <Button className='flex-shrink-0' asChild>
+                  <Button className='shrink-0' asChild>
                     <Link href='/signup'>Sign Up</Link>
                   </Button>
                 </SheetDescription>

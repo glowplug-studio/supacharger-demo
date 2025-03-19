@@ -45,7 +45,7 @@ function classNames(...classes: string[]): string {
       </div>
       <div className="container flex min-h-screen flex-col gap-8 py-8 lg:flex-row">
         {/* Sidebar */}
-        <nav aria-label="Sidebar" className="w-full lg:w-64 flex-shrink-0">
+        <nav aria-label="Sidebar" className="w-full lg:w-64 shrink-0">
           <ul role="list" className="space-y-1">
             {navigation.map((item) => (
               <li key={item.name}>

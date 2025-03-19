@@ -18,7 +18,7 @@ export default async function Pricing() {
         </div>
 
         <div className="grid lg:grid-cols-3 sm:grid-cols-2 gap-6 mt-10 max-sm:max-w-sm max-sm:mx-auto">
-          <div className="border shadow rounded-md p-6 bg-blue-100">
+          <div className="border shadow-sm rounded-md p-6 bg-blue-100">
             <h3 className="text-slate-900 text-xl font-semibold mb-2">Starter</h3>
             <p className="text-sm text-slate-500">For Individuals and Small Teams</p>
 
@@ -67,7 +67,7 @@ export default async function Pricing() {
             </div>
           </div>
 
-          <div className="border shadow rounded-md p-6  bg-blue-100">
+          <div className="border shadow-sm rounded-md p-6  bg-blue-100">
             <h3 className="text-slate-900 text-xl font-semibold mb-2 flex items-center">Professional <span className="px-2 py-1 text-xs font-semibold text-white bg-blue-500 rounded-md ml-3">Best Deal</span></h3>
             <p className="text-sm text-slate-500">For Individuals and Largest Teams</p>
 
@@ -115,7 +115,7 @@ export default async function Pricing() {
             </div>
           </div>
 
-          <div className="border shadow rounded-md p-6  bg-blue-100">
+          <div className="border shadow-sm rounded-md p-6  bg-blue-100">
             <h3 className="text-slate-900 text-xl font-semibold mb-2">Business</h3>
             <p className="text-sm text-slate-500">For Multiples and Largest Teams</p>
 

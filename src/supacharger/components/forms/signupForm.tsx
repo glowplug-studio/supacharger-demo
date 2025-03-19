@@ -71,7 +71,7 @@ export function SingupForm() {
       <div className='mt-6 grid grid-cols-2 gap-4'>
         <a
           href='#'
-          className='shadow-xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
+          className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
         >
           
           <GoogleLogo className="w-4 flex inline h-4" />
@@ -81,7 +81,7 @@ export function SingupForm() {
 
         <a
           href='#'
-          className='shadow-xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
+          className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
         >
            <FacebookLogo className="w-4 flex inline h-4" />
           <span className=' font-semibold'>Facebook</span>
@@ -111,7 +111,7 @@ export function SingupForm() {
               name='name'
               type='text'
               required
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none'
+              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden'
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -129,7 +129,7 @@ export function SingupForm() {
               type='email'
               required
               autoComplete='email'
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none'
+              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -146,7 +146,7 @@ export function SingupForm() {
               name='password'
               type={showPassword ? 'text' : 'password'}
               required
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none  mt-2'
+              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden  mt-2'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -173,7 +173,7 @@ export function SingupForm() {
               name='password-again'
               type='password'
               required
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-none mt-2'
+              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden mt-2'
               value={retypePassword}
               onChange={(e) => setRetypePassword(e.target.value)}
             />
@@ -188,7 +188,7 @@ export function SingupForm() {
           <motion.div
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className={`shadow-xs flex w-full justify-between bg-primary font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+            className={`shadow-2xs flex w-full justify-between bg-primary font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
           />
         </div>
       </form>
