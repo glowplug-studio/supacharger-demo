@@ -4,7 +4,6 @@ import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
-import { IoLogoFacebook, IoLogoInstagram, IoLogoTwitter } from 'react-icons/io5';
 
 import { Logo } from '@/components/logo';
 import { Toaster } from '@/components/ui/toaster';

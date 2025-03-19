@@ -4,7 +4,6 @@ import { Logo } from '@/components/logo';
 import { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IoLogoGithub, IoLogoGoogle } from 'react-icons/io5';
 
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -71,7 +70,7 @@ export function SigninMagicUI({
           onClick={() => handleOAuthClick('google')}
           disabled={pending}
         >
-          <IoLogoGoogle size={20} />
+       
           Continue with Google
         </button>
         <button
@@ -79,7 +78,7 @@ export function SigninMagicUI({
           onClick={() => handleOAuthClick('github')}
           disabled={pending}
         >
-          <IoLogoGithub size={20} />
+    
           Continue with GitHub
         </button>
 

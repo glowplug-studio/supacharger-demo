@@ -1,6 +1,5 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { IoMenu } from 'react-icons/io5';
 
 import { AccountMenu } from '@/components/account-menu';
 import { Logo } from '@/components/logo';
@@ -189,7 +188,7 @@ export async function Navigation() {
           </Button>
           <Sheet>
             <SheetTrigger className='block lg:hidden'>
-              <IoMenu size={28} />
+              MENU 
             </SheetTrigger>
             <SheetContent className='w-full bg-black'>
               <SheetHeader>

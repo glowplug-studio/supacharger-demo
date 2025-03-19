@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
 import { IoLogoFacebook, IoLogoInstagram, IoLogoTwitter } from 'react-icons/io5';
 
+import { ToastContainer } from 'react-toastify';
+
 import { Logo } from '@/components/logo';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/utils/cn';
@@ -108,6 +110,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                <Toaster />
                <Analytics />
             </NextIntlClientProvider>
+            <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar={true} />
          </body>
       </html>
    );

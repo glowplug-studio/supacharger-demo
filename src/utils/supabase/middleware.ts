@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
+import { pathToRegexp } from 'path-to-regexp';
 import {
   noSessionUserAllowedPaths,
   sessionUserDisallowedPaths,
@@ -46,18 +47,19 @@ export async function updateSession(request: NextRequest) {
   // Check if the current path is in the allowed paths
   const pathname = request.nextUrl.pathname;
   const isAllowedPath = noSessionUserAllowedPaths.some((path) => {
-    // Check for exact matches first
     if (path === pathname) return true;
-    // Ignore root for startsWith check
-    if (path === '/') return false; 
-    return pathname.startsWith(path);
+    if (path === '/') return false;
+
+    const { regexp } = pathToRegexp(path);
+    return regexp.test(pathname);
   });
 
   // Redirect logged-in users from restricted paths
   if (user && sessionUserDisallowedPaths.some((path) => {
-    // Check for exact matches first
     if (path === pathname) return true;
-    return pathname.startsWith(path);
+
+    const { regexp } = pathToRegexp(path);
+    return regexp.test(pathname);
   })) {
     const url = request.nextUrl.clone();
     url.pathname = authedRedirectDestinaton;
