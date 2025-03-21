@@ -13,7 +13,7 @@ export default function ExampleDash() {
           </h2>
           <button className='rounded bg-primary px-3 py-1 text-sm font-bold text-white'>Manage Account</button>
 
-          <LogoutButton className="btn bg-primary mt-6"></LogoutButton>
+          <LogoutButton className="btn bg-primary mt-6">Log Out</LogoutButton>
 
         </div>
       </div>

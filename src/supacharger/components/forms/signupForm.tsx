@@ -1,4 +1,5 @@
 'use client';
+import {useTranslations} from 'next-intl';
 import { useState } from 'react';
 import { CircleArrowRight, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -64,7 +65,7 @@ export function SingupForm() {
         className='flex w-full justify-between rounded bg-gray-100  px-5 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-200 hover:no-underline'
       >
         <span className='font-normal'>I already have an account</span>
-        <span className=''>Sign In</span>
+        <span className=''>Log In</span>
       </Link>
 
       <div className='mt-6 grid grid-cols-2 gap-4'>
