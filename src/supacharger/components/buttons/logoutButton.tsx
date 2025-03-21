@@ -16,9 +16,8 @@ interface LogoutButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>
  * @param {LogoutButtonProps} props - Props for the button.
  * @param {string | null} props.className - Optional CSS class for styling.
  * @param {React.ReactNode} props.children - Button content (defaults to "Logout").
- * @param {ButtonHTMLAttributes<HTMLButtonElement>} props - Additional button attributes.
  * 
- * @returns {JSX.Element} A button element that initiates logout on click.
+ * @returns A button element.
  */
 export default function LogoutButton({
   className,
