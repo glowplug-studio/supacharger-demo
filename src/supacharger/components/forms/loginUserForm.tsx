@@ -1,12 +1,19 @@
 'use client';
 
+/** ========== 
+ * 
+ * Supacharger - Login User Form
+ * 
+ * ========== */
+
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { loginUser } from '../../../app/(supacharger)/(authenticated)/account/(auth)/auth-actions';
+import { loginUser } from '../../../app/(supacharger)/auth-actions';
+import { toast } from 'react-toastify';
+import { supabaseErrorCodeLocalisation } from '../../utils/helpers'
 
 export function LoginUserForm() {
-
   const t = useTranslations('AuthTerms');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -16,12 +23,62 @@ export function LoginUserForm() {
     const result = await loginUser(formData);
     if (result?.error) {
       setIsLoading(false);
+      toast.error( supabaseErrorCodeLocalisation(result.error) ); // Display error toast
       return false; // Prevent form reset
     }
     setIsLoading(false);
+    toast.success(t('loginSuccess')); // Display success toast
   }
 
+  // async function handleOAuthClick(provider: 'google' | 'github') {
+  //   setPending(true);
+  //   const response = await signInWithOAuth(provider);
+
+  //   if (response?.error) {
+  //     toast({
+  //       variant: 'destructive',
+  //       description: 'An error occurred while authenticating. Please try again.',
+  //     });
+  //     setPending(false);
+  //   }
+  // }
+
   return (
+    <>
+    {/* <div className='flex flex-col gap-4'>
+        <button
+          className='flex items-center justify-center gap-2 rounded-md bg-cyan-500 py-4 font-medium text-black transition-all hover:bg-cyan-400 disabled:bg-neutral-700'
+          onClick={() => handleOAuthClick('google')}
+          disabled={pending}
+        >
+       
+          Continue with Google
+        </button>
+        <button
+          className='flex items-center justify-center gap-2 rounded-md bg-fuchsia-500 py-4 font-medium text-black transition-all hover:bg-fuchsia-400 disabled:bg-neutral-700'
+          onClick={() => handleOAuthClick('github')}
+          disabled={pending}
+        >
+    
+          Continue with GitHub
+        </button>
+
+        <Collapsible open={emailFormOpen} onOpenChange={setEmailFormOpen}>
+          <CollapsibleTrigger asChild>
+            <button
+              className='text-neutral6 flex w-full items-center justify-center gap-2 rounded-md bg-zinc-900 py-4 font-medium transition-all hover:bg-zinc-800 disabled:bg-neutral-700 disabled:text-black'
+              disabled={pending}
+            >
+              Continue with Email
+            </button>
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <div className='mt-[-2px] w-full rounded-b-md bg-zinc-900 p-8'>
+              
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+      </div> */}
     <form
       onSubmit={async (e) => {
         e.preventDefault();
@@ -91,6 +148,7 @@ export function LoginUserForm() {
           {t('forgotPassword')}
         </a>
       </div>
+
       <div>
         <button
           type="submit"
@@ -120,5 +178,6 @@ export function LoginUserForm() {
         </button>
       </div>
     </form>
+    </>
   );
 }

@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 
 import { AccountMenu } from '@/supacharger/components/menus/account-menu';
-import { Logo } from '@/components/logo';
+
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { isLoggedIn } from '@/utils/supabase/server';
@@ -177,7 +177,7 @@ export async function Navigation() {
       <LocaleSwitcher currentLocale={currentLocale} />
       
           <Button className='hidden shrink-0 lg:flex' asChild>
-            <Link href='/login'>Sign in</Link>
+            <Link href='/account/login'>Sign in</Link>
           </Button>
           <Button className='hidden shrink-0 bg-green-800 lg:flex' asChild>
             <Link href='/signup'>Crete Account</Link>
@@ -188,7 +188,7 @@ export async function Navigation() {
             </SheetTrigger>
             <SheetContent className='w-full bg-black'>
               <SheetHeader>
-                <Logo />
+               
                 <SheetDescription className='py-8'>
                   <Button className='shrink-0' asChild>
                     <Link href='/signup'>Sign Up</Link>

@@ -1,8 +1,8 @@
 'use client';
 
-import { Logo } from '@/components/logo';
-import { SingupForm } from '@/supacharger/components/forms/signupForm';
-import { SignupRight } from '@/components/signupRight';
+import { CreateAccountForm } from '@/supacharger/components/forms/createAccountForm';
+import { SignupRight } from '@/components/signupRight'
+import SiteLogo from '@/components/siteLogo';
 
 export default function SignUp() {
 
@@ -13,13 +13,12 @@ export default function SignUp() {
           <div className='sm:mx-auto sm:w-full sm:max-w-[380px]'>
             <div className=''>
               <div className='mb-28 block'>
-                <Logo showSiteTitle={true} darkMode={false} />
+                <SiteLogo showSiteTitle={true} darkMode={false} />
               </div>
 
               <div>
-
-                <SingupForm></SingupForm>
-
+              <h1 className='mb-8 text-2xl/9 font-bold tracking-tight text-gray-700'>Create an Account</h1>
+                  <CreateAccountForm></CreateAccountForm>
               </div>
             </div>
           </div>

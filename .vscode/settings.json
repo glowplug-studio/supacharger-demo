@@ -7,6 +7,10 @@
         {
             "folderPath": "authed_application/src/app/(supacharger)/(authenticated)/account/(auth)/logout/route.ts/",
             "color": "foldercolorizer.color_00cccc"
+        },
+        {
+            "folderPath": "authed_application/src/app/(supacharger)/(unauthenticated)/account/logout/route.ts/",
+            "color": "foldercolorizer.color_00cccc"
         }
     ],
     "search.exclude": {

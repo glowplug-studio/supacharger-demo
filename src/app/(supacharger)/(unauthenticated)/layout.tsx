@@ -5,12 +5,14 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
 
-import { Logo } from '@/components/logo';
+import  SiteLogo  from '@/components/siteLogo';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
 
-import { Navigation } from '../navigation';
+
+
+import { siteDescription, siteTitle } from "@/supacharger/supacharger-config";
 
 import '@/styles/globals.css';
 
@@ -21,7 +23,7 @@ const inter = Inter({
   subsets: ['latin'],
 });
 
-const site_title = process.env.SITE_TITLE;
+const site_title = siteTitle;
 
 const navigation = [
   {
@@ -97,7 +99,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
    const cookieStore = await cookies();
    const currentLocale = cookieStore.get('supacharger_locale')?.value || 'en'; // Default to 'en' if not set
    // Load translations for the current locale
-   const messages = await import(`../../../messages/${currentLocale}.json`).then((module) => module.default);
+   const messages = await import(`../../../../messages/${currentLocale}.json`).then((module) => module.default);
 
    return (
      
@@ -118,8 +120,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 async function AppBar() {
    return (
       <header className="flex items-center justify-between py-8">
-         <Logo />
-         <Navigation />
+        
       </header>
    );
 }

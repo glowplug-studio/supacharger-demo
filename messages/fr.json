@@ -6,7 +6,7 @@
     "Billing": {
       "title": "Facturation"
     },
-    "Login": {
+    "LoginPage": {
       "title": "Se Connecter",
       "emailAddress": "Adresse email",
       "password": "Mot de passe",

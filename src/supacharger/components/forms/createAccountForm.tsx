@@ -1,13 +1,19 @@
 'use client';
-import {useTranslations} from 'next-intl';
+
+/** ========== 
+ * 
+ * Supacharger - Create Account Form
+ * 
+ * ========== */
+
 import { useState } from 'react';
 import { CircleArrowRight, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import GoogleLogo from '@/assets/socialAuthIcons/GoogleLogo.svg';
-import FacebookLogo from '@/assets/socialAuthIcons/FacebookLogo.svg';
+import GoogleLogo from '@/assets/images/socialAuthIcons/GoogleLogo.svg';
+import FacebookLogo from '@/assets/images/socialAuthIcons/FacebookLogo.svg';
 
-export function SingupForm() {
+export function CreateAccountForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,8 +24,11 @@ export function SingupForm() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (event: { preventDefault: () => void }) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // Add your form submission logic here
+    console.log('Form submitted:', { name, email, password, retypePassword });
+  };
 
   const passwordContainerVariants = {
     hidden: { height: 0, opacity: 0 },
@@ -35,10 +44,8 @@ export function SingupForm() {
 
   return (
     <>
-      <h2 className='mb-8 text-2xl/9 font-bold tracking-tight text-gray-700'>Create an Account</h2>
-
       <Link
-        href='/login'
+        href='/account/login'
         className='flex w-full justify-between rounded bg-gray-100  px-5 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-200 hover:no-underline'
       >
         <span className='font-normal'>I already have an account</span>
@@ -50,9 +57,7 @@ export function SingupForm() {
           href='#'
           className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
         >
-          
           <GoogleLogo className="w-4 flex inline h-4" />
-
           <span className=' font-semibold'>Google</span>
         </a>
 
@@ -60,7 +65,7 @@ export function SingupForm() {
           href='#'
           className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
         >
-           <FacebookLogo className="w-4 flex inline h-4" />
+          <FacebookLogo className="w-4 flex inline h-4" />
           <span className=' font-semibold'>Facebook</span>
         </a>
       </div>
@@ -138,7 +143,7 @@ export function SingupForm() {
         <motion.div
           variants={passwordContainerVariants}
           initial='visible'
-          animate={showPassword ? 'hidden' : 'visible'}
+          animate={showPassword ? 'visible' : 'visible'} // Corrected logic
           style={{ overflow: 'hidden' }}
         >
           <label htmlFor='password-again' className='block  font-bold text-gray-700'>
@@ -161,12 +166,6 @@ export function SingupForm() {
           <button type='submit' className='btn w-full bg-primary text-white'>
             Sign Up <CircleArrowRight size={18} className='' />
           </button>
-
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className={`shadow-2xs flex w-full justify-between bg-primary font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
-          />
         </div>
       </form>
     </>

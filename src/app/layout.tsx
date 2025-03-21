@@ -5,11 +5,11 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
 import { ToastContainer } from 'react-toastify';
-import { Logo } from '@/components/logo';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
 import { Navigation } from './navigation';
+import { siteDescription, siteTitle } from "@/supacharger/supacharger-config";
 import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';
@@ -19,11 +19,9 @@ const inter = Inter({
   subsets: ['latin'],
 });
 
-const site_title = process.env.SITE_TITLE;
-
 export const metadata: Metadata = {
-  title: site_title,
-  description: 'Start your next project without reinventing the wheel. REPLACE_ME',
+  title: siteTitle,
+  description: siteDescription,
 };
 
 export default async function RootLayout({ children }: PropsWithChildren) {

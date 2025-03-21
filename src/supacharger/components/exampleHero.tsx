@@ -11,9 +11,16 @@ export default function ExampleHero() {
             </h1>
             <Link
                     className="btn w-full bg-white text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto"
-                    href="account/login"
+                    href="account/account/login"
                   >
                     Sign in
+                  </Link>
+
+                  <Link
+                    className="btn w-full bg-white text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto"
+                    href="account/create"
+                  >
+                   Create a free account
                   </Link>
             <div className="mx-auto max-w-3xl">
               <p className="mb-8 text-lg text-gray-700">
@@ -32,6 +39,8 @@ export default function ExampleHero() {
                       </span>
                     </span>
                   </a>
+
+                  
                  
                 </div>
               </div>
