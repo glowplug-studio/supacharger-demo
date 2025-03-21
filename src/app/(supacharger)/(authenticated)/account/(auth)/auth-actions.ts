@@ -45,9 +45,5 @@ export async function logoutUser(): Promise<{ success: boolean }> {
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.signOut();
 
-  if (error) {
-      return { success: false };
-  }
-
-  return { success: true };
+  return error ? { success: false } : { success: true };
 }
