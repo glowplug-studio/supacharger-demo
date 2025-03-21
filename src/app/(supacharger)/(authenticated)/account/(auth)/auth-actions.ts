@@ -41,13 +41,13 @@ export async function signInWithEmail(email: string): Promise<ActionResponse> {
   return { data: null, error: null };
 }
 
-export async function logoutUser(): Promise<{ success: boolean; message: string }> {
+export async function logoutUser(): Promise<{ success: boolean }> {
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.signOut();
 
   if (error) {
-      return { success: false, message: 'Failed to log out' };
+      return { success: false };
   }
 
-  return { success: true, message: 'Logged out successfully' };
+  return { success: true };
 }
