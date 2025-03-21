@@ -23,6 +23,27 @@ export async function signInWithOAuth(provider: 'github' | 'google'): Promise<Ac
   return redirect(data.url);
 }
 
+
+
+// export async function signup(formData: FormData) {
+//   const supabase = await createClient()
+
+//   // Type-casting here for convenience
+//   const data = {
+//     email: formData.get('email') as string,
+//     password: formData.get('password') as string,
+//   }
+
+//   const { error } = await supabase.auth.signUp(data)
+
+//   if (error) {
+//     return { error }; // Return the error instead of redirecting
+//   }
+
+//   revalidatePath('/', 'layout');
+//   return { success: true }; // Indicate success
+// }
+
 export async function signInWithEmail(email: string): Promise<ActionResponse> {
   const supabase = await createSupabaseServerClient();
 

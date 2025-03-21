@@ -9,7 +9,6 @@ import { isLoggedIn } from '@/utils/supabase/server';
 
 import LocaleSwitcher from '../components/LocaleSwitcher';
 
-import { signOut } from './(supacharger)/(authenticated)/account/(auth)/auth-actions';
 
 export async function Navigation() {
   const session = await isLoggedIn();
@@ -176,10 +175,7 @@ export async function Navigation() {
     <div className='relative flex items-center gap-6'>
       Pricing About
       <LocaleSwitcher currentLocale={currentLocale} />
-      {session ? (
-        <AccountMenu signOut={signOut} />
-      ) : (
-        <>
+      
           <Button className='hidden shrink-0 lg:flex' asChild>
             <Link href='/login'>Sign in</Link>
           </Button>
@@ -201,8 +197,7 @@ export async function Navigation() {
               </SheetHeader>
             </SheetContent>
           </Sheet>
-        </>
-      )}
+    
     </div>
   );
 }

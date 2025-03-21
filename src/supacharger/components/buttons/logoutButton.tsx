@@ -1,4 +1,5 @@
 "use client";
+
 import { useTranslations } from 'next-intl';
 import type React from "react";
 import type { ButtonHTMLAttributes } from "react";
@@ -9,16 +10,6 @@ interface LogoutButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>
   children?: React.ReactNode;
 }
 
-/**
- * A button component that triggers a logout request when clicked.
- * On successful logout, the user is redirected to the destination configured in supacharger-config.ts.
- * 
- * @param {LogoutButtonProps} props - Props for the button.
- * @param {string | null} props.className - Optional CSS class for styling.
- * @param {React.ReactNode} props.children - Button content (defaults to "Logout").
- * 
- * @returns A button element.
- */
 export default function LogoutButton({
   className,
   children = "Logout",

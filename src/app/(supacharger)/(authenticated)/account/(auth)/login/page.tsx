@@ -1,9 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import {getTranslations} from 'next-intl/server';
 import { Eye, EyeOff } from 'lucide-react';
 
 import { useToast } from "@/components/ui/use-toast";
