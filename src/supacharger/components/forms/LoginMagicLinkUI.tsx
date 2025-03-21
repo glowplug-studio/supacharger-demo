@@ -12,13 +12,13 @@ import { toast } from "react-toastify";
 
 export function LoginMagicLinkUI() {
   const [pending, setPending] = useState(false);
-  const [emailFormOpen, setEmailFormOpen] = useState(false);
 
   async function handleEmailSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setPending(true);
     const form = event.target as HTMLFormElement;
     const email = form["email"].value;
+
     const response = await signInWithEmail(email);
 
     if (response?.error) {
@@ -30,6 +30,7 @@ export function LoginMagicLinkUI() {
     form.reset();
     setPending(false);
   }
+
   return (
     <form onSubmit={handleEmailSubmit}>
       <input
@@ -41,13 +42,7 @@ export function LoginMagicLinkUI() {
         className="input"
       />
       <div className="mt-4 flex justify-end gap-2">
-        <button
-          className="btn bg-gray-500"
-          onClick={() => setEmailFormOpen(false)}
-        >
-          Cancel
-        </button>
-        <button className="btn bg-primary" type="submit">
+        <button className="btn bg-primary" type="submit" disabled={pending}>
           Submit
         </button>
       </div>
