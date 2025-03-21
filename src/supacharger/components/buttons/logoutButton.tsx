@@ -35,20 +35,19 @@ export default function LogoutButton({
           "Content-Type": "application/json",
         },
       });
-
-      if (response.redirected) {
+    
+      if (response.ok) {
         toast.success(t('logoutSucceeded'));
         // Small delay to allow toast to be seen before redirect
         setTimeout(() => {
           window.location.href = response.url;
         }, 800);
-      } else if (!response.ok) {
-        toast.error(t('logoutFailed'));
       } else {
-        // Handle unexpected successful response without redirect
+        // Handle HTTP errors
         toast.error(t('logoutFailed'));
       }
     } catch (error) {
+      // Handle network errors
       toast.error(t('logoutFailed'));
     }
   };
