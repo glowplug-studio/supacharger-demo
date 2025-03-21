@@ -3,6 +3,10 @@
         {
             "folderPath": "authed_application/src/supacharger/components/buttons/logoutButton.tsx/",
             "color": "foldercolorizer.color_00cccc"
+        },
+        {
+            "folderPath": "authed_application/src/app/(supacharger)/(authenticated)/account/(auth)/logout/route.ts/",
+            "color": "foldercolorizer.color_00cccc"
         }
     ]
 }

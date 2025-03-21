@@ -21,29 +21,6 @@ export function SingupForm() {
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
-    // **Replace with your actual API endpoint and logic**
-    try {
-      const response = await fetch('/api/signup', {
-        // Your API endpoint
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name, email, password }),
-      });
-
-      if (response.ok) {
-        // Handle successful signup (e.g., redirect, display success message)
-        console.log('Signup successful!');
-      } else {
-        // Handle signup error (e.g., display error message)
-        console.error('Signup failed.');
-      }
-    } catch (error) {
-      console.error('Error during signup:', error);
-    }
-  };
-
   const passwordContainerVariants = {
     hidden: { height: 0, opacity: 0 },
     visible: {

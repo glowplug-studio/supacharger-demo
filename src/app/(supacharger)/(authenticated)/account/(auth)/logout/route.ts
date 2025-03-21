@@ -1,18 +1,20 @@
 'use server';
 import { NextResponse } from 'next/server';
-import { createClient } from '@/utils/supabase/server';
 import { authedRedirectDestinaton } from '@/supacharger/supacharger-config';
 import { getURL } from '@/supacharger/utils/helpers';
+import { logoutUser } from '../../(auth)/auth-actions';
 
-export async function GET() {
-    // Create Supabase client
-    const supabase = await createClient();
-    // Sign out the user
-    var { error } = await supabase.auth.signOut();
-    if (error) {
-        return NextResponse.json({ success: false, message: 'Failed to log out' }, { status: 500 });
+/**
+ * Handles GET requests for the logout route.
+ * Initiates user logout and redirects to the configured destination upon success.
+ * 
+ * @returns {NextResponse} A response that either redirects the user or returns an error.
+ */
+export async function GET(): Promise<NextResponse> {
+    const logoutResult = await logoutUser();
+    if (!logoutResult.success) {
+        return NextResponse.json(logoutResult, { status: 500 });
     }
-    // Redirect
     const redirectURL = getURL(authedRedirectDestinaton);
     return NextResponse.redirect(redirectURL);
 }

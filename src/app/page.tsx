@@ -3,7 +3,7 @@ import Link from 'next/link';
 import ExampleDash from '@/supacharger/components/exampleDash';
 import ExampleHero from '@/supacharger/components/exampleHero';
 import { AccountMenu } from '@/supacharger/components/menus/account-menu';
-import { signOut } from './(supacharger)/(authenticated)/account/(auth)/auth-actions';
+
 
 import { useTranslations } from 'next-intl';
 
@@ -21,7 +21,7 @@ export default async function RootPage() {
       
       {session ? (<>
         <ExampleDash></ExampleDash>
-        <AccountMenu signOut={signOut} />
+        <AccountMenu />
         </>
       ) : (
         <>

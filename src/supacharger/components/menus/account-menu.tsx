@@ -1,9 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { CircleUserRound, LogOut, Settings } from 'lucide-react';
-import { toast } from 'react-toastify';
+import LogoutButton from '@/supacharger/components/buttons/logoutButton';
 
 import {
   DropdownMenu,
@@ -15,20 +14,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ActionResponse } from '@/types/action-response';
 
-export function AccountMenu({ signOut }: { signOut: () => Promise<ActionResponse> }) {
-  const router = useRouter();
+export function AccountMenu() {
 
-  async function handleLogoutClick() {
-    const response = await signOut();
-
-    if (response?.error) {
-      toast.error('An error occurred while logging out. Please try again or contact support.');
-    } else {
-      router.refresh();
-
-      toast.success('You have been logged out.');
-    }
-  }
 
   return (
     <DropdownMenu>
@@ -49,10 +36,10 @@ export function AccountMenu({ signOut }: { signOut: () => Promise<ActionResponse
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={handleLogoutClick}>
-          <LogOut size="14" className='mr-2' />
+        <LogoutButton >
+          <LogoutButton className='btn bg-pink-400 mr-2' />
           Log Out
-        </DropdownMenuItem>
+        </LogoutButton>
         <DropdownMenuArrow className='me-4 fill-white' />
       </DropdownMenuContent>
     </DropdownMenu>

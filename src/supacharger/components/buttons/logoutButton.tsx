@@ -9,6 +9,17 @@ interface LogoutButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>
   children?: React.ReactNode;
 }
 
+/**
+ * A button component that triggers a logout request when clicked.
+ * On successful logout, the user is redirected to the destination configured in supacharger-config.ts.
+ * 
+ * @param {LogoutButtonProps} props - Props for the button.
+ * @param {string | null} props.className - Optional CSS class for styling.
+ * @param {React.ReactNode} props.children - Button content (defaults to "Logout").
+ * @param {ButtonHTMLAttributes<HTMLButtonElement>} props - Additional button attributes.
+ * 
+ * @returns {JSX.Element} A button element that initiates logout on click.
+ */
 export default function LogoutButton({
   className,
   children = "Logout",
@@ -33,8 +44,7 @@ export default function LogoutButton({
           window.location.href = response.url;
         }, 800);
       } else if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        toast.error(errorData.message || t('logoutFailed'));
+        toast.error(t('logoutFailed'));
       } else {
         // Handle unexpected successful response without redirect
         toast.error(t('logoutFailed'));
