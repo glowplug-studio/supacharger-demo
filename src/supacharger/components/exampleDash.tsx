@@ -1,4 +1,5 @@
- export default function ExampleDash() {
+import LogoutButton from '@/supacharger/components/buttons/logoutButton' 
+export default function ExampleDash() {
   return (
       <div className='flex items-center rounded-md bg-green-200 p-4'>
         <img
@@ -11,6 +12,9 @@
             Welcome back, <span className='font-bold'>John Doe</span>
           </h2>
           <button className='rounded bg-primary px-3 py-1 text-sm font-bold text-white'>Manage Account</button>
+
+          <LogoutButton className="btn bg-primary mt-6"></LogoutButton>
+
         </div>
       </div>
     );

@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { CircleArrowRight, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -61,7 +60,7 @@ export function SingupForm() {
       <h2 className='mb-8 text-2xl/9 font-bold tracking-tight text-gray-700'>Create an Account</h2>
 
       <Link
-        href='/signin'
+        href='/login'
         className='flex w-full justify-between rounded bg-gray-100  px-5 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-200 hover:no-underline'
       >
         <span className='font-normal'>I already have an account</span>

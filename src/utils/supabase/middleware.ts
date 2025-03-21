@@ -6,7 +6,7 @@ import {
   sessionUserDisallowedPaths,
   unauthedRedirectDestinaton,
   authedRedirectDestinaton,
-} from '@/supacharger/config/protected-routes';
+} from '@/supacharger/supacharger-config';
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({

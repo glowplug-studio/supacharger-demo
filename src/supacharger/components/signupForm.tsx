@@ -209,7 +209,7 @@ export function SingupForm() {
 
       <div className='mt-6'>
         <Link
-          href='/signin'
+          href='/login'
           className='flex w-full appearance-none justify-between rounded bg-gray-100  px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-200 hover:no-underline'
         >
           <span className='text-normal'>I already have an account</span>

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function ExampleHero() {
     return (
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -7,6 +9,12 @@ export default function ExampleHero() {
             <h1 className="mb-6 border-y text-5xl font-bold [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-300/.8),transparent)1] md:text-6xl">
               Don't reinvent the wheel<br className="max-lg:hidden" /> roll with it.
             </h1>
+            <Link
+                    className="btn w-full bg-white text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto"
+                    href="account/login"
+                  >
+                    Sign in
+                  </Link>
             <div className="mx-auto max-w-3xl">
               <p className="mb-8 text-lg text-gray-700">
                 Simple is a modern website builder powered by AI that changes how companies create user interfaces together.
@@ -24,12 +32,7 @@ export default function ExampleHero() {
                       </span>
                     </span>
                   </a>
-                  <a
-                    className="btn w-full bg-white text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto"
-                    href="#0"
-                  >
-                    Learn More
-                  </a>
+                 
                 </div>
               </div>
             </div>

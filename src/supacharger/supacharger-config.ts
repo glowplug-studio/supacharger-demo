@@ -1,25 +1,30 @@
 // Define an array of allowed paths that do not require a session
 export const noSessionUserAllowedPaths = [
-    '/signin',
-    '/signup',
+    '/account/login',
+    '/account/create',
+    '/account/login-magic',
+    // API
     '/api/webhooks',
+    // Marketing
     '/pricing',
     '/about',
-    '/signin-magic',
-    '/',
+    // Directory and Profiles
     '/user/:username',
+    // Root - remove if all routes are protected.
+    '/',
+
     // Add any other paths you want to allow
 ];
 
 // Define paths that should redirect logged-in users
 export const sessionUserDisallowedPaths = [
-    '/signin',
-    '/signin-magic', 
-    '/signup',
+    '/account/login',
+    '/account/create', 
+    '/account/login-magic',
 ];
 
 // Define where non authenticated users are redirected to to authenticated
-export const unauthedRedirectDestinaton = '/signin';
+export const unauthedRedirectDestinaton = '/account/login';
 
 // Define where authenticated users are redirected to when hitting a unauthed user only page.
 export const authedRedirectDestinaton = '/';

@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ExampleDash from '@/supacharger/components/exampleDash';
 import ExampleHero from '@/supacharger/components/exampleHero';
-import { AccountMenu } from '@/components/account-menu';
-import { signOut } from './(auth)/auth-actions';
+import { AccountMenu } from '@/supacharger/components/menus/account-menu';
+import { signOut } from './(supacharger)/(authenticated)/account/(auth)/auth-actions';
 
 import { useTranslations } from 'next-intl';
 

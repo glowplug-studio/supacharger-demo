@@ -11,7 +11,7 @@ export default async function AccountPage() {
   const [session, subscription, products] = await Promise.all([getSession(), getSubscription(), getProducts()]);
 
   if (!session) {
-    redirect('/signin');
+    redirect('/login');
   }
 
   let userProduct: ProductWithPrices | undefined;

@@ -1,7 +1,6 @@
-import { cookies } from 'next/headers'
-
-import { createClient } from '@/utils/supabase/server';
-import { createServerClient } from '@supabase/ssr'
+/**
+ * Supacharger Helpers
+ */
 
 /**
  *  Get the base URL as a clean 

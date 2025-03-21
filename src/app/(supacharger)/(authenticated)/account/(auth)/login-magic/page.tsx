@@ -1,9 +1,5 @@
 'use client';
-
-import { SignupRight } from '@/components/signupRight';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { SigninMagicUI } from '../signin-magic-ui';
+import { SigninMagicUI } from './login-magic-ui';
 import { signInWithEmail, signInWithOAuth } from '../auth-actions';
 
 export default function AuthMagicLink() {

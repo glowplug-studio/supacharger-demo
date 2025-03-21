@@ -1,4 +1,4 @@
-import Carousel, { type Slide } from '@/supacharger/components/carousel';
+import Carousel, { type Slide } from '@/components/demo/carousel';
 
 const slides: Slide[] = [
   {

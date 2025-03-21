@@ -13,6 +13,10 @@
       "rememberMe": "Souviens-toi de moi",
       "forgotPassword": "Mot de passe oublié",
       "signIn": "Se Connecter"
+    },
+    "Toasts":{
+      "logoutFailed": "There was a problem logging you you out. Please try again.",
+      "logoutSucceeded": "Un problème est survenu lors de votre déconnexion."
     }
 
  }

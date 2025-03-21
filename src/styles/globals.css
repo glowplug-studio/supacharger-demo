@@ -223,6 +223,7 @@
     @apply focus-visible:outline-2;
     @apply focus-visible:outline-offset-2;
     @apply focus-visible:outline-indigo-600;
+    @apply hover:cursor-pointer;
   }
 }
 

@@ -8,7 +8,7 @@ import { Eye, EyeOff } from 'lucide-react';
 
 import { useToast } from "@/components/ui/use-toast";
 
-import { login, signup } from './actions';
+import { login } from './actions';
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
