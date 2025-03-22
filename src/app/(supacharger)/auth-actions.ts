@@ -50,7 +50,7 @@ export async function loginUser(formData: FormData) {
 export async function signInWithEmail(email: string): Promise<ActionResponse> {
   const supabase = await createSupabaseServerClient();
 
-  const { error } = await supabase.auth.signInWithOtp({
+  const { data, error } = await supabase.auth.signInWithOtp({
     email,
     options: {
       emailRedirectTo: getURL('/auth/callback'),
@@ -58,26 +58,37 @@ export async function signInWithEmail(email: string): Promise<ActionResponse> {
   });
 
   if (error) {
-    console.error(error);
     return { data: null, error: error };
   }
 
-  return { data: null, error: null };
+  return { data: data, error: null };
+}
+
+/**
+ * Create a new user with email password combo
+ */
+export async function createUserByEmailPassword(formData: FormData) {
+  const supabase = await createSupabaseServerClient();
+  
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
+
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+  });
+
+  if (error) {
+    return { data: null, error: error };
+  }
+
+  return { data: data, error: null };
 }
 
 
 
+
 //// @TODO the rest is questionable 
-
-
-
-
-
-
-
-
-
-
 
 export async function signInWithOAuth(provider: 'github' | 'google'): Promise<ActionResponse> {
   const supabase = await createSupabaseServerClient();

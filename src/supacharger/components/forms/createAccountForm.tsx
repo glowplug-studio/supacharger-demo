@@ -12,6 +12,9 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import GoogleLogo from '@/assets/images/socialAuthIcons/GoogleLogo.svg';
 import FacebookLogo from '@/assets/images/socialAuthIcons/FacebookLogo.svg';
+import { createUserByEmailPassword } from '../../../app/(supacharger)/auth-actions';
+import { toast } from 'react-toastify';
+import { supabaseErrorCodeLocalisation } from '../../utils/helpers';
 
 export function CreateAccountForm() {
   const [name, setName] = useState('');
@@ -19,6 +22,7 @@ export function CreateAccountForm() {
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleToggle = () => {
     setShowPassword(!showPassword);
@@ -26,8 +30,28 @@ export function CreateAccountForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Add your form submission logic here
-    console.log('Form submitted:', { name, email, password, retypePassword });
+
+    // if (password !== retypePassword) {
+    //   setError('Passwords do not match');
+    //   return;
+    // }
+
+
+    try {
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('password', password);
+
+      const result = await createUserByEmailPassword(formData);
+      if (result?.error) {
+        toast.error("Failed to create account" +result.error); //supabaseErrorCodeLocalisation('result.error'));
+      } else {
+        toast.success('Account created successfully');
+      }
+    } catch (error) {
+      console.error('Error creating user:', error);
+      toast.error('Failed to create account');
+    }
   };
 
   const passwordContainerVariants = {
@@ -143,7 +167,7 @@ export function CreateAccountForm() {
         <motion.div
           variants={passwordContainerVariants}
           initial='visible'
-          animate={showPassword ? 'visible' : 'visible'} // Corrected logic
+          animate='visible'
           style={{ overflow: 'hidden' }}
         >
           <label htmlFor='password-again' className='block  font-bold text-gray-700'>
@@ -161,6 +185,8 @@ export function CreateAccountForm() {
             />
           </div>
         </motion.div>
+
+        {error && <p className="error">{error}</p>}
 
         <div>
           <button type='submit' className='btn w-full bg-primary text-white'>
