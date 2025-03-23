@@ -3,7 +3,11 @@ import Carousel, { type Slide } from '@/components/sc_demo/sc_carousel';
 const slides: Slide[] = [
   {
     id: 1,
-    title: 'Welcome to Our Platform',
+    title: 'Member benefits',
+    slideClasses: 'bg-gre-200 bg-center bg-cover',
+    slideStyle: {
+      backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1606492707206-bd0841bb6332?q=70&w=1000)',
+    },
     content: `
       <p class="text-xl mb-4">Praesent pulvinar ligula a venenatis varius. Sed et ligula arcu. Class aptent taciti sociosqu.</p>
       <ul class="list-disc list-inside space-y-2">
@@ -58,9 +62,11 @@ const slides: Slide[] = [
   },
 ];
 
+
+
 export function SignupRight() {
   return (
-    <div className='flex h-full w-full items-center justify-center rounded-md bg-primary text-white'>
+    <div className='flex h-full w-full items-center justify-center rounded-md bg-gray-200 text-white border'>
       <Carousel slides={slides} autoScrollInterval={5000} transitionDuration={0.5} />
       {/* <h3 className='text-2xl mb-3 font-bold'>Lorem Ipsum Dolor</h3>
     <p className="md:w-1/2">REPLACE ME. Ut dignissim sapien et varius feugiat. Praesent purus sapien, bibendum quis ipsum ac, pharetra ultricies magna. </p> */}
