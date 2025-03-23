@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Figtree } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
@@ -17,7 +17,7 @@ import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';
 
-const inter = Inter({
+const figtree = Figtree({
   variable: '--font-inter',
   subsets: ['latin'],
 });
@@ -36,7 +36,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 
    return (
       <html lang={currentLocale}>
-         <body className={cn('font-sans antialiased', inter.variable)}>
+         <body className={cn('font-sans antialiased', figtree.variable)}>
             <NextIntlClientProvider messages={messages}>
             {children}
                <Toaster />

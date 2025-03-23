@@ -15,7 +15,7 @@
     ],
     "search.exclude": {
         "**/node_modules": true,
-        ".next": true,
+        ".next/*": true,
         ".vscode": true
     },
     "search.useIgnoreFiles": true

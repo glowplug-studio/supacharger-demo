@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Figtree } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
@@ -15,8 +15,8 @@ import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';
 
-const inter = Inter({
-  variable: '--font-inter',
+const figtree = Figtree({
+  variable: '--font-figtree',
   subsets: ['latin'],
 });
 
@@ -105,7 +105,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                     <AppBar />
                   </div>
                   <main className="relative flex-1">
-                     <div className="relative h-full">{children}</div>
+                     <div className="relative h-full"><h1>TESTNG</h1>{children}</div>
                   </main>
                   <Footer />
                </div>
