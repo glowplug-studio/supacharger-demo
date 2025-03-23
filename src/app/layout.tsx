@@ -9,7 +9,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
 import { Navigation } from './navigation';
-import { siteDescription, siteTitle } from "@/supacharger/supacharger-config";
+import { SC_SITE_DESCRIPTION, SC_SITE_TITLE } from "@/supacharger/supacharger-config";
 import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';
@@ -20,8 +20,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: siteTitle,
-  description: siteDescription,
+  title: SC_SITE_TITLE,
+  description: SC_SITE_DESCRIPTION,
 };
 
 export default async function RootLayout({ children }: PropsWithChildren) {

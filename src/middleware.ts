@@ -1,10 +1,10 @@
 import { type NextRequest } from 'next/server';
 import { updateSession } from '@/libs/supabase/supabase-middleware-client';
 import {
-    noSessionUserAllowedPaths,
-    sessionUserDisallowedPaths,
-    unauthedRedirectDestinaton,
-    authedRedirectDestinaton,
+    SC_NO_SESSION_USER_ALLOWED_PATHS,
+    SC_SESSION_USER_DISALLOWED_PATHS,
+    SC_NO_SESSION_REDIRECT_DESTINATION,
+    SC_LOGIN_REDIRECT_DESTINATON,
   } from '@/supacharger/supacharger-config';
 
 export async function middleware(request: NextRequest) {

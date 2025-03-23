@@ -12,7 +12,7 @@ import { Analytics } from '@vercel/analytics/react';
 
 
 
-import { siteDescription, siteTitle } from "@/supacharger/supacharger-config";
+import { SC_SITE_DESCRIPTION, SC_SITE_TITLE } from "@/supacharger/supacharger-config";
 
 import '@/styles/globals.css';
 
@@ -23,7 +23,7 @@ const inter = Inter({
   subsets: ['latin'],
 });
 
-const site_title = siteTitle;
+const site_title = SC_SITE_TITLE;
 
 const navigation = [
   {

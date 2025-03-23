@@ -11,7 +11,7 @@ import { ActionResponse } from '@/types/action-response';
 import { getURL } from '@/supacharger/utils/helpers';
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { authedRedirectDestinaton } from  '@/supacharger/supacharger-config'
+import { SC_LOGIN_REDIRECT_DESTINATON } from  '@/supacharger/supacharger-config'
 
 /**
  * Logout user
@@ -41,7 +41,7 @@ export async function loginUser(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect( authedRedirectDestinaton )
+  redirect( SC_LOGIN_REDIRECT_DESTINATON )
 }
 
 /**

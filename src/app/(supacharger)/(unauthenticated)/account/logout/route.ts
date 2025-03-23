@@ -7,7 +7,7 @@
  * ========== */
 
 import { NextResponse } from "next/server";
-import { authedRedirectDestinaton } from "@/supacharger/supacharger-config";
+import { SC_LOGIN_REDIRECT_DESTINATON } from "@/supacharger/supacharger-config";
 import { getURL } from "@/supacharger/utils/helpers";
 import { logoutUser } from "../../../auth-actions";
 
@@ -16,7 +16,7 @@ export async function GET(): Promise<NextResponse> {
   if (!logoutResult.success) {
     return NextResponse.json(logoutResult, { status: 500 });
   }
-  const redirectURL = getURL(authedRedirectDestinaton);
+  const redirectURL = getURL(SC_LOGIN_REDIRECT_DESTINATON);
   return NextResponse.redirect(redirectURL);
 }
 
