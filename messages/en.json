@@ -1,5 +1,9 @@
 {
-    "AuthedFeed": {
+   "Global": {
+      "siteTitle": "Supacharger",
+       "siteDescription": "Start your next project without reinventing the wheel."
+    }, 
+  "AuthedFeed": {
       "title": "News Feed",
        "explainer": "Hardcoded news from users you are not really following."
     },
@@ -15,7 +19,8 @@
       "rememberMe": "Remember Me",
       "forgotPassword": "Forgot Password",
       "loginSuccess": "You have been logged in",
-      "logIn": "Log In"
+      "logIn": "Log In",
+      "createAnAccount": "Create an Account"
     },
     "SupabaseErrorCodes": {
       "invalidCredentials": "Login unsuccessful. Please verify your email and password and try again.",

@@ -13,12 +13,19 @@ import { motion } from 'framer-motion';
 import { CircleArrowRight, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
 
-import FacebookLogo from '@/assets/images/socialAuthIcons/FacebookLogo.svg';
-import GoogleLogo from '@/assets/images/socialAuthIcons/GoogleLogo.svg';
+import { SC_CONFIG } from "@/supacharger/supacharger-config";
 
 import { createUserByEmailPassword } from '../../../app/(supacharger)/auth-actions';
 import { SCP_REGISTRY } from "../../plugins/registry";
 import { supabaseErrorCodeLocalisation } from '../../utils/helpers';
+
+const renderAuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some((enabled) => enabled);
+
+const AuthProviderButtons = renderAuthProviderButtons
+  ? dynamic(() => import('../buttons/authProviderButtons'), {
+      ssr: false,
+    })
+  : null;
 
 /**
  * BREVOCODE
@@ -74,45 +81,27 @@ export function CreateAccountForm() {
 
   return (
     <>
-      <Link
-        href='/account/login'
-        className='flex w-full justify-between rounded bg-gray-100  px-5 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-200 hover:no-underline'
-      >
-        <span className='font-normal'>I already have an account</span>
-        <span className=''>Log In</span>
-      </Link>
+     
+      {AuthProviderButtons && <AuthProviderButtons />}
 
-      <div className='mt-6 grid grid-cols-2 gap-4'>
-        <a
-          href='#'
-          className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
-        >
-          <GoogleLogo className="w-4 flex inline h-4" />
-          <span className=' font-semibold'>Google</span>
-        </a>
 
-        <a
-          href='#'
-          className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
-        >
-          <FacebookLogo className="w-4 flex inline h-4" />
-          <span className=' font-semibold'>Facebook</span>
-        </a>
-      </div>
-
-      <div className='my-4 py-2 font-medium text-gray-700'>
-        <div className='flex w-full items-center justify-between'>
-          <div className='flex-1'>
-            <hr className='border-gray-300'></hr>
-          </div>
-          <div className='px-4 text-gray-400 text-sm'>Or create an account with Email</div>
-          <div className='flex-1'>
-            <hr className='border-gray-300'></hr>
-          </div>
+      {renderAuthProviderButtons ? (
+    <div className='my-4 py-2 font-medium text-gray-700'>
+      <div className='flex w-full items-center justify-between'>
+        <div className='flex-1'>
+          <hr className='border-gray-300'></hr>
+        </div>
+        <div className='px-4 text-gray-400 text-sm'>Or create an account with Email</div>
+        <div className='flex-1'>
+          <hr className='border-gray-300'></hr>
         </div>
       </div>
+    </div>
+  ) : (
+    <div className='my-4 py-2'></div>
+  )}
 
-      <form onSubmit={handleSubmit} className='space-y-6'>
+      <form onSubmit={handleSubmit} className='space-y-6 mb-4'>
         <div>
           <label htmlFor='name' className='block  font-bold text-gray-700'>
             Name
@@ -206,6 +195,13 @@ export function CreateAccountForm() {
           </button>
         </div>
       </form>
+      <Link
+        href='/account/login'
+        className='flex w-full appearance-none justify-between rounde px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-100 hover:no-underline border border-gray-200 rounded-4xl'
+      >
+        <span className='font-normal'>I already have an account</span>
+        <span className=''>Log In</span>
+      </Link>
     </>
   );
 }

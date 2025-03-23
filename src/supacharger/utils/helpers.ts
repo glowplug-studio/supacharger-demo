@@ -36,7 +36,7 @@ export function supabaseErrorCodeLocalisation(response: string) {
     if (response === 'otp_expired')             messageId = 'otpExpired';
     if (response === 'unexpected_failure' || response === 'request_timeout') messageId = 'genericError';
 
-    //@TODO theres a lot more to handle! and this doesnt currently work 
+    //@TODO theres a lot more to handle! and this doesnt currently work
 
     return t(messageId); // Pass the variable directly
 }
