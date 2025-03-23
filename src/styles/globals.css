@@ -35,7 +35,7 @@
   --radius-sm: calc(var(--radius) - 4px);
 
   --font-sans:
-    var(--font-inter), ui-sans-serif, system-ui, sans-serif,
+    var(--font-figtree), ui-sans-serif, system-ui, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-alt: var(--font-inter-alternates);
 

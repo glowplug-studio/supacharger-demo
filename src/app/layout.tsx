@@ -18,7 +18,7 @@ import '@/styles/globals.css';
 export const dynamic = 'force-dynamic';
 
 const figtree = Figtree({
-  variable: '--font-inter',
+  variable: '--font-figtree',
   subsets: ['latin'],
 });
 
