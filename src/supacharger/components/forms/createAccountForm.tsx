@@ -1,26 +1,28 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import dynamic from "next/dynamic"
-import Link from "next/link"
-import { useTranslations } from "next-intl"
-import { AnimatePresence, motion } from "framer-motion"
-import { ArrowLeft, CircleArrowRight, Eye, EyeOff, Mail } from "lucide-react"
-import type React from "react"
-import { toast } from "react-toastify"
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowLeft, CircleArrowRight, Eye, EyeOff, Mail } from "lucide-react";
+import type React from "react";
+import { toast } from "react-toastify";
 
-import { SC_CONFIG } from "@/supacharger/supacharger-config"
+import { SC_CONFIG } from "@/supacharger/supacharger-config";
 
-import { createUserByEmailPassword } from "../../../app/(supacharger)/auth-actions"
-import { SCP_REGISTRY } from "../../plugins/registry"
+import { createUserByEmailPassword } from "../../../app/(supacharger)/auth-actions";
+import { SCP_REGISTRY } from "../../plugins/registry";
 
-const renderAuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some((enabled) => enabled)
+const renderAuthProviderButtons = Object.values(
+  SC_CONFIG.AUTH_PROVDERS_ENABLED,
+).some((enabled) => enabled);
 
 const AuthProviderButtons = renderAuthProviderButtons
   ? dynamic(() => import("../buttons/authProviderButtons"), {
       ssr: true,
     })
-  : null
+  : null;
 
 /**
  * BREVOCODE
@@ -30,45 +32,47 @@ const BrevoNewsletterRegistrationCheckbox = dynamic(
   {
     ssr: true,
   },
-)
+);
 
 export function CreateAccountForm() {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [retypePassword, setRetypePassword] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
-  const [error, setError] = useState(null)
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [retypePassword, setRetypePassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
   // If no social auth buttons, show the email form by default
-  const [showForm, setShowForm] = useState(!renderAuthProviderButtons)
-  const [isInitialRender, setIsInitialRender] = useState(true)
+  const [showForm, setShowForm] = useState(!renderAuthProviderButtons);
+  const [isInitialRender, setIsInitialRender] = useState(true);
 
-  const tAuthTerms = useTranslations("AuthTerms")
-  const tCreateAccountFormComponent = useTranslations("CreateAccountFormComponent")
+  const tAuthTerms = useTranslations("AuthTerms");
+  const tCreateAccountFormComponent = useTranslations(
+    "CreateAccountFormComponent",
+  );
 
   const handleToggle = () => {
-    setShowPassword(!showPassword)
-  }
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    event.preventDefault();
 
     try {
-      const formData = new FormData()
-      formData.append("email", email)
-      formData.append("password", password)
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
 
-      const result = await createUserByEmailPassword(formData)
+      const result = await createUserByEmailPassword(formData);
       if (result?.error) {
-        toast.error("Failed to create account" + result.error) //supabaseErrorCodeLocalisation('result.error'));
+        toast.error("Failed to create account" + result.error); //supabaseErrorCodeLocalisation('result.error'));
       } else {
-        toast.success("Account created successfully")
+        toast.success("Account created successfully");
       }
     } catch (error) {
-      console.error("Error creating user:", error)
-      toast.error("Failed to create account")
+      console.error("Error creating user:", error);
+      toast.error("Failed to create account");
     }
-  }
+  };
 
   const formVariants = {
     hidden: { height: 0, opacity: 0 },
@@ -80,7 +84,7 @@ export function CreateAccountForm() {
         ease: "circInOut",
       },
     },
-  }
+  };
 
   const passwordContainerVariants = {
     hidden: { height: 0, opacity: 0 },
@@ -89,19 +93,19 @@ export function CreateAccountForm() {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: "circInOut",
+        ease: "easeInOut",
       },
     },
-  }
+  };
 
   const toggleForm = () => {
-    setShowForm(!showForm)
-  }
+    setShowForm(!showForm);
+  };
 
   useEffect(() => {
     // Mark that initial render is complete
-    setIsInitialRender(false)
-  }, [])
+    setIsInitialRender(false);
+  }, []);
 
   return (
     <>
@@ -143,7 +147,9 @@ export function CreateAccountForm() {
         <button
           type="button"
           onClick={toggleForm}
-          className={`btn w-full ${showForm ? "bg-gray-100 text-gray-700" : "bg-primary text-white"}`}
+          className={`btn w-full ${
+            showForm ? "bg-gray-100 text-gray-700" : "bg-primary text-white"
+          }`}
         >
           {showForm
             ? tCreateAccountFormComponent("hideEmailFormButtonText")
@@ -151,7 +157,6 @@ export function CreateAccountForm() {
           {showForm ? <ArrowLeft size={18} /> : <Mail size={18} />}
         </button>
       )}
-
       <AnimatePresence>
         {showForm && (
           <motion.div
@@ -197,59 +202,73 @@ export function CreateAccountForm() {
               </div>
 
               <div className="my-2">
-                <label htmlFor="password" className="block  text-gray-700">
-                  {tAuthTerms("password")}
-                </label>
-                <div className="relative">
+                <div className="flex items-center justify-between">
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                    {tAuthTerms("password")}
+                  </label>
+                  <button
+                    type="button"
+                    className="text-gray-500 hover:text-gray-700"
+                    aria-label="Show password"
+                    onClick={handleToggle}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+                <div className="mt-2">
                   <input
                     id="password"
                     name="password"
                     type={showPassword ? "text" : "password"}
                     required
-                    className="focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden  mt-2"
+                    className="focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5">
-                    <button type="button" className="text-gray-600 hover:text-gray-900" onClick={handleToggle}>
-                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                  </div>
                 </div>
               </div>
 
-              <motion.div
-                variants={passwordContainerVariants}
-                initial="visible"
-                animate="visible"
-                style={{ overflow: "hidden" }}
-                className="my-2"
-              >
-                <label htmlFor="password-again" className="block   text-gray-700">
-                  {tAuthTerms("retypePassword")}
-                </label>
-                <div>
-                  <input
-                    id="password-again"
-                    name="password-again"
-                    type="password"
-                    required
-                    className="focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden mt-2"
-                    value={retypePassword}
-                    onChange={(e) => setRetypePassword(e.target.value)}
-                  />
-                </div>
-              </motion.div>
+              <AnimatePresence>
+                {!showPassword && (
+                  <motion.div
+                    variants={passwordContainerVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    style={{ overflow: "hidden" }}
+                    className="my-2"
+                  >
+                    <label htmlFor="password-again" className="block   text-gray-700">
+                      {tAuthTerms("retypePassword")}
+                    </label>
+                    <div>
+                      <input
+                        id="password-again"
+                        name="password-again"
+                        type="password"
+                        required
+                        className="focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden mt-2"
+                        value={retypePassword}
+                        onChange={(e) => setRetypePassword(e.target.value)}
+                      />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               {error && <p className="error">{error}</p>}
 
               {/**
                * BREVOCODE
                */}
-              {SCP_REGISTRY.BREVO.ENABLED && <BrevoNewsletterRegistrationCheckbox />}
-
+              {SCP_REGISTRY.BREVO.ENABLED && (
+                <BrevoNewsletterRegistrationCheckbox />
+              )}
               <div className="mt-4">
-                <button type="submit" className="btn w-full bg-primary text-white hover:bg-teal-800">
+                <button
+                  type="submit"
+                  className="btn w-full bg-primary text-white hover:bg-teal-800"
+                >
                   {tAuthTerms("signUp")} <CircleArrowRight size={18} className="" />
                 </button>
               </div>
@@ -262,11 +281,12 @@ export function CreateAccountForm() {
           href="/account/login"
           className="flex w-full appearance-none justify-between rounde px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-100 hover:no-underline border border-gray-200 rounded-4xl"
         >
-          <span className="font-normal">{tCreateAccountFormComponent("iAlreadyHaveAnAccount")}</span>
+          <span className="font-normal">
+            {tCreateAccountFormComponent("iAlreadyHaveAnAccount")}
+          </span>
           <span className="">{tAuthTerms("logIn")}</span>
         </Link>
       </div>
     </>
-  )
+  );
 }
-
