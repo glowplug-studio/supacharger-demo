@@ -22,7 +22,7 @@
     "orCreateAccountWithEmail": "Or create an account with Email",
     "iAlreadyHaveAnAccount": "I already have an account",
     "showEmailFormButtonText": "Continue with Email",
-    "hideEmailFormButtonText": "Use social Account"
+    "hideEmailFormButtonText": "Use Social Account"
   },
   "AuthTerms": {
     "name": "Name",
