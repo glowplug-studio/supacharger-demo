@@ -1,6 +1,8 @@
 import Link from 'next/link';
+
+import { SC_CONFIG } from "@/supacharger/supacharger-config";
+
 import SiteLogoSVG from '../assets/images/SiteLogoSVG.svg';
-import { SC_SITE_DESCRIPTION, SC_SITE_TITLE } from "@/supacharger/supacharger-config";
 
 interface LogoProps {
   showSiteTitle?: boolean | null;
@@ -8,10 +10,10 @@ interface LogoProps {
 }
 
 export default function SiteLogo({ showSiteTitle, darkMode }: LogoProps) {
-  const site_title = SC_SITE_TITLE;
+  const site_title = SC_CONFIG.SITE_TITLE;
 
   return (
-    //@TODO handle session state - of theres a sesson then switch this href value based on the src/supacharger/supacharger-config.ts SC_NO_SESSION_HOME_PATH and SC_SESSION_HOME_PATH
+    //@TODO handle session state - of theres a sesson then switch this href value based on the src/supacharger/supacharger-config.ts SC_CONFIG.NO_SESSION_HOME_PATH and SC_CONFIG.SESSION_HOME_PATH
     <Link href='/' className='flex w-fit items-center gap-2'>
       <SiteLogoSVG></SiteLogoSVG>
       {

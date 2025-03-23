@@ -1,12 +1,16 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { LoginUserForm } from "@/supacharger/components/forms/loginUserForm";
-import SiteLogo from "@/components/siteLogo";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+import SiteLogo from "@/components/siteLogo";
+import { LoginUserForm } from "@/supacharger/components/forms/loginUserForm";
+import { SC_CONFIG } from "@/supacharger/supacharger-config";
 
 export default function LoginPage() {
-  const t = useTranslations("LoginPage");
+  const tLoginPage= useTranslations("LoginPage");
+  const tGlobal = useTranslations('Global');
+  const tAuthTerms = useTranslations('AuthTerms');
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-sc-gradient">
@@ -16,7 +20,7 @@ export default function LoginPage() {
             <SiteLogo showSiteTitle={false} darkMode={false} />
           </div>
           <h1 className="mb-8 text-2xl/9 font-bold tracking-tight text-gray-700">
-            {t("title")}{" "}
+            {tLoginPage("title")}{" "}
           </h1>
 
           <LoginUserForm></LoginUserForm>
@@ -24,10 +28,10 @@ export default function LoginPage() {
           <div className="mt-6">
             <Link
               href="/account/create"
-              className="flex w-full appearance-none justify-between rounded bg-gray-100  px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-200 hover:no-underline"
+              className="flex w-full appearance-none justify-between px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-100 hover:no-underline border border-gray-200 rounded-4xl"
             >
-              <span className="text-normal">I don't have an account</span>
-              <span className="font-bold">Sign Up</span>
+              <span className="font-normal">New to{" "}{tGlobal("siteTitle")}?</span>
+              <span className="font-bold">{tAuthTerms("createAnAccount")}</span>
             </Link>
           </div>
         </div>

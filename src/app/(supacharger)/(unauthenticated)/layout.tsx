@@ -1,29 +1,26 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Manrope } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
 
 import  SiteLogo  from '@/components/siteLogo';
 import { Toaster } from '@/components/ui/toaster';
+import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
-
-
-
-import { SC_SITE_DESCRIPTION, SC_SITE_TITLE } from "@/supacharger/supacharger-config";
 
 import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';
 
-const inter = Inter({
-  variable: '--font-inter',
+const manrope = Manrope({
+  variable: '--font-manrope',
   subsets: ['latin'],
 });
 
-const site_title = SC_SITE_TITLE;
+const site_title = SC_CONFIG.SITE_TITLE;
 
 const navigation = [
   {
@@ -108,7 +105,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                     <AppBar />
                   </div>
                   <main className="relative flex-1">
-                     <div className="relative h-full">{children}</div>
+                     <div className="relative h-full"><h1>TESTNG</h1>{children}</div>
                   </main>
                   <Footer />
                </div>

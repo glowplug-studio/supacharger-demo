@@ -1,27 +1,29 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Manrope } from 'next/font/google';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
 import { ToastContainer } from 'react-toastify';
+
 import { Toaster } from '@/components/ui/toaster';
+import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
+
 import { Navigation } from './navigation';
-import { SC_SITE_DESCRIPTION, SC_SITE_TITLE } from "@/supacharger/supacharger-config";
+
 import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';
 
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
+const manrope = Manrope({
+   variable: '--font-manrope',
+   subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: SC_SITE_TITLE,
-  description: SC_SITE_DESCRIPTION,
+   title: SC_CONFIG.SITE_TITLE,
+   description: SC_CONFIG.SITE_DESCRIPTION,
 };
 
 export default async function RootLayout({ children }: PropsWithChildren) {
@@ -33,7 +35,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 
    return (
       <html lang={currentLocale}>
-         <body className={cn('font-sans antialiased', inter.variable)}>
+         <body className={cn('font-sans antialiased', manrope.variable)}>
             <NextIntlClientProvider messages={messages}>
             {children}
                <Toaster />
