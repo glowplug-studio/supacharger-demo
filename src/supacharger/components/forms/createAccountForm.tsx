@@ -2,8 +2,8 @@ import { useState } from 'react';
 import dynamic from "next/dynamic";
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, CircleArrowRight, Eye, EyeOff } from 'lucide-react';
+import { AnimatePresence,motion } from 'framer-motion';
+import { CircleArrowRight, Eye, EyeOff,Mail } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
@@ -37,6 +37,7 @@ export function CreateAccountForm() {
   const [showForm, setShowForm] = useState(false);
 
   const tAuthTerms = useTranslations("AuthTerms");
+  const tCreateAccountComponent = useTranslations("CreateAccountComponent");
 
   const handleToggle = () => {
     setShowPassword(!showPassword);
@@ -123,9 +124,9 @@ export function CreateAccountForm() {
             exit="hidden"
             style={{ overflow: 'hidden' }}
           >
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor='name' className='block  font-bold text-gray-700'>
+            <form onSubmit={handleSubmit} className="mt-6">
+              <div className='my-2'>
+                <label htmlFor='name' className='block text-gray-700'>
                   {tAuthTerms('name')}
                 </label>
                 <div className='mt-2'>
@@ -141,8 +142,8 @@ export function CreateAccountForm() {
                 </div>
               </div>
 
-              <div>
-                <label htmlFor='email' className='block  font-bold text-gray-700'>
+              <div className='my-2'>
+                <label htmlFor='email' className='block text-gray-700'>
                   {tAuthTerms('emailAddress')}
                 </label>
                 <div className='mt-2'>
@@ -159,8 +160,8 @@ export function CreateAccountForm() {
                 </div>
               </div>
 
-              <div>
-                <label htmlFor='password' className='block  font-bold text-gray-700'>
+              <div className='my-2'>
+                <label htmlFor='password' className='block  text-gray-700'>
                   {tAuthTerms('password')}
                 </label>
                 <div className='relative'>
@@ -186,8 +187,9 @@ export function CreateAccountForm() {
                 initial='visible'
                 animate='visible'
                 style={{ overflow: 'hidden' }}
+                className='my-2'
               >
-                <label htmlFor='password-again' className='block  font-bold text-gray-700'>
+                <label htmlFor='password-again' className='block   text-gray-700'>
                   {tAuthTerms('retypePassword')}
                 </label>
                 <div>
@@ -210,8 +212,8 @@ export function CreateAccountForm() {
              */}
               {SCP_REGISTRY.BREVO.ENABLED && <BrevoNewsletterRegistrationCheckbox />}
 
-              <div>
-                <button type='submit' className='btn w-full bg-primary text-white'>
+              <div className='mt-4'>
+                <button type='submit' className='btn w-full bg-primary text-white hover:bg-teal-800'>
                   {tAuthTerms('signUp')} <CircleArrowRight size={18} className='' />
                 </button>
               </div>
@@ -220,13 +222,16 @@ export function CreateAccountForm() {
         )}
       </AnimatePresence>
 
+      <div className='my-6'>
+
       <Link
         href='/account/login'
         className='flex w-full appearance-none justify-between rounde px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-100 hover:no-underline border border-gray-200 rounded-4xl'
       >
-        <span className='font-normal'>I already have an account</span>
+        <span className='font-normal'>{tCreateAccountComponent('iAlreadyHaveAnAccount')}</span>
         <span className=''>{tAuthTerms('logIn')}</span>
       </Link>
+      </div>
     </>
   );
 }

@@ -14,7 +14,12 @@
     "title": "Sign In"
   },
   "CreateAccountPage": {
-    "title": "Create an Account"
+    "title": "Create an Account",
+    "iAlreadyHaveAnAccount": "I already have an account"
+  },
+  "CreateAccountComponent": {
+    "title": "Create an Account",
+    "iAlreadyHaveAnAccount": "I already have an account"
   },
   "AuthTerms": {
     "name": "Name",
