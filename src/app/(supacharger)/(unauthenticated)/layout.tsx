@@ -7,12 +7,9 @@ import { NextIntlClientProvider } from 'next-intl';
 
 import  SiteLogo  from '@/components/siteLogo';
 import { Toaster } from '@/components/ui/toaster';
+import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
-
-
-
-import { SC_SITE_DESCRIPTION, SC_SITE_TITLE } from "@/supacharger/supacharger-config";
 
 import '@/styles/globals.css';
 
@@ -23,7 +20,7 @@ const inter = Inter({
   subsets: ['latin'],
 });
 
-const site_title = SC_SITE_TITLE;
+const site_title = SC_CONFIG.SITE_TITLE;
 
 const navigation = [
   {

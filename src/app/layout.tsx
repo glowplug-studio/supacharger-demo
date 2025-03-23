@@ -5,11 +5,14 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
 import { ToastContainer } from 'react-toastify';
+
 import { Toaster } from '@/components/ui/toaster';
+import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
+
 import { Navigation } from './navigation';
-import { SC_SITE_DESCRIPTION, SC_SITE_TITLE } from "@/supacharger/supacharger-config";
+
 import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';
@@ -20,8 +23,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: SC_SITE_TITLE,
-  description: SC_SITE_DESCRIPTION,
+  title: SC_CONFIG.SITE_TITLE,
+  description: SC_CONFIG.SITE_DESCRIPTION,
 };
 
 export default async function RootLayout({ children }: PropsWithChildren) {

@@ -10,7 +10,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
-import { SC_LOGIN_REDIRECT_DESTINATON } from  '@/supacharger/supacharger-config';
+import { SC_CONFIG } from  '@/supacharger/supacharger-config';
 import { getURL } from '@/supacharger/utils/helpers';
 import { ActionResponse } from '@/types/action-response';
 
@@ -42,7 +42,7 @@ export async function loginUser(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect( SC_LOGIN_REDIRECT_DESTINATON )
+  redirect( SC_CONFIG.LOGIN_REDIRECT_DESTINATON )
 }
 
 /**

@@ -2,8 +2,9 @@
 
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { SC_NO_SESSION_REDIRECT_DESTINATION } from "@/supacharger/supacharger-config";
+
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
+import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { getURL } from '@/supacharger/utils/helpers';
 
 let siteUrl = getURL();
@@ -21,7 +22,7 @@ export async function GET(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (!user?.id) {
-      return NextResponse.redirect( getURL(SC_NO_SESSION_REDIRECT_DESTINATION) );
+      return NextResponse.redirect( getURL(SC_CONFIG.NO_SESSION_USER_REDIRECT_DESTINATION) );
     }
 
     // Check if user is subscribed, if not redirect to pricing page

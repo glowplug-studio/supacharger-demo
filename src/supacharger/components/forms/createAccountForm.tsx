@@ -42,11 +42,6 @@ export function CreateAccountForm() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // if (password !== retypePassword) {
-    //   setError('Passwords do not match');
-    //   return;
-    // }
-
 
     try {
       const formData = new FormData();
