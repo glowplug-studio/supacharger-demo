@@ -7,7 +7,7 @@ import { SC_CONFIG } from "@/supacharger/supacharger-config"; // Corrected impor
 
 export default function AuthProviderButtons() {
   return (
-    <div className='mt-6 grid grid-cols-2 gap-4'>
+    <div className='grid grid-cols-2 gap-4'>
       {SC_CONFIG.AUTH_PROVDERS_ENABLED.google ? (
         <a
           href='#'

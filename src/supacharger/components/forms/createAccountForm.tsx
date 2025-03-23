@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef,useState } from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
@@ -40,6 +40,8 @@ export function CreateAccountForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState(null)
   const [showForm, setShowForm] = useState(false)
+  const [isInitialRender, setIsInitialRender] = useState(true)
+  const socialSectionRef = useRef(null)
 
   const tAuthTerms = useTranslations("AuthTerms")
   const tCreateAccountFormComponent = useTranslations("CreateAccountFormComponent")
@@ -74,8 +76,8 @@ export function CreateAccountForm() {
       height: "auto",
       opacity: 1,
       transition: {
-        duration: 0.7, //Slower
-        ease: "easeOut", //Eased
+        duration: 0.5,
+        ease: "easeInOut",
       },
     },
   }
@@ -86,7 +88,7 @@ export function CreateAccountForm() {
       height: "auto",
       opacity: 1,
       transition: {
-        duration: 0.3,
+        duration: 0.5,
         ease: "easeInOut",
       },
     },
@@ -94,18 +96,31 @@ export function CreateAccountForm() {
 
   const toggleForm = () => {
     setShowForm(!showForm)
+
+    // If we're showing the email form (hiding social), make sure social section animates properly next time
+    if (!showForm && socialSectionRef.current) {
+      socialSectionRef.current.style.height = "auto"
+      socialSectionRef.current.style.opacity = "1"
+    }
   }
+
+  useEffect(() => {
+    // Mark that initial render is complete
+    setIsInitialRender(false)
+  }, [])
 
   return (
     <>
       <AnimatePresence>
         {!showForm && (
           <motion.div
+            ref={socialSectionRef}
             variants={formVariants}
-            initial="hidden"
+            initial={isInitialRender ? false : "hidden"}
             animate="visible"
             exit="hidden"
             style={{ overflow: "hidden" }}
+            className="social-auth-container"
           >
             {AuthProviderButtons && <AuthProviderButtons />}
 
@@ -259,4 +274,3 @@ export function CreateAccountForm() {
     </>
   )
 }
-
