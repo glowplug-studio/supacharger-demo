@@ -11,7 +11,7 @@ export default function ExampleHero() {
             </h1>
             <Link
                     className="btn w-full bg-white text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto"
-                    href="account/account/login"
+                    href="account/login"
                   >
                     Sign in
                   </Link>

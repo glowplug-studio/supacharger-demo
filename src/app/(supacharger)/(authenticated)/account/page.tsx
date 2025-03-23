@@ -10,9 +10,7 @@ import { Price, ProductWithPrices } from '@/features/pricing/types';
 export default async function AccountPage() {
   const [session, subscription, products] = await Promise.all([getSession(), getSubscription(), getProducts()]);
 
-  if (!session) {
-    redirect('/login');
-  }
+  
 
   let userProduct: ProductWithPrices | undefined;
   let userPrice: Price | undefined;
