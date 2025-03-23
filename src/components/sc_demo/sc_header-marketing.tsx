@@ -1,6 +1,8 @@
 'use client';
+
 import { useState } from 'react';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { Menu } from 'lucide-react';
 
@@ -41,45 +43,56 @@ export function SCMarketingMenu() {
                 </div>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
-                    <div className="relative group">
-                      <button className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                    <div className="relative inline-block">
+                      <button
+                        className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium flex items-center"
+                        onClick={() => handleDropdownToggle('dropdown1')}
+                      >
                         Products
                         <ChevronDown size={16} />
                       </button>
 
-                      <div
-                        className="absolute left-0 mt-2 w-screen max-w-6xl bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform -translate-x-1/4"
-                      >
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6">
-                          <div>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Software</h3>
-                            <ul className="space-y-3">
-                              <li><a href="#" className="text-gray-600 hover:text-indigo-600">Web Development</a></li>
-                              <li><a href="#" className="text-gray-600 hover:text-indigo-600">Mobile Apps</a></li>
-                              <li><a href="#" className="text-gray-600 hover:text-indigo-600">Desktop Software</a></li>
-                              <li><a href="#" className="text-gray-600 hover:text-indigo-600">Enterprise Solutions</a></li>
-                            </ul>
-                          </div>
-                          <div>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Hardware</h3>
-                            <ul className="space-y-3">
-                              <li><a href="#" className="text-gray-600 hover:text-indigo-600">Laptops</a></li>
-                              <li><a href="#" className="text-gray-600 hover:text-indigo-600">Desktops</a></li>
-                              <li><a href="#" className="text-gray-600 hover:text-indigo-600">Tablets</a></li>
-                              <li><a href="#" className="text-gray-600 hover:text-indigo-600">Accessories</a></li>
-                              <li><a href="#" className="text-gray-600 hover:text-indigo-600">Networking</a></li>
-                            </ul>
-                          </div>
-                          <div>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Featured</h3>
-                            <div className="bg-gray-100 p-4 rounded-lg">
-                              <h4 className="font-medium text-gray-900">New Release</h4>
-                              <p className="text-sm text-gray-600 mb-2">Check out our latest product offering with advanced features.</p>
-                              <a href="#" className="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Learn more →</a>
+                      {dropdownStates.dropdown1 && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          transition={{
+                            duration: 0.3,
+                            ease: 'circInOut',
+                          }}
+                          className="absolute left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+                        >
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6">
+                            <div>
+                              <h3 className="text-lg font-semibold text-gray-900 mb-4">Software</h3>
+                              <ul className="space-y-3">
+                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Web Development</a></li>
+                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Mobile Apps</a></li>
+                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Desktop Software</a></li>
+                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Enterprise Solutions</a></li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h3 className="text-lg font-semibold text-gray-900 mb-4">Hardware</h3>
+                              <ul className="space-y-3">
+                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Laptops</a></li>
+                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Desktops</a></li>
+                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Tablets</a></li>
+                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Accessories</a></li>
+                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Networking</a></li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h3 className="text-lg font-semibold text-gray-900 mb-4">Featured</h3>
+                              <div className="bg-gray-100 p-4 rounded-lg">
+                                <h4 className="font-medium text-gray-900">New Release</h4>
+                                <p className="text-sm text-gray-600 mb-2">Check out our latest product offering with advanced features.</p>
+                                <a href="#" className="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Learn more →</a>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
+                        </motion.div>
+                      )}
                     </div>
                     <Link href='/about' className='text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium'>About</Link>
                   </div>
@@ -121,33 +134,37 @@ export function SCMarketingMenu() {
             </div>
           </div>
 
-          <div
-            className={`sm:hidden ${isMobileMenuExpanded ? '' : 'hidden'}`}
-            id="mobile-menu"
-          >
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link href="/" className="bg-gray-100 text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Home</Link>
+          {isMobileMenuExpanded && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, ease: 'circInOut' }}
+              className="top-0 left-0 w-screen h-screen bg-gray-100 z-50"
+            >
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <Link href="/" className="bg-gray-100 text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Home</Link>
 
-              <Link href="/about" className="text-gray-900 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">About</Link>
+                <Link href="/about" className="text-gray-900 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">About</Link>
 
-              <div className="pt-4 pb-3 border-t border-gray-200">
-                <div className="flex items-center px-3 space-y-2 flex-col">
-                  <Link
-                    href="/account/login"
-                    className="btn w-full text-center text-gray-900 bg-gray-100 px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    href="/account/create"
-                    className="btn bg-primary w-full text-center bg-indigo-600 text-white px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Sign Up
-                  </Link>
+                <div className="pt-4 pb-3 border-t border-gray-200">
+                  <div className="flex items-center px-3 space-y-2 flex-col">
+                    <Link
+                      href="/account/login"
+                      className="btn w-full text-center text-gray-900 bg-gray-100 px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href="/account/create"
+                      className="btn bg-primary w-full text-center bg-indigo-600 text-white px-3 py-2 rounded-md text-base font-medium"
+                    >
+                      Sign Up
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          )}
         </nav>
       </header>
     </>
