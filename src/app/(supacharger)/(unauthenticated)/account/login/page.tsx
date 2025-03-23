@@ -13,7 +13,7 @@ export default function LoginPage() {
   const tAuthTerms = useTranslations('AuthTerms');
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-sc-gradient">
+    <div className="flex h-screen flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 bg-sc-gradient">
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
           <div className="mb-28 block">
@@ -28,7 +28,7 @@ export default function LoginPage() {
           <div className="mt-6">
             <Link
               href="/account/create"
-              className="flex w-full appearance-none justify-between px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-100 hover:no-underline border border-gray-200 rounded-4xl"
+              className="flex w-full appearance-none justify-between px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-100 hover:no-underline border border-gray-200 rounded-3xl"
             >
               <span className="font-normal">New to{" "}{tGlobal("siteTitle")}?</span>
               <span className="font-bold">{tAuthTerms("createAnAccount")}</span>

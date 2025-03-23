@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 
 import ExampleDash from '@/supacharger/components/exampleDash';
 import ExampleHero from '@/supacharger/components/exampleHero';
-import { AccountMenu } from '@/supacharger/components/menus/account-menu';
+import { AccountMenu } from '@/components/menus/sc_account-menu';
 import { isLoggedIn } from '@/utils/supabase/server';
 
 

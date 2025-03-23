@@ -105,7 +105,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
                     <AppBar />
                   </div>
                   <main className="relative flex-1">
-                     <div className="relative h-full"><h1>TESTNG</h1>{children}</div>
+                     <div className="relative h-full"><h1>TESTNG src/app/(supacharger)/(unauthenticated)/layout.tsx</h1>{children}</div>
                   </main>
                   <Footer />
                </div>

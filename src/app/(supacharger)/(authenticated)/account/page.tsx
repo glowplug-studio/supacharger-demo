@@ -39,7 +39,7 @@ function classNames(...classes: string[]): string {
   return (
     <main className="flex-1 bg-gray-800 py-10">
       <div className='container'>
-        <h1 className='mb-8 text-center lg:text-left text-4xl font-bold'>Account</h1>
+        <h1 className='mb-8 text-center lg:text-left text-3xl font-bold'>Account</h1>
       </div>
       <div className="container flex min-h-screen flex-col gap-8 py-8 lg:flex-row">
         {/* Sidebar */}

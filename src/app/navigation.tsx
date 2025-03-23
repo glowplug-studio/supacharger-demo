@@ -1,14 +1,11 @@
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 
-import { AccountMenu } from '@/supacharger/components/menus/account-menu';
-
+import { AccountMenu } from '@/components/menus/sc_account-menu';
+import LocaleSwitcher from '@/components/sc_LocaleSwitcher';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { isLoggedIn } from '@/utils/supabase/server';
-
-import LocaleSwitcher from '../components/LocaleSwitcher';
-
 
 export async function Navigation() {
   const session = await isLoggedIn();

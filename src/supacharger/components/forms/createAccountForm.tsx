@@ -279,7 +279,7 @@ export function CreateAccountForm() {
       <div className="my-6">
         <Link
           href="/account/login"
-          className="flex w-full appearance-none justify-between rounde px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-100 hover:no-underline border border-gray-200 rounded-4xl"
+          className="flex w-full appearance-none justify-between rounde px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-100 hover:no-underline border border-gray-200 rounded-3xl"
         >
           <span className="font-normal">
             {tCreateAccountFormComponent("iAlreadyHaveAnAccount")}

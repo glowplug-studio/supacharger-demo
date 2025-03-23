@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-import { SignupRight } from '@/components/signupRight'
+import { SignupRight } from '@/components/sc_signupRight'
 import SiteLogo from '@/components/siteLogo';
 import { CreateAccountForm } from '@/supacharger/components/forms/createAccountForm';
 
@@ -27,11 +27,10 @@ export default function SignUp() {
               <h1 className='mb-8 text-2xl/9 font-bold tracking-tight text-gray-700'>{tCreateAccountPage('title')}</h1>
                   <CreateAccountForm></CreateAccountForm>
               </div>
-           
           </div>
         </div>
         <div className='h-full w-full p-4 md:w-3/5'>
-                           <SignupRight></SignupRight>
+           <SignupRight></SignupRight>
         </div>
       </div>
     </>

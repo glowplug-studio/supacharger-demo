@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { CircleUserRound, LogOut, Settings } from 'lucide-react';
-import LogoutButton from '@/supacharger/components/buttons/logoutButton';
 
 import {
   DropdownMenu,
@@ -12,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import LogoutButton from '@/supacharger/components/buttons/logoutButton';
 import { ActionResponse } from '@/types/action-response';
 
 export function AccountMenu() {

@@ -41,7 +41,7 @@ export default async function BillingPage() {
   return (
     <main className='flex-1 bg-stone-800 py-10'>
       <div className='container'>
-        <h1 className='mb-8 text-center text-4xl lg:text-left'>Account</h1>
+        <h1 className='mb-8 text-center text-3xl lg:text-left'>Account</h1>
       </div>
       <div className='container flex min-h-screen flex-col gap-8 py-8 lg:flex-row'>
         {/* Sidebar */}
