@@ -97,7 +97,6 @@ export function CreateAccountForm() {
   const toggleForm = () => {
     setShowForm(!showForm)
 
-    // If we're showing the email form (hiding social), make sure social section animates properly next time
     if (!showForm && socialSectionRef.current) {
       socialSectionRef.current.style.height = "auto"
       socialSectionRef.current.style.opacity = "1"
@@ -123,7 +122,6 @@ export function CreateAccountForm() {
             className="social-auth-container"
           >
             {AuthProviderButtons && (
-              // Remove the fade-in animation specifically for the social buttons
               <div style={{ opacity: 1 }}>
                 <AuthProviderButtons />
               </div>

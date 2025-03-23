@@ -19,7 +19,7 @@ export default function SignUp() {
 
 
 
-              <div className='mb-28 block'>
+              <div className='mb-16 block'>
                 <SiteLogo showSiteTitle={true} darkMode={false} />
               </div>
 
