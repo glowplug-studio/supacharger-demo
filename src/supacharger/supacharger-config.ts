@@ -20,8 +20,10 @@ export const SC_CONFIG = {
    * STRINGS
    * ==========
    */
+
+  //@toto this should be translatable! this has been done using en.json Global and in  src/app/(supacharger)/(unauthenticated)/account/login/page.tsx
   SITE_TITLE: 'Supacharger',
-  SITE_DESCRIPTION: 'Start your next project without reinventing the wheel.', //@toto this should be translatable! this has been done using en.json Global and in  src/app/(supacharger)/(unauthenticated)/account/login/page.tsx
+  SITE_DESCRIPTION: 'Start your next project without reinventing the wheel.',
 
   /**
    * ==========
