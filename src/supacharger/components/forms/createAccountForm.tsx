@@ -42,7 +42,6 @@ export function CreateAccountForm() {
   // If no social auth buttons, show the email form by default
   const [showForm, setShowForm] = useState(!renderAuthProviderButtons)
   const [isInitialRender, setIsInitialRender] = useState(true)
-  const socialSectionRef = useRef(null)
 
   const tAuthTerms = useTranslations("AuthTerms")
   const tCreateAccountFormComponent = useTranslations("CreateAccountFormComponent")
@@ -97,11 +96,6 @@ export function CreateAccountForm() {
 
   const toggleForm = () => {
     setShowForm(!showForm)
-
-    if (!showForm && socialSectionRef.current) {
-      socialSectionRef.current.style.height = "auto"
-      socialSectionRef.current.style.opacity = "1"
-    }
   }
 
   useEffect(() => {
@@ -114,7 +108,6 @@ export function CreateAccountForm() {
       <AnimatePresence>
         {!showForm && renderAuthProviderButtons && (
           <motion.div
-            ref={socialSectionRef}
             variants={formVariants}
             initial={isInitialRender ? false : "hidden"}
             animate="visible"

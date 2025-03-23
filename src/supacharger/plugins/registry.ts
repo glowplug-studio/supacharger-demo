@@ -1,6 +1,6 @@
 export const SCP_REGISTRY = {
     BREVO: {
-      ENABLED: false,
+      ENABLED: true,
     },
   } as const;
 
