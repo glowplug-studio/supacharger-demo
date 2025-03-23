@@ -92,17 +92,6 @@
   body {
     @apply h-full;
   }
-  h1 {
-    @apply font-bold;
-    @apply text-4xl;
-    @apply lg:text-6xl;
-    @apply bg-clip-text;
-    @apply drop-shadow-[0_0_15px_rgba(0,0,0,1)];
-    @apply lg:text-transparent;
-    @apply lg:bg-gradient-to-br;
-    @apply from-white;
-    @apply to-neutral-400;
-  }
 
   a {
     @apply text-blue-600;
@@ -115,12 +104,24 @@
     @apply justify-between;
     @apply items-center;
     @apply rounded-md;
-    @apply hover:bg-secondary;
+    @apply hover:bg-teal-500;
     @apply px-5;
     @apply py-3;
     @apply focus-visible:outline-2;
     @apply focus-visible:outline-offset-2;
     @apply focus-visible:outline-indigo-600;
+    @apply hover:cursor-pointer;
+  }
+
+  .input {
+    @apply appearance-none;
+    @apply rounded;
+    @apply border;
+    @apply px-3;
+    @apply py-2;
+    @apply leading-tight;
+    @apply text-gray-700;
+    @apply bg-white;
   }
 }
 

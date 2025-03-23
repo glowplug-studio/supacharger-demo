@@ -55,8 +55,8 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: ['var(--font-figtree)', ...fontFamily.sans],
-        alt: ['var(--font-figtree-alternates)'],
+        sans: ['var(--font-manrope)', ...fontFamily.sans],
+        alt: ['var(--font-manrope-alternates)'],
       },
       keyframes: {
         'accordion-down': {
