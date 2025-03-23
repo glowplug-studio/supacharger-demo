@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import LogoutButton from '@/supacharger/components/buttons/logoutButton';
+import LogoutButton from '@/supacharger/components/buttons/logout-button';
 import { ActionResponse } from '@/types/action-response';
 
 export function AccountMenu() {

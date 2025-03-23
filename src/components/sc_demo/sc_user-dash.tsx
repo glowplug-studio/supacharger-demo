@@ -1,5 +1,6 @@
-import LogoutButton from '@/supacharger/components/buttons/logoutButton' 
-export default function ExampleDash() {
+import LogoutButton from '@/supacharger/components/buttons/logout-button';
+
+export default function SCUserDash() {
   return (
       <div className='flex items-center rounded-md bg-green-200 p-4'>
         <img

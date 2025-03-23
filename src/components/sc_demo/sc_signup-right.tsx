@@ -1,4 +1,4 @@
-import Carousel, { type Slide } from '@/components/demo/carousel';
+import Carousel, { type Slide } from '@/components/sc_demo/sc_carousel';
 
 const slides: Slide[] = [
   {

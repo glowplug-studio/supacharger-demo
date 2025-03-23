@@ -2,6 +2,7 @@ import { PropsWithChildren } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 
+import { SCMarketingMenu } from '@/components/sc_demo/sc_marketing-header';
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 
 export const metadata: Metadata = {
@@ -12,8 +13,13 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: PropsWithChildren) {
   return (
+    <>
+    <div id="marketing-root-layout">
+      <SCMarketingMenu></SCMarketingMenu>
     <main className="relative flex-1">
       <div className="relative h-full">{children}</div>
     </main>
+    </div>
+    </>
   );
 }

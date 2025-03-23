@@ -10,8 +10,6 @@ import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
 
-import { Navigation } from './navigation';
-
 import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';

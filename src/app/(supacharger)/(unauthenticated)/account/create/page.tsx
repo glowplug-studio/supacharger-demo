@@ -2,9 +2,9 @@
 
 import { useTranslations } from 'next-intl';
 
-import { SignupRight } from '@/components/sc_signupRight'
-import SiteLogo from '@/components/siteLogo';
-import { CreateAccountForm } from '@/supacharger/components/forms/createAccountForm';
+import { SignupRight } from '@/components/sc_demo/sc_signup-right'
+import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
+import { CreateAccountForm } from '@/supacharger/components/forms/create-account-form';
 
 export default function SignUp() {
   const tCreateAccountPage = useTranslations('CreateAccountPage');
@@ -20,7 +20,7 @@ export default function SignUp() {
 
 
               <div className='mb-16 block'>
-                <SiteLogo showSiteTitle={true} darkMode={false} />
+                <SCSiteLogo showSiteTitle={true} darkMode={false} />
               </div>
 
               <div>

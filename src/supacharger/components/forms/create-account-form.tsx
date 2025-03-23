@@ -19,7 +19,7 @@ const renderAuthProviderButtons = Object.values(
 ).some((enabled) => enabled);
 
 const AuthProviderButtons = renderAuthProviderButtons
-  ? dynamic(() => import("../buttons/authProviderButtons"), {
+  ? dynamic(() => import("../buttons/auth-provider-buttons"), {
       ssr: true,
     })
   : null;
