@@ -2,7 +2,6 @@ import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
 import { ToastContainer } from 'react-toastify';
 
@@ -18,13 +17,13 @@ import '@/styles/globals.css';
 export const dynamic = 'force-dynamic';
 
 const figtree = Figtree({
-  variable: '--font-figtree',
-  subsets: ['latin'],
+   variable: '--font-figtree',
+   subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
-  title: SC_CONFIG.SITE_TITLE,
-  description: SC_CONFIG.SITE_DESCRIPTION,
+   title: SC_CONFIG.SITE_TITLE,
+   description: SC_CONFIG.SITE_DESCRIPTION,
 };
 
 export default async function RootLayout({ children }: PropsWithChildren) {
