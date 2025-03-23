@@ -18,8 +18,8 @@ const renderAuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED)
 
 const AuthProviderButtons = renderAuthProviderButtons
   ? dynamic(() => import("../buttons/authProviderButtons"), {
-    ssr: false,
-  })
+      ssr: true,
+    })
   : null
 
 /**
@@ -28,7 +28,7 @@ const AuthProviderButtons = renderAuthProviderButtons
 const BrevoNewsletterRegistrationCheckbox = dynamic(
   () => import("../../plugins/scp_brevo/brevoNewsletterRegistrationCheckbox"),
   {
-    ssr: false, // Optional: Disable server-side rendering
+    ssr: true, 
   },
 )
 
@@ -42,8 +42,6 @@ export function CreateAccountForm() {
   const [showForm, setShowForm] = useState(false)
   const [isInitialRender, setIsInitialRender] = useState(true)
   const socialSectionRef = useRef(null)
-  const [socialIconsVisible, setSocialIconsVisible] = useState(false);
-
 
   const tAuthTerms = useTranslations("AuthTerms")
   const tCreateAccountFormComponent = useTranslations("CreateAccountFormComponent")
@@ -107,17 +105,9 @@ export function CreateAccountForm() {
   }
 
   useEffect(() => {
-    // Set social icons to visible after a delay for fade-in effect
-    const timer = setTimeout(() => {
-      setSocialIconsVisible(true);
-    }, 200); // 200ms delay
-
     // Mark that initial render is complete
-    setIsInitialRender(false);
-
-    return () => clearTimeout(timer); // Clear timeout if component unmounts
-  }, []);
-
+    setIsInitialRender(false)
+  }, [])
 
   return (
     <>
@@ -132,15 +122,12 @@ export function CreateAccountForm() {
             style={{ overflow: "hidden" }}
             className="social-auth-container"
           >
-            {AuthProviderButtons &&
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: socialIconsVisible ? 1 : 0 }}
-                transition={{ duration: 0.2 }} // 200ms fade-in
-              >
+            {AuthProviderButtons && (
+              // Remove the fade-in animation specifically for the social buttons
+              <div style={{ opacity: 1 }}>
                 <AuthProviderButtons />
-              </motion.div>
-            }
+              </div>
+            )}
 
             {renderAuthProviderButtons ? (
               <div className="my-4 py-2 font-medium text-gray-700">
@@ -290,3 +277,4 @@ export function CreateAccountForm() {
     </>
   )
 }
+
