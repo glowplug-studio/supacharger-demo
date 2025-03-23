@@ -28,7 +28,7 @@ const AuthProviderButtons = renderAuthProviderButtons
 const BrevoNewsletterRegistrationCheckbox = dynamic(
   () => import("../../plugins/scp_brevo/brevoNewsletterRegistrationCheckbox"),
   {
-    ssr: true, 
+    ssr: true,
   },
 )
 
@@ -39,7 +39,8 @@ export function CreateAccountForm() {
   const [retypePassword, setRetypePassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState(null)
-  const [showForm, setShowForm] = useState(false)
+  // If no social auth buttons, show the email form by default
+  const [showForm, setShowForm] = useState(!renderAuthProviderButtons)
   const [isInitialRender, setIsInitialRender] = useState(true)
   const socialSectionRef = useRef(null)
 
@@ -77,7 +78,7 @@ export function CreateAccountForm() {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: "easeInOut",
+        ease: "circInOut",
       },
     },
   }
@@ -89,7 +90,7 @@ export function CreateAccountForm() {
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: "easeInOut",
+        ease: "circInOut",
       },
     },
   }
@@ -111,7 +112,7 @@ export function CreateAccountForm() {
   return (
     <>
       <AnimatePresence>
-        {!showForm && (
+        {!showForm && renderAuthProviderButtons && (
           <motion.div
             ref={socialSectionRef}
             variants={formVariants}
@@ -127,47 +128,47 @@ export function CreateAccountForm() {
               </div>
             )}
 
-            {renderAuthProviderButtons ? (
-              <div className="my-4 py-2 font-medium text-gray-700">
-                <div className="flex w-full items-center justify-between">
-                  <div className="flex-1">
-                    <hr className="border-gray-300"></hr>
-                  </div>
-                  <div className="px-4 text-gray-400 text-sm">
-                    {tCreateAccountFormComponent("orCreateAccountWithEmail")}
-                  </div>
-                  <div className="flex-1">
-                    <hr className="border-gray-300"></hr>
-                  </div>
+            <div className="my-4 py-2 font-medium text-gray-700">
+              <div className="flex w-full items-center justify-between">
+                <div className="flex-1">
+                  <hr className="border-gray-300"></hr>
+                </div>
+                <div className="px-4 text-gray-400 text-sm">
+                  {tCreateAccountFormComponent("orCreateAccountWithEmail")}
+                </div>
+                <div className="flex-1">
+                  <hr className="border-gray-300"></hr>
                 </div>
               </div>
-            ) : (
-              <div className="my-4 py-2"></div>
-            )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-      <button
-        type="button"
-        onClick={toggleForm}
-        className={`btn w-full ${showForm ? "bg-gray-100 text-gray-700" : "bg-primary text-white"}`}
-      >
-        {showForm
-          ? tCreateAccountFormComponent("hideEmailFormButtonText")
-          : tCreateAccountFormComponent("showEmailFormButtonText")}
-        {showForm ? <ArrowLeft size={18} /> : <Mail size={18} />}
-      </button>
+
+      {/* Only show the toggle button if we have social auth buttons */}
+      {renderAuthProviderButtons && (
+        <button
+          type="button"
+          onClick={toggleForm}
+          className={`btn w-full ${showForm ? "bg-gray-100 text-gray-700" : "bg-primary text-white"}`}
+        >
+          {showForm
+            ? tCreateAccountFormComponent("hideEmailFormButtonText")
+            : tCreateAccountFormComponent("showEmailFormButtonText")}
+          {showForm ? <ArrowLeft size={18} /> : <Mail size={18} />}
+        </button>
+      )}
 
       <AnimatePresence>
         {showForm && (
           <motion.div
             variants={formVariants}
-            initial="hidden"
+            initial={isInitialRender ? false : "hidden"}
             animate="visible"
             exit="hidden"
             style={{ overflow: "hidden" }}
           >
-            <form onSubmit={handleSubmit} className="mt-6">
+            <form onSubmit={handleSubmit} className={renderAuthProviderButtons ? "mt-6" : ""}>
               <div className="my-2">
                 <label htmlFor="name" className="block text-gray-700">
                   {tAuthTerms("name")}

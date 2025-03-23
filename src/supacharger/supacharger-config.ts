@@ -87,7 +87,7 @@ export const SC_CONFIG = {
    * Only the providers listed here are supported at this point in time.
    */
   AUTH_PROVDERS_ENABLED: {
-    google: false,
+    google: true,
     facebook: false,
   },
 };
