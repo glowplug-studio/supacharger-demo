@@ -19,7 +19,9 @@
   },
   "CreateAccountComponent": {
     "title": "Create an Account",
-    "iAlreadyHaveAnAccount": "I already have an account"
+    "iAlreadyHaveAnAccount": "I already have an account",
+    "showEmailFormButtonText": "Continue with Email",
+    "hideEmailFormButtonText": "Close"
   },
   "AuthTerms": {
     "name": "Name",
