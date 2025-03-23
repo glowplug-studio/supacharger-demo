@@ -1,8 +1,8 @@
 'use client';
 
-import { CreateAccountForm } from '@/supacharger/components/forms/createAccountForm';
 import { SignupRight } from '@/components/signupRight'
 import SiteLogo from '@/components/siteLogo';
+import { CreateAccountForm } from '@/supacharger/components/forms/createAccountForm';
 
 export default function SignUp() {
 

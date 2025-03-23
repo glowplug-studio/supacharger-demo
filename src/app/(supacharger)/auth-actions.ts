@@ -1,17 +1,18 @@
 'use server';
 
-/** ========== 
- * 
+/** ==========
+ *
  * Supacharger - Auth Actions.
- * 
+ *
  * ========== */
 
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
+
 import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
-import { ActionResponse } from '@/types/action-response';
+import { SC_LOGIN_REDIRECT_DESTINATON } from  '@/supacharger/supacharger-config';
 import { getURL } from '@/supacharger/utils/helpers';
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
-import { SC_LOGIN_REDIRECT_DESTINATON } from  '@/supacharger/supacharger-config'
+import { ActionResponse } from '@/types/action-response';
 
 /**
  * Logout user
@@ -24,7 +25,7 @@ export async function logoutUser(): Promise<{ success: boolean }> {
 }
 
 /**
- * Login user with email and password 
+ * Login user with email and password
  */
 export async function loginUser(formData: FormData) {
   const supabase = await createSupabaseServerClient()

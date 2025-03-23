@@ -1,9 +1,10 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { LoginUserForm } from "@/supacharger/components/forms/loginUserForm";
-import SiteLogo from "@/components/siteLogo";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+import SiteLogo from "@/components/siteLogo";
+import { LoginUserForm } from "@/supacharger/components/forms/loginUserForm";
 
 export default function LoginPage() {
   const t = useTranslations("LoginPage");
@@ -26,7 +27,7 @@ export default function LoginPage() {
               href="/account/create"
               className="flex w-full appearance-none justify-between rounded bg-gray-100  px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-200 hover:no-underline"
             >
-              <span className="text-normal">I don't have an account</span>
+              <span className="text-normal">I don&apos;t have an account</span>
               <span className="font-bold">Sign Up</span>
             </Link>
           </div>

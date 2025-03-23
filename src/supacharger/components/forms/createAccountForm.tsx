@@ -1,20 +1,31 @@
 'use client';
 
-/** ========== 
- * 
+/** ==========
+ *
  * Supacharger - Create Account Form
- * 
+ *
  * ========== */
 
 import { useState } from 'react';
-import { CircleArrowRight, Eye, EyeOff } from 'lucide-react';
-import { motion } from 'framer-motion';
+import dynamic from "next/dynamic";
 import Link from 'next/link';
-import GoogleLogo from '@/assets/images/socialAuthIcons/GoogleLogo.svg';
-import FacebookLogo from '@/assets/images/socialAuthIcons/FacebookLogo.svg';
-import { createUserByEmailPassword } from '../../../app/(supacharger)/auth-actions';
+import { motion } from 'framer-motion';
+import { CircleArrowRight, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
+
+import FacebookLogo from '@/assets/images/socialAuthIcons/FacebookLogo.svg';
+import GoogleLogo from '@/assets/images/socialAuthIcons/GoogleLogo.svg';
+
+import { createUserByEmailPassword } from '../../../app/(supacharger)/auth-actions';
+import { SCP_REGISTRY } from "../../plugins/registry";
 import { supabaseErrorCodeLocalisation } from '../../utils/helpers';
+
+/**
+ * BREVOCODE
+ */
+const BrevoNewsletterRegistrationCheckbox = dynamic(() => import('../../plugins/scp_brevo/brevoNewsletterRegistrationCheckbox'), {
+  ssr: false, // Optional: Disable server-side rendering
+});
 
 export function CreateAccountForm() {
   const [name, setName] = useState('');
@@ -187,6 +198,12 @@ export function CreateAccountForm() {
         </motion.div>
 
         {error && <p className="error">{error}</p>}
+
+        {/**
+       * BREVOCODE
+       */}
+        {SCP_REGISTRY.BREVO.ENABLED && <BrevoNewsletterRegistrationCheckbox />}
+ 
 
         <div>
           <button type='submit' className='btn w-full bg-primary text-white'>
