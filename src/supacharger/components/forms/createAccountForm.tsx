@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef,useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
@@ -18,8 +18,8 @@ const renderAuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED)
 
 const AuthProviderButtons = renderAuthProviderButtons
   ? dynamic(() => import("../buttons/authProviderButtons"), {
-      ssr: false,
-    })
+    ssr: false,
+  })
   : null
 
 /**
@@ -42,6 +42,8 @@ export function CreateAccountForm() {
   const [showForm, setShowForm] = useState(false)
   const [isInitialRender, setIsInitialRender] = useState(true)
   const socialSectionRef = useRef(null)
+  const [socialIconsVisible, setSocialIconsVisible] = useState(false);
+
 
   const tAuthTerms = useTranslations("AuthTerms")
   const tCreateAccountFormComponent = useTranslations("CreateAccountFormComponent")
@@ -105,9 +107,17 @@ export function CreateAccountForm() {
   }
 
   useEffect(() => {
+    // Set social icons to visible after a delay for fade-in effect
+    const timer = setTimeout(() => {
+      setSocialIconsVisible(true);
+    }, 200); // 200ms delay
+
     // Mark that initial render is complete
-    setIsInitialRender(false)
-  }, [])
+    setIsInitialRender(false);
+
+    return () => clearTimeout(timer); // Clear timeout if component unmounts
+  }, []);
+
 
   return (
     <>
@@ -122,7 +132,15 @@ export function CreateAccountForm() {
             style={{ overflow: "hidden" }}
             className="social-auth-container"
           >
-            {AuthProviderButtons && <AuthProviderButtons />}
+            {AuthProviderButtons &&
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: socialIconsVisible ? 1 : 0 }}
+                transition={{ duration: 0.2 }} // 200ms fade-in
+              >
+                <AuthProviderButtons />
+              </motion.div>
+            }
 
             {renderAuthProviderButtons ? (
               <div className="my-4 py-2 font-medium text-gray-700">
@@ -144,7 +162,6 @@ export function CreateAccountForm() {
           </motion.div>
         )}
       </AnimatePresence>
-
       <button
         type="button"
         onClick={toggleForm}
@@ -261,7 +278,6 @@ export function CreateAccountForm() {
           </motion.div>
         )}
       </AnimatePresence>
-
       <div className="my-6">
         <Link
           href="/account/login"
