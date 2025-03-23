@@ -3,7 +3,11 @@ import Link from "next/link";
 export default function SCMarketngLanding() {
     return (
       <>
-     <section>
+     <section 
+  className="bg-gray-900 bg-no-repeat bg-cover bg-center bg-auto-100 bg-[url('/images/sample-background.svg')]" 
+
+>
+     
      <div className="relative isolate pt-14">
         <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
@@ -60,6 +64,55 @@ export default function SCMarketngLanding() {
         </div>
       </div>
      </section>
+
+     <section className="bg-darkGreen-900">
+      <div className="container mx-auto px-4">
+        <div className="sm:border-l sm:border-r border-white border-opacity-20 border-dashed">
+          <div className="py-32 px-4 sm:px-24">
+            <p className="uppercase text-sweetGreen-300 text-xs mb-4 tracking-widest">HOW IT WORKS</p>
+            <h1 className="font-heading text-white text-4xl md:text-5xl font-bold mb-20">See how we simplifies your financial tasks</h1>
+            <div className="flex flex-wrap items-center -m-4">
+              <div className="w-full lg:w-1/3 p-4">
+                <div className="mb-10">
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    <div className="bg-gradient-to-b from-green-400 via-green-500 to-darkGreen-900 rounded-full p-px w-6 h-6">
+                      <div className="bg-greenSecondary-900 rounded-full p-1">
+                        <p className="text-white text-center text-xs font-semibold">1</p>
+                      </div>
+                    </div>
+                    <p className="text-white text-lg font-semibold">Input Transactions</p>
+                  </div>
+                  <p className="text-white text-opacity-70 max-w-xs">Record your financial transactions such as receipts, and other relevant documents.</p>
+                </div>
+                <div className="mb-10">
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    <div className="bg-gradient-to-b from-green-400 via-green-500 to-darkGreen-900 rounded-full p-px w-6 h-6">
+                      <div className="bg-greenSecondary-900 rounded-full p-1">
+                        <p className="text-white text-center text-xs font-semibold">2</p>
+                      </div>
+                    </div>
+                    <p className="text-white text-lg font-semibold">Categorization</p>
+                  </div>
+                  <p className="text-white text-opacity-70 max-w-xs">Automatically categorizes and organizes the recorded transactions, such as income and expenses.</p>
+                </div>
+                <div className="flex flex-wrap gap-2 mb-2">
+                  <div className="bg-gradient-to-b from-green-400 via-green-500 to-darkGreen-900 rounded-full p-px w-6 h-6">
+                    <div className="bg-greenSecondary-900 rounded-full p-1">
+                      <p className="text-white text-center text-xs font-semibold">3</p>
+                    </div>
+                  </div>
+                  <p className="text-white text-lg font-semibold">Generate Reports</p>
+                </div>
+                <p className="text-white text-opacity-70 max-w-xs">Generate financial reports, such as income statements, balance sheets, and cash flow.</p>
+              </div>
+              <div className="w-full lg:w-2/3 p-4">
+                <img className="rounded-3xl w-full object-cover" style={{ height: '600px' }} src="https://html-warpspeed-full.vercel.app/template-assets/images/how-it-works/illustration-green2.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
      <section>
      <div className="bg-gray-50 py-24 sm:py-32">
