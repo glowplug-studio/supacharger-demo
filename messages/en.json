@@ -17,11 +17,12 @@
     "title": "Create an Account",
     "iAlreadyHaveAnAccount": "I already have an account"
   },
-  "CreateAccountComponent": {
+  "CreateAccountFormComponent": {
     "title": "Create an Account",
+    "orCreateAccountWithEmail": "Or create an account with Email",
     "iAlreadyHaveAnAccount": "I already have an account",
     "showEmailFormButtonText": "Continue with Email",
-    "hideEmailFormButtonText": "Close"
+    "hideEmailFormButtonText": "Use social Account"
   },
   "AuthTerms": {
     "name": "Name",

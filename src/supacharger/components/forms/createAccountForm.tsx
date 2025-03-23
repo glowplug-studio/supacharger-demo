@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
-import { CircleArrowRight, Eye, EyeOff, Mail } from 'lucide-react';
+import { CircleArrowRight, Eye, EyeOff, Mail, X } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
@@ -21,8 +21,8 @@ const AuthProviderButtons = renderAuthProviderButtons
     : null;
 
 /**
- * BREVOCODE
- */
+     * BREVOCODE
+     */
 const BrevoNewsletterRegistrationCheckbox = dynamic(() => import('../../plugins/scp_brevo/brevoNewsletterRegistrationCheckbox'), {
     ssr: false, // Optional: Disable server-side rendering
 });
@@ -37,7 +37,7 @@ export function CreateAccountForm() {
     const [showForm, setShowForm] = useState(false);
 
     const tAuthTerms = useTranslations("AuthTerms");
-    const tCreateAccountComponent = useTranslations("CreateAccountComponent");
+    const tCreateAccountFormComponent = useTranslations("CreateAccountFormComponent");
 
     const handleToggle = () => {
         setShowPassword(!showPassword);
@@ -69,8 +69,8 @@ export function CreateAccountForm() {
             height: 'auto',
             opacity: 1,
             transition: {
-                duration: 0.5,
-                ease: "easeInOut",
+                duration: 0.7, //Slower
+                ease: "easeOut", //Eased
             },
         },
     };
@@ -93,30 +93,41 @@ export function CreateAccountForm() {
 
     return (
         <>
-            {AuthProviderButtons && <AuthProviderButtons />}
+            <AnimatePresence>
+                {!showForm && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                    >
+                        {AuthProviderButtons && <AuthProviderButtons />}
 
-            {renderAuthProviderButtons ? (
-                <div className='my-4 py-2 font-medium text-gray-700'>
-                    <div className='flex w-full items-center justify-between'>
-                        <div className='flex-1'>
-                            <hr className='border-gray-300'></hr>
-                        </div>
-                        <div className='px-4 text-gray-400 text-sm'>Or create an account with Email</div>
-                        <div className='flex-1'>
-                            <hr className='border-gray-300'></hr>
-                        </div>
-                    </div>
-                </div>
-            ) : (
-                <div className='my-4 py-2'></div>
-            )}
+                        {renderAuthProviderButtons ? (
+                            <div className='my-4 py-2 font-medium text-gray-700'>
+                                <div className='flex w-full items-center justify-between'>
+                                    <div className='flex-1'>
+                                        <hr className='border-gray-300'></hr>
+                                    </div>
+                                    <div className='px-4 text-gray-400 text-sm'>{tCreateAccountFormComponent('orCreateAccountWithEmail')}</div>
+                                    <div className='flex-1'>
+                                        <hr className='border-gray-300'></hr>
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className='my-4 py-2'></div>
+                        )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <button
                 type="button"
                 onClick={toggleForm}
-                className="btn w-full bg-primary text-white"
+                className="btn w-full bg-gray-100 text-gray-700"
             >
-                {showForm ? tCreateAccountComponent('hideEmailFormButtonText') : tCreateAccountComponent('showEmailFormButtonText')} <Mail size={18} />
+                {showForm ? tCreateAccountFormComponent('hideEmailFormButtonText') : tCreateAccountFormComponent('showEmailFormButtonText')}
+                {showForm ? <X size={18} /> : <Mail size={18} />}
             </button>
 
             <AnimatePresence>
@@ -211,8 +222,8 @@ export function CreateAccountForm() {
                             {error && <p className="error">{error}</p>}
 
                             {/**
-                             * BREVOCODE
-                             */}
+                                 * BREVOCODE
+                                 */}
                             {SCP_REGISTRY.BREVO.ENABLED && <BrevoNewsletterRegistrationCheckbox />}
 
                             <div className='mt-4'>
@@ -231,7 +242,7 @@ export function CreateAccountForm() {
                     href='/account/login'
                     className='flex w-full appearance-none justify-between rounde px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-100 hover:no-underline border border-gray-200 rounded-4xl'
                 >
-                    <span className='font-normal'>{tCreateAccountComponent('iAlreadyHaveAnAccount')}</span>
+                    <span className='font-normal'>{tCreateAccountFormComponent('iAlreadyHaveAnAccount')}</span>
                     <span className=''>{tAuthTerms('logIn')}</span>
                 </Link>
             </div>
