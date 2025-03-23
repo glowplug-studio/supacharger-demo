@@ -1,16 +1,9 @@
-'use client';
-
-/** ==========
- *
- * Supacharger - Create Account Form
- *
- * ========== */
-
 import { useState } from 'react';
 import dynamic from "next/dynamic";
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { CircleArrowRight, Eye, EyeOff } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, CircleArrowRight, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
@@ -41,6 +34,9 @@ export function CreateAccountForm() {
   const [retypePassword, setRetypePassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  const tAuthTerms = useTranslations("AuthTerms");
 
   const handleToggle = () => {
     setShowPassword(!showPassword);
@@ -49,7 +45,6 @@ export function CreateAccountForm() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-
     try {
       const formData = new FormData();
       formData.append('email', email);
@@ -57,7 +52,7 @@ export function CreateAccountForm() {
 
       const result = await createUserByEmailPassword(formData);
       if (result?.error) {
-        toast.error("Failed to create account" +result.error); //supabaseErrorCodeLocalisation('result.error'));
+        toast.error("Failed to create account" + result.error); //supabaseErrorCodeLocalisation('result.error'));
       } else {
         toast.success('Account created successfully');
       }
@@ -65,6 +60,18 @@ export function CreateAccountForm() {
       console.error('Error creating user:', error);
       toast.error('Failed to create account');
     }
+  };
+
+  const formVariants = {
+    hidden: { height: 0, opacity: 0 },
+    visible: {
+      height: 'auto',
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeInOut",
+      },
+    },
   };
 
   const passwordContainerVariants = {
@@ -81,126 +88,144 @@ export function CreateAccountForm() {
 
   return (
     <>
-     
       {AuthProviderButtons && <AuthProviderButtons />}
 
-
       {renderAuthProviderButtons ? (
-    <div className='my-4 py-2 font-medium text-gray-700'>
-      <div className='flex w-full items-center justify-between'>
-        <div className='flex-1'>
-          <hr className='border-gray-300'></hr>
-        </div>
-        <div className='px-4 text-gray-400 text-sm'>Or create an account with Email</div>
-        <div className='flex-1'>
-          <hr className='border-gray-300'></hr>
-        </div>
-      </div>
-    </div>
-  ) : (
-    <div className='my-4 py-2'></div>
-  )}
-
-      <form onSubmit={handleSubmit} className='space-y-6 mb-4'>
-        <div>
-          <label htmlFor='name' className='block  font-bold text-gray-700'>
-            Name
-          </label>
-          <div className='mt-2'>
-            <input
-              id='name'
-              name='name'
-              type='text'
-              required
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor='email' className='block  font-bold text-gray-700'>
-            Email address
-          </label>
-          <div className='mt-2'>
-            <input
-              id='email'
-              name='email'
-              type='email'
-              required
-              autoComplete='email'
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor='password' className='block  font-bold text-gray-700'>
-            Password
-          </label>
-          <div className='relative'>
-            <input
-              id='password'
-              name='password'
-              type={showPassword ? 'text' : 'password'}
-              required
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden  mt-2'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <div className='absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5'>
-              <button type='button' className='text-gray-600 hover:text-gray-900' onClick={handleToggle}>
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
+        <div className='my-4 py-2 font-medium text-gray-700'>
+          <div className='flex w-full items-center justify-between'>
+            <div className='flex-1'>
+              <hr className='border-gray-300'></hr>
+            </div>
+            <div className='px-4 text-gray-400 text-sm'>Or create an account with Email</div>
+            <div className='flex-1'>
+              <hr className='border-gray-300'></hr>
             </div>
           </div>
         </div>
+      ) : (
+        <div className='my-4 py-2'></div>
+      )}
 
-        <motion.div
-          variants={passwordContainerVariants}
-          initial='visible'
-          animate='visible'
-          style={{ overflow: 'hidden' }}
-        >
-          <label htmlFor='password-again' className='block  font-bold text-gray-700'>
-            Retype Password
-          </label>
-          <div>
-            <input
-              id='password-again'
-              name='password-again'
-              type='password'
-              required
-              className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden mt-2'
-              value={retypePassword}
-              onChange={(e) => setRetypePassword(e.target.value)}
-            />
-          </div>
-        </motion.div>
+      <button
+        type="button"
+        onClick={() => setShowForm(true)}
+        className="btn w-full bg-primary text-white"
+      >
+        Continue with Email <Mail size={18} />
+      </button>
 
-        {error && <p className="error">{error}</p>}
+      <AnimatePresence>
+        {showForm && (
+          <motion.div
+            variants={formVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            style={{ overflow: 'hidden' }}
+          >
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor='name' className='block  font-bold text-gray-700'>
+                  {tAuthTerms('name')}
+                </label>
+                <div className='mt-2'>
+                  <input
+                    id='name'
+                    name='name'
+                    type='text'
+                    required
+                    className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+              </div>
 
-        {/**
-       * BREVOCODE
-       */}
-        {SCP_REGISTRY.BREVO.ENABLED && <BrevoNewsletterRegistrationCheckbox />}
- 
+              <div>
+                <label htmlFor='email' className='block  font-bold text-gray-700'>
+                  {tAuthTerms('emailAddress')}
+                </label>
+                <div className='mt-2'>
+                  <input
+                    id='email'
+                    name='email'
+                    type='email'
+                    required
+                    autoComplete='email'
+                    className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+              </div>
 
-        <div>
-          <button type='submit' className='btn w-full bg-primary text-white'>
-            Sign Up <CircleArrowRight size={18} className='' />
-          </button>
-        </div>
-      </form>
+              <div>
+                <label htmlFor='password' className='block  font-bold text-gray-700'>
+                  {tAuthTerms('password')}
+                </label>
+                <div className='relative'>
+                  <input
+                    id='password'
+                    name='password'
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden  mt-2'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div className='absolute inset-y-0 right-0 flex items-center pr-3 text-sm leading-5'>
+                    <button type='button' className='text-gray-600 hover:text-gray-900' onClick={handleToggle}>
+                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <motion.div
+                variants={passwordContainerVariants}
+                initial='visible'
+                animate='visible'
+                style={{ overflow: 'hidden' }}
+              >
+                <label htmlFor='password-again' className='block  font-bold text-gray-700'>
+                  {tAuthTerms('retypePassword')}
+                </label>
+                <div>
+                  <input
+                    id='password-again'
+                    name='password-again'
+                    type='password'
+                    required
+                    className='focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden mt-2'
+                    value={retypePassword}
+                    onChange={(e) => setRetypePassword(e.target.value)}
+                  />
+                </div>
+              </motion.div>
+
+              {error && <p className="error">{error}</p>}
+
+              {/**
+             * BREVOCODE
+             */}
+              {SCP_REGISTRY.BREVO.ENABLED && <BrevoNewsletterRegistrationCheckbox />}
+
+              <div>
+                <button type='submit' className='btn w-full bg-primary text-white'>
+                  {tAuthTerms('signUp')} <CircleArrowRight size={18} className='' />
+                </button>
+              </div>
+            </form>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <Link
         href='/account/login'
         className='flex w-full appearance-none justify-between rounde px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-100 hover:no-underline border border-gray-200 rounded-4xl'
       >
         <span className='font-normal'>I already have an account</span>
-        <span className=''>Log In</span>
+        <span className=''>{tAuthTerms('logIn')}</span>
       </Link>
     </>
   );

@@ -68,6 +68,17 @@ export const SC_CONFIG = {
   // Which path is considered "home" for authenticated users
   SESSION_HOME_PATH: '/',
 
+
+    /**
+   * ==========
+   * Registration Settings
+   * ==========
+   *
+   */
+
+    // set to false if you turn off email verification in Supabase.
+  EMAIL_VERIFY_ENABLED: true,
+
   /**
    * ==========
    * AUTHENTICATION Providers
