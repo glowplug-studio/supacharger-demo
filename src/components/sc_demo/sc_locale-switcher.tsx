@@ -1,6 +1,6 @@
 'use client';
 
-import { Languages } from  'lucide-react'
+import { Globe } from  'lucide-react'
 
 import {
     DropdownMenu,
@@ -20,14 +20,14 @@ export default function LocaleSwitcher({ currentLocale }: { currentLocale: strin
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger className='rounded-full'><Languages size={18} className="inline" /> {currentLocale === 'en' ? 'EN' : 'FR'}
+            <DropdownMenuTrigger className='rounded-full'><Globe size={16} className="inline-block" /> {currentLocale === 'en' ? 'EN' : 'FR'}
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuItem onClick={() => handleLocaleChange('en')}>
-                    English
+                <span className='mr-2'>&#x1F1EC;&#x1F1E7;</span> English
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => handleLocaleChange('fr')}>
-                    Français
+                <span className='mr-2'>&#x1F1EB;&#x1F1F7;</span> Français
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

@@ -1,20 +1,20 @@
 import SCFooter from '@/components/sc_demo/sc_footer';
-import SCFooterAuthed from '@/components/sc_demo/sc_footer-authed';
+import SCFooterAuthed from '@/components/sc_demo/sc_footer-session';
+import { SCHeaderSession } from '@/components/sc_demo/sc_header-session';
 import SCMarketngLanding from '@/components/sc_demo/sc_marketing-landing';
 import SCUserDash from '@/components/sc_demo/sc_user-dash';
 import { isLoggedIn } from '@/utils/supabase/server';
 
-import { SCMarketingMenu } from  "../components/sc_demo/sc_marketing-header";
+import { SCMarketingMenu } from  "../components/sc_demo/sc_header-marketing";
 
 export default async function RootPage() {
 
   const session = await isLoggedIn();
 
   return (
-
-    <section className='relative overflow-hidden lg:overflow-visible bg-gray-800'>
-
+<>
       {session ? (<>
+        <SCHeaderSession />
         <SCUserDash></SCUserDash>
         <SCFooterAuthed />
         </>
@@ -25,8 +25,8 @@ export default async function RootPage() {
           <SCFooter />
         </>
       )}
+</>
 
-  </section>
   );
 
 }

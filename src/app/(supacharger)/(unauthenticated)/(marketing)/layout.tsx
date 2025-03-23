@@ -2,7 +2,7 @@ import { PropsWithChildren } from "react";
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
 
-import { SCMarketingMenu } from '@/components/sc_demo/sc_marketing-header';
+import { SCMarketingMenu } from '@/components/sc_demo/sc_header-marketing';
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 
 export const metadata: Metadata = {

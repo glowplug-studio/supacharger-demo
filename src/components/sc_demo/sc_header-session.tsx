@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 import { Menu } from 'lucide-react';
 
-import { AccountMenu } from '@/components/sc_demo/sc_account-menu';
+import  SCAccountMenu from '@/components/sc_demo/sc_account-menu';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 import { isLoggedIn } from '@/utils/supabase/server';
@@ -11,7 +11,7 @@ import { isLoggedIn } from '@/utils/supabase/server';
 import LocaleSwitcher from './sc_locale-switcher';
 import SCSiteLogo from './sc_site-logo';
 
-export async function SCMarketingMenu() {
+export async function SCHeaderSession() {
   const session = await isLoggedIn();
     // Get the current locale from cookies
     const cookieStore = await cookies();
@@ -30,70 +30,19 @@ export async function SCMarketingMenu() {
           </div>
           <div className="hidden sm:block sm:ml-6">
             <div className="flex space-x-4">
-              <div className="relative group">
-                <button className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium flex items-center">
-                                    Products
-                                    <ChevronDown size={16} />
-                                </button>
-
-                <div
-                  className="absolute left-0 mt-2 w-screen max-w-6xl bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform -translate-x-1/4">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6">
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Software</h3>
-                      <ul className="space-y-3">
-                        <li><a href="#" className="text-gray-600 hover:text-indigo-600">Web Development</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-indigo-600">Mobile Apps</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-indigo-600">Desktop Software</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-indigo-600">Enterprise Solutions</a></li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Hardware</h3>
-                      <ul className="space-y-3">
-                        <li><a href="#" className="text-gray-600 hover:text-indigo-600">Laptops</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-indigo-600">Desktops</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-indigo-600">Tablets</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-indigo-600">Accessories</a></li>
-                        <li><a href="#" className="text-gray-600 hover:text-indigo-600">Networking</a></li>
-                      </ul>
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">Featured</h3>
-                      <div className="bg-gray-100 p-4 rounded-lg">
-                       
-                        <h4 className="font-medium text-gray-900">New Release</h4>
-                        <p className="text-sm text-gray-600 mb-2">Check out our latest product offering with advanced
-                          features.</p>
-                        <a href="#" className="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Learn more →</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <Link href='/about' className='text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium'>About</Link>
+              <Link href='/' className='text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium'>Dashboard</Link>
             </div>
           </div>
         </div>
         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <div className="hidden sm:flex sm:items-center">
             
-          <Link
-                    className="btn w-full bg-white text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto"
-                    href="account/login"
-                  >
-                    Sign in
-                  </Link>
-
-                  <Link
-                    className="btn w-full bg-teal-300 text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto"
-                    href="account/create"
-                  >
-                   Create a free account
-                  </Link>
-                  <div className='btn w-full bg-gray-100 text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto'>
+          
+             
+             <div className='btn w-full bg-gray-100 text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto'>
              <LocaleSwitcher currentLocale={currentLocale} />
-          </div>
+             </div>
+          <SCAccountMenu></SCAccountMenu>
           </div>
 
        
