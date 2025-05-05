@@ -1,20 +1,20 @@
 'use client';
 
-/** ========== 
- * 
+/** ==========
+ *
  * Supacharger - Login User Form
- * 
+ *
  * ========== */
 
 import { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { loginUser } from '../../../app/(supacharger)/auth-actions';
+import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
+
+import { loginUser } from '../../../app/(supacharger)/auth-actions';
 import { supabaseErrorCodeLocalisation } from '../../utils/helpers'
 
 export function LoginUserForm() {
-  
   const tAuthTerms = useTranslations('AuthTerms');
   const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
   const [showPassword, setShowPassword] = useState(false);
