@@ -1,18 +1,19 @@
 import { redirect } from 'next/navigation'
 
+import SCFooter from '@/components/sc_demo/sc_footer'
 import { createClient } from '@/utils/supabase/server'
 
 export default async function About() {
 
   return <>
-
   <div className="container">
-  <h1 className='block mb-28'>About</h1>
-  <p>This has been allowed in src/utils/supabase/middleware.ts</p>
 
   <div className="py-24 sm:py-32">
+
       <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="text-base/7 font-semibold text-indigo-400">Deploy faster</h2>
+
+      <h1 className="text-8xl font-semibold text-white">About</h1>
+
         <p className="mt-2 max-w-lg text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
           Everything you need to deploy your app
         </p>
@@ -88,6 +89,6 @@ export default async function About() {
     </div>
     
   </div>
-  
+  <SCFooter></SCFooter>
   </>
 }

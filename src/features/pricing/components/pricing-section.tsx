@@ -19,7 +19,7 @@ export async function PricingSection({ isPricingPage }: { isPricingPage?: boolea
         <p className='text-center text-xl'>
           Find a plan that fits you. Upgrade at any time to enable additional features.
         </p>
-        <div className='flex w-full flex-col items-center justify-center gap-2 lg:flex-row lg:gap-8'>
+        <div className=''>
           {products.map((product) => {
             return <PricingCard key={product.id} product={product} createCheckoutAction={createCheckoutAction} />;
           })}
