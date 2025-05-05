@@ -2,17 +2,16 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useLocale } from "next-intl";
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { Menu } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTrigger } from '@/components/ui/sheet';
 
 import LocaleSwitcher from './sc_locale-switcher';
 import SCSiteLogo from './sc_site-logo';
 
 export function SCMarketingMenu() {
+  const currentLocale = useLocale();
   const [isMobileMenuExpanded, setIsMobileMenuExpanded] = useState(false);
   const [dropdownStates, setDropdownStates] = useState<{ [key: string]: boolean }>({
     dropdown1: false,
@@ -114,7 +113,7 @@ export function SCMarketingMenu() {
                     Get Started
                   </Link>
                   <div className='btn w-full bg-gray-100 text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto'>
-                    <LocaleSwitcher />
+                  <LocaleSwitcher currentLocale={currentLocale} />
                   </div>
                 </div>
 

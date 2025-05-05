@@ -7,8 +7,9 @@
  * ========== */
 
 import { FormEvent, useState } from "react";
-import { signInWithEmail } from "../../../app/(supacharger)/auth-actions";
 import { toast } from "react-toastify";
+
+import { signInWithEmail } from "../../../app/(supacharger)/auth-actions";
 
 export function LoginMagicLinkUI() {
   const [pending, setPending] = useState(false);
