@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { upsertUserSubscription } from '@/features/account/controllers/upsert-user-subscription';
 import { upsertPrice } from '@/features/pricing/controllers/upsert-price';
 import { upsertProduct } from '@/features/pricing/controllers/upsert-product';
-import { stripeAdmin } from '@/libs/stripe/stripe-admin';
+import { stripeObject } from '@/libs/stripe/stripe-object';
 import { getEnvVar } from '@/utils/get-env-var';
 
 export const config = {
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
   let event: Stripe.Event;
 
   try {
-    event = stripeAdmin.webhooks.constructEvent(rawBody, sig, webhookSecret);
+    event = stripeObject.webhooks.constructEvent(rawBody, sig, webhookSecret);
   } catch (err: any) {
     return new Response(`Webhook Error: ${err.message}`, { status: 400 });
   }
