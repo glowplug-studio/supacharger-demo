@@ -1,6 +1,5 @@
 // Ref: https://supabase.com/docs/guides/auth/server-side/nextjs
-
-import { type NextRequest,NextResponse } from 'next/server';
+import { type NextRequest,NextResponse } from 'next/server'
 
 import { getEnvVar } from '@/utils/get-env-var';
 import { createServerClient } from '@supabase/ssr';
@@ -16,20 +15,16 @@ export async function updateSession(request: NextRequest) {
     {
       cookies: {
         getAll() {
-          return request.cookies.getAll();
+          return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          for (const { name, value, options } of cookiesToSet) {
-            request.cookies.set(name, value);
-          }
-
+          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
           supabaseResponse = NextResponse.next({
             request,
-          });
-
-          for (const { name, value, options } of cookiesToSet) {
-            supabaseResponse.cookies.set(name, value, options);
-          }
+          })
+          cookiesToSet.forEach(({ name, value, options }) =>
+            supabaseResponse.cookies.set(name, value, options)
+          )
         },
       },
     }

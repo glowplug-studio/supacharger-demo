@@ -1,6 +1,6 @@
 'use client';
 import  SCSiteLogo from '@/components/sc_demo/sc_site-logo';
-import { LoginMagicLinkUI } from '@/supacharger/components/forms/Login-magic-link-ui';
+import { LoginMagicLinkUI } from '@/supacharger/components/forms/login-magic-link-ui';
 
 export default function AuthMagicLink() {
   return (

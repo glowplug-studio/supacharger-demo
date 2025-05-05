@@ -1,20 +1,22 @@
 'use client';
 
-/** ========== 
- * 
+/** ==========
+ *
  * Supacharger - Login User Form
- * 
+ *
  * ========== */
 
 import { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import { loginUser } from '../../../app/(supacharger)/auth-actions';
+import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
+
+import { loginUser } from '../../../app/(supacharger)/auth-actions';
 import { supabaseErrorCodeLocalisation } from '../../utils/helpers'
 
 export function LoginUserForm() {
-  const t = useTranslations('AuthTerms');
+  const tAuthTerms = useTranslations('AuthTerms');
+  const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,11 +25,11 @@ export function LoginUserForm() {
     const result = await loginUser(formData);
     if (result?.error) {
       setIsLoading(false);
-      toast.error( supabaseErrorCodeLocalisation(result.error) ); // Display error toast
+      toast.error( tSupabaseErrorCodes( supabaseErrorCodeLocalisation(result.error) ) ); // Display error toast
       return false; // Prevent form reset
     }
     setIsLoading(false);
-    toast.success(t('loginSuccess')); // Display success toast
+    toast.success(tAuthTerms('loginSuccess')); // Display success toast
   }
 
   // async function handleOAuthClick(provider: 'google' | 'github') {
@@ -88,7 +90,7 @@ export function LoginUserForm() {
     >
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-          {t('emailAddress')}
+          {tAuthTerms('emailAddress')}
         </label>
         <div className="mt-2">
           <input
@@ -105,7 +107,7 @@ export function LoginUserForm() {
       <div>
         <div className="flex items-center justify-between">
           <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-            {t('password')}
+            {tAuthTerms('password')}
           </label>
           <button
             type="button"
@@ -141,11 +143,11 @@ export function LoginUserForm() {
             className="h-4 w-4 rounded border-gray-300  focus:ring-indigo-500"
           />
           <label htmlFor="remember-me" className="block text-sm text-gray-700">
-            {t('rememberMe')}
+            {tAuthTerms('rememberMe')}
           </label>
         </div>
         <a href="#" className="text-sm font-semibold  hover:text-indigo-500">
-          {t('forgotPassword')}
+          {tAuthTerms('forgotPassword')}
         </a>
       </div>
 
@@ -153,7 +155,7 @@ export function LoginUserForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className="btn bg-primary flex w-full justify-center rounded-md"
+          className="btn bg-primary flex w-full justify-center rounded-md text-white"
         >
           {isLoading ? (
             <>
@@ -170,10 +172,10 @@ export function LoginUserForm() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
               </svg>
-              {t('logIn')}
+              {tAuthTerms('logIn')}
             </>
           ) : (
-            t('logIn')
+            tAuthTerms('logIn')
           )}
         </button>
       </div>

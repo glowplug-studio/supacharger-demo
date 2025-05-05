@@ -1,221 +1,265 @@
-import Link from "next/link";
+import Link from 'next/link';
 
+import MarketingSampleFeaturesLeft from '@/../public/images/sample/marketingSampleFeaturesLeft.svg';
+import SampleMarketingFeaturesCenterTop from '@/../public/images/sample/sampleMarketingFeaturesCenterTop.svg';
+
+//import SiteLogoSVG from "@/assets/images/SiteLogoSVG.svg";
 export default function SCMarketngLanding() {
-    return (
-      <>
-     <section 
-  className="bg-gray-900 bg-no-repeat bg-cover bg-center bg-auto-100 bg-[url('/images/sample-background.svg')]" 
+  return (
+    <>
+      <section className='bg-white'>
+        <div className='relative isolate pt-14'>
+          <div className='mx-auto max-w-7xl px-6 py-12 sm:py-5 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-20'>
+            <div className='mx-auto max-w-2xl lg:mx-0 lg:flex-auto'>
+              <h1 className='mt-10 text-5xl font-semibold tracking-tight text-primary sm:text-7xl'>
+                Grow deals together, thrive collaboratively
+              </h1>
+              <p className='font-mediu mt-8 text-pretty sm:text-xl/8'>
+                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
+                fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt.
+              </p>
+              <div className='mt-10 flex items-center gap-x-6'>
+                <Link
+                  className='btn shadow-xs w-full bg-secondary text-white hover:bg-gray-50 sm:ml-4 sm:w-auto'
+                  href='account/login'
+                >
+                  Sign in
+                </Link>
 
->
-     
-     <div className="relative isolate pt-14">
-        <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
-          <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
-            
-            <h1 className="mt-10 text-5xl font-semibold tracking-tight text-white sm:text-7xl">
-              Don&apos;t Reinvent the wheel. <br/>Roll with it.
+                <Link
+                  className='btn shadow-xs w-full bg-primary text-white hover:bg-gray-50 sm:ml-4 sm:w-auto'
+                  href='account/create'
+                >
+                  Create a free account
+                </Link>
+              </div>
+            </div>
+            <div className='mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow'>
+              <img src='/images/sample/sample-marketing-hero-right.webp'></img>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id='logo-cloud'>
+  <div className='bg-white py-6 sm:py-8'>
+    <div className='mx-auto px-6 lg:px-8'>
+      <h2 className='text-center text-lg/8 font-semibold text-gray-900'>
+        Trusted by thousands of customers
+      </h2>
+      <div className='mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-4'> <svg width='110' height='31' viewBox='0 0 110 31' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <path
+                  d='M15.7025 7.91869C16.1827 7.43735 16.4797 6.77314 16.4797 6.03929C16.4797 4.56961 15.2882 3.37808 13.8185 3.37808C12.8894 3.37808 12.0725 3.85509 11.5965 4.57671C11.47 4.70336 0.876283 17.7604 0.777252 17.9106C0.29709 18.3919 0 19.0563 0 19.7898C0 21.2596 1.19152 22.4512 2.6612 22.4512C3.59036 22.4512 4.40727 21.9744 4.88328 21.2525C5.00974 21.1259 15.6035 8.06862 15.7025 7.91869Z'
+                  fill='#201D5A'
+                />
+                <path
+                  d='M21.8324 14.1142C22.314 13.6325 22.6117 12.9675 22.6117 12.2327C22.6117 10.763 21.4201 9.57145 19.9505 9.57145C19.0209 9.57145 18.2036 10.0488 17.7276 10.7711C17.6001 10.8987 12.0361 17.7573 11.9365 17.9084C11.4549 18.3901 11.1572 19.0551 11.1572 19.7898C11.1572 21.2596 12.3488 22.4512 13.8184 22.4512C14.748 22.4512 15.5653 21.9738 16.0411 21.2516C16.1685 21.1241 21.7328 14.2654 21.8324 14.1142Z'
+                  fill='#201D5A'
+                />
+                <path
+                  d='M27.6369 19.5829C27.6369 21.0528 26.4453 22.2441 24.9757 22.2441C23.5058 22.2441 22.3145 21.0528 22.3145 19.5829C22.3145 18.1133 23.5058 16.9217 24.9757 16.9217C26.4453 16.9217 27.6369 18.1133 27.6369 19.5829Z'
+                  fill='#201D5A'
+                />
+                <path
+                  d='M5.32241 6.03899C5.32241 7.50887 4.13089 8.7002 2.6612 8.7002C1.19152 8.7002 0 7.50887 0 6.03899C0 4.56931 1.19152 3.37778 2.6612 3.37778C4.13089 3.37778 5.32241 4.56931 5.32241 6.03899Z'
+                  fill='#201D5A'
+                />
+                <path
+                  d='M36.1004 12.0423C36.1004 14.7003 43.451 12.3048 43.451 16.5544C43.451 18.9663 41.1539 20.1805 38.8568 20.1805C36.5598 20.1805 34.2627 18.9663 34.2627 16.5544H35.8706C35.8706 17.9326 37.3637 18.6218 38.8568 18.6218C40.3499 18.6218 41.843 17.9326 41.843 16.538C41.843 13.9128 34.4924 16.3083 34.4924 12.0587C34.4924 9.59755 36.6746 8.35056 38.8568 8.35056C41.0391 8.35056 43.2213 9.59755 43.2213 12.0587H41.6133C41.6133 10.5656 40.2351 9.81084 38.8568 9.81084C37.4786 9.81084 36.1004 10.5656 36.1004 12.0423ZM46.542 12.633C47.1819 11.9274 48.0844 11.5829 49.0032 11.5829C50.6932 11.5829 52.3996 12.797 52.3996 15.2418V20H50.7916V15.2418C50.7916 13.8964 49.7251 13.2236 48.6586 13.2236C47.6085 13.2236 46.542 13.8964 46.542 15.2418V20H44.9341V7.71066H46.542V12.633ZM54.0352 7.74348H55.6432V9.35143H54.0352V7.74348ZM54.0352 19.9836V11.7634H55.6432V19.9836H54.0352ZM60.028 10.9102V11.7798H62.4399V13.3877H60.028V19.9836H58.42V13.3877H57.2879V11.7798H58.42V10.9102C58.42 8.08804 60.3561 7.66144 61.5539 7.66144C62.0625 7.66144 62.4399 7.74348 62.4399 7.74348V9.33502C62.4399 9.33502 62.0461 9.20376 61.5867 9.20376C60.8976 9.20376 60.028 9.4991 60.028 10.9102ZM68.9055 13.4041H66.4936V16.7841C66.4936 18.2116 67.3468 18.4905 68.0359 18.4905C68.5118 18.4905 68.9055 18.3592 68.9055 18.3592V19.9508C68.9055 19.9508 68.5282 20.0328 68.0195 20.0328C66.8218 20.0328 64.8857 19.6062 64.8857 16.7841V13.4041H63.7535V11.7962H64.8857V9.66317H66.4936V11.7962H68.9055V13.4041ZM81.4742 11.7962H83.0821L80.6702 20H79.0623H79.0787H78.3896L76.6503 14.3886L74.9275 20H72.6469L70.2185 11.7962H71.8265L73.7954 18.4741L75.8464 11.7962H77.4543L79.5217 18.4741L81.4742 11.7962ZM87.7417 11.5829C90.2684 11.5829 91.5811 13.4862 91.5811 15.8981C91.5811 18.2772 90.2192 20.2133 87.7417 20.2133C85.2805 20.2133 83.9023 18.2772 83.9023 15.8981C83.9023 13.4862 85.2805 11.5829 87.7417 11.5829ZM87.7417 18.5233C89.1527 18.5233 89.9403 17.6701 89.9403 15.8981C89.9403 14.1097 89.1855 13.2729 87.7417 13.2729C86.3306 13.2729 85.543 14.1097 85.543 15.8981C85.543 17.6701 86.3306 18.5233 87.7417 18.5233ZM94.6754 12.4525C95.2497 11.9602 96.5131 11.7141 97.3663 11.7141C97.4647 11.7141 97.5632 11.7305 97.6616 11.7305V13.5026C97.4155 13.3549 97.0381 13.2729 96.6608 13.2729C95.7419 13.2729 94.6754 13.6995 94.6754 14.5527V20.0164H93.0675V11.7962H94.6754V12.4525ZM104.813 19.9836L102.205 16.3739L100.908 17.6865V19.9836H99.3005V17.1123V7.69426H100.908V15.5207L104.699 11.7798H106.766L103.337 15.2418L106.766 19.9836H104.813Z'
+                  fill='#201D5A'
+                />
+              </svg>
+
+              <svg width='86' height='31' viewBox='0 0 86 31' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <path
+                  d='M8 22.4627C12.4183 22.4627 16 18.881 16 14.4629L-8.63656e-08 14.4629C2.99881e-07 18.881 3.5817 22.4627 8 22.4627Z'
+                  fill='#201D5A'
+                />
+                <path
+                  d='M0.874929 13.5381C0.874929 9.6093 4.07122 6.41302 8 6.41302C11.9288 6.41301 15.1251 9.6093 15.1251 13.5381L16 13.5381C16 9.12687 12.4112 5.53809 8 5.53809C3.58878 5.53809 2.27376e-07 9.12687 6.13017e-07 13.5381L0.874929 13.5381Z'
+                  fill='#201D5A'
+                />
+                <path
+                  d='M8.00019 7.54004C4.69303 7.54004 2.00248 10.2307 2.00248 13.5379L2.87741 13.5379C2.87741 10.7132 5.17546 8.41512 8.00019 8.41512C10.8249 8.41512 13.123 10.7132 13.123 13.5379L13.998 13.5379C13.998 10.2307 11.3073 7.54004 8.00019 7.54004Z'
+                  fill='#201D5A'
+                />
+                <path
+                  d='M27.0387 9.20163C29.0825 10.1028 30.386 12.1466 30.386 14.3997C30.386 15.4779 30.0802 16.54 29.517 17.4412C28.9537 18.3263 28.1652 19.0344 27.2479 19.485C26.6524 19.7908 26.1214 20.0322 24.4316 20.0322H21.0682C20.9877 20.0322 20.9394 19.9678 20.9394 19.9034V8.89586C20.9394 8.81539 20.9877 8.75102 21.0682 8.75102H24.3511C25.8156 8.75102 26.5076 8.97632 27.0387 9.20163ZM26.7651 16.54C27.2801 16.0089 27.5536 15.2687 27.5536 14.3836C27.5375 11.4546 24.5121 11.342 23.8201 11.3581C23.7396 11.3581 23.6752 11.4225 23.6752 11.5029V17.2642C23.6752 17.3447 23.7396 17.409 23.8201 17.409H23.981C25.1719 17.409 26.2501 17.0711 26.7651 16.54ZM35.1694 8.75102C35.2498 8.75102 35.3142 8.81539 35.3142 8.87977V19.8713C35.3142 19.9517 35.2498 20.0161 35.1694 20.0161H32.5784C32.4979 20.0161 32.4497 19.9517 32.4497 19.8713V8.87977C32.4497 8.81539 32.4979 8.75102 32.5784 8.75102H35.1694ZM50.1441 19.8552C50.1602 19.9356 50.0958 20 50.0154 20.0161H47.521C47.4405 20.0161 47.3922 19.9517 47.3761 19.8873L46.8451 14.1743C46.8451 14.0295 46.6359 13.9973 46.5876 14.1422L44.7369 19.9195C44.7208 19.9678 44.6725 20.0161 44.6081 20.0161H42.9023C42.8379 20.0161 42.7896 19.9678 42.7736 19.9195L40.9229 14.1422C40.8746 13.9973 40.6654 14.0295 40.6493 14.1743L40.1343 19.8873C40.1182 19.9517 40.0699 20.0161 39.9895 20.0161H37.4951C37.4146 20.0161 37.3502 19.9356 37.3663 19.8552L38.7664 8.84758C38.7825 8.78321 38.8308 8.71884 38.9112 8.71884H41.7919C41.8563 8.71884 41.9045 8.76712 41.9206 8.81539L43.6426 14.3997C43.6909 14.5284 43.8679 14.5284 43.9001 14.3997L45.5576 8.81539C45.5898 8.76712 45.6381 8.71884 45.7025 8.71884H48.5992C48.6636 8.71884 48.7279 8.78321 48.744 8.84758L50.1441 19.8552ZM57.0291 13.3536C58.8798 14.2065 59.604 15.1077 59.604 16.5883C59.604 17.0872 59.5236 18.0367 58.9925 18.8252C58.3488 19.7425 57.2705 20.2253 55.7578 20.2253C54.5026 20.2253 53.5209 19.8873 52.8289 19.2597C52.5392 18.9701 52.0886 18.4068 51.8794 17.5056C51.8633 17.4251 51.9116 17.3608 51.976 17.3447L54.5508 16.8136C54.6152 16.7975 54.6957 16.8297 54.7118 16.9102C54.9371 17.6987 55.5808 17.747 55.7256 17.747C56.3532 17.747 56.7556 17.2159 56.7556 16.717C56.7556 16.1699 56.3211 15.9929 54.76 15.3169L54.6313 15.2526C53.891 14.9468 51.9277 14.1422 51.9277 12.0179C51.9277 9.74879 53.9232 8.52572 55.8061 8.52572C56.1601 8.52572 56.8199 8.574 57.4958 8.84758C57.9625 9.05679 58.9764 9.63614 59.1856 10.827C59.2017 10.8914 59.1534 10.9719 59.089 10.9879L56.6912 11.5834C56.6268 11.5995 56.5625 11.5673 56.5464 11.5029C56.4176 11.2293 56.1923 11.004 55.7095 11.004C55.2589 11.004 54.7922 11.3098 54.7922 11.8409C54.7922 12.3237 55.0819 12.4524 57.0291 13.3536ZM69.9234 8.75102C70.0038 8.75102 70.0682 8.81539 70.0682 8.89586V15.5423C70.0682 17.4573 69.6176 18.2941 68.9256 19.0022C68.121 19.823 67.1876 20.2414 65.868 20.2414C65.2242 20.2414 63.7598 20.1287 62.7298 19.0183C61.7642 17.9562 61.6033 17.0872 61.6033 15.5423V8.89586C61.6033 8.81539 61.6516 8.75102 61.7321 8.75102H64.323C64.4035 8.75102 64.4679 8.81539 64.4679 8.89586V15.5423C64.4679 15.9446 64.484 16.3952 64.6449 16.7814C64.838 17.232 65.3208 17.4412 65.8358 17.4412C66.3829 17.4412 66.8657 17.2481 67.0266 16.8458C67.1876 16.4595 67.1876 15.9446 67.1876 15.5423V8.89586C67.1876 8.81539 67.2519 8.75102 67.3324 8.75102H69.9234ZM84.6591 19.8552C84.6752 19.9356 84.6108 20 84.5304 20.0161H82.036C81.9555 20.0161 81.9072 19.9517 81.8911 19.8873L81.3601 14.1743C81.3601 14.0295 81.1509 13.9973 81.1026 14.1422L79.2519 19.9195C79.2358 19.9678 79.1875 20.0161 79.1231 20.0161H77.4173C77.3529 20.0161 77.3046 19.9678 77.2885 19.9195L75.4379 14.1422C75.3896 13.9973 75.1804 14.0295 75.1643 14.1743L74.6493 19.8873C74.6332 19.9517 74.5849 20.0161 74.5045 20.0161H72.0101C71.9296 20.0161 71.8652 19.9356 71.8813 19.8552L73.2814 8.84758C73.2975 8.78321 73.3458 8.71884 73.4262 8.71884H76.3069C76.3712 8.71884 76.4195 8.76712 76.4356 8.81539L78.1576 14.3997C78.2058 14.5284 78.3829 14.5284 78.4151 14.3997L80.0726 8.81539C80.1048 8.76712 80.1531 8.71884 80.2175 8.71884H83.1142C83.1786 8.71884 83.2429 8.78321 83.259 8.84758L84.6591 19.8552Z'
+                  fill='#201D5A'
+                />
+              </svg>
+
+              <svg width='77' height='31' viewBox='0 0 77 31' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <path
+                  d='M5.7078 13.4996C5.7078 11.9576 6.95781 10.7074 8.5 10.7074C10.042 10.7074 11.2922 11.9576 11.2922 13.4996C11.2922 15.0418 10.042 16.292 8.5 16.292C6.95781 16.292 5.7078 15.0418 5.7078 13.4996ZM8.5 4.99981C3.80566 4.99981 0 8.80546 0 13.4996C0 18.1942 3.80566 21.9998 8.5 21.9998V26.7861C8.5 26.7861 17 23.76 17 13.4996C17 8.80546 13.1943 4.99981 8.5 4.99981Z'
+                  fill='#201D5A'
+                />
+                <path
+                  d='M33.0948 21L29.8762 16.7997H28.1381V21H26.3196V9.73493H30.9705C33.4166 9.73493 34.8006 11.1833 34.8006 13.3076C34.8006 15.1583 33.7546 16.3652 31.9683 16.7032L35.3317 21H33.0948ZM28.1381 11.473V15.1904H30.7774C32.274 15.1904 32.966 14.418 32.966 13.3237C32.966 12.2293 32.2579 11.473 30.7774 11.473H28.1381ZM40.6524 11.9558C43.5009 11.9558 45.3033 14.1605 45.1263 17.0733H37.9327C38.0775 18.6987 39.2201 19.5999 40.7007 19.5999C41.7628 19.5999 42.6479 19.1493 43.0664 18.2803H44.9492C44.2572 20.2597 42.5675 21.1931 40.6846 21.1931C37.9971 21.1931 36.082 19.262 36.082 16.5905C36.082 13.9191 37.981 11.9558 40.6524 11.9558ZM40.6524 13.5329C39.2684 13.5329 38.335 14.4019 38.0293 15.5928H43.179C42.9054 14.3858 41.9881 13.5329 40.6524 13.5329ZM51.5199 10.0246C50.2486 10.0246 49.6853 10.7488 49.6853 12.1006V12.1489H52.9522V13.8547H49.6853V21H47.8668V13.8547H46.2254V12.1489H47.8668V12.0201C47.8668 9.60619 49.4118 8.41531 51.3107 8.41531C51.9866 8.41531 52.7591 8.56014 53.3063 8.80154L52.9844 10.2982L52.7269 10.2177C52.3085 10.089 51.8901 10.0246 51.5199 10.0246ZM54.6809 21V8.60842H56.5155V21H54.6809ZM62.8745 11.9558C65.723 11.9558 67.5254 14.1605 67.3484 17.0733H60.1548C60.2997 18.6987 61.4423 19.5999 62.9228 19.5999C63.9849 19.5999 64.8701 19.1493 65.2885 18.2803H67.1713C66.4793 20.2597 64.7896 21.1931 62.9067 21.1931C60.2192 21.1931 58.3041 19.262 58.3041 16.5905C58.3041 13.9191 60.2031 11.9558 62.8745 11.9558ZM62.8745 13.5329C61.4905 13.5329 60.5571 14.4019 60.2514 15.5928H65.4011C65.1275 14.3858 64.2102 13.5329 62.8745 13.5329ZM76.5532 21H74.3806L72.2402 17.8297L70.1803 21H67.9917L71.162 16.4457L68.1687 12.1489H70.3413L72.3046 15.11L74.2036 12.1489H76.3922L73.3989 16.4779L76.5532 21Z'
+                  fill='#201D5A'
+                />
+              </svg>
+
+              <svg width='154' height='22' viewBox='0 0 154 22' fill='none' xmlns='http://www.w3.org/2000/svg'>
+                <path
+                  d='M34.4636 17.2909L34.4635 17.2908C32.6038 15.4516 30.257 14.2795 27.6758 13.9017C27.2851 13.8445 26.9241 14.1159 26.8673 14.5036L26.8673 14.5036C26.8105 14.8923 27.0807 15.2545 27.469 15.3117L27.4692 15.3117C29.4957 15.6081 31.3684 16.4646 32.9126 17.7968C31.0045 19.4397 28.5766 20.3648 26.0262 20.411L26.0261 20.411C23.6562 20.4556 21.3634 19.7337 19.4726 18.371C25.3421 17.4782 29.8868 12.4057 29.9193 6.32419M34.4636 17.2909L13.8639 7.87999C14.2409 5.29926 15.4124 2.95225 17.2528 1.09308C17.3839 0.960173 17.5681 0.885323 17.7594 0.885323C17.9493 0.885323 18.133 0.960413 18.2654 1.09263L18.2659 1.09315C22.5197 5.39366 22.8699 12.1719 19.3479 16.9466C21.5354 16.5964 23.5667 15.5848 25.1919 14.0093L25.192 14.0093C27.1175 12.1439 28.2687 9.69073 28.4654 7.06152C26.4772 7.20861 24.5851 7.90018 22.9672 9.07419L22.9671 9.07428C22.8129 9.18585 22.6241 9.23088 22.436 9.20096L22.4357 9.20093C22.2498 9.17099 22.0837 9.06987 21.9723 8.91603M34.4636 17.2909C34.5977 17.4238 34.6748 17.6078 34.6748 17.7971C34.6748 17.9862 34.5977 18.1703 34.4637 18.3034L34.4636 18.3036C32.1594 20.583 29.0895 21.8383 25.8244 21.8384H25.8244H25.8243H25.8243H25.8243H25.8243H25.8243H25.8242H25.8242H25.8242H25.8242H25.8241H25.8241H25.8241H25.8241H25.8241H25.824H25.824H25.824H25.824H25.824H25.8239H25.8239H25.8239H25.8239H25.8239H25.8239H25.8238H25.8238H25.8238H25.8238H25.8238H25.8238H25.8237H25.8237H25.8237H25.8237H25.8237H25.8237H25.8236H25.8236H25.8236H25.8236H25.8236H25.8236H25.8235H25.8235H25.8235H25.8235H25.8235H25.8235H25.8234H25.8234H25.8234H25.8234H25.8234H25.8233H25.8233H25.8233H25.8233H25.8233H25.8232H25.8232H25.8232H25.8232H25.8232H25.8232H25.8231H25.8231H25.8231H25.8231H25.8231H25.8231H25.8231H25.823H25.823H25.823H25.823H25.823H25.8229H25.8229H25.8229H25.8229H25.8229H25.8229H25.8228H25.8228H25.8228H25.8228H25.8228H25.8228H25.8228H25.8227H25.8227H25.8227H25.8227H25.8227H25.8227H25.8226H25.8226H25.8226H25.8226H25.8226H25.8226H25.8225H25.8225H25.8225H25.8225H25.8225C22.5593 21.8384 19.4932 20.5847 17.1891 18.308L17.155 18.2743C15.1922 16.3472 12.5803 15.2616 9.79877 15.2169C7.14033 15.1747 4.61248 16.0823 2.62737 17.7813M34.4636 17.2909L2.62737 17.7813M29.9193 6.32419C29.9215 6.13437 29.8442 5.94984 29.7127 5.81703L29.7125 5.81687C29.573 5.67645 29.381 5.59496 29.1905 5.60752C26.6339 5.62441 24.1922 6.42417 22.1294 7.92084L22.1293 7.92091C21.8113 8.15209 21.7408 8.59818 21.9723 8.91603M29.9193 6.32419C29.9193 6.32427 29.9193 6.32434 29.9193 6.32443L29.8045 6.32304L29.9193 6.32365C29.9193 6.32383 29.9193 6.32401 29.9193 6.32419ZM21.9723 8.91603C21.9724 8.91612 21.9725 8.91621 21.9725 8.9163L22.0652 8.84872L21.9723 8.91597C21.9723 8.91599 21.9723 8.91601 21.9723 8.91603ZM16.8356 16.1441C12.0944 12.6651 5.357 13.0792 1.09857 17.2506L1.09848 17.2506C0.961909 17.3847 0.886108 17.5645 0.8852 17.7554L1.00001 17.7559M16.8356 16.1441L15.9742 19.2089C15.8923 19.0719 15.7627 18.9743 15.6084 18.9349C15.4522 18.8951 15.2921 18.9185 15.1549 18.9999C13.4897 19.9872 11.5807 20.5102 9.63368 20.5126V20.3978H9.63363C11.5602 20.3954 13.449 19.8779 15.0964 18.9011M16.8356 16.1441C16.4892 13.9777 15.4909 11.961 13.9366 10.3442L13.9366 10.3442C12.0912 8.42413 9.66318 7.26996 7.06208 7.06662V7.39503C7.25119 9.19322 7.89957 10.9269 8.93763 12.4099C9.04674 12.5657 9.08863 12.7551 9.05554 12.9424C9.05554 12.9424 9.05553 12.9424 9.05552 12.9425L8.94247 12.9225M16.8356 16.1441L5.75516 7.4923C5.96207 9.52502 6.6914 11.4852 7.86447 13.161M1.00001 17.7559L0.885201 17.7552C0.884065 17.9445 0.959913 18.1296 1.09403 18.2631C1.09406 18.2631 1.09409 18.2631 1.09412 18.2631L1.87533 19.0442C1.89291 19.0622 1.9111 19.0787 1.93115 19.0952L1.93174 19.0957L1.93174 19.0957C4.08943 20.8543 6.81559 21.8226 9.60854 21.8226H9.60855H9.60856H9.60857H9.60858H9.60859H9.6086H9.60861H9.60861H9.60862H9.60863H9.60864H9.60865H9.60866H9.60867H9.60868H9.60869H9.6087H9.60871H9.60871H9.60872H9.60873H9.60874H9.60875H9.60876H9.60876H9.60877H9.60878H9.60879H9.6088H9.6088H9.60881H9.60882H9.60883H9.60884H9.60884H9.60885H9.60886H9.60887H9.60888H9.60888H9.60889H9.6089H9.60891H9.60892H9.60892H9.60893H9.60894H9.60895H9.60896H9.60897H9.60898H9.60898H9.60899H9.609H9.60901H9.60902H9.60903H9.60904H9.60905H9.60906H9.60907H9.60908H9.60909H9.60909H9.6091H9.60911H9.60912H9.60913H9.60914H9.60914H9.60915H9.60916H9.60917H9.60918H9.60919H9.6092H9.6092H9.60921H9.60922H9.60923H9.60924H9.60925H9.60925H9.60926H9.60927H9.60928H9.60929H9.60929H9.6093H9.60931H9.60932H9.60933H9.60933H9.60934H9.60935H9.60936H9.60937H9.60937H9.60938H9.60939H9.6094H9.60941H9.60942H9.60942H9.60943H9.60944H9.60945H9.60945H9.60946H9.60947H9.60948H9.60948H9.60949H9.63178H9.63187C11.8146 21.8209 13.9554 21.2345 15.8232 20.1265M1.00001 17.7559C0.999058 17.9146 1.06287 18.0701 1.17509 18.1818L16.8601 16.3051C12.1592 12.7853 5.42447 13.1739 1.17891 17.3326C1.06421 17.4452 1.00077 17.5957 1.00001 17.7559ZM15.8232 20.1265L15.7646 20.0278L15.8232 20.1265C15.8232 20.1265 15.8232 20.1265 15.8232 20.1265ZM15.8232 20.1265C15.9867 20.0295 16.1026 19.8741 16.1501 19.6903L16.1505 19.6891C16.1956 19.5058 16.1685 19.3142 16.0734 19.151L16.0727 19.1499C15.9755 18.9873 15.8209 18.8707 15.6368 18.8237L15.6368 18.8236C15.451 18.7763 15.2597 18.8043 15.0964 18.9011M15.0964 18.9011L15.153 18.9967L15.0964 18.9011C15.0964 18.9011 15.0964 18.9011 15.0964 18.9011ZM2.62737 17.7813L2.85986 18.0134C4.75699 19.5497 7.15112 20.3963 9.6032 20.3978C9.60323 20.3978 9.60325 20.3978 9.60327 20.3978L2.62737 17.7813ZM8.94247 12.9225C8.91484 13.0795 8.82738 13.2165 8.69668 13.3081C8.42556 13.4965 8.05271 13.4304 7.86447 13.161M8.94247 12.9225C8.97028 12.7651 8.93522 12.6066 8.84357 12.4757L8.94247 12.9225ZM7.86447 13.161L7.77041 13.2269M7.86447 13.161L7.77035 13.2268C7.77037 13.2268 7.77039 13.2268 7.77041 13.2269M7.77041 13.2269C6.58612 11.535 5.84983 9.55617 5.64094 7.50393L5.64091 7.50363C5.63838 7.4781 5.63748 7.45444 5.63748 7.43171V6.32266C5.63748 6.13364 5.71404 5.94932 5.84833 5.81639C5.84833 5.81639 5.84833 5.81638 5.84834 5.81638L5.92911 5.89798C6.04361 5.78462 6.19565 5.72384 6.35855 5.72498C12.3447 5.78671 17.3359 10.33 18.1643 16.1521C18.1969 16.1085 18.2291 16.0647 18.261 16.0207C18.2692 16.0746 18.2771 16.1287 18.2846 16.1828L7.77041 13.2269ZM25.8225 21.7236C22.5893 21.7236 19.5523 20.4816 17.2698 18.2263L25.8225 21.7236ZM25.8225 21.7236H25.8244M25.8225 21.7236H25.8244M25.8244 21.7236C29.0595 21.7234 32.1003 20.4799 34.3828 18.222L25.8244 21.7236ZM33.0872 17.7969C33.0583 17.8224 33.0292 17.8478 33 17.873L33.0872 17.7969ZM19.1788 18.2963C19.2329 18.2893 19.2868 18.282 19.3407 18.2743L19.3101 18.3946C19.2661 18.3621 19.2224 18.3294 19.1788 18.2963Z'
+                  fill='#201D5A'
+                  stroke='black'
+                  strokeWidth='0.229623'
+                />
+                <path
+                  d='M47.5786 18.0878C44.1409 18.0878 41.5047 15.5585 41.5047 11.7646C41.5047 7.93499 44.23 5.33444 47.8992 5.33444C50.8738 5.33444 53.1538 7.04439 53.5813 9.52025H50.7135C50.3395 8.3981 49.2708 7.77468 47.8992 7.77468C45.8152 7.77468 44.2656 9.27088 44.2656 11.7289C44.2656 14.187 45.8152 15.6476 47.9171 15.6476C49.6626 15.6476 50.9451 14.6145 51.1766 13.0648H48.0239V10.874H53.6347V17.9453H51.6398L51.4616 16.36C50.6245 17.4822 49.253 18.0878 47.5786 18.0878ZM55.7269 17.9453V8.41591H58.2028V10.0724C58.7193 9.0037 59.788 8.41591 61.0171 8.41591H61.8008V10.7315H60.9458C59.1646 10.7315 58.2562 11.6399 58.2562 13.5101V17.9453H55.7269ZM67.5009 18.0878C64.7044 18.0878 62.6026 16.0572 62.6026 13.1717C62.6026 10.2862 64.7044 8.27341 67.5009 8.27341C70.3152 8.27341 72.417 10.2862 72.417 13.1717C72.417 16.0572 70.3152 18.0878 67.5009 18.0878ZM65.1675 13.1717C65.1675 14.8104 66.1294 15.8613 67.5009 15.8613C68.8724 15.8613 69.8521 14.8104 69.8521 13.1717C69.8521 11.533 68.8724 10.4999 67.5009 10.4999C66.1294 10.4999 65.1675 11.533 65.1675 13.1717ZM76.0068 17.9453L72.961 8.41591H75.704L77.4852 14.4185L79.4445 8.41591H81.6532L83.6125 14.4185L85.3937 8.41591H88.0299L84.984 17.9453H82.4904L80.4954 11.8002L78.5183 17.9453H76.0068ZM93.9604 18.0878C90.9502 18.0878 89.0087 16.4313 88.9909 13.902H91.6093C91.6983 15.0776 92.6602 15.7723 94.1029 15.7723C95.4923 15.7723 96.1869 15.131 96.1869 14.2582C96.1869 13.5279 95.6882 13.0648 94.192 12.7977L92.4108 12.4592C90.2377 12.0674 89.08 10.9274 89.08 9.18182C89.08 6.93752 90.9858 5.33444 93.8358 5.33444C96.6679 5.33444 98.5915 6.90189 98.6806 9.2887H96.0444C95.9198 8.2556 95.136 7.63218 93.7645 7.63218C92.4642 7.63218 91.7339 8.20217 91.7339 9.03933C91.7339 9.66275 92.1792 10.0902 93.622 10.3396L95.421 10.678C97.7009 11.0877 98.8409 12.2811 98.8409 14.0979C98.8409 16.4135 97.0063 18.0878 93.9604 18.0878ZM104.274 17.9453C102.314 17.9453 101.317 16.9478 101.317 14.9885V10.6068H99.7849V8.41591H100.604C101.121 8.41591 101.317 8.21998 101.317 7.70343V6.20722H103.846V8.41591H106.375V10.6068H103.846V14.5254C103.846 15.4338 104.149 15.7366 105.039 15.7366H106.375V17.9453H104.274ZM108.067 17.9453V8.41591H110.543V10.0724C111.059 9.0037 112.128 8.41591 113.357 8.41591H114.141V10.7315H113.286C111.505 10.7315 110.596 11.6399 110.596 13.5101V17.9453H108.067ZM119.93 18.0878C117.009 18.0878 114.943 16.1641 114.943 13.243C114.943 10.2862 117.098 8.27341 119.93 8.27341C122.584 8.27341 124.65 10.0902 124.65 12.958C124.65 13.2251 124.632 13.5101 124.597 13.7595H117.419C117.632 15.2557 118.63 16.0038 119.966 16.0038C120.963 16.0038 121.747 15.5763 122.085 14.8817H124.525C124.009 16.8766 122.21 18.0878 119.93 18.0878ZM117.543 12.0496H122.121C121.872 10.8918 121.052 10.3396 119.93 10.3396C118.772 10.3396 117.882 10.9274 117.543 12.0496ZM129.179 18.0522C127.166 18.0522 125.777 16.8766 125.777 15.1666C125.777 13.4211 127.255 12.2455 129.642 12.2455H132.242V11.9961C132.242 10.874 131.619 10.2862 130.497 10.2862C129.481 10.2862 128.858 10.7493 128.751 11.4974H126.133C126.329 9.52025 127.967 8.27341 130.55 8.27341C133.222 8.27341 134.682 9.62712 134.682 12.0852V15.131C134.682 15.6298 134.896 15.8613 135.395 15.8613H135.733V17.9453H134.522C133.364 17.9453 132.598 17.4644 132.367 16.5204C131.744 17.5 130.568 18.0522 129.179 18.0522ZM128.324 15.0063C128.324 15.6832 128.894 16.1107 129.838 16.1107C131.245 16.1107 132.242 15.2023 132.242 13.9554V13.9376H130.051C128.911 13.9376 128.324 14.3295 128.324 15.0063ZM137.029 17.9453V8.41591H139.505V9.80524C140.146 8.8434 141.232 8.27341 142.426 8.27341C143.673 8.27341 144.706 8.89683 145.24 10.0368C145.881 8.93246 147.146 8.27341 148.464 8.27341C150.352 8.27341 151.724 9.60931 151.724 11.9605V17.9453H149.194V12.7264C149.194 11.248 148.553 10.589 147.556 10.589C146.451 10.589 145.632 11.3727 145.632 12.9758V17.9453H143.103V12.7264C143.103 11.248 142.461 10.589 141.464 10.589C140.377 10.589 139.558 11.3727 139.558 12.9758V17.9453H137.029Z'
+                  fill='#201D5A'
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className='bg-white'>
+        <div className='container mx-auto px-4'>
+          <div className='px-4 py-32 sm:px-24'>
+            <p className='text-sweetGreen-300 mb-4 text-xs uppercase tracking-widest'>HOW IT WORKS</p>
+            <h1 className='font-heading mb-20 text-4xl font-bold text-primary md:text-5xl'>
+              Simplify borderless teamwork
             </h1>
-            <p className="mt-8 text-lg font-medium text-pretty text-white sm:text-xl/8">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt.
+            <div className='-m-4 flex flex-wrap items-center'>
+              <div className='w-full p-4 lg:w-1/3'>
+                <div className='mb-10'>
+                  <div className='mb-2 flex flex-wrap gap-2'>
+                    <div className='h-6 w-6 rounded-full bg-secondary p-px'>
+                      <div className='bg-greenSecondary-900 rounded-full p-1'>
+                        <p className='text-center text-xs font-semibold text-white'>1</p>
+                      </div>
+                    </div>
+                    <p className='text-lg font-semibold text-primary'>Input Transactions</p>
+                  </div>
+                  <p className='max-w-xs  text-opacity-70'>
+                    Record your financial transactions such as receipts, and other relevant documents.
+                  </p>
+                </div>
+                <div className='mb-10'>
+                  <div className='mb-2 flex flex-wrap gap-2'>
+                    <div className='h-6 w-6 rounded-full bg-secondary p-px'>
+                      <div className='bg-greenSecondary-900 rounded-full p-1'>
+                        <p className='text-center text-xs font-semibold text-white'>2</p>
+                      </div>
+                    </div>
+                    <p className='text-lg font-semibold text-primary'>Categorization</p>
+                  </div>
+                  <p className='max-w-xs text-white text-opacity-70'>
+                    Automatically categorizes and organizes the recorded transactions, such as income and expenses.
+                  </p>
+                </div>
+                <div className='mb-2 flex flex-wrap gap-2'>
+                  <div className='h-6 w-6 rounded-full bg-secondary p-px'>
+                    <div className='bg-greenSecondary-900 rounded-full p-1'>
+                      <p className='text-center text-xs font-semibold text-white'>3</p>
+                    </div>
+                  </div>
+                  <p className='text-lg font-semibold text-primary'>Generate Reports</p>
+                </div>
+                <p className='max-w-xs text-opacity-70'>
+                  Generate financial reports, such as income statements, balance sheets, and cash flow.
+                </p>
+              </div>
+              <div className='w-full p-4 lg:w-2/3'>
+                <img
+                  className='w-full rounded-3xl object-cover'
+                  style={{ height: '600px' }}
+                  src='/images/sample/sample-details-right.webp'
+                  alt=''
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div className='bg-gray-50 py-24 sm:py-32'>
+          <div className='mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8'>
+            <h2 className='text-center text-base/7 font-semibold text-indigo-600'>Deploy faster</h2>
+            <p className='mx-auto mt-2 max-w-lg text-balance text-center text-4xl font-semibold tracking-tight  sm:text-5xl'>
+              Grow deals together, thrive collaboratively.
             </p>
-            <div className="mt-10 flex items-center gap-x-6">
-            <Link
-                    className="btn w-full bg-white text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto"
-                    href="account/login"
-                  >
-                    Sign in
-                  </Link>
-
-                  <Link
-                    className="btn w-full bg-white text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto"
-                    href="account/create"
-                  >
-                   Create a free account
-                  </Link>
-            </div>
-          </div>
-          <div className="mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow">
-            <svg role="img" viewBox="0 0 366 729" className="mx-auto w-[22.875rem] max-w-full drop-shadow-xl">
-              <title>App screenshot</title>
-              <defs>
-                <clipPath id="2ade4387-9c63-4fc4-b754-10e687a0d332">
-                  <rect rx={36} width={316} height={684} />
-                </clipPath>
-              </defs>
-              <path
-                d="M363.315 64.213C363.315 22.99 341.312 1 300.092 1H66.751C25.53 1 3.528 22.99 3.528 64.213v44.68l-.857.143A2 2 0 0 0 1 111.009v24.611a2 2 0 0 0 1.671 1.973l.95.158a2.26 2.26 0 0 1-.093.236v26.173c.212.1.398.296.541.643l-1.398.233A2 2 0 0 0 1 167.009v47.611a2 2 0 0 0 1.671 1.973l1.368.228c-.139.319-.314.533-.511.653v16.637c.221.104.414.313.56.689l-1.417.236A2 2 0 0 0 1 237.009v47.611a2 2 0 0 0 1.671 1.973l1.347.225c-.135.294-.302.493-.49.607v377.681c0 41.213 22 63.208 63.223 63.208h95.074c.947-.504 2.717-.843 4.745-.843l.141.001h.194l.086-.001 33.704.005c1.849.043 3.442.37 4.323.838h95.074c41.222 0 63.223-21.999 63.223-63.212v-394.63c-.259-.275-.48-.796-.63-1.47l-.011-.133 1.655-.276A2 2 0 0 0 366 266.62v-77.611a2 2 0 0 0-1.671-1.973l-1.712-.285c.148-.839.396-1.491.698-1.811V64.213Z"
-                fill="#4B5563"
-              />
-              <path
-                d="M16 59c0-23.748 19.252-43 43-43h246c23.748 0 43 19.252 43 43v615c0 23.196-18.804 42-42 42H58c-23.196 0-42-18.804-42-42V59Z"
-                fill="#343E4E"
-              />
-              <foreignObject
-                width={316}
-                height={684}
-                clipPath="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)"
-                transform="translate(24 24)"
-              >
-                <img alt="" src="https://tailwindcss.com/plus-assets/img/component-images/mobile-app-screenshot.png" />
-              </foreignObject>
-            </svg>
-          </div>
-        </div>
-      </div>
-     </section>
-
-     <section className="bg-darkGreen-900">
-      <div className="container mx-auto px-4">
-        <div className="sm:border-l sm:border-r border-white border-opacity-20 border-dashed">
-          <div className="py-32 px-4 sm:px-24">
-            <p className="uppercase text-sweetGreen-300 text-xs mb-4 tracking-widest">HOW IT WORKS</p>
-            <h1 className="font-heading text-white text-4xl md:text-5xl font-bold mb-20">See how we simplifies your financial tasks</h1>
-            <div className="flex flex-wrap items-center -m-4">
-              <div className="w-full lg:w-1/3 p-4">
-                <div className="mb-10">
-                  <div className="flex flex-wrap gap-2 mb-2">
-                    <div className="bg-gradient-to-b from-green-400 via-green-500 to-darkGreen-900 rounded-full p-px w-6 h-6">
-                      <div className="bg-greenSecondary-900 rounded-full p-1">
-                        <p className="text-white text-center text-xs font-semibold">1</p>
-                      </div>
-                    </div>
-                    <p className="text-white text-lg font-semibold">Input Transactions</p>
+            <div className='mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2'>
+              <div className='relative lg:row-span-2'>
+                <div className='absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]'></div>
+                <div className='relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-l-[calc(2rem+1px)]'>
+                  <div className='px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10'>
+                    <p
+                      className='mt-2 text-lg font-medium tracking-tight 
+                     max-lg:text-center'
+                    >
+                      Mobile friendly
+                    </p>
+                    <p className='mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center'>
+                      Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
+                    </p>
                   </div>
-                  <p className="text-white text-opacity-70 max-w-xs">Record your financial transactions such as receipts, and other relevant documents.</p>
-                </div>
-                <div className="mb-10">
-                  <div className="flex flex-wrap gap-2 mb-2">
-                    <div className="bg-gradient-to-b from-green-400 via-green-500 to-darkGreen-900 rounded-full p-px w-6 h-6">
-                      <div className="bg-greenSecondary-900 rounded-full p-1">
-                        <p className="text-white text-center text-xs font-semibold">2</p>
-                      </div>
-                    </div>
-                    <p className="text-white text-lg font-semibold">Categorization</p>
-                  </div>
-                  <p className="text-white text-opacity-70 max-w-xs">Automatically categorizes and organizes the recorded transactions, such as income and expenses.</p>
-                </div>
-                <div className="flex flex-wrap gap-2 mb-2">
-                  <div className="bg-gradient-to-b from-green-400 via-green-500 to-darkGreen-900 rounded-full p-px w-6 h-6">
-                    <div className="bg-greenSecondary-900 rounded-full p-1">
-                      <p className="text-white text-center text-xs font-semibold">3</p>
+                  <div className='@container relative min-h-[30rem] w-full grow max-lg:mx-auto max-lg:max-w-sm'>
+                    <div className='absolute inset-x-10 bottom-0 top-10 overflow-hidden'>
+                      <MarketingSampleFeaturesLeft></MarketingSampleFeaturesLeft>
                     </div>
                   </div>
-                  <p className="text-white text-lg font-semibold">Generate Reports</p>
                 </div>
-                <p className="text-white text-opacity-70 max-w-xs">Generate financial reports, such as income statements, balance sheets, and cash flow.</p>
+                <div className='pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-l-[2rem]'></div>
               </div>
-              <div className="w-full lg:w-2/3 p-4">
-                <img className="rounded-3xl w-full object-cover" style={{ height: '600px' }} src="https://html-warpspeed-full.vercel.app/template-assets/images/how-it-works/illustration-green2.png" alt="" />
+              <div className='relative max-lg:row-start-1'>
+                <div className='absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]'></div>
+                <div className='relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]'>
+                  <div className='px-8 pt-8 sm:px-10 sm:pt-10'>
+                    <p className='mt-2 text-lg font-medium tracking-tight  max-lg:text-center'>Performance</p>
+                    <p className='mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center'>
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit maiores impedit.
+                    </p>
+                  </div>
+                  <div className='flex flex-1 items-center justify-center px-8 max-lg:pb-12 max-lg:pt-10 sm:px-10 lg:pb-2'>
+                    <SampleMarketingFeaturesCenterTop className="w-100"></SampleMarketingFeaturesCenterTop>
+                  </div>
+                </div>
+                <div className='pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-[2rem]'></div>
+              </div>
+              <div className='relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2'>
+                <div className='absolute inset-px rounded-lg bg-white'></div>
+                <div className='relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]'>
+                  <div className='px-8 pt-8 sm:px-10 sm:pt-10'>
+                    <p className='mt-2 text-lg font-medium tracking-tight  max-lg:text-center'>Security</p>
+                    <p className='mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center'>
+                      Morbi viverra dui mi arcu sed. Tellus semper morbi.
+                    </p>
+                  </div>
+                  <div className='@container items-right flex flex-1 max-lg:py-6 lg:pb-2'>
+                    <img
+                      className='-[min(152px,40cqw)] absolute right-0 mt-4 object-cover'
+                      src='/images/sample/sample-maretng-features-center.webp'
+                      alt=''
+                    />
+                  </div>
+                </div>
+                <div className='pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5'></div>
+              </div>
+              <div className='relative lg:row-span-2'>
+                <div className='absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]'></div>
+                <div className='relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]'>
+                  <div className='px-8 pb-3 pt-8 sm:px-10 sm:pb-0 sm:pt-10'>
+                    <p className='mt-2 text-lg font-medium tracking-tight  max-lg:text-center'>Powerful APIs</p>
+                    <p className='mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center'>
+                      Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget sem sodales gravida.
+                    </p>
+                  </div>
+                  <div className='relative min-h-[30rem] w-full grow'>
+                    <img src='/images/sample/sample-marketing-features-right.webp' />
+                  </div>
+                </div>
+                <div className='pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]'></div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-     <section>
-     <div className="bg-gray-50 py-24 sm:py-32">
-      <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="text-center text-base/7 font-semibold text-indigo-600">Deploy faster</h2>
-        <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl">
-          Everything you need to deploy your app
-        </p>
-        <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
-          <div className="relative lg:row-span-2">
-            <div className="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
-            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
-              <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
-                <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
-                  Mobile friendly
-                </p>
-                <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
-                </p>
-              </div>
-              <div className="@container relative min-h-[30rem] w-full grow max-lg:mx-auto max-lg:max-w-sm">
-                <div className="absolute inset-x-10 top-10 bottom-0 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-gray-700 bg-gray-900 shadow-2xl">
-                  <img
-                    className="size-full object-cover object-top"
-                    src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-mobile-friendly.png"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5 lg:rounded-l-[2rem]"></div>
-          </div>
-          <div className="relative max-lg:row-start-1">
-            <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]"></div>
-            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
-              <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Performance</p>
-                <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit maiores impedit.
-                </p>
-              </div>
-              <div className="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
-                <img
-                  className="w-full max-lg:max-w-xs"
-                  src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-performance.png"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5 max-lg:rounded-t-[2rem]"></div>
-          </div>
-          <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
-            <div className="absolute inset-px rounded-lg bg-white"></div>
-            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
-              <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Security</p>
-                <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                  Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi.
-                </p>
-              </div>
-              <div className="@container flex flex-1 items-center max-lg:py-6 lg:pb-2">
-                <img
-                  className="h-[min(152px,40cqw)] object-cover"
-                  src="https://tailwindcss.com/plus-assets/img/component-images/bento-03-security.png"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5"></div>
-          </div>
-          <div className="relative lg:row-span-2">
-            <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
-            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
-              <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
-                <p className="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">
-                  Powerful APIs
-                </p>
-                <p className="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
-                  Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget sem sodales gravida.
-                </p>
-              </div>
-              <div className="relative min-h-[30rem] w-full grow">
-                <div className="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-tl-xl bg-gray-900 shadow-2xl">
-                  <div className="flex bg-gray-800/40 ring-1 ring-white/5">
-                    <div className="-mb-px flex text-sm/6 font-medium text-gray-400">
-                      <div className="border-r border-b border-r-white/10 border-b-white/20 bg-white/5 px-4 py-2 text-white">
-                        NotificationSetting.jsx
-                      </div>
-                      <div className="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
-                    </div>
-                  </div>
-                  <div className="px-6 pt-6 pb-14">{/* Your code example */}</div>
-                </div>
-              </div>
-            </div>
-            <div className="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-     </section>
-
-</>
-
-      );
-  }
+      </section>
+    </>
+  );
+}

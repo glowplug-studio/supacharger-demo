@@ -1,5 +1,3 @@
-import { useTranslations } from 'next-intl';
-
 /** ==========
  *
  * Supacharger Helpers
@@ -23,10 +21,10 @@ export function getURL(path = '') {
  * Returns a next-intl Message string based on the current locale.
  */
 export function supabaseErrorCodeLocalisation(response: string) {
-    const t = useTranslations('SupabaseErrorCodes');
+    
     let messageId = 'genericError';
 
-    if (response === 'invalid_credentials')     messageId = 'invalidCredentials';
+    if (response == 'invalid_credentials')     messageId = 'invalidCredentials';
     if (response === 'email_not_confirmed')     messageId = 'emailNotConfirmed';
     if (response === 'email_address_invalid')   messageId = 'invalidEmail';
     if (response === 'user_not_found')          messageId = 'userNotFound';
@@ -37,6 +35,6 @@ export function supabaseErrorCodeLocalisation(response: string) {
 
     //@TODO theres a lot more to handle! and this doesnt currently work
 
-    return t(messageId); // Pass the variable directly
+    return messageId; // Pass the variable directly
 }
 
