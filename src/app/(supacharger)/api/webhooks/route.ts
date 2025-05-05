@@ -1,4 +1,3 @@
-import { buffer } from 'micro';
 import Stripe from 'stripe';
 
 import { upsertUserSubscription } from '@/features/account/controllers/upsert-user-subscription';
@@ -6,12 +5,6 @@ import { upsertPrice } from '@/features/pricing/controllers/upsert-price';
 import { upsertProduct } from '@/features/pricing/controllers/upsert-product';
 import { stripeAdmin } from '@/libs/stripe/stripe-admin';
 import { getEnvVar } from '@/utils/get-env-var';
-
-export const config = {
-  api: {
-    bodyParser: false, // Disable Next.js body parsing to get raw body
-  },
-};
 
 const relevantEvents = new Set([
   'product.created',
@@ -25,23 +18,16 @@ const relevantEvents = new Set([
 ]);
 
 export async function POST(req: Request) {
-  // Read raw request body as a buffer
-  const buf = await buffer(req);
-  const rawBody = buf.toString('utf8');
-
-  const sig = req.headers.get('stripe-signature');
+  const body = await req.text();
+  const sig = req.headers.get('stripe-signature') as string;
   const webhookSecret = getEnvVar(process.env.STRIPE_WEBHOOK_SECRET, 'STRIPE_WEBHOOK_SECRET');
-
-  if (!sig || !webhookSecret) {
-    return new Response('Missing Stripe signature or webhook secret', { status: 400 });
-  }
-
   let event: Stripe.Event;
 
   try {
-    event = stripeAdmin.webhooks.constructEvent(rawBody, sig, webhookSecret);
-  } catch (error: any) {
-    return new Response(`Webhook Error: ${error.message}`, { status: 400 });
+    if (!sig || !webhookSecret) return;
+    event = stripeAdmin.webhooks.constructEvent(body, sig, webhookSecret);
+  } catch (error) {
+    return Response.json(sig + ` Webhook Error: ${(error as any).message}`, { status: 400 });
   }
 
   if (relevantEvents.has(event.type)) {
@@ -67,6 +53,7 @@ export async function POST(req: Request) {
           break;
         case 'checkout.session.completed':
           const checkoutSession = event.data.object as Stripe.Checkout.Session;
+
           if (checkoutSession.mode === 'subscription') {
             const subscriptionId = checkoutSession.subscription;
             await upsertUserSubscription({
@@ -81,14 +68,10 @@ export async function POST(req: Request) {
       }
     } catch (error) {
       console.error(error);
-      return new Response('Webhook handler failed. View your nextjs function logs.', {
+      return Response.json('Webhook handler failed. View your nextjs function logs.', {
         status: 400,
       });
     }
   }
-
-  return new Response(JSON.stringify({ received: true }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
-  });
+  return Response.json({ received: true });
 }
