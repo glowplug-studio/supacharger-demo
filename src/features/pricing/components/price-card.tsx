@@ -87,7 +87,10 @@ export function PricingCard({
               <Button
                 variant={buttonVariantMap[metadata.priceCardVariant]}
                 className='w-full'
-                onClick={() => createCheckoutAction({ price: currentPrice })}
+                onClick={() => {
+                  console.log('Checkout price:', currentPrice);
+                  createCheckoutAction({ price: currentPrice });
+                }}
               >
                 Get Started
               </Button>
@@ -107,7 +110,6 @@ export function PricingCard({
 function CheckItem({ text }: { text: string }) {
   return (
     <div className='flex items-center gap-2'>
-     
       <p className='text-sm font-medium text-white first-letter:capitalize'>{text}</p>
     </div>
   );

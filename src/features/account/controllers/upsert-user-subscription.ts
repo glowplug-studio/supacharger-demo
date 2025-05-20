@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 
-import { stripeAdmin } from '@/libs/stripe/stripe-admin';
-import { supabaseAdminClient } from '@/libs/supabase/supabase-admin';
+import { stripeObject } from '@/libs/stripe/stripe-object';
+import { supabaseDatabaseClient } from '@/libs/supabase/supabase-database-client';
 import type { Database } from '@/libs/supabase/types';
 import { toDateTime } from '@/utils/to-date-time';
 import { AddressParam } from '@stripe/stripe-js';
@@ -16,7 +16,7 @@ export async function upsertUserSubscription({
   isCreateAction?: boolean;
 }) {
   // Get customer's userId from mapping table.
-  const { data: customerData, error: noCustomerError } = await supabaseAdminClient
+  const { data: customerData, error: noCustomerError } = await supabaseDatabaseClient
     .from('customers')
     .select('id')
     .eq('stripe_customer_id', customerId)
@@ -25,7 +25,7 @@ export async function upsertUserSubscription({
 
   const { id: userId } = customerData!;
 
-  const subscription = await stripeAdmin.subscriptions.retrieve(subscriptionId, {
+  const subscription = await stripeObject.subscriptions.retrieve(subscriptionId, {
     expand: ['default_payment_method'],
   });
 
@@ -39,15 +39,15 @@ export async function upsertUserSubscription({
     cancel_at_period_end: subscription.cancel_at_period_end,
     cancel_at: subscription.cancel_at ? toDateTime(subscription.cancel_at).toISOString() : null,
     canceled_at: subscription.canceled_at ? toDateTime(subscription.canceled_at).toISOString() : null,
-    current_period_start: toDateTime(subscription.current_period_start).toISOString(),
-    current_period_end: toDateTime(subscription.current_period_end).toISOString(),
+    current_period_start: toDateTime(subscription.items.data[0].current_period_start).toISOString(),
+    current_period_end: toDateTime(subscription.items.data[0].current_period_end).toISOString(),
     created: toDateTime(subscription.created).toISOString(),
     ended_at: subscription.ended_at ? toDateTime(subscription.ended_at).toISOString() : null,
     trial_start: subscription.trial_start ? toDateTime(subscription.trial_start).toISOString() : null,
     trial_end: subscription.trial_end ? toDateTime(subscription.trial_end).toISOString() : null,
   };
 
-  const { error } = await supabaseAdminClient.from('subscriptions').upsert([subscriptionData]);
+  const { error } = await supabaseDatabaseClient.from('subscriptions').upsert([subscriptionData]);
   if (error) {
     throw error;
   }
@@ -69,9 +69,9 @@ const copyBillingDetailsToCustomer = async (userId: string, paymentMethod: Strip
   const { name, phone, address } = paymentMethod.billing_details;
   if (!name || !phone || !address) return;
 
-  await stripeAdmin.customers.update(customer, { name, phone, address: address as AddressParam });
+  await stripeObject.customers.update(customer, { name, phone, address: address as AddressParam });
 
-  const { error } = await supabaseAdminClient
+  const { error } = await supabaseDatabaseClient
     .from('users')
     .update({
       billing_address: { ...address },
