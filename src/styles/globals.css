@@ -87,7 +87,7 @@
   }
   body {
     @apply h-full;
-    @apply bg-background text-foreground;
+    /*@apply bg-background text-foreground; @todo figure out this colouring dark and light mode */
     font-feature-settings: 'rlig' 1, 'calt' 1;
     @apply text-gray-700;
   }
@@ -122,5 +122,62 @@
     @apply text-gray-700;
     @apply bg-white;
   }
+
+    /* Authenticated Header Dropdown Menu @todo this shouldnt be here! */
+  /* Dropdown behavior for user menu */
+.dropdown-container .dropdown-content {
+  display: none;
+  z-index: 50;
+}
+
+.dropdown-container:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content:hover {
+  display: block;
+}
+
+.dropdown-container::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  display: none;
+}
+
+.dropdown-container:hover::after {
+  display: block;
+}
+
+/* Mobile menu behavior using checkbox hack */
+.mobile-menu-dropdown {
+  display: none;
+}
+
+#menu-toggle:checked ~ .mobile-menu-dropdown {
+  display: block;
+}
+
+/* Burger menu animation */
+#menu-toggle:checked ~ label span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+#menu-toggle:checked ~ label span:nth-child(2) {
+  opacity: 0;
+}
+
+#menu-toggle:checked ~ label span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+#menu-toggle ~ label span {
+  transition: all 0.3s ease-in-out;
+}
+
+
 }
 

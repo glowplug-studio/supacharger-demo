@@ -8,9 +8,12 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
       screens: {
         '2xl': '1600px',
+      },
+      padding: {
+        DEFAULT: '0rem', // 16px for mobile (or 0 if you want no padding on mobile)
+        sm: '2rem',      // 32px for sm and above
       },
     },
     extend: {

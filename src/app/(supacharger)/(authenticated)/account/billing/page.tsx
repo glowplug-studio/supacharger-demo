@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { CreditCard } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/seperator';
 import { getSession } from '@/features/account/controllers/get-session';
 import { getSubscription } from '@/features/account/controllers/get-subscription';
 import { PricingCard } from '@/features/pricing/components/price-card';
@@ -38,45 +39,34 @@ function classNames(...classes: string[]): string {
 }
 
   return (
-      <main className="flex-1 bg-grey-600 py-10">
-        <div className='container'>
-        <h1 className='mb-8 text-center lg:text-left text-4xl'>Account</h1>
-        <hr></hr>
-        </div>
-        <div className="container flex min-h-screen flex-col gap-8 py-8 lg:flex-row">
-      {/* Sidebar */}
-      <nav aria-label="Sidebar" className="w-full lg:w-64 shrink-0">
-        <ul role="list" className="space-y-1">
-          {navigation.map((item) => (
-            <li key={item.name}>
-             
-              <a
-                href={item.href}
-                className={classNames(
-                  item.current ? 'bg-gray-50 ' : 'text-white hover:bg-gray-50 ',
-                  'group flex gap-x-3 rounded-md p-2 pl-3  font-semibold',
-                )}
-              >
-                 <CreditCard  size="14" className='mr-2' />
-                {item.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <main className="">
 
-        <div className='flex flex-col gap-4'>
-          <h2 className='font-bold text-2xl mb-4'>Billing &amp; Subscriptions</h2>
+
+        <div className='container'>
+
+        <section className="w-full">
+
+    <div>
+            <h2 className="text-2xl font-bold tracking-tight">Billing</h2>
+            <Separator className="my-4" />
+          </div>
+
+  <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-6">
+    {/* Left column */}
+    <div className="flex-1">
+
+    <h2 className="text-2xl font-semibold mb-4">Subscriptions</h2>
+      
           <Card
             title='Your Plan'
             footer={
               subscription ? (
                 <Button size='sm' variant='secondary' asChild>
-                  <Link href='/manage-subscription'>Manage your subscription</Link>
+                  <Link href='billing/manage-subscription'>Manage your subscription</Link>
                 </Button>
               ) : (
                 <Button size='sm' variant='secondary' asChild>
-                  <Link href='/account//billing/subscribe'>Start a subscription</Link>
+                  <Link href='/account/billing/subscribe'>Start a subscription</Link>
                 </Button>
               )
             }
@@ -87,8 +77,24 @@ function classNames(...classes: string[]): string {
               <p>You don&apos;t have an active subscription</p>
             )}
           </Card>
-        </div>
+        
     </div>
+    {/* Right column */}
+    <div className="flex-1">
+      <h2 className="text-2xl font-semibold mb-4">Payment Methods</h2>
+      {/* Additional right column content can go here */}
+    </div>
+  </div>
+
+  {/* Billing History Section */}
+  <div className="container mx-auto px-4 py-8">
+  <h2 className="text-2xl font-semibold mb-4">Billing History</h2>
+    {/* Billing history content goes here */}
+  </div>
+</section>
+
+</div>
+        
     </main>
   );
 }

@@ -5,7 +5,6 @@ import { cookies } from 'next/headers';
 import { NextIntlClientProvider } from 'next-intl';
 import { ToastContainer } from 'react-toastify';
 
-import { Toaster } from '@/components/ui/toaster';
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
@@ -36,7 +35,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
          <body className={cn('font-sans antialiased', manrope.variable)}>
             <NextIntlClientProvider messages={messages}>
             {children}
-               <Toaster />
+       
                <Analytics />
             </NextIntlClientProvider>
             <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar={true} />
