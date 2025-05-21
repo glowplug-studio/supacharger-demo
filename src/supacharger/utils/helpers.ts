@@ -20,26 +20,6 @@ export function getURL(path = '') {
 }
 
 /**
- * Returns a next-intl Message string based on the current locale.
- */
-export function supabaseErrorCodeLocalisation(response: string) {
-  let messageId = 'genericError';
-
-  if (response == 'invalid_credentials') messageId = 'invalidCredentials';
-  if (response === 'email_not_confirmed') messageId = 'emailNotConfirmed';
-  if (response === 'email_address_invalid') messageId = 'invalidEmail';
-  if (response === 'user_not_found') messageId = 'userNotFound';
-  if (response === 'over_request_rate_limit') messageId = 'overLimit';
-  if (response === 'user_banned') messageId = 'userBanned';
-  if (response === 'otp_expired') messageId = 'otpExpired';
-  if (response === 'unexpected_failure' || response === 'request_timeout') messageId = 'genericError';
-
-  //@TODO theres a lot more to handle! and this doesnt currently work
-
-  return messageId; // Pass the variable directly
-}
-
-/**
  * Password Strength Evlauation.
  * Make sure the settings are the same in Supabase - see Supacharger docs.
  */
@@ -128,4 +108,24 @@ export function evaluatePasswordStrength(password: string): PasswordValidationRe
     valid: true,
     message: 'valid',
   };
+}
+
+/**
+ * Returns a next-intl Message string based on the current locale.
+ */
+export function supabaseErrorCodeLocalisation(response: string) {
+  let messageId = 'genericError';
+
+  if (response == 'invalid_credentials') messageId = 'invalidCredentials';
+  if (response === 'email_not_confirmed') messageId = 'emailNotConfirmed';
+  if (response === 'email_address_invalid') messageId = 'invalidEmail';
+  if (response === 'user_not_found') messageId = 'userNotFound';
+  if (response === 'over_request_rate_limit') messageId = 'overLimit';
+  if (response === 'user_banned') messageId = 'userBanned';
+  if (response === 'otp_expired') messageId = 'otpExpired';
+  if (response === 'unexpected_failure' || response === 'request_timeout') messageId = 'genericError';
+
+  //@TODO theres a lot more to handle! and this doesnt currently work
+
+  return messageId; // Pass the variable directly
 }

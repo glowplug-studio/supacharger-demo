@@ -4,19 +4,22 @@ import { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { toast } from "react-toastify";
-import { useTranslations } from "next-intl";
-
+import { toast } from 'react-toastify';
+import { useTranslations } from 'next-intl';
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
+import { Check } from 'lucide-react';
+import SaveButton from '@/supacharger/components/buttons/form-save-button';
 
 export default function AccountChangePasswordForm() {
   const tAuthTerms = useTranslations('AuthTerms');
   const tGlobalUI = useTranslations('GlobalUI');
   const tPassReset = useTranslations('PasswordResetFormComponent');
+  const tevaluatePasswordStrengthErrorCodes = useTranslations('evaluatePasswordStrengthErrorCodes');
 
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,14 +45,17 @@ export default function AccountChangePasswordForm() {
       const response = await res.json();
 
       if (!res.ok) {
-        setStatus(response.error || 'Something went wrong.');
+        setStatus(tevaluatePasswordStrengthErrorCodes(response.error) || 'Something went wrong.');
         return;
       }
 
       if (response.data && response.data.updated) {
-        toast.success('Password updated');
+        toast.success(tAuthTerms('passwordUpdated'));
         setStatus(null);
         form.reset();
+        setIsSuccess(true);
+        // After 0.5s, reset the button state
+        setTimeout(() => setIsSuccess(false), 500);
         return;
       }
 
@@ -70,36 +76,40 @@ export default function AccountChangePasswordForm() {
       <div className='space-y-4'>
         <div className='space-y-2'>
           <div className='flex flex-col'>
-            <Label htmlFor='oldPassword' className='mb-2'>{tAuthTerms("oldPassword")}</Label>
+            <Label htmlFor='oldPassword' className='mb-2'>
+              {tAuthTerms('oldPassword')}
+            </Label>
             <Input id='oldPassword' name='oldPassword' type='password' className='w-full' />
           </div>
         </div>
         <div className='space-y-2'>
           <div className='flex flex-col'>
-            <Label htmlFor='newPassword' className='mb-2'>{tAuthTerms("newPassword")}</Label>
+            <Label htmlFor='newPassword' className='mb-2'>
+              {tAuthTerms('newPassword')}
+            </Label>
             <Input id='newPassword' name='newPassword' type='password' className='w-full' />
           </div>
         </div>
         <div className='space-y-2'>
           <div className='flex flex-col'>
-            <Label htmlFor='confirmPassword' className='mb-2'>{tAuthTerms("repeatNewPassword")}</Label>
+            <Label htmlFor='confirmPassword' className='mb-2'>
+              {tAuthTerms('repeatNewPassword')}
+            </Label>
             <Input id='confirmPassword' name='confirmPassword' type='password' className='w-full' />
           </div>
         </div>
       </div>
-      <Button type='submit' variant='secondary' disabled={isLoading}>
-        {isLoading ? (
-          <span className="flex items-center">
-            <InlineLoader className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
-            {tGlobalUI("buttonSaveChanges")}
-          </span>
-        ) : (
-          tGlobalUI("buttonSaveChanges")
-        )}
-      </Button>
-      {status && (
-        <div className="mt-2 text-sm text-red-600">{status}</div>
-      )}
+
+      {status && <div className='sc-error-message'>{status}</div>}
+
+      <SaveButton
+      isLoading={isLoading}
+      isSuccess={isSuccess}
+      initialLabel={tGlobalUI("buttonSaveChanges")}
+      savingLabel={tGlobalUI("buttonSaving")}
+      completeLabel={tGlobalUI("buttonSaved")}
+      />
+
     </form>
   );
 }
