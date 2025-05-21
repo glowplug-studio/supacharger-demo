@@ -95,9 +95,13 @@ export async function POST(request: NextRequest) {
   }
 
   // data.matched == true
-  await supaUser.supabase.auth.updateUser({
+  const { data: updateData, error: updateError } = await supaUser.supabase.auth.updateUser({
     password: newPassword,
   });
 
-  return NextResponse.json({ data: { updated: true } });
+  if (updateError) {
+    return NextResponse.json({ error: updateError.message }, { status: 500 });
+  } else {
+    return NextResponse.json({ data: { updated: true } });
+  }
 }
