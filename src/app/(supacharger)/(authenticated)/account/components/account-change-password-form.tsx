@@ -12,13 +12,13 @@ export default function AccountChangePasswordForm() {
   const tAuthTerms = useTranslations('AuthTerms');
   const tGlobalUI = useTranslations('GlobalUI');
   const tPassReset = useTranslations('PasswordResetFormComponent');
-  const tevaluatePasswordStrengthErrorCodes = useTranslations('evaluatePasswordStrengthErrorCodes');
+  const tEvaluatePasswordStrengthErrorCodes = useTranslations('evaluatePasswordStrengthErrorCodes');
 
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [newPassword, setNewPassword] = useState("");
+  const [newPassword, setNewPassword] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -43,7 +43,7 @@ export default function AccountChangePasswordForm() {
       const response = await res.json();
 
       if (!res.ok) {
-        setStatus(tevaluatePasswordStrengthErrorCodes(response.error) || 'Something went wrong.');
+        setStatus(tEvaluatePasswordStrengthErrorCodes(response.error));
         return;
       }
 
@@ -51,14 +51,9 @@ export default function AccountChangePasswordForm() {
         toast.success(tAuthTerms('passwordUpdated'));
         setStatus(null);
         form.reset();
-        setNewPassword("");
+        setNewPassword('');
         setIsSuccess(true);
-        setTimeout(() => setIsSuccess(false), 500);
-        return;
-      }
-
-      if (response.data && response.data.matched === false) {
-        setStatus('Old password is incorrect.');
+        setTimeout(() => setIsSuccess(false), 800);
         return;
       }
 
@@ -78,16 +73,16 @@ export default function AccountChangePasswordForm() {
             <Label htmlFor='oldPassword' className='mb-2'>
               {tAuthTerms('oldPassword')}
             </Label>
-            <Input id='oldPassword' name='oldPassword' type='password' className='w-full' />
+            <Input id='oldPassword' name='oldPassword' type='password' className='w-full' maxLength={30} />
           </div>
         </div>
 
         {/* New Password Indicator moved below Old Password */}
         <PasswordValidationIndicator
           value={newPassword}
-          onChange={e => setNewPassword(e.target.value)}
-          name="newPassword"
-          id="newPassword"
+          onChange={(e) => setNewPassword(e.target.value)}
+          name='newPassword'
+          id='newPassword'
         />
 
         <div className='space-y-2'>
@@ -95,7 +90,7 @@ export default function AccountChangePasswordForm() {
             <Label htmlFor='confirmPassword' className='mb-2'>
               {tAuthTerms('retypeNewPassword')}
             </Label>
-            <Input id='confirmPassword' name='confirmPassword' type='password' className='w-full' />
+            <Input id='confirmPassword' name='confirmPassword' type='password' className='w-full' maxLength={30} />
           </div>
         </div>
       </div>
@@ -105,9 +100,9 @@ export default function AccountChangePasswordForm() {
       <SaveButton
         isLoading={isLoading}
         isSuccess={isSuccess}
-        initialLabel={tGlobalUI("buttonSaveChanges")}
-        savingLabel={tGlobalUI("buttonSaving")}
-        completeLabel={tGlobalUI("buttonSaved")}
+        initialLabel={tGlobalUI('buttonSaveChanges')}
+        savingLabel={tGlobalUI('buttonSaving')}
+        completeLabel={tGlobalUI('buttonSaved')}
       />
     </form>
   );

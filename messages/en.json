@@ -26,7 +26,8 @@
     "passwordUpdated": "Password Succesfully Updated"
   },
   "evaluatePasswordStrengthErrorCodes": {
-    "password_required": "You must enter a new password",
+    "old_password_incorrect": "Incorrect current password",
+    "old_password_required": "You must enter the current password",
     "provided_password_mismatch": "Provided passwords do not match",
     "password_too_short": "The password provided is too short",
     "password_failed_regex_evaluation": "The password provided is not strong enough",

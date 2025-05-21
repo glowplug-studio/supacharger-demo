@@ -26,7 +26,7 @@
     "passwordUpdated": "Mot de passe mis à jour avec succès"
   },
   "evaluatePasswordStrengthErrorCodes": {
-    "password_required": "Vous devez entrer un nouveau mot de passe",
+    "old_password_required": "Vous devez entrer un nouveau mot de passe",
     "provided_password_mismatch": "Les mots de passe fournis ne correspondent pas",
     "password_too_short": "Le mot de passe fourni est trop court",
     "password_failed_regex_evaluation": "Le mot de passe fourni n'est pas assez fort",

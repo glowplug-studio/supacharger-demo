@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
 
   // evaluate passwords
   if (!password) {
-    return NextResponse.json({ error: 'password_required' }, { status: 400 });
+    return NextResponse.json({ error: 'old_password_required' }, { status: 400 });
   }
   if (newPassword !== newPasswordRetype) {
     return NextResponse.json({ error: 'provided_password_mismatch' }, { status: 400 });
@@ -67,8 +67,14 @@ export async function POST(request: NextRequest) {
     password,
   });
 
+
+
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  if (data.matched == false) {
+    return NextResponse.json({ error: 'old_password_incorrect' }, { status: 400 });
   }
 
   if (data.matched == true) {
