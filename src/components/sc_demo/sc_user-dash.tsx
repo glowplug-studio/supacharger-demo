@@ -1,23 +1,139 @@
+import Image from 'next/image';
 import Link from 'next/link';
+import { Eye, ThumbsUp } from 'lucide-react';
 
-import LogoutButton from '@/supacharger/components/buttons/logout-button';
+const posts = [
+  {
+    id: 1,
+    title: "Prime Office Space Yielding 7% in Auckland CBD",
+    author: "Jane Smith",
+    summary: "Secure a premium office investment in the heart of Auckland, offering stable returns and long-term tenancy.",
+    thumbnail: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+    views: 1200,
+    upvotes: 34,
+  },
+  {
+    id: 2,
+    title: "NZX Tech Stock: 30% Upside Potential",
+    author: "Mark Lee",
+    summary: "Analysts predict strong growth for this under-the-radar tech stock listed on NZX. Find out why insiders are buying.",
+    thumbnail: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80",
+    views: 850,
+    upvotes: 21,
+  },
+  {
+    id: 3,
+    title: "Queenstown Lakeside Apartment Pre-Sale",
+    author: "Sophie Turner",
+    summary: "Invest early in Queenstown's newest luxury lakeside apartments with exclusive pre-sale pricing.",
+    thumbnail: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=400&q=80",
+    views: 670,
+    upvotes: 15,
+  },
+  {
+    id: 4,
+    title: "Diversified Investment Fund: Low Risk, Steady Growth",
+    author: "Alex Kim",
+    summary: "Join a diversified fund focused on sustainable growth and risk management. Open to new investors this quarter.",
+    thumbnail: "https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?auto=format&fit=crop&w=400&q=80",
+    views: 940,
+    upvotes: 28,
+  },
+  {
+    id: 5,
+    title: "Personal Finance App Launch: Early Access",
+    author: "Priya Patel",
+    summary: "Get early access to a new app designed to help you manage your finances, track investments, and save smarter.",
+    thumbnail: "https://images.unsplash.com/photo-1601972599720-36938d4ecd31?auto=format&fit=crop&w=400&q=80",
+    views: 510,
+    upvotes: 12,
+  },
+  {
+    id: 6,
+    title: "Commercial Property in Wellington: High Yield",
+    author: "Liam Brown",
+    summary: "A rare opportunity to acquire a fully-leased commercial property in Wellington's business district.",
+    thumbnail: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
+    views: 780,
+    upvotes: 19,
+  },
+  {
+    id: 7,
+    title: "Green Energy Investment Bonds Open",
+    author: "Emily Green",
+    summary: "Support renewable energy and earn fixed returns with our new green bonds, now open for subscription.",
+    thumbnail: "https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=400&q=80",
+    views: 640,
+    upvotes: 22,
+  },
+];
 
 export default function SCUserDash() {
   return (
-    <div className='m-16 flex items-center rounded-md bg-green-200 p-4'>
-      <div className='p-8 '>
-        <img
-          src='https://images.unsplash.com/photo-1640043959259-41ba58cc3ab3?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-          alt='Profile Picture'
-          className='mr-4 h-14 w-14 rounded-full'
-        ></img>
-        <div className='flex flex-col'>
-          <h2 className='mb-3 block text-base text-gray-700'>
-            Welcome back, <span className='font-bold'>John Doe</span>
-          </h2>
-          <Link className='btn bg-primary text-white' href='/account'>Manage Account</Link>
+    <div className='container'>
+    <div className='m-4 flex min-h-screen flex-col items-stretch rounded-md p-2 sm:m-8 sm:p-4'>
+      <div className='flex flex-1 flex-col gap-6 lg:flex-row lg:items-start'>
+        <div className='w-full lg:w-[400px] rounded-lg bg-gray-100 p-6 mx-auto lg:mx-0'>
+          <h1 className='mb-4 text-lg font-bold'>Compose a new Post</h1>
+          <div className='flex items-start gap-4'>
+            <div className='flex-1'>
+              <textarea
+                className='mb-4 h-24 w-full resize-none rounded border border-gray-300 p-2'
+                placeholder='Enter your post here'
+              ></textarea>
+              <button className='flex w-full justify-center rounded-md bg-primary py-2 font-bold text-white'>
+                Publish
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* Right: Posts Container */}
+        <div className='w-full flex-1'>
+        <h1 className='text-4xl mb-8 font-semibold'>Updates from your Network</h1>
+          <div className='space-y-6'>
+            {posts.map((post) => (
+              <div key={post.id} className='flex gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm'>
+                {/* Thumbnail */}
+                <div className='flex-shrink-0'>
+                  <img
+                    src={post.thumbnail}
+                    alt={post.title}
+                    width={80}
+                    height={80}
+                    className='h-20 w-20 rounded-md object-cover'
+                  />
+                </div>
+                {/* Content */}
+                <div className='flex flex-1 flex-col'>
+                  <div>
+                    <h3 className='text-base sm:text-lg font-semibold'>{post.title}</h3>
+                    <div className='mb-1 text-xs sm:text-sm text-gray-500'>By {post.author}</div>
+                    <p className='text-xs text-gray-600'>{post.summary}</p>
+                  </div>
+                  <div className='mt-2 flex flex-1 items-end justify-between'>
+                    {/* View & Upvote counts */}
+                    <div className='flex items-center gap-3 text-xs text-gray-400'>
+                      <span className='flex items-center gap-1'>
+                        <Eye size={16} className='inline' />
+                        {post.views}
+                      </span>
+                      <span className='flex items-center gap-1'>
+                        <ThumbsUp size={16} className='inline' />
+                        {post.upvotes}
+                      </span>
+                    </div>
+                    {/* View more link */}
+                    <Link href='#' className='text-xs font-medium text-blue-600 hover:underline'>
+                      View more &rarr;
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

@@ -1,0 +1,142 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { Loader2 } from 'lucide-react';
+import { toast } from 'react-toastify';
+
+import { Avatar } from '@/app/(supacharger)/(authenticated)/account/edit-profile/account-profile-edit-avatar';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/seperator';
+import { Textarea } from '@/components/ui/textarea';
+import { useUnsavedChanges } from '@/hooks/use-unsaved-changes';
+
+interface Profile {
+  firstName: string;
+  lastName: string;
+  aboutMe: string;
+  avatarFile: File | null;
+}
+
+export default function EditProfilePage() {
+  const { setHasChanges } = useUnsavedChanges();
+  const [isLoading, setIsLoading] = useState(false);
+  const [profile, setProfile] = useState<Profile>({
+    firstName: '',
+    lastName: '',
+    aboutMe: '',
+    avatarFile: null,
+  });
+  const [initialProfile, setInitialProfile] = useState<Profile>({
+    firstName: '',
+    lastName: '',
+    aboutMe: '',
+    avatarFile: null,
+  });
+
+  // Simulate loading initial data
+  useEffect(() => {
+    const loadProfile = async () => {
+      // In a real app, fetch from API
+      const mockData = {
+        firstName: 'J',
+        lastName: 'Sharp',
+        aboutMe: '',
+        avatarFile: null,
+      };
+
+      setProfile(mockData);
+      setInitialProfile(mockData);
+    };
+
+    loadProfile();
+  }, []);
+
+  // Check for changes in form
+  useEffect(() => {
+    const hasChanged =
+      profile.firstName !== initialProfile.firstName ||
+      profile.lastName !== initialProfile.lastName ||
+      profile.aboutMe !== initialProfile.aboutMe ||
+      profile.avatarFile !== initialProfile.avatarFile;
+
+    setHasChanges(hasChanged);
+  }, [profile, initialProfile, setHasChanges]);
+
+  // Handle form field changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setProfile((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Handle avatar image changes
+  const handleAvatarChange = (file: File | null) => {
+    setProfile((prev) => ({ ...prev, avatarFile: file }));
+  };
+
+  // Check if form has any changes
+  const hasChanges =
+    profile.firstName !== initialProfile.firstName ||
+    profile.lastName !== initialProfile.lastName ||
+    profile.aboutMe !== initialProfile.aboutMe ||
+    profile.avatarFile !== initialProfile.avatarFile;
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    // Update the initial state to match current state
+    setInitialProfile(profile);
+    setHasChanges(false);
+    setIsLoading(false);
+    toast.success('Your profile has been successfully updated.');
+  };
+
+  return (
+    <div className='space-y-6'>
+      <div>
+        <h2 className='text-2xl font-bold tracking-tight'>Edit Profile</h2>
+        <Separator className='my-4' />
+      </div>
+
+      <form onSubmit={handleSubmit} className='space-y-8'>
+        <div className='grid grid-cols-1 gap-8 md:grid-cols-[250px_1fr]'>
+          {/* Avatar section */}
+          <div className='rounded-lg bg-muted/40 p-4'>
+            <Avatar
+              initialImage='https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=600'
+              onImageChange={handleAvatarChange}
+            />
+          </div>
+
+          {/* Profile form fields */}
+          <div className='max-w-md space-y-4'>
+            <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+              <div className='space-y-2'>
+                <Label htmlFor='firstName'>First name</Label>
+                <Input id='firstName' name='firstName' value={profile.firstName} onChange={handleChange} />
+              </div>
+
+              <div className='space-y-2'>
+                <Label htmlFor='lastName'>Last name</Label>
+                <Input id='lastName' name='lastName' value={profile.lastName} onChange={handleChange} />
+              </div>
+            </div>
+
+            <div className='space-y-2'>
+              <Label htmlFor='aboutMe'>About Me</Label>
+              <Textarea id='aboutMe' name='aboutMe' value={profile.aboutMe} onChange={handleChange} rows={6} />
+            </div>
+
+            <Button type='submit' disabled={isLoading || !hasChanges}>
+              {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+              Save Changes
+            </Button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+}

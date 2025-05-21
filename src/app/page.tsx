@@ -1,5 +1,5 @@
 import SCFooter from '@/components/sc_demo/sc_footer';
-import SCFooterAuthed from '@/components/sc_demo/sc_footer-session';
+import SCFooterSession from '@/components/sc_demo/sc_footer-session';
 import { SCHeaderSession } from '@/components/sc_demo/sc_header-session';
 import SCMarketngLanding from '@/components/sc_demo/sc_marketing-landing';
 import SCUserDash from '@/components/sc_demo/sc_user-dash';
@@ -16,7 +16,7 @@ export default async function RootPage() {
       {session ? (<>
         <SCHeaderSession />
         <SCUserDash></SCUserDash>
-        <SCFooterAuthed />
+        <SCFooterSession />
         </>
       ) : (
         <>
