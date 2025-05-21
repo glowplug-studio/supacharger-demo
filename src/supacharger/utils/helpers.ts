@@ -19,95 +19,76 @@ export function getURL(path = '') {
   return cleanPath ? `${formattedURL}/${cleanPath}` : formattedURL;
 }
 
-/**
- * Password Strength Evlauation.
- * Make sure the settings are the same in Supabase - see Supacharger docs.
- */
 interface PasswordValidationResult {
   valid: boolean;
   message: string;
 }
 
-/**
- * Evaluates a password using the SC_CONFIG settings.
- * @param password The password string to evaluate.
- * @returns {PasswordValidationResult} The result of the evaluation.
- */
+// --- Individual Validators (return boolean only) ---
+
+function validateNoRequired(_password: string): boolean {
+  return true;
+}
+
+function validateLettersDigits(password: string): boolean {
+  return /(?=.*[A-Za-z])(?=.*\d)/.test(password);
+}
+
+function validateLowerUpperLettersDigits(password: string): boolean {
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(password);
+}
+
+function validateLowerUpperLettersDigitsSymbols(password: string): boolean {
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).+$/.test(password);
+}
+
+export {
+  validateNoRequired,
+  validateLettersDigits,
+  validateLowerUpperLettersDigits,
+  validateLowerUpperLettersDigitsSymbols
+};
+
+// --- Main Pass Eval Function ---
+
 export function evaluatePasswordStrength(password: string): PasswordValidationResult {
-  // Use config from SC_CONFIG
   const requirements = SC_CONFIG.PASSWORD_REQUIREMENTS;
   const minLength = SC_CONFIG.PASSWORD_MINIMUM_LENGTH;
   const customRegex = SC_CONFIG.PASSWORD_CUSTOM_REGEX;
 
-  // Use custom regex if set
+  // Custom regex takes precedence
   if (customRegex) {
     const regex = new RegExp(customRegex);
     if (regex.test(password)) {
-      return {
-        valid: true,
-        message: 'valid',
-      };
+      return { valid: true, message: 'valid' };
     }
-    return {
-      valid: false,
-      message: 'password_failed_regex_evaluation',
-    };
+    return { valid: false, message: 'password_failed_regex_evaluation' };
   }
 
   // Minimum length check
   if (password.length < minLength) {
-    return {
-      valid: false,
-      message: `password_too_short`,
-    };
+    return { valid: false, message: 'password_too_short' };
   }
 
-  // Requirements checks
+  // Dispatch to the right validator
   switch (requirements) {
     case 'no_required':
-      // No character requirements
-      return {
-        valid: true,
-        message: 'valid',
-      };
-
+      return { valid: validateNoRequired(password), message: 'valid' };
     case 'letters_digits':
-      if (!/(?=.*[A-Za-z])(?=.*\d)/.test(password)) {
-        return {
-          valid: false,
-          message: 'must_contain_letter_digit',
-        };
-      }
-      break;
+      return validateLettersDigits(password)
+        ? { valid: true, message: 'valid' }
+        : { valid: false, message: 'must_contain_letter_digit' };
     case 'lower_upper_letters_digits':
-      // FIX: Use only lookaheads and .+ to allow any characters, not just letters and digits
-      if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/.test(password)) {
-        return {
-          valid: false,
-          message: 'must_contain_lower_letter_upper_letter_digit',
-        };
-      }
-      break;
+      return validateLowerUpperLettersDigits(password)
+        ? { valid: true, message: 'valid' }
+        : { valid: false, message: 'must_contain_lower_letter_upper_letter_digit' };
     case 'lower_upper_letters_digits_symbols':
-      if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).+$/.test(password)) {
-        return {
-          valid: false,
-          message: 'must_contain_lower_letter_upper_letter_digit_symbol',
-        };
-      }
-      break;
-
+      return validateLowerUpperLettersDigitsSymbols(password)
+        ? { valid: true, message: 'valid' }
+        : { valid: false, message: 'must_contain_lower_letter_upper_letter_digit_symbol' };
     default:
-      return {
-        valid: false,
-        message: 'Invalid password requirements configuration.',
-      };
+      return { valid: false, message: 'Invalid password requirements configuration.' };
   }
-
-  return {
-    valid: true,
-    message: 'valid',
-  };
 }
 
 /**
