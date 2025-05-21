@@ -79,6 +79,30 @@ export const SC_CONFIG = {
     // set to false if you turn off email verification in Supabase.
   EMAIL_VERIFY_ENABLED: true,
 
+      /**
+   * ==========
+   * Secuirty
+   * ==========
+   */
+
+  /**
+   *
+   * Password Strength Settings
+   *
+    Used for front end, server side password validation on signup and password change
+
+    Options:
+    no_reuqired: no required chars
+    letters_digits: letters and digits
+    lower_upper_letters_digits
+    lower_upper_letters_digits_symbols
+  */
+  PASSWORD_REQUIREMENTS: 'letters_digits',
+  // minimum length
+  PASSWORD_MINIMUM_LENGTH: 8,
+  // if set the above two will be ignored. A generic failed message will be returned without reason if criteria not met.
+  // eg string '^999' checks that the password must start with 999 and no further evaluation
+  PASSWORD_CUSTOM_REGEX: null,
   /**
    * ==========
    * AUTHENTICATION Providers

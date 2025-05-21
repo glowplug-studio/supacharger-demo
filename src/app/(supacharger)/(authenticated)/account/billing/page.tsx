@@ -32,70 +32,62 @@ export default async function BillingPage() {
     { name: 'Account Settings', href: '/account', current: false },
     { name: 'Edit Profile', href: '/account/profile', current: false },
     { name: 'Billing', href: '/account/billing', current: true },
-  ]
+  ];
 
-function classNames(...classes: string[]): string {
-  return classes.filter(Boolean).join(' ')
-}
+  function classNames(...classes: string[]): string {
+    return classes.filter(Boolean).join(' ');
+  }
 
   return (
-      <main className="">
-
-
-        <div className='container'>
-
-        <section className="w-full">
-
-    <div>
-            <h2 className="text-2xl font-bold tracking-tight">Billing</h2>
-            <Separator className="my-4" />
+    <section className=''>
+      <div className='container'>
+        <section className='w-full'>
+          <div>
+            <h2 className='text-2xl font-bold tracking-tight'>Billing</h2>
+            <Separator className='my-4' />
           </div>
 
-  <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-6">
-    {/* Left column */}
-    <div className="flex-1">
+          <div className='container mx-auto flex flex-col gap-6 px-4 py-8 md:flex-row'>
+            {/* Left column */}
+            <div className='flex-1'>
+              <h2 className='mb-4 text-2xl font-semibold'>Subscriptions</h2>
 
-    <h2 className="text-2xl font-semibold mb-4">Subscriptions</h2>
-      
-          <Card
-            title='Your Plan'
-            footer={
-              subscription ? (
-                <Button size='sm' variant='secondary' asChild>
-                  <Link href='billing/manage-subscription'>Manage your subscription</Link>
-                </Button>
-              ) : (
-                <Button size='sm' variant='secondary' asChild>
-                  <Link href='/account/billing/subscribe'>Start a subscription</Link>
-                </Button>
-              )
-            }
-          >
-            {userProduct && userPrice ? (
-              <PricingCard product={userProduct} price={userPrice} />
-            ) : (
-              <p>You don&apos;t have an active subscription</p>
-            )}
-          </Card>
-        
-    </div>
-    {/* Right column */}
-    <div className="flex-1">
-      <h2 className="text-2xl font-semibold mb-4">Payment Methods</h2>
-      {/* Additional right column content can go here */}
-    </div>
-  </div>
+              <Card
+                title='Your Plan'
+                footer={
+                  subscription ? (
+                    <Button size='sm' variant='secondary' asChild>
+                      <Link href='billing/manage-subscription'>Manage your subscription</Link>
+                    </Button>
+                  ) : (
+                    <Button size='sm' variant='secondary' asChild>
+                      <Link href='/account/billing/subscribe'>Start a subscription</Link>
+                    </Button>
+                  )
+                }
+              >
+                {userProduct && userPrice ? (
+                  <PricingCard product={userProduct} price={userPrice} />
+                ) : (
+                  <p>You don&apos;t have an active subscription</p>
+                )}
+              </Card>
+            </div>
+            {/* Right column */}
+            <div className='flex-1'>
+              <h2 className='mb-4 text-2xl font-semibold'>Payment Methods</h2>
+              {/* Additional right column content can go here */}
+            </div>
+          </div>
 
-  {/* Billing History Section */}
-  <div className="container mx-auto px-4 py-8">
-  <h2 className="text-2xl font-semibold mb-4">Billing History</h2>
-    {/* Billing history content goes here */}
-  </div>
-</section>
-
-</div>
-        
-    </main>
+          {/* Billing History Section */}
+          <div className='container mx-auto px-4 py-8'>
+            <h2 className='mb-4 text-2xl font-semibold'>Billing History</h2>
+            {/* Billing history content goes here */}
+          </div>
+        </section>
+      </div>
+    </section>
   );
 }
 

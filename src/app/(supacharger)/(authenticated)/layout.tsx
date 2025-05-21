@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
 
 import SCFooter from '@/components/sc_demo/sc_footer';
+import SCFooterSession from '@/components/sc_demo/sc_footer-session';
 import { SCHeaderSession } from '@/components/sc_demo/sc_header-session';
 import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
@@ -43,7 +44,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
           {children}
         </div>
       </main>
-      <SCFooter />
+      <SCFooterSession />
     </div>
   );
 }

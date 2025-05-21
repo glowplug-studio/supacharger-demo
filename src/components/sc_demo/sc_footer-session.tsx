@@ -5,7 +5,7 @@ import Link from "next/link";
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 
   
-export default function  SCFooterAuthed() {
+export default function  SCFooterSession() {
     return (
         <footer className="py-6">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

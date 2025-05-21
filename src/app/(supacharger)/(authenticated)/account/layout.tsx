@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
 
 import { AccountLayout } from  '@/app/(supacharger)/(authenticated)/account/account-layout';
-import SCFooter from '@/components/sc_demo/sc_footer';
+import SCFooter from '@/components/sc_demo/sc_footer-session';
+import SCFooterSession from '@/components/sc_demo/sc_footer-session';
 import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 import { cn } from '@/utils/cn';
@@ -39,10 +40,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
     <div className='m-auto flex h-full flex-col'>
       <main className='relative flex-1'>
         <div className='relative h-full'>
-        <AccountLayout>{children} </AccountLayout>
+        <AccountLayout>{children}</AccountLayout>
         </div>
-      </main>
-      <SCFooter />
+      </main>  
     </div>
   );
 }
