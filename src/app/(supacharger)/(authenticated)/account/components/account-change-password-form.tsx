@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
 import { Check } from 'lucide-react';
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
+import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
 
 export default function AccountChangePasswordForm() {
   const tAuthTerms = useTranslations('AuthTerms');
@@ -73,6 +74,9 @@ export default function AccountChangePasswordForm() {
   return (
     <form ref={formRef} className='max-w-md space-y-4' onSubmit={handleSubmit}>
       <h3 className='text-lg font-medium'>{tPassReset('title')}</h3>
+
+
+      <PasswordValidationIndicator></PasswordValidationIndicator>
       <div className='space-y-4'>
         <div className='space-y-2'>
           <div className='flex flex-col'>
