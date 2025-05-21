@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { evaluatePasswordStrength } from "@/supacharger/utils/helpers";
-import { SC_CONFIG } from "@/supacharger/supacharger-config";
-import { Input } from "@/components/ui/input";
-import { Check, SquareDashed } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Check, SquareDashed } from "lucide-react";
+
+import { Input } from "@/components/ui/input";
+import { SC_CONFIG } from "@/supacharger/supacharger-config";
+import { evaluatePasswordStrength } from "@/supacharger/utils/helpers";
 
 // Individual validators
 const hasLowercase = (newPassword: string) => /[a-z]/.test(newPassword);

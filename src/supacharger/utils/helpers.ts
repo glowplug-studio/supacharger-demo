@@ -43,11 +43,10 @@ function validateLowerUpperLettersDigitsSymbols(password: string): boolean {
 }
 
 export {
-  validateNoRequired,
   validateLettersDigits,
   validateLowerUpperLettersDigits,
-  validateLowerUpperLettersDigitsSymbols
-};
+  validateLowerUpperLettersDigitsSymbols,
+  validateNoRequired};
 
 // --- Main Pass Eval Function ---
 

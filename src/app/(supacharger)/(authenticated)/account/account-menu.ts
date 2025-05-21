@@ -4,7 +4,7 @@ export interface Tab {
   id: string;
   label: string;
   path: string;
-  icon: LucideIcon;
+  icon: typeof LucideIcon;
 }
 
 export const tabs: Tab[] = [

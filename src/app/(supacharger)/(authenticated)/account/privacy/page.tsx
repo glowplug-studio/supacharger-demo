@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/seperator';
 import { Switch } from '@/components/ui/switch';
-//import { useToast } from '@/hooks/use-toast';
 import { useUnsavedChanges } from '@/hooks/use-unsaved-changes';
 
 interface PrivacySettings {
@@ -70,10 +70,7 @@ export default function PrivacyPage() {
     setInitialSettings(settings);
     setIsLoading(false);
 
-    toast({
-      title: 'Privacy settings updated',
-      description: 'Your privacy preferences have been saved.',
-    });
+    toast.success('Your privacy preferences have been saved.');
   };
 
   return (
@@ -104,7 +101,7 @@ export default function PrivacyPage() {
             <div className='flex items-center justify-between'>
               <div>
                 <Label className='text-base'>Activity Status</Label>
-                <p className='text-sm text-muted-foreground'>Show when you're active on the platform</p>
+                <p className='text-sm text-muted-foreground'>Show when you&apos;re active on the platform</p>
               </div>
               <Switch
                 checked={settings.activityVisible}

@@ -1,12 +1,14 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { toast } from 'react-toastify';
+
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { toast } from 'react-toastify';
-import { useTranslations } from 'next-intl';
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
 import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
+
 
 export default function AccountChangePasswordForm() {
   const tAuthTerms = useTranslations('AuthTerms');

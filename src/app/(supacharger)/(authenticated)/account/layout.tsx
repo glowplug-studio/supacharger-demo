@@ -2,30 +2,22 @@ import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
-import { NextIntlClientProvider } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 import { AccountLayout } from  '@/app/(supacharger)/(authenticated)/account/account-layout';
-import SCFooter from '@/components/sc_demo/sc_footer-session';
-import SCFooterSession from '@/components/sc_demo/sc_footer-session';
-import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
-import { cn } from '@/utils/cn';
-import { Analytics } from '@vercel/analytics/react';
 
 import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';
 
-const manrope = Manrope({
-  variable: '--font-manrope',
-  subsets: ['latin'],
-});
-
 const site_title = SC_CONFIG.SITE_TITLE;
 
+//const tPageMeta = useTranslations('PageMeta');
+// @todo fix these page titles so they load from intl
+
 export const metadata: Metadata = {
-  title: site_title,
+  title: site_title,//+ tPageMeta("account_AccountSecuritySettings_sectionTitle"),
   description: 'Start your next project without reinventing the wheel. REPLACE_ME',
 };
 
@@ -42,7 +34,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         <div className='relative h-full'>
         <AccountLayout>{children}</AccountLayout>
         </div>
-      </main>  
+      </main>
     </div>
   );
 }

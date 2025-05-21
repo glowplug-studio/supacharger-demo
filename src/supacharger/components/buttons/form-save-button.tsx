@@ -1,6 +1,7 @@
-import { Button } from '@/components/ui/button';
-import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
 import { Check } from 'lucide-react';
+
+import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
+import { Button } from '@/components/ui/button';
 
 interface SaveButtonProps {
   isLoading: boolean;

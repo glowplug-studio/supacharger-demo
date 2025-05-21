@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Bell, Mail } from 'lucide-react';
 import { Loader2 } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -76,10 +77,7 @@ export default function NotificationsPage() {
     setInitialSettings(settings);
     setIsLoading(false);
 
-    toast({
-      title: 'Notification preferences updated',
-      description: 'Your notification settings have been saved.',
-    });
+    toast.success('Your notification settings have been saved.');
   };
 
   return (

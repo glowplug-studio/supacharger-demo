@@ -8,6 +8,11 @@
       "buttonSaving": "Saving",
       "buttonSaved": "Done"
   },
+  "PageMeta": {
+    "account_AccountSecuritySettings_sectionTitle": "Account Config",
+    "account_AccountSecuritySettings_pageTitle": "Account & Security Settings"
+  },
+
   "AuthTerms": {
     "name": "Name",
     "username": "Username",

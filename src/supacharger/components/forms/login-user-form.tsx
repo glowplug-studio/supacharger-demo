@@ -11,10 +11,10 @@ import { useTranslations } from 'next-intl';
 import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
 
+import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
+
 import { loginUser } from '../../../app/(supacharger)/auth-actions';
 import { supabaseErrorCodeLocalisation } from '../../utils/helpers'
-
-import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
 
 export function LoginUserForm() {
   const tAuthTerms = useTranslations('AuthTerms');
