@@ -97,7 +97,7 @@ export const SC_CONFIG = {
     lower_upper_letters_digits
     lower_upper_letters_digits_symbols
   */
-  PASSWORD_REQUIREMENTS: 'letters_digits',
+  PASSWORD_REQUIREMENTS: 'lower_upper_letters_digits',
   // minimum length
   PASSWORD_MINIMUM_LENGTH: 8,
   // if set the above two will be ignored. A generic failed message will be returned without reason if criteria not met.

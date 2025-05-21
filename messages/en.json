@@ -15,7 +15,7 @@
     "password": "Password",
     "oldPassword": "Old Password",
     "newPassword": "New Password",
-    "repeatNewPassword": "Repeat New Password",
+    "retypeNewPassword": "Retype New Password",
     "rememberMe": "Remember Me",
     "forgotPassword": "Forgot Password",
     "loginSuccess": "You have been logged in",

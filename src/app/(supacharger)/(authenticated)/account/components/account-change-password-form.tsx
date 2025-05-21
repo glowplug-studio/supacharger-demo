@@ -93,7 +93,7 @@ export default function AccountChangePasswordForm() {
         <div className='space-y-2'>
           <div className='flex flex-col'>
             <Label htmlFor='confirmPassword' className='mb-2'>
-              {tAuthTerms('repeatNewPassword')}
+              {tAuthTerms('retypeNewPassword')}
             </Label>
             <Input id='confirmPassword' name='confirmPassword' type='password' className='w-full' />
           </div>
