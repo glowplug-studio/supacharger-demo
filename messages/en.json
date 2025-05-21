@@ -13,7 +13,7 @@
     "username": "Username",
     "emailAddress": "Email Address",
     "password": "Password",
-    "oldPassword": "Old Password",
+    "oldPassword": "Current Password",
     "newPassword": "New Password",
     "retypeNewPassword": "Retype New Password",
     "rememberMe": "Remember Me",
@@ -35,14 +35,14 @@
     "must_contain_lower_letter_upper_letter_digit_symbol": "The password must contain at least 1 uppercase letter, at least 1 lowercase letter, at least one digit and at least one special character"
   },
   "evaluatePasswordStrengthComponent": {
-    "fieldTitle": "Password",
     "passwordLetter": "Has a letter",
     "passwordDigit": "Has a digit",
     "passwordLowercase": "Has a lowercse letter",
     "passwordUppercase": "Has an uppercase letter",
     "passwordSymbol": "Has a special Character",
     "passwordRequirementsLabel": "Requirements",
-    "passwordMinLength": "Characters "
+    "passwordMinLength": "Characters minimum",
+    "passwordCustomRegexDescription": "REPLACE_ME"
   },
   "SupabaseErrorCodes": {
     "invalidCredentials": "Login unsuccessful. Please verify your email and password and try again",

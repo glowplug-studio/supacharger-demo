@@ -1,13 +1,10 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'react-toastify';
 import { useTranslations } from 'next-intl';
-import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
-import { Check } from 'lucide-react';
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
 import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
 
@@ -21,6 +18,7 @@ export default function AccountChangePasswordForm() {
   const [status, setStatus] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +27,6 @@ export default function AccountChangePasswordForm() {
 
     const form = e.currentTarget;
     const oldPassword = (form.elements.namedItem('oldPassword') as HTMLInputElement).value;
-    const newPassword = (form.elements.namedItem('newPassword') as HTMLInputElement).value;
     const confirmPassword = (form.elements.namedItem('confirmPassword') as HTMLInputElement).value;
 
     try {
@@ -54,8 +51,8 @@ export default function AccountChangePasswordForm() {
         toast.success(tAuthTerms('passwordUpdated'));
         setStatus(null);
         form.reset();
+        setNewPassword("");
         setIsSuccess(true);
-        // After 0.5s, reset the button state
         setTimeout(() => setIsSuccess(false), 500);
         return;
       }
@@ -75,8 +72,6 @@ export default function AccountChangePasswordForm() {
     <form ref={formRef} className='max-w-md space-y-4' onSubmit={handleSubmit}>
       <h3 className='text-lg font-medium'>{tPassReset('title')}</h3>
 
-
-      <PasswordValidationIndicator></PasswordValidationIndicator>
       <div className='space-y-4'>
         <div className='space-y-2'>
           <div className='flex flex-col'>
@@ -86,14 +81,15 @@ export default function AccountChangePasswordForm() {
             <Input id='oldPassword' name='oldPassword' type='password' className='w-full' />
           </div>
         </div>
-        <div className='space-y-2'>
-          <div className='flex flex-col'>
-            <Label htmlFor='newPassword' className='mb-2'>
-              {tAuthTerms('newPassword')}
-            </Label>
-            <Input id='newPassword' name='newPassword' type='password' className='w-full' />
-          </div>
-        </div>
+
+        {/* New Password Indicator moved below Old Password */}
+        <PasswordValidationIndicator
+          value={newPassword}
+          onChange={e => setNewPassword(e.target.value)}
+          name="newPassword"
+          id="newPassword"
+        />
+
         <div className='space-y-2'>
           <div className='flex flex-col'>
             <Label htmlFor='confirmPassword' className='mb-2'>
@@ -107,13 +103,12 @@ export default function AccountChangePasswordForm() {
       {status && <div className='sc-error-message'>{status}</div>}
 
       <SaveButton
-      isLoading={isLoading}
-      isSuccess={isSuccess}
-      initialLabel={tGlobalUI("buttonSaveChanges")}
-      savingLabel={tGlobalUI("buttonSaving")}
-      completeLabel={tGlobalUI("buttonSaved")}
+        isLoading={isLoading}
+        isSuccess={isSuccess}
+        initialLabel={tGlobalUI("buttonSaveChanges")}
+        savingLabel={tGlobalUI("buttonSaving")}
+        completeLabel={tGlobalUI("buttonSaved")}
       />
-
     </form>
   );
 }
