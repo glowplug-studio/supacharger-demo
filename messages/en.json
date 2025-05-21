@@ -3,32 +3,17 @@
     "siteTitle": "DealBud",
     "siteDescription": "Start your next project without reinventing the wheel."
   },
-  "AuthedFeed": {
-    "title": "News Feed",
-    "explainer": "Hardcoded news from users you are not really following."
-  },
-  "Billing": {
-    "title": "Billing"
-  },
-  "LoginPage": {
-    "title": "Sign In"
-  },
-  "CreateAccountPage": {
-    "title": "Create an Account",
-    "iAlreadyHaveAnAccount": "I already have an account"
-  },
-  "CreateAccountFormComponent": {
-    "title": "Create an Account",
-    "orCreateAccountWithEmail": "Or create an account with Email",
-    "iAlreadyHaveAnAccount": "I already have an account",
-    "showEmailFormButtonText": "Continue with Email",
-    "hideEmailFormButtonText": "Use Social Account"
+  "GlobalUI": {
+      "buttonSaveChanges": "Save Changes"
   },
   "AuthTerms": {
     "name": "Name",
     "username": "Username",
     "emailAddress": "Email Address",
     "password": "Password",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "repeatNewPassword": "Repeat New Password",
     "rememberMe": "Remember Me",
     "forgotPassword": "Forgot Password",
     "loginSuccess": "You have been logged in",
@@ -50,5 +35,25 @@
   "Toasts": {
     "logoutFailed": "There was a problem logging you out.",
     "logoutSucceeded": "Logged out"
+  },
+  "Billing": {
+    "title": "Billing"
+  },
+  "LoginPage": {
+    "title": "Sign In"
+  },
+  "CreateAccountPage": {
+    "title": "Create an Account",
+    "iAlreadyHaveAnAccount": "I already have an account"
+  },
+  "CreateAccountFormComponent": {
+    "title": "Create an Account",
+    "orCreateAccountWithEmail": "Or create an account with Email",
+    "iAlreadyHaveAnAccount": "I already have an account",
+    "showEmailFormButtonText": "Continue with Email",
+    "hideEmailFormButtonText": "Use Social Account"
+  },
+  "PasswordResetFormComponent": {
+    "title": "Update your Password"
   }
 }
