@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   // Parse the request body
   const { password, newPassword, newPasswordRetype } = await request.json();
 
-  // evaluate passwords
+  // Evaluate passwords
   if (!password) {
     return NextResponse.json({ error: 'old_password_required' }, { status: 400 });
   }
@@ -26,20 +26,41 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: passStrengthValidity.message }, { status: 400 });
   }
 
-  // get the userSession and accessToken
+  // Get the userSession and accessToken
   const supaSession = await getUserSession();
+
+  // Check that supaSession has a session property and it's not null
+  if (!('session' in supaSession) || !supaSession.session) {
+    return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
+  }
+
   const accessToken = supaSession.session.access_token;
 
-  // get the user by JWT
+  // Get the user by JWT
   //This method is useful for checking if the user is authorized because it validates the user's access token JWT on the server.
+
   const supaUser = await getUser(accessToken, true);
+
+  // Type guard for supaUser: must have .data and .supabase
+  if (
+    !supaUser ||
+    !('data' in supaUser) ||
+    !supaUser.data ||
+    !('user' in supaUser.data) ||
+    !supaUser.data.user ||
+    !('supabase' in supaUser) ||
+    !supaUser.supabase
+  ) {
+    return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
+  }
 
   const supaUserId = supaUser.data.user.id;
   const supaSessionId = supaSession.session.user.id;
+
   // Server side verification that supplied token data is valid for the current user session.
   // @todo It's probaly uncessary to check the User as well as only the JWT is passed to the rpc call. Anyway be extra safe when it comes to password update.
+
   if (
-    !supaUser?.data?.user ||
     !supaUserId ||
     !supaSessionId ||
     supaUserId !== supaSessionId
@@ -47,7 +68,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
   }
 
-  //Use the access token to make the client
+  // Use the access token to make the client
   const supabase = createClient(
     supabaseUrl,
     supabaseAnonKey,
@@ -62,18 +83,16 @@ export async function POST(request: NextRequest) {
       : undefined
   );
 
-  //rpc call to function
+  // RPC call to function
   const { data, error } = await supabase.rpc('verify_user_password', {
     password,
   });
-
-
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  if (data.matched == false) {
+  if (data.matched === false) {
     return NextResponse.json({ error: 'old_password_incorrect' }, { status: 400 });
   }
 
