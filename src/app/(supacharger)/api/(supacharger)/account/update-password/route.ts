@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
   }
 
-  const accessToken = supaSession.session.access_token;
+  const { access_token: accessToken, user: sessionUser } = supaSession.session;
 
   // Get the user by JWT
   //This method is useful for checking if the user is authorized because it validates the user's access token JWT on the server.
@@ -54,8 +54,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'unauthenticated' }, { status: 401 });
   }
 
-  const supaUserId = supaUser.data.user.id;
-  const supaSessionId = supaSession.session.user.id;
+  const { id: supaUserId } = supaUser.data.user;
+  const { id: supaSessionId } = sessionUser;
 
   // Server side verification that supplied token data is valid for the current user session.
   // @todo It's probaly uncessary to check the User as well as only the JWT is passed to the rpc call. Anyway be extra safe when it comes to password update.
@@ -72,15 +72,13 @@ export async function POST(request: NextRequest) {
   const supabase = createClient(
     supabaseUrl,
     supabaseAnonKey,
-    accessToken
-      ? {
-          global: {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          },
-        }
-      : undefined
+    {
+      global: {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+    }
   );
 
   // RPC call to function
@@ -92,18 +90,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  if (data.matched === false) {
+  if (!data?.matched) {
     return NextResponse.json({ error: 'old_password_incorrect' }, { status: 400 });
   }
 
-  if (data.matched == true) {
-    const { data, error } = await supaUser.supabase.auth.updateUser({
-      password: newPassword,
-    });
+  // data.matched == true
+  await supaUser.supabase.auth.updateUser({
+    password: newPassword,
+  });
 
-    return NextResponse.json({ data: { updated: true } });
-  }
-
-  // data will be true or false depending on password validity
-  return NextResponse.json({ data });
+  return NextResponse.json({ data: { updated: true } });
 }
