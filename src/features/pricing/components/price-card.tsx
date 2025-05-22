@@ -5,9 +5,8 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
-import { PriceCardVariant, productMetadataSchema } from '../models/product-metadata';
-import { BillingInterval, Price, ProductWithPrices } from '../types';
+import { PriceCardVariant, productMetadataSchema } from '@/features/pricing/models/product-metadata';
+import { BillingInterval, Price, ProductWithPrices } from '@/features/pricing/types';
 
 export function PricingCard({
   product,

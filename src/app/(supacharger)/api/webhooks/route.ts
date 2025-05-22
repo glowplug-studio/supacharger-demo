@@ -4,7 +4,7 @@ import { upsertUserSubscription } from '@/features/account/controllers/upsert-us
 import { upsertPrice } from '@/features/pricing/controllers/upsert-price';
 import { upsertProduct } from '@/features/pricing/controllers/upsert-product';
 import { stripeAdmin } from '@/supacharger/libs/stripe/stripe-admin';
-import { getEnvVar } from '@/supabase/utils/helpers';
+import { getEnvVar } from '@/supacharger/utils/helpers';
 
 export const config = {
   api: {

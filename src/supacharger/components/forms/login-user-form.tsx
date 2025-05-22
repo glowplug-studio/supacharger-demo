@@ -11,11 +11,10 @@ import { useTranslations } from 'next-intl';
 import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
 
+import { loginUser } from '@/app/(supacharger)/auth-actions';
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
-
-import { loginUser } from '../../../app/(supacharger)/auth-actions';
-import { isValidEmail, supabaseErrorCodeLocalisation } from '../../utils/helpers';
-import SaveButton from '../buttons/form-save-button';
+import SaveButton from '@/supacharger/components/buttons/form-save-button';
+import { isValidEmail, supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
 
 export function LoginUserForm() {
   const tAuthTerms = useTranslations('AuthTerms');

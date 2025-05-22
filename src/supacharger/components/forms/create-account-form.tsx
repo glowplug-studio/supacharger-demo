@@ -9,18 +9,17 @@ import { ArrowLeft, CircleArrowRight, Eye, EyeOff, Mail } from "lucide-react";
 import type React from "react";
 import { toast } from "react-toastify";
 
+import { createUserByEmailPassword } from "@/app/(supacharger)/auth-actions";
 import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
+import { SCP_REGISTRY } from "@/supacharger/plugins/registry";
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
-
-import { createUserByEmailPassword } from "../../../app/(supacharger)/auth-actions";
-import { SCP_REGISTRY } from "../../plugins/registry";
 
 const renderAuthProviderButtons = Object.values(
   SC_CONFIG.AUTH_PROVDERS_ENABLED,
 ).some((enabled) => enabled);
 
 const AuthProviderButtons = renderAuthProviderButtons
-  ? dynamic(() => import("../buttons/auth-provider-buttons"), {
+  ? dynamic(() => import("@/supacharger/components/buttons/auth-provider-buttons"), {
       ssr: true,
     })
   : null;
@@ -29,7 +28,7 @@ const AuthProviderButtons = renderAuthProviderButtons
  * BREVOCODE
  */
 const BrevoNewsletterRegistrationCheckbox = dynamic(
-  () => import("../../plugins/scp_brevo/brevoNewsletterRegistrationCheckbox"),
+  () => import("@/supacharger/plugins/scp_brevo/brevoNewsletterRegistrationCheckbox"),
   {
     ssr: true,
   },
