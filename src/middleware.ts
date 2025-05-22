@@ -1,6 +1,6 @@
 import { type NextRequest } from 'next/server';
 
-import { updateSession } from '@/libs/supabase/middleware';
+import { updateSession } from '@/supacharger/libs/supabase/middleware';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 
 export async function middleware(request: NextRequest) {

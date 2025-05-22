@@ -1,4 +1,4 @@
-import { supabaseAdminClient } from '@/libs/supabase/supabase-admin';
+import { supabaseAdminClient } from '@/supacharger/libs/supabase/supabase-admin';
 
 export async function getCustomerId({ userId }: { userId: string }) {
   const { data, error } = await supabaseAdminClient

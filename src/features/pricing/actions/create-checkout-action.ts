@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 
 import { getOrCreateCustomer } from '@/features/account/controllers/get-or-create-customer';
 import { Price } from '@/features/pricing/types';
-import { stripeAdmin } from '@/libs/stripe/stripe-admin';
+import { stripeAdmin } from '@/supacharger/libs/stripe/stripe-admin';
 import { getURL } from '@/supacharger/utils/helpers';
 import { getUser } from '@/supacharger/utils/supabase/server';
 
