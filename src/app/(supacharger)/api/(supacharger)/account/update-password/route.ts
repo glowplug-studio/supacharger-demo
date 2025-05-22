@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { evaluatePasswordStrength } from '@/supacharger/utils/helpers';
-import { getUser, getUserSession } from '@/utils/supabase/server';
+import { getUser, getUserSession } from '@/supacharger/utils/supabase/server';
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
