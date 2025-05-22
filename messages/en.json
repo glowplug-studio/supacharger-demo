@@ -21,6 +21,7 @@
     "oldPassword": "Current Password",
     "newPassword": "New Password",
     "retypeNewPassword": "Retype New Password",
+    "setNewPassword": "Set new password",
     "rememberMe": "Remember Me",
     "forgotPassword": "Forgot Password",
     "loginSuccess": "You have been logged in",
@@ -34,7 +35,8 @@
     "sendNewAuthEmailSentButtonLabel": "Sent",
     "resendConfirmationEmailSent": "Confirm email link resent, check your email",
     "resendConfirmationEmailFail": "Failed to send. Wait and retry",
-    "passwordUpdated": "Your password has been updated"
+    "passwordUpdated": "Your password has been updated",
+    "backToSignIn": "Back to Sign In page"
   },
   "evaluatePasswordStrengthErrorCodes": {
     "old_password_incorrect": "Incorrect current password",
@@ -77,7 +79,9 @@
     "title": "Sign In"
   },
   "PasswordResetPage": {
-    "title": "Reset your Password"
+    "title": "Reset your Password",
+    "redirectingIn": "Redirecting in",
+    "description": "We will send a reset link to your email"
   },
   "CreateAccountPage": {
     "title": "Create an Account",

@@ -104,13 +104,20 @@ export async function resendAccountConfirmEmail(email: string) {
 }
 
 /**
- *  Send password reset Link
+ * Send password reset Link
+ * redirects to the form to enter the new password
  */
 export async function sendPasswordReset(email: string) {
   const supabase = await createClient();
 
+  // Get the site URL from env
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
+
+  // Ensure no double slashes
+  const redirectTo = `${siteUrl.replace(/\/$/, "")}/account/reset-password/enter-new`;
+
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: 'reset-password',
+    redirectTo,
   });
 
   return { data, error };

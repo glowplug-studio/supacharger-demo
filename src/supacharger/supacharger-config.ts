@@ -42,6 +42,9 @@ export const SC_CONFIG = {
     '/account/reset-password',
     // API
     '/api/webhooks',
+    '/api/account/request-password-reset',
+    '/api/account/resend-activation-link',
+    '/api/account/update-password',
     // Marketing
     '/pricing',
     '/about',
