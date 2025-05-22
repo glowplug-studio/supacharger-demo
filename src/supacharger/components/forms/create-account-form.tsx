@@ -9,17 +9,17 @@ import { ArrowLeft, CircleArrowRight, Eye, EyeOff, Mail } from "lucide-react";
 import type React from "react";
 import { toast } from "react-toastify";
 
+import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
+import { createUserByEmailPassword } from "@/supacharger/libs/supabase/supabase-auth";
+import { SCP_REGISTRY } from "@/supacharger/plugins/registry";
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
-
-import { createUserByEmailPassword } from "../../../app/(supacharger)/auth-actions";
-import { SCP_REGISTRY } from "../../plugins/registry";
 
 const renderAuthProviderButtons = Object.values(
   SC_CONFIG.AUTH_PROVDERS_ENABLED,
 ).some((enabled) => enabled);
 
 const AuthProviderButtons = renderAuthProviderButtons
-  ? dynamic(() => import("../buttons/auth-provider-buttons"), {
+  ? dynamic(() => import("@/supacharger/components/buttons/auth-provider-buttons"), {
       ssr: true,
     })
   : null;
@@ -28,14 +28,13 @@ const AuthProviderButtons = renderAuthProviderButtons
  * BREVOCODE
  */
 const BrevoNewsletterRegistrationCheckbox = dynamic(
-  () => import("../../plugins/scp_brevo/brevoNewsletterRegistrationCheckbox"),
+  () => import("@/supacharger/plugins/scp_brevo/brevoNewsletterRegistrationCheckbox"),
   {
     ssr: true,
   },
 );
 
 export function CreateAccountForm() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [retypePassword, setRetypePassword] = useState("");
@@ -64,7 +63,7 @@ export function CreateAccountForm() {
 
       const result = await createUserByEmailPassword(formData);
       if (result?.error) {
-        toast.error("Failed to create account" + result.error); //supabaseErrorCodeLocalisation('result.error'));
+        toast.error("Failed to create account" + result.error);
       } else {
         toast.success("Account created successfully");
       }
@@ -168,22 +167,6 @@ export function CreateAccountForm() {
           >
             <form onSubmit={handleSubmit} className={renderAuthProviderButtons ? "mt-6" : ""}>
               <div className="my-2">
-                <label htmlFor="name" className="block text-gray-700">
-                  {tAuthTerms("name")}
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    className="focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-              </div>
-              <div className="my-2">
                 <label htmlFor="email" className="block text-gray-700">
                   {tAuthTerms("emailAddress")}
                 </label>
@@ -200,12 +183,8 @@ export function CreateAccountForm() {
                   />
                 </div>
               </div>
-
               <div className="my-2">
                 <div className="flex items-center justify-between">
-                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                    {tAuthTerms("password")}
-                  </label>
                   <button
                     type="button"
                     className="text-gray-500 hover:text-gray-700"
@@ -216,14 +195,12 @@ export function CreateAccountForm() {
                   </button>
                 </div>
                 <div className="mt-2">
-                  <input
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    required
-                    className="focus:shadow-outline focus w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 focus:outline-hidden"
+                  <PasswordValidationIndicator
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    name="password"
+                    id="password"
+                    type={showPassword ? "text" : "password"}
                   />
                 </div>
               </div>
@@ -238,7 +215,7 @@ export function CreateAccountForm() {
                     style={{ overflow: "hidden" }}
                     className="my-2"
                   >
-                    <label htmlFor="password-again" className="block   text-gray-700">
+                    <label htmlFor="password-again" className="block text-gray-700">
                       {tAuthTerms("retypePassword")}
                     </label>
                     <div>
@@ -257,7 +234,6 @@ export function CreateAccountForm() {
               </AnimatePresence>
 
               {error && <p className="error">{error}</p>}
-
               {/**
                * BREVOCODE
                */}

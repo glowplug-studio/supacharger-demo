@@ -39,8 +39,12 @@ export const SC_CONFIG = {
     '/account/login',
     '/account/create',
     '/account/login-magic',
+    '/account/reset-password',
     // API
     '/api/webhooks',
+    '/api/account/request-password-reset',
+    '/api/account/resend-activation-link',
+    '/api/account/update-password',
     // Marketing
     '/pricing',
     '/about',
@@ -77,8 +81,12 @@ export const SC_CONFIG = {
    */
 
     // set to false if you turn off email verification in Supabase.
+    /// @todo this does nothing yet!
   EMAIL_VERIFY_ENABLED: true,
 
+  // where to redirect the user when their account is confirmed via OTP or link - keep the parameter ?account_confirmed=1 
+  // an example handler is in src/components/sc_demo/sc_user-dash.tsx
+  ACCOUNT_CONFIRMED_PATH: '/?account_confirmed=1',
       /**
    * ==========
    * Secuirty

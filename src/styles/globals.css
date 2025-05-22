@@ -73,10 +73,8 @@
     @apply bg-cyan-400;
   }
   *:focus-visible {
-    @apply outline;
-    @apply outline-2;
-    @apply outline-offset-2;
-    @apply outline-pink-500;
+    @apply shadow-inner;
+    @apply transition;
   }
   * {
     @apply border-border;
@@ -123,17 +121,32 @@
     @apply bg-white;
   }
 
-  .sc-error-message {
+  .sc-message {
     @apply mt-2;
     @apply text-sm;
     @apply rounded;
     @apply rounded-sm;
+    @apply p-4;
+  }
+
+  .sc-message-error {
     @apply bg-red-100;
-    @apply px-6;
-    @apply py-4;
     @apply font-bold;
     @apply text-gray-600;
   }
+
+  .sc-message-attention {
+    @apply bg-yellow-100;
+    @apply font-bold;
+    @apply text-gray-600;
+  }
+
+  .sc-message-positive {
+    @apply bg-green-100;
+    @apply font-bold;
+    @apply text-gray-600;
+  }
+
 
   /* Authenticated Header Dropdown Menu @todo this shouldnt be here! */
   /* Dropdown behavior for user menu */

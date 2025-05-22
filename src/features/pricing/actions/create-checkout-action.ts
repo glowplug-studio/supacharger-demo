@@ -3,9 +3,9 @@ import { redirect } from 'next/navigation';
 
 import { getOrCreateCustomer } from '@/features/account/controllers/get-or-create-customer';
 import { Price } from '@/features/pricing/types';
-import { stripeObject } from '@/libs/stripe/stripe-object';
+import { stripeAdmin } from '@/supacharger/libs/stripe/stripe-admin';
+import { getUser } from '@/supacharger/libs/supabase/supabase-auth';
 import { getURL } from '@/supacharger/utils/helpers';
-import { getUser } from '@/utils/supabase/server';
 
 export async function createCheckoutAction({ price }: { price: Price }) {
   // 1. Get the user from session
@@ -22,7 +22,7 @@ export async function createCheckoutAction({ price }: { price: Price }) {
 
 
   // 3. Create a checkout session in Stripe
-  const checkoutSession = await stripeObject.checkout.sessions.create({
+  const checkoutSession = await stripeAdmin.checkout.sessions.create({
     payment_method_types: ['card'],
     billing_address_collection: 'required',
     customer,

@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/supacharger/libs/supabase/supabase-server-client'
 
 export async function getProducts() {
   const supabase = await createClient()

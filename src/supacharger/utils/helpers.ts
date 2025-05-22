@@ -19,6 +19,32 @@ export function getURL(path = '') {
   return cleanPath ? `${formattedURL}/${cleanPath}` : formattedURL;
 }
 
+/**
+ * @todo write this
+ */
+export function toDateTime(secs: number) {
+  var t = new Date('1970-01-01T00:30:00Z'); // Unix epoch start.
+  t.setSeconds(secs);
+  return t;
+}
+
+export function getEnvVar(varValue: string | undefined, varName: string): string {
+  if (varValue === undefined) throw new ReferenceError(`Reference to undefined env var: ${varName}`);
+  return varValue;
+}
+
+/**
+ *  Email Validation
+ * */
+
+export function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+/**
+ *  Password Validation
+ * */
 interface PasswordValidationResult {
   valid: boolean;
   message: string;
@@ -90,6 +116,8 @@ export function evaluatePasswordStrength(password: string): PasswordValidationRe
   }
 }
 
+
+
 /**
  * Returns a next-intl Message string based on the current locale.
  */
@@ -103,6 +131,7 @@ export function supabaseErrorCodeLocalisation(response: string) {
   if (response === 'over_request_rate_limit') messageId = 'overLimit';
   if (response === 'user_banned') messageId = 'userBanned';
   if (response === 'otp_expired') messageId = 'otpExpired';
+  if (response === 'same_password') messageId = 'samePassword';
   if (response === 'unexpected_failure' || response === 'request_timeout') messageId = 'genericError';
 
   //@TODO theres a lot more to handle! and this doesnt currently work

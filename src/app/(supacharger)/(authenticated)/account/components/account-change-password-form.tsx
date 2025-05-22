@@ -13,7 +13,7 @@ import PasswordValidationIndicator from '@/supacharger/components/forms/password
 export default function AccountChangePasswordForm() {
   const tAuthTerms = useTranslations('AuthTerms');
   const tGlobalUI = useTranslations('GlobalUI');
-  const tPassReset = useTranslations('PasswordResetFormComponent');
+  const tPassReset = useTranslations('PasswordUpdateFormComponent');
   const tEvaluatePasswordStrengthErrorCodes = useTranslations('evaluatePasswordStrengthErrorCodes');
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -79,7 +79,6 @@ export default function AccountChangePasswordForm() {
           </div>
         </div>
 
-        {/* New Password Indicator moved below Old Password */}
         <PasswordValidationIndicator
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
@@ -97,7 +96,7 @@ export default function AccountChangePasswordForm() {
         </div>
       </div>
 
-      {status && <div className='sc-error-message'>{status}</div>}
+      {status && <div className='sc-message-error'>{status}</div>}
 
       <SaveButton
         isLoading={isLoading}

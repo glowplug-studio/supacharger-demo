@@ -65,7 +65,7 @@
     "showEmailFormButtonText": "Continuer avec l'e-mail",
     "hideEmailFormButtonText": "Utiliser un compte social"
   },
-  "PasswordResetFormComponent": {
+  "PasswordUpdateFormComponent": {
     "title": "Mettre à jour votre mot de passe"
   }
 }
