@@ -19,15 +19,10 @@ export function getURL(path = '') {
   return cleanPath ? `${formattedURL}/${cleanPath}` : formattedURL;
 }
 
-export function toDateTime(secs: number) {
-  var t = new Date('1970-01-01T00:30:00Z'); // Unix epoch start.
-  t.setSeconds(secs);
-  return t;
-}
-
 /**
  *  Email Validation
  * */
+
 export function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);

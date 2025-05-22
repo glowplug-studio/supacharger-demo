@@ -1,5 +1,5 @@
 import { stripeObject } from '@/libs/stripe/stripe-object';
-import { supabaseDatabaseClient } from '@/supacharger/utils/supabase/client';
+import { supabaseDatabaseClient } from '@/libs/supabase/supabase-database-client';
 
 export async function getOrCreateCustomer({ userId, email }: { userId: string; email: string }) {
   const { data, error } = await supabaseDatabaseClient

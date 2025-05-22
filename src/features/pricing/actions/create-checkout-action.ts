@@ -5,7 +5,7 @@ import { getOrCreateCustomer } from '@/features/account/controllers/get-or-creat
 import { Price } from '@/features/pricing/types';
 import { stripeObject } from '@/libs/stripe/stripe-object';
 import { getURL } from '@/supacharger/utils/helpers';
-import { getUser } from '@/supacharger/utils/supabase/server';
+import { getUser } from '@/utils/supabase/server';
 
 export async function createCheckoutAction({ price }: { price: Price }) {
   // 1. Get the user from session

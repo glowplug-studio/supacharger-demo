@@ -1,9 +1,9 @@
 import Stripe from 'stripe';
 
 import { stripeObject } from '@/libs/stripe/stripe-object';
-import { supabaseDatabaseClient } from '@/supacharger/utils/supabase/client';
+import { supabaseDatabaseClient } from '@/libs/supabase/supabase-database-client';
 import type { Database } from '@/libs/supabase/types';
-import { toDateTime } from '@/supacharger/utils/helpers';
+import { toDateTime } from '@/utils/to-date-time';
 import { AddressParam } from '@stripe/stripe-js';
 
 export async function upsertUserSubscription({

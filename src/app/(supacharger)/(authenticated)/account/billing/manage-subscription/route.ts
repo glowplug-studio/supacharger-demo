@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import { getCustomerId } from '@/features/account/controllers/get-customer-id';
 import { stripeObject } from '@/libs/stripe/stripe-object';
 import { getURL } from '@/supacharger/utils/helpers';
-import { getUser } from '@/supacharger/utils/supabase/server';
+import { getUser } from '@/utils/supabase/server';
 
 export const dynamic = 'force-dynamic';
 
