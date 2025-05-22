@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 
 import { getOrCreateCustomer } from '@/features/account/controllers/get-or-create-customer';
 import { Price } from '@/features/pricing/types';
-import { stripeObject } from '@/libs/stripe/stripe-object';
+import { stripeAdmin } from '@/libs/stripe/stripe-admin';
 import { getURL } from '@/supacharger/utils/helpers';
 import { getUser } from '@/supacharger/utils/supabase/server';
 
@@ -22,7 +22,7 @@ export async function createCheckoutAction({ price }: { price: Price }) {
 
 
   // 3. Create a checkout session in Stripe
-  const checkoutSession = await stripeObject.checkout.sessions.create({
+  const checkoutSession = await stripeAdmin.checkout.sessions.create({
     payment_method_types: ['card'],
     billing_address_collection: 'required',
     customer,

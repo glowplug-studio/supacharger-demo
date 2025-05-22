@@ -1,4 +1,4 @@
-import { stripeObject } from '@/libs/stripe/stripe-object';
+import { stripeAdmin } from '@/libs/stripe/stripe-admin';
 import { supabaseAdminClient } from '@/libs/supabase/supabase-admin';
 
 export async function getOrCreateCustomer({ userId, email }: { userId: string; email: string }) {
@@ -17,7 +17,7 @@ export async function getOrCreateCustomer({ userId, email }: { userId: string; e
       },
     } as const;
 
-    const customer = await stripeObject.customers.create(customerData);
+    const customer = await stripeAdmin.customers.create(customerData);
 
     // Insert the customer ID into our Supabase mapping table.
     const { error: supabaseError } = await supabaseAdminClient

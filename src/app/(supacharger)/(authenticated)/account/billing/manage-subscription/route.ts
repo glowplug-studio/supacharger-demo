@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 
 import { getCustomerId } from '@/features/account/controllers/get-customer-id';
-import { stripeObject } from '@/libs/stripe/stripe-object';
+import { stripeAdmin } from '@/libs/stripe/stripe-admin';
 import { getURL } from '@/supacharger/utils/helpers';
 import { getUser } from '@/supacharger/utils/supabase/server';
 
@@ -29,7 +29,7 @@ export async function GET() {
   }
 
   // 3. Create portal link and redirect user
-  const { url } = await stripeObject.billingPortal.sessions.create({
+  const { url } = await stripeAdmin.billingPortal.sessions.create({
     customer,
     return_url: `${getURL()}/account`,
   });
