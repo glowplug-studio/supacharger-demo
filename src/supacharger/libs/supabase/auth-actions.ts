@@ -103,6 +103,19 @@ export async function resendAccountConfirmEmail(email: string) {
   return { data, error };
 }
 
+/**
+ *  Send password reset Link
+ */
+export async function sendPasswordReset(email: string) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: 'reset-password',
+  })
+
+  return { data, error };
+}
+
 
 //// @TODO the rest is questionable
 

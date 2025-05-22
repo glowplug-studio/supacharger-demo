@@ -8,7 +8,7 @@
 
 import { NextResponse } from "next/server";
 
-import { logoutUser } from "@/app/(supacharger)/auth-actions";
+import { logoutUser } from "@/supacharger/libs/supabase/auth-actions";
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { getURL } from "@/supacharger/utils/helpers";
 
