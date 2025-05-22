@@ -3,9 +3,9 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { getURL } from '@/supacharger/utils/helpers';
+import { createClient } from '@/supacharger/utils/supabase/server'; 
 
 let siteUrl = getURL();
 
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   const code = requestUrl.searchParams.get('code');
 
   if (code) {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createClient();
     await supabase.auth.exchangeCodeForSession(code);
 
     const {

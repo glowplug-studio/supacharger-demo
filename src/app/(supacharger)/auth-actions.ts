@@ -9,16 +9,16 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
 import { SC_CONFIG } from  '@/supacharger/supacharger-config';
 import { getURL } from '@/supacharger/utils/helpers';
+import { createClient } from '@/supacharger/utils/supabase/server';
 import { ActionResponse } from '@/types/action-response';
 
 /**
  * Logout user
  */
 export async function logoutUser(): Promise<{ success: boolean }> {
-  const supabase = await createSupabaseServerClient();
+  const supabase = await createClient();
   const { error } = await supabase.auth.signOut();
 
   return error ? { success: false } : { success: true };
@@ -28,7 +28,7 @@ export async function logoutUser(): Promise<{ success: boolean }> {
  * Login user with email and password
  */
 export async function loginUser(formData: FormData) {
-  const supabase = await createSupabaseServerClient()
+  const supabase = await createClient()
 
   const data = {
     email: formData.get('email') as string,
@@ -49,7 +49,7 @@ export async function loginUser(formData: FormData) {
  * Sign / Sign Up wth Magic Link to email
  */
 export async function signInWithEmail(email: string): Promise<ActionResponse> {
-  const supabase = await createSupabaseServerClient();
+  const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signInWithOtp({
     email,
@@ -69,7 +69,7 @@ export async function signInWithEmail(email: string): Promise<ActionResponse> {
  * Create a new user with email password combo
  */
 export async function createUserByEmailPassword(formData: FormData) {
-  const supabase = await createSupabaseServerClient();
+  const supabase = await createClient();
   
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
@@ -90,7 +90,7 @@ export async function createUserByEmailPassword(formData: FormData) {
  *  Resends the activation email to unconfirmed users
  */
 export async function resendAccountConfirmEmail(email: string) {
-  const supabase = await createSupabaseServerClient();
+  const supabase = await createClient();
 
   const { data, error } = await supabase.auth.resend({
     type: 'signup',
@@ -107,7 +107,7 @@ export async function resendAccountConfirmEmail(email: string) {
 //// @TODO the rest is questionable
 
 export async function signInWithOAuth(provider: 'github' | 'google'): Promise<ActionResponse> {
-  const supabase = await createSupabaseServerClient();
+  const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider,
