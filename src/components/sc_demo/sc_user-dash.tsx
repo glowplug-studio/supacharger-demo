@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, ThumbsUp } from 'lucide-react';
-import { toast } from 'react-toastify';
+import { Bounce, toast } from 'react-toastify';
 
 const posts = [
   {
@@ -87,7 +87,17 @@ export default function SCUserDash() {
 
   useEffect(() => {
     if (accountConfirmed === '1') {
-      toast.success('account confirmed');
+      toast.success('Email successfully verified.', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
       // Remove the query param from the URL
       const params = new URLSearchParams(window.location.search);
       params.delete('account_confirmed');

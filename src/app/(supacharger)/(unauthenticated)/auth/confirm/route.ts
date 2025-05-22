@@ -1,7 +1,8 @@
+'use server'
 import { type NextRequest, NextResponse } from 'next/server';
 
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@/supacharger/utils/supabase/server';
 import { type EmailOtpType } from '@supabase/supabase-js';
 
 // Creating a handler to a GET request to route /auth/confirm
@@ -13,7 +14,14 @@ export async function GET(request: NextRequest) {
 
   // Create redirect link without the secret token
   const redirectTo = request.nextUrl.clone();
-  redirectTo.pathname = next;
+
+  // Parse next to get pathname and search params
+  const url = new URL(next, request.url); // Handles path and params
+
+  redirectTo.pathname = url.pathname;
+  redirectTo.search = url.search;
+
+  // Remove sensitive params from the redirect
   redirectTo.searchParams.delete('token_hash');
   redirectTo.searchParams.delete('type');
 
@@ -31,6 +39,7 @@ export async function GET(request: NextRequest) {
   }
 
   // return the user to an error page with some instructions
-  redirectTo.pathname = '/error';
+  redirectTo.pathname = '/error'; //@todo where does this error page go?
+  redirectTo.search = ''; // Remove query params for error page if you want
   return NextResponse.redirect(redirectTo);
 }
