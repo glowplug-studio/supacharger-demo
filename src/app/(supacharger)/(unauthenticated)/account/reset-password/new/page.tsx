@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
 
@@ -19,14 +19,12 @@ export default function LoginPage() {
   const tAuthTerms = useTranslations('AuthTerms');
   const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
 
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<string | null>(null);
   const [pending, setPending] = useState(true); // for code validation only
   const [isLoading, setIsLoading] = useState(false); // for password submission
   const [isSuccess, setIsSuccess] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [timer, setTimer] = useState(5);
   const [newPassword, setNewPassword] = useState('');
   const [isCodeValid, setIsCodeValid] = useState(true);
 
@@ -78,26 +76,13 @@ export default function LoginPage() {
     toast.success(tAuthTerms('passwordUpdated'));
     setIsSuccess(true);
     setSuccess(true);
-    setStatus('Password updated! Redirecting...');
+    setStatus('Password updated!');
     setIsLoading(false);
     setTimeout(() => {
       setIsSuccess(false);
-      // router.push('/');
-      console.log('redirected');
+      // No redirect!
     }, 24 * 60 * 60 * 1000); // 24 hours for debugging
   }
-
-  useEffect(() => {
-    if (success) {
-      if (timer === 0) {
-        router.push('/');
-      }
-      const interval = setInterval(() => {
-        setTimer((t) => t - 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  }, [success, timer, router]);
 
   return (
     <div className='flex h-screen flex-col justify-center bg-sc-gradient px-4 py-12 sm:px-6 lg:px-8'>
@@ -166,9 +151,8 @@ export default function LoginPage() {
                 </form>
               )}
               {success && (
-                <div className='mt-4 bg-green-100 text-center text-gray-700'>
-                  <div>{tPasswordResetPage('redirectingIn', { seconds: timer })}</div>
-                  <InlineLoader className='-ml-1 mr-3 h-5 w-5 animate-spin text-white' />
+                <div className='mt-4 bg-green-100 text-center text-green-800 rounded rounded-sm py-4 font-medium'>
+                  <div>{tPasswordResetPage('redirectingIn', { seconds: 0 })}</div>
                 </div>
               )}
             </div>

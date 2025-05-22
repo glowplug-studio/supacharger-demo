@@ -19,13 +19,6 @@ async function post<T = any>(url: string, data: any): Promise<T> {
   return json;
 }
 
-const SUPABASE_ERROR_MESSAGES: Record<string, string> = {
-  "invalid_email": "The email address is invalid.",
-  "user_not_found": "No account found with this email address.",
-  "unexpected_error": "An unexpected error occurred. Please try again.",
-  // Add more mappings as needed
-};
-
 export default function ResetPasswordForm() {
   const tAuthTerms = useTranslations('AuthTerms');
   const tPasswordResetPage = useTranslations('PasswordResetPage');
@@ -49,12 +42,13 @@ export default function ResetPasswordForm() {
       setStatus(null);
       form.reset();
       setIsSuccess(true);
-      setTimeout(() => setIsSuccess(false), 24 * 60 * 60 * 1000); // 24 hours for debugging
+      // You can adjust or remove this timeout as needed
+      setTimeout(() => setIsSuccess(false), 24 * 60 * 60 * 1000);
     } catch (error: any) {
-      const errorCode = error?.error || error?.code;
       const errorMsg =
-        (errorCode && SUPABASE_ERROR_MESSAGES[errorCode]) ||
         error?.error_description ||
+        error?.error ||
+        error?.message ||
         "Failed to request password reset.";
       setStatus(errorMsg);
       toast.error(errorMsg);
