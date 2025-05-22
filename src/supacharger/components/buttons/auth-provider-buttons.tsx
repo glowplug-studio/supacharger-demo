@@ -13,7 +13,7 @@ export default function AuthProviderButtons() {
           href='#'
           className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
         >
-          <GoogleLogo className="w-4 flex inline h-4" />
+          <GoogleLogo className="w-4 flex h-4" />
           <span className=' font-semibold'>Google</span>
         </a>
       ) : null}
@@ -23,7 +23,7 @@ export default function AuthProviderButtons() {
           href='#'
           className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
         >
-          <FacebookLogo className="w-4 flex inline h-4" />
+          <FacebookLogo className="w-4 flex h-4" />
           <span className=' font-semibold'>Facebook</span>
         </a>
       ) : null}
