@@ -131,6 +131,7 @@ export function supabaseErrorCodeLocalisation(response: string) {
   if (response === 'over_request_rate_limit') messageId = 'overLimit';
   if (response === 'user_banned') messageId = 'userBanned';
   if (response === 'otp_expired') messageId = 'otpExpired';
+  if (response === 'same_password') messageId = 'samePassword';
   if (response === 'unexpected_failure' || response === 'request_timeout') messageId = 'genericError';
 
   //@TODO theres a lot more to handle! and this doesnt currently work

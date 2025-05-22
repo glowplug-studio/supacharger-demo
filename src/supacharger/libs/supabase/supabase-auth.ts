@@ -114,7 +114,7 @@ export async function sendPasswordReset(email: string) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
 
   // Ensure no double slashes
-  const redirectTo = `${siteUrl.replace(/\/$/, "")}/account/reset-password/enter-new`;
+  const redirectTo = `${siteUrl.replace(/\/$/, "")}/account/reset-password/new`;
 
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo,

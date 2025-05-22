@@ -36,7 +36,8 @@
     "resendConfirmationEmailSent": "Confirm email link resent, check your email",
     "resendConfirmationEmailFail": "Failed to send. Wait and retry",
     "passwordUpdated": "Your password has been updated",
-    "backToSignIn": "Back to Sign In page"
+    "backToSignIn": "Back to Sign In page",
+    "backToRequestLink": "Get another link"
   },
   "evaluatePasswordStrengthErrorCodes": {
     "old_password_incorrect": "Incorrect current password",
@@ -65,8 +66,9 @@
     "userNotFound": "Account not found. Please double-check your email and password and try again",
     "overLimit": "Too many requests. Please wait a few minutes and try again",
     "userBanned": "This account has been suspended",
-    "genericError": "There was an unexpected problem logging you in. Please try again later",
-    "otpExpired": "The One Time Passcode has expired or is invalid"
+    "genericError": "There was an unexpected problem",
+    "otpExpired": "The One Time Passcode has expired or is invalid",
+    "samePassword": "New password should be different from the old password"
   },
   "Toasts": {
     "logoutFailed": "There was a problem logging you out",
@@ -81,7 +83,10 @@
   "PasswordResetPage": {
     "title": "Reset your Password",
     "redirectingIn": "Redirecting in",
-    "description": "We will send a reset link to your email"
+    "description": "We will send a reset link to your email",
+    "expiredCode": "The reset code is invalid or expired",
+    "verifyingCode": "Verifying code...",
+    "noCode": "There is no activation code, or the code is invalid"
   },
   "CreateAccountPage": {
     "title": "Create an Account",
