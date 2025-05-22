@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
 import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
+import SaveButton from '@/supacharger/components/buttons/form-save-button';
 import { createClient } from '@/supacharger/libs/supabase/supabase-client';
 import { supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
 
@@ -21,7 +22,9 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<string | null>(null);
-  const [pending, setPending] = useState(true);
+  const [pending, setPending] = useState(true); // for code validation only
+  const [isLoading, setIsLoading] = useState(false); // for password submission
+  const [isSuccess, setIsSuccess] = useState(false);
   const [success, setSuccess] = useState(false);
   const [timer, setTimer] = useState(5);
   const [newPassword, setNewPassword] = useState('');
@@ -59,7 +62,7 @@ export default function LoginPage() {
 
   async function handlePasswordReset(e: React.FormEvent) {
     e.preventDefault();
-    setPending(true);
+    setIsLoading(true);
     setStatus(null);
 
     const supabase = createClient();
@@ -68,15 +71,20 @@ export default function LoginPage() {
       const localised = supabaseErrorCodeLocalisation(error.code || 'genericError');
       const translated = tSupabaseErrorCodes(localised);
       toast.error(translated);
-      setStatus(error.message); // Optionally keep this for inline display
-    } else {
-      setSuccess(true);
-      setStatus('Password updated! Redirecting...');
-      setTimeout(() => {
-        console.log('redirected'); //router.push('/');
-      }, 5000);
+      setStatus(error.message);
+      setIsLoading(false);
+      return;
     }
-    setPending(false);
+    toast.success(tAuthTerms('passwordUpdated'));
+    setIsSuccess(true);
+    setSuccess(true);
+    setStatus('Password updated! Redirecting...');
+    setIsLoading(false);
+    setTimeout(() => {
+      setIsSuccess(false);
+      // router.push('/');
+      console.log('redirected');
+    }, 24 * 60 * 60 * 1000); // 24 hours for debugging
   }
 
   useEffect(() => {
@@ -100,7 +108,7 @@ export default function LoginPage() {
           </div>
           <h1 className='mb-8 text-2xl/9 font-bold tracking-tight text-gray-700'>{tPasswordResetPage('title')} </h1>
 
-          {/* Loader is always shown when pending */}
+          {/* Loader is always shown when pending (code validation) */}
           {pending && (
             <div className="flex items-center gap-3 rounded bg-gray-100 px-4 py-3">
               <InlineLoader className="h-5 w-5 animate-spin text-gray-500" />
@@ -146,11 +154,15 @@ export default function LoginPage() {
                     className='input w-full'
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    disabled={pending}
+                    disabled={isLoading}
                   />
-                  <button type='submit' className='btn w-full bg-primary' disabled={pending}>
-                    {pending ? tGlobalUI('buttonSaving') : tAuthTerms('setNewPassword')}
-                  </button>
+                  <SaveButton
+                    isLoading={isLoading}
+                    isSuccess={isSuccess}
+                    initialLabel={tGlobalUI('buttonSaveChanges')}
+                    savingLabel={tGlobalUI('buttonSaving')}
+                    completeLabel={tGlobalUI('buttonSaved')}
+                  />
                 </form>
               )}
               {success && (

@@ -45,11 +45,11 @@ export default function ResetPasswordForm() {
 
     try {
       await post("/api/account/request-password-reset", { email });
-      toast.success("Password reset email sent!");
+      toast.success(tPasswordResetPage('emailSent'));
       setStatus(null);
       form.reset();
       setIsSuccess(true);
-      setTimeout(() => setIsSuccess(false), 1200);
+      setTimeout(() => setIsSuccess(false), 24 * 60 * 60 * 1000); // 24 hours for debugging
     } catch (error: any) {
       const errorCode = error?.error || error?.code;
       const errorMsg =
@@ -81,21 +81,20 @@ export default function ResetPasswordForm() {
       </div>
       {status && <div className="sc-message-error">{status}</div>}
       <div className="mt-4 flex items-center justify-between">
-  <SaveButton
-    isLoading={isLoading}
-    isSuccess={isSuccess}
-    initialLabel="Request new password"
-    savingLabel="Sending..."
-    completeLabel="Sent!"
-  />
-  <Link
-    className="text-sm font-semibold"
-    href="/account/login"
-  >
-    {tAuthTerms("backToSignIn")}
-  </Link>
-</div>
-
+        <SaveButton
+          isLoading={isLoading}
+          isSuccess={isSuccess}
+          initialLabel={tPasswordResetPage('getResetLink')}
+          savingLabel={tAuthTerms('sendNewAuthEmailSendingButtonLabel')}
+          completeLabel={tAuthTerms('sendNewAuthEmailSentButtonLabel')}
+        />
+        <Link
+          className="text-sm font-semibold"
+          href="/account/login"
+        >
+          {tAuthTerms("backToSignIn")}
+        </Link>
+      </div>
     </form>
   );
 }

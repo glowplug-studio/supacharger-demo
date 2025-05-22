@@ -86,7 +86,9 @@
     "description": "We will send a reset link to your email",
     "expiredCode": "The reset code is invalid or expired",
     "verifyingCode": "Verifying code...",
-    "noCode": "There is no activation code, or the code is invalid"
+    "noCode": "There is no activation code, or the code is invalid",
+    "getResetLink": "Send link",
+    "emailSent": "Link sent, check your inbox"
   },
   "CreateAccountPage": {
     "title": "Create an Account",
