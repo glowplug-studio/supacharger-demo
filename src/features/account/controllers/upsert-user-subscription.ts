@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { stripeAdmin } from '@/supacharger/libs/stripe/stripe-admin';
 import { supabaseAdminClient } from '@/supacharger/libs/supabase/supabase-admin';
 import type { Database } from '@/supacharger/libs/supabase/types';
-import { toDateTime } from '@/utils/to-date-time';
+import { toDateTime } from '@/supacharger/utils/helpers';
 import { AddressParam } from '@stripe/stripe-js';
 
 export async function upsertUserSubscription({
