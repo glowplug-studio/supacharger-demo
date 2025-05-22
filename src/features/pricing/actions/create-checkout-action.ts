@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { getOrCreateCustomer } from '@/features/account/controllers/get-or-create-customer';
 import { Price } from '@/features/pricing/types';
 import { stripeAdmin } from '@/supacharger/libs/stripe/stripe-admin';
-import { getUser } from '@/supacharger/libs/supabase/supabase-server-client';
+import { getUser } from '@/supacharger/libs/supabase/supabase-auth';
 import { getURL } from '@/supacharger/utils/helpers';
 
 export async function createCheckoutAction({ price }: { price: Price }) {

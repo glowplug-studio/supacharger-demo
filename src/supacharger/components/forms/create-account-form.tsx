@@ -9,8 +9,8 @@ import { ArrowLeft, CircleArrowRight, Eye, EyeOff, Mail } from "lucide-react";
 import type React from "react";
 import { toast } from "react-toastify";
 
-import { createUserByEmailPassword } from "@/supacharger/libs/supabase/supabase-auth";
 import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
+import { createUserByEmailPassword } from "@/supacharger/libs/supabase/supabase-auth";
 import { SCP_REGISTRY } from "@/supacharger/plugins/registry";
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 

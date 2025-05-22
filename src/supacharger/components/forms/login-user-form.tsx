@@ -11,9 +11,9 @@ import { useTranslations } from 'next-intl';
 import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
 
-import { loginUser } from '@/supacharger/libs/supabase/supabase-auth';
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
+import { loginUser } from '@/supacharger/libs/supabase/supabase-auth';
 import { isValidEmail, supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
 
 export function LoginUserForm() {
