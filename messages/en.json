@@ -82,7 +82,7 @@
   },
   "PasswordResetPage": {
     "title": "Reset your Password",
-    "redirectingIn": "You are now logged in. Redirecting in",
+    "redirectingIn": "Success. Redirecting in",
     "description": "We will send a reset link to your email",
     "expiredCode": "The reset code is invalid or expired",
     "verifyingCode": "Verifying code...",

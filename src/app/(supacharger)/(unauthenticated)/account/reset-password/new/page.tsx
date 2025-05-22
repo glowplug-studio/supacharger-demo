@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
 
@@ -19,12 +19,14 @@ export default function LoginPage() {
   const tAuthTerms = useTranslations('AuthTerms');
   const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
 
+  const router = useRouter();
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<string | null>(null);
-  const [pending, setPending] = useState(true); // for code validation only
-  const [isLoading, setIsLoading] = useState(false); // for password submission
+  const [pending, setPending] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [timer, setTimer] = useState(4); // seconds for redirect countdown
   const [newPassword, setNewPassword] = useState('');
   const [isCodeValid, setIsCodeValid] = useState(true);
 
@@ -58,6 +60,7 @@ export default function LoginPage() {
     })();
   }, [code, tPasswordResetPage]);
 
+  // Handle password reset form submission
   async function handlePasswordReset(e: React.FormEvent) {
     e.preventDefault();
     setIsLoading(true);
@@ -78,11 +81,21 @@ export default function LoginPage() {
     setSuccess(true);
     setStatus('Password updated!');
     setIsLoading(false);
-    setTimeout(() => {
-      setIsSuccess(false);
-      // No redirect!
-    }, 24 * 60 * 60 * 1000); // 24 hours for debugging
+    setTimer(3);
   }
+
+  // Redirect after delay on success
+  useEffect(() => {
+    if (success && timer > 0) {
+      const interval = setInterval(() => {
+        setTimer((t) => t - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+    if (success && timer === 0) {
+      router.push('/');
+    }
+  }, [success, timer, router]);
 
   return (
     <div className='flex h-screen flex-col justify-center bg-sc-gradient px-4 py-12 sm:px-6 lg:px-8'>
@@ -93,24 +106,21 @@ export default function LoginPage() {
           </div>
           <h1 className='mb-8 text-2xl/9 font-bold tracking-tight text-gray-700'>{tPasswordResetPage('title')} </h1>
 
-          {/* Loader is always shown when pending (code validation) */}
           {pending && (
-            <div className="flex items-center gap-3 rounded bg-gray-100 px-4 py-3">
-              <InlineLoader className="h-5 w-5 animate-spin text-gray-500" />
-              <span className="text-gray-600">{tPasswordResetPage('verifyingCode') || 'Verifying code...'}</span>
+            <div className='flex items-center gap-3 rounded bg-gray-100 px-4 py-3'>
+              <InlineLoader className='h-5 w-5 animate-spin text-gray-500' />
+              <span className='text-gray-600'>{tPasswordResetPage('verifyingCode') || 'Verifying code...'}</span>
             </div>
           )}
 
           {/* If there is no code and not pending, show message and link */}
           {!pending && !code && (
-            <div className="sc-message sc-message-error flex flex-col gap-2">
+            <div className='sc-message sc-message-error flex flex-col gap-2'>
               <span>
                 {tPasswordResetPage('noCode') || 'No reset code found. Please request a new password reset link.'}
               </span>
-              <Link
-                className="text-sm font-semibold hover:text-indigo-500"
-                href="/account/reset-password">
-                {tAuthTerms("backToRequestLink")}
+              <Link className='text-sm font-semibold hover:text-indigo-500' href='/account/reset-password'>
+                {tAuthTerms('backToRequestLink')}
               </Link>
             </div>
           )}
@@ -119,13 +129,10 @@ export default function LoginPage() {
           {!pending && code && (
             <div className='space-y-4'>
               {!isCodeValid && status && (
-                <div className="sc-message sc-message-error flex flex-col gap-2">
+                <div className='sc-message sc-message-error flex flex-col gap-2'>
                   <span>{status}</span>
-                  <Link
-                    className="text-sm font-semibold hover:text-indigo-500"
-                    href="/account/login"
-                  >
-                    {tAuthTerms("backToSignIn")}
+                  <Link className='text-sm font-semibold hover:text-indigo-500' href='/account/login'>
+                    {tAuthTerms('backToSignIn')}
                   </Link>
                 </div>
               )}
@@ -151,8 +158,10 @@ export default function LoginPage() {
                 </form>
               )}
               {success && (
-                <div className='mt-4 bg-green-100 text-center text-green-800 rounded rounded-sm py-4 font-medium'>
-                  <div>{tPasswordResetPage('redirectingIn', { seconds: 0 })}</div>
+                <div className='mt-4 rounded-sm bg-green-100 py-4 text-center font-medium text-green-800'>
+                  <div>
+                    {tPasswordResetPage('redirectingIn')} {timer}
+                  </div>
                 </div>
               )}
             </div>
