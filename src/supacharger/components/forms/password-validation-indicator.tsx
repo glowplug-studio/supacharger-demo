@@ -26,6 +26,7 @@ interface PasswordValidationIndicatorProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   id?: string;
+  type?: string; // <-- Added type prop
 }
 
 export default function PasswordValidationIndicator({
@@ -33,6 +34,7 @@ export default function PasswordValidationIndicator({
   onChange,
   name = "newPassword",
   id = "newPassword",
+  type = "password", // <-- Default to "password"
 }: PasswordValidationIndicatorProps) {
   const tStrengthComponent = useTranslations("evaluatePasswordStrengthComponent");
   const tAuthTerms = useTranslations("AuthTerms");
@@ -195,7 +197,7 @@ export default function PasswordValidationIndicator({
         <Input
           id={id}
           name={name}
-          type="password"
+          type={type}      // <-- Use the type prop here!
           value={value}
           onChange={onChange}
           className="w-full pr-10"

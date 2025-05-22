@@ -8,12 +8,9 @@ import { isValidEmail } from '@/supacharger/utils/helpers';
 export async function POST(req: NextRequest) {
   const { email } = await req.json();
 
-  // if(!isValidEmail(email)) {
-  //     return NextResponse.json(
-  //         { error: 'invalid_email' },
-  //         { status: 500 }
-  //       );
-  // }
+  if (!isValidEmail(email)) {
+    return NextResponse.json({ error: 'invalid_email' }, { status: 500 });
+  }
 
   try {
     const result = await resendAccountConfirmEmail(email);
