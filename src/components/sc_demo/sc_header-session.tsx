@@ -13,108 +13,69 @@ export async function SCHeaderSession() {
   // Get the current locale from cookies
   const cookieStore = await cookies();
   const currentLocale = cookieStore.get('supacharger_locale')?.value || 'en'; // Default to 'en' if not set
+  const username = 'johsimpsons';
 
   return (
     <>
-      <header className='bg-white'>
-        <nav className='bg-white shadow-lg'>
-          <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
-            <div className='relative flex h-16 items-center justify-between'>
-              <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
-                <div className='flex flex-shrink-0 items-center'>
-                  <SCSiteLogo></SCSiteLogo>
-                </div>
-                <div className='hidden sm:ml-6 sm:block'>
-                  <div className='flex space-x-4'>
-                    <Link href='/' className='rounded-md px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100'>
-                      Dashboard
-                    </Link>
-                  </div>
-                </div>
+      <header className='flex items-center justify-between border-b border-gray-200 bg-white px-4 shadow-sm'>
+        <div className='flex h-14 items-center'>
+          <div className='mobile-menu mr-4 md:hidden'>
+            <input type='checkbox' id='menu-toggle' className='hidden' />
+            <label htmlFor='menu-toggle' className='block cursor-pointer'>
+              <div className='flex h-5 w-6 flex-col justify-between'>
+                <span className='h-0.5 w-full rounded-sm bg-gray-800'></span>
+                <span className='h-0.5 w-full rounded-sm bg-gray-800'></span>
+                <span className='h-0.5 w-full rounded-sm bg-gray-800'></span>
               </div>
-              <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
-                <div className='hidden sm:flex sm:items-center'>
-                  <div className='btn shadow-xs w-full bg-gray-100 text-gray-800 hover:bg-gray-50 sm:ml-4 sm:w-auto'>
-                    <LocaleSwitcher currentLocale={currentLocale} />
-                  </div>
-                  <SCAccountMenu></SCAccountMenu>
-                </div>
+            </label>
 
-                <div className='sm:hidden'>
-                  <button
-                    type='button'
-                    className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'
-                    aria-expanded='false'
-                    id='mobile-menu-button'
-                  >
-                    <span className='sr-only'>Open main menu</span>
-                    <Menu />
-                  </button>
-                </div>
-              </div>
+            <div className='mobile-menu-dropdown absolute left-0 top-14 z-50 w-full border-b border-gray-200 bg-white shadow-md'>
+              <Link href='/dashboard' className='block border-l-4 border-gray-800 bg-gray-50 px-4 py-3 font-medium'>
+                Dashboard
+              </Link>
+              <Link href='/deals' className='block border-l-4 border-transparent px-4 py-3 hover:bg-gray-50'>
+                Deals
+              </Link>
+              <Link href='/connections' className='block border-l-4 border-transparent px-4 py-3 hover:bg-gray-50'>
+                Connections
+              </Link>
             </div>
           </div>
 
-          <div className='hidden sm:hidden' id='mobile-menu'>
-            <div className='space-y-1 px-2 pb-3 pt-2'>
-              <a href='#' className='block rounded-md bg-gray-100 px-3 py-2 text-base font-medium text-gray-900'>
-                Home
-              </a>
-
-              <div className='relative'>
-                <button className='mobile-dropdown-trigger flex w-full items-center justify-between rounded-md px-3 py-2 text-left text-base font-medium text-gray-900 hover:bg-gray-100'>
-                  Products
-                </button>
-                <div className='mobile-dropdown-content hidden px-4 py-2'>
-                  <div className='mb-4 border-l-2 border-indigo-500 pl-2'>
-                    <h4 className='mb-2 font-medium text-gray-900'>Software</h4>
-                    <ul className='space-y-2'>
-                      <li>
-                        <a href='#' className='block text-gray-600 hover:text-indigo-600'>
-                          Web Development
-                        </a>
-                      </li>
-                      <li>
-                        <a href='#' className='block text-gray-600 hover:text-indigo-600'>
-                          Mobile Apps
-                        </a>
-                      </li>
-                      <li>
-                        <a href='#' className='block text-gray-600 hover:text-indigo-600'>
-                          Desktop Software
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <a href='#' className='block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100'>
-                About
-              </a>
-              <a href='#' className='block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100'>
-                Contact
-              </a>
-
-              <div className='border-t border-gray-200 pb-3 pt-4'>
-                <div className='flex flex-col items-center space-y-2 px-3'>
-                  <a
-                    href='#'
-                    className='block w-full rounded-md bg-gray-100 px-3 py-2 text-center text-base font-medium text-gray-900'
-                  >
-                    Login
-                  </a>
-                  <a
-                    href='#'
-                    className='block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-base font-medium text-white'
-                  >
-                    Sign Up
-                  </a>
-                </div>
-              </div>
-            </div>
+          {/* Logo */}
+          <div className='mr-8'>
+            <SCSiteLogo></SCSiteLogo>
           </div>
-        </nav>
+
+          {/* Desktop Tabbed Menu (hidden on small screens) */}
+          <nav className='hidden h-full md:flex'>
+            <Link
+              href='/#'
+              className='flex h-full items-center border-b-2 border-gray-500 px-4 font-medium text-neutral-900'
+            >
+              Feed
+            </Link>
+            <Link
+              href='/#'
+              className='flex h-full items-center border-b-2 border-transparent px-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:no-underline'
+            >
+              Negotiations
+            </Link>
+            <Link
+              href='/#'
+              className='flex h-full items-center border-b-2 border-transparent px-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:no-underline'
+            >
+              Connections
+            </Link>
+          </nav>
+        </div>
+        <div className='flex items-center'>
+          {/* Lang Switcher */}
+          <div className='mr-4 '>
+            <LocaleSwitcher currentLocale={currentLocale}></LocaleSwitcher>
+          </div>
+          <SCAccountMenu></SCAccountMenu>
+        </div>
       </header>
     </>
   );

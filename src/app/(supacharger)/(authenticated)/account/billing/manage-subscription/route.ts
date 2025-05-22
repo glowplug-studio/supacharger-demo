@@ -9,10 +9,10 @@ export const dynamic = 'force-dynamic';
 
 export async function GET() {
   // 1. Get the user from session
-  const supaSession = await getUser();
+  const supaUser = await getUser();
 
-  if ('user' in supaSession) {
-    if (!supaSession.user.id) {
+  if ('user' in supaUser) {
+    if (!supaUser.user.id) {
       throw new Error('Could not get userId');
     }
   } else {
@@ -21,7 +21,7 @@ export async function GET() {
 
   // 2. Retrieve or create the customer in Stripe
   const customer = await getCustomerId({
-    userId: supaSession.user.id,
+    userId: supaUser.user.id,
   });
 
   if (!customer) {
