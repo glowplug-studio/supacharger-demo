@@ -19,6 +19,18 @@ export function getURL(path = '') {
   return cleanPath ? `${formattedURL}/${cleanPath}` : formattedURL;
 }
 
+/**
+ *  Email Validation
+ * */
+
+export function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+/**
+ *  Password Validation
+ * */
 interface PasswordValidationResult {
   valid: boolean;
   message: string;
@@ -89,6 +101,8 @@ export function evaluatePasswordStrength(password: string): PasswordValidationRe
       return { valid: false, message: 'Invalid password requirements configuration.' };
   }
 }
+
+
 
 /**
  * Returns a next-intl Message string based on the current locale.

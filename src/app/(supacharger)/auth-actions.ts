@@ -86,10 +86,25 @@ export async function createUserByEmailPassword(formData: FormData) {
   return { data: data, error: null };
 }
 
+/**
+ *  Resends the activation email to unconfirmed users
+ */
+export async function resendAccountConfirmEmail(email: string) {
+  const supabase = await createSupabaseServerClient();
+
+  const { data, error } = await supabase.auth.resend({
+    type: 'signup',
+    email: email,
+    options: {
+      emailRedirectTo: SC_CONFIG.ACCOUNT_CONFIRMED_PATH
+    }
+  });
+
+  return { data, error };
+}
 
 
-
-//// @TODO the rest is questionable 
+//// @TODO the rest is questionable
 
 export async function signInWithOAuth(provider: 'github' | 'google'): Promise<ActionResponse> {
   const supabase = await createSupabaseServerClient();

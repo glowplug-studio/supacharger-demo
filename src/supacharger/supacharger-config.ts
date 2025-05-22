@@ -77,8 +77,11 @@ export const SC_CONFIG = {
    */
 
     // set to false if you turn off email verification in Supabase.
+    /// @todo this does nothing yet!
   EMAIL_VERIFY_ENABLED: true,
 
+  // where to redirect the user when their account is confirmed via OTP or link
+  ACCOUNT_CONFIRMED_PATH: '/?account_confirmed=1',
       /**
    * ==========
    * Secuirty
