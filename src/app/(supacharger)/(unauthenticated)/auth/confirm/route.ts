@@ -1,7 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
-import { createClient } from '@/supacharger/libs/supabase/server';
+import { createClient } from '@/supacharger/libs/supabase/supabase-server-client';
 import { type EmailOtpType } from '@supabase/supabase-js';
 
 // Creating a handler to a GET request to route /auth/confirm

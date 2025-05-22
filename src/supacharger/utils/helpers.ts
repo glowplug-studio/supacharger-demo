@@ -20,13 +20,17 @@ export function getURL(path = '') {
 }
 
 /**
- * @param secs 
- * @returns 
+ * @todo write this
  */
 export function toDateTime(secs: number) {
   var t = new Date('1970-01-01T00:30:00Z'); // Unix epoch start.
   t.setSeconds(secs);
   return t;
+}
+
+export function getEnvVar(varValue: string | undefined, varName: string): string {
+  if (varValue === undefined) throw new ReferenceError(`Reference to undefined env var: ${varName}`);
+  return varValue;
 }
 
 /**

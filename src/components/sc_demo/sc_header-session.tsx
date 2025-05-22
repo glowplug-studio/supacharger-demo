@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Menu } from 'lucide-react';
 
 import SCAccountMenu from '@/components/sc_demo/sc_account-menu';
-import { isLoggedIn } from '@/supacharger/libs/supabase/server';
+import { isLoggedIn } from '@/supacharger/libs/supabase/supabase-server-client';
 
 import LocaleSwitcher from './sc_locale-switcher';
 import SCSiteLogo from './sc_site-logo';

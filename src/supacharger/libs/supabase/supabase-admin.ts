@@ -1,5 +1,5 @@
 import type { Database } from '@/supacharger/libs/supabase/types';
-import { getEnvVar } from '@/utils/get-env-var';
+import { getEnvVar } from '@/supacharger/utils/helpers';
 import { createClient } from '@supabase/supabase-js';
 
 export const supabaseAdminClient = createClient<Database>(

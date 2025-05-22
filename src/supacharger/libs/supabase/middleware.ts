@@ -1,7 +1,7 @@
 // Ref: https://supabase.com/docs/guides/auth/server-side/nextjs
 import { type NextRequest,NextResponse } from 'next/server'
 
-import { getEnvVar } from '@/utils/get-env-var';
+import { getEnvVar } from '@/supacharger/utils/helpers';
 import { createServerClient } from '@supabase/ssr';
 
 export async function updateSession(request: NextRequest) {

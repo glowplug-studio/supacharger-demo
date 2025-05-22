@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { getURL } from '@/supacharger/utils/helpers';
-import { createClient } from '@/supacharger/libs/supabase/server'; 
+import { createClient } from '@/supacharger/libs/supabase/supabase-server-client'; 
 
 let siteUrl = getURL();
 
