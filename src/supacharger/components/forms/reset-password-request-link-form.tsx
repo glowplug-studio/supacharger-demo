@@ -9,7 +9,7 @@
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 
-import { signInWithEmail } from "@/supacharger/libs/supabase/auth-actions";
+import { signInWithEmail } from "@/supacharger/libs/supabase/supabase-auth";
 
 export function ResetPasswordForm() {
   const [pending, setPending] = useState(false);

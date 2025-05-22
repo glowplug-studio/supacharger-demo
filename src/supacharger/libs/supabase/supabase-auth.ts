@@ -2,7 +2,7 @@
 
 /** ==========
  *
- * Supacharger - Auth Actions.
+ * Supacharger - Supabase Auth wrappers.
  *
  * ========== */
 
@@ -70,7 +70,7 @@ export async function signInWithEmail(email: string): Promise<ActionResponse> {
  */
 export async function createUserByEmailPassword(formData: FormData) {
   const supabase = await createClient();
-  
+
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 
