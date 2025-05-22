@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 
 import { stripeObject } from '@/libs/stripe/stripe-object';
-import { supabaseDatabaseClient } from '@/libs/supabase/supabase-database-client';
+import { supabaseDatabaseClient } from '@/supacharger/utils/supabase/client';
 import type { Database } from '@/libs/supabase/types';
 import { toDateTime } from '@/supacharger/utils/helpers';
 import { AddressParam } from '@stripe/stripe-js';

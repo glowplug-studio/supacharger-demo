@@ -45,7 +45,6 @@ export async function getUser(jwt: string | null = null, withClient: boolean = f
 }
 
 
-
 /**
  * Gets the Current user session - note DO NOT TRUST the user data in this it's taken directly from the clients localstorage and can be tampered with.
  * https://supabase.com/docs/reference/javascript/auth-getsession

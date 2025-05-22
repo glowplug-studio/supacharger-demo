@@ -1,4 +1,4 @@
-import { supabaseDatabaseClient } from '@/libs/supabase/supabase-database-client';
+import { supabaseDatabaseClient } from '@/supacharger/utils/supabase/client';
 
 export async function getCustomerId({ userId }: { userId: string }) {
   const { data, error } = await supabaseDatabaseClient
