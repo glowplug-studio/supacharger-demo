@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 
 import { stripeObject } from '@/libs/stripe/stripe-object';
-import { supabaseDatabaseClient } from '@/libs/supabase/supabase-database-client';
+import { supabaseAdminClient } from '@/libs/supabase/supabase-admin';
 import type { Database } from '@/libs/supabase/types';
 import { toDateTime } from '@/utils/to-date-time';
 import { AddressParam } from '@stripe/stripe-js';
@@ -16,7 +16,7 @@ export async function upsertUserSubscription({
   isCreateAction?: boolean;
 }) {
   // Get customer's userId from mapping table.
-  const { data: customerData, error: noCustomerError } = await supabaseDatabaseClient
+  const { data: customerData, error: noCustomerError } = await supabaseAdminClient
     .from('customers')
     .select('id')
     .eq('stripe_customer_id', customerId)
@@ -47,7 +47,7 @@ export async function upsertUserSubscription({
     trial_end: subscription.trial_end ? toDateTime(subscription.trial_end).toISOString() : null,
   };
 
-  const { error } = await supabaseDatabaseClient.from('subscriptions').upsert([subscriptionData]);
+  const { error } = await supabaseAdminClient.from('subscriptions').upsert([subscriptionData]);
   if (error) {
     throw error;
   }
@@ -71,7 +71,7 @@ const copyBillingDetailsToCustomer = async (userId: string, paymentMethod: Strip
 
   await stripeObject.customers.update(customer, { name, phone, address: address as AddressParam });
 
-  const { error } = await supabaseDatabaseClient
+  const { error } = await supabaseAdminClient
     .from('users')
     .update({
       billing_address: { ...address },
