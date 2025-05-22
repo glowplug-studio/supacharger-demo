@@ -126,8 +126,7 @@
     @apply text-sm;
     @apply rounded;
     @apply rounded-sm;
-    @apply px-6;
-    @apply py-4;
+    @apply p-4;
   }
 
   .sc-message-error {

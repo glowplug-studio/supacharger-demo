@@ -2,7 +2,7 @@
 
 /** ==========
  *
- * Supacharger - Login User Form
+ * Supacharger - Create Account Form
  *
  * ========== */
 
@@ -11,7 +11,6 @@ import { useTranslations } from 'next-intl';
 import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
 
-// import { resendAccountConfirmEmail } from '@/app/(supacharger)/auth-actions'; // No longer used
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
 
 import { loginUser } from '../../../app/(supacharger)/auth-actions';
@@ -22,37 +21,16 @@ export function LoginUserForm() {
   const tAuthTerms = useTranslations('AuthTerms');
   const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
   const tGlobalUI = useTranslations('GlobalUI');
-  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaveLoading, setIsSaveLoading] = useState(false);
   const [isSaveSuccess, setIsSaveSuccess] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMsg, setErrorMsg] = useState<React.ReactNode | null>(null);
-
-  // Helper to render the "email not confirmed" message
-  function EmailNotConfirmedMessage() {
-    return (
-      <div className='sc-message sc-message-attention mt-4'>
-        {/* Resend a new activation link */}
-        {tAuthTerms('sendNewAuthEmailLabel')}
-        <div className='mt-3'>
-          <SaveButton
-            onClick={handleResendActivation}
-            isLoading={isSaveLoading}
-            isSuccess={isSaveSuccess}
-            initialLabel={tAuthTerms('sendNewAuthEmailButtonLabel')}
-            savingLabel={tAuthTerms('sendNewAuthEmailSendingButtonLabel')}
-            completeLabel={tAuthTerms('sendNewAuthEmailSentButtonLabel')}
-          />
-        </div>
-      </div>
-    );
-  }
+  const [showEmailNotConfirmed, setShowEmailNotConfirmed] = useState(false);
 
   async function handleSubmit(formData: FormData) {
     setIsLoading(true);
-    setErrorMsg(null);
+    setShowEmailNotConfirmed(false);
 
     const result = await loginUser(formData);
     if (result?.error) {
@@ -60,9 +38,9 @@ export function LoginUserForm() {
       // If the error is "email_not_confirmed", show the special message
       const localisedCode = supabaseErrorCodeLocalisation(result.error);
       if (result.error === 'email_not_confirmed') {
-        setErrorMsg(<EmailNotConfirmedMessage />);
+        setShowEmailNotConfirmed(true);
       } else {
-        setErrorMsg(null); // Only show error for email_not_confirmed
+        setShowEmailNotConfirmed(false);
       }
 
       toast.error(tSupabaseErrorCodes(localisedCode)); // Display error toast
@@ -72,10 +50,15 @@ export function LoginUserForm() {
     toast.success(tAuthTerms('loginSuccess')); // Display success toast
   }
 
-  // Updated to use fetch and POST to /api/account/resend-activation-link
-  async function handleResendActivation() {
+  async function handleResendActivation(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
     setIsSaveLoading(true);
     setIsSaveSuccess(false);
+
+    if(!isValidEmail(email)){
+      toast.error(tAuthTerms('resendConfirmationEmailFail'));
+      return;
+    }
 
     try {
       const response = await fetch('/api/account/resend-activation-link', {
@@ -115,7 +98,6 @@ export function LoginUserForm() {
   // async function handleOAuthClick(provider: 'google' | 'github') {
   //   setPending(true);
   //   const response = await signInWithOAuth(provider);
-
   //   if (response?.error) {
   //     toast({
   //       variant: 'destructive',
@@ -127,40 +109,7 @@ export function LoginUserForm() {
 
   return (
     <>
-      {/* <div className='flex flex-col gap-4'>
-        <button
-          className='flex items-center justify-center gap-2 rounded-md bg-cyan-500 py-4 font-medium text-black transition-all hover:bg-cyan-400 disabled:bg-neutral-700'
-          onClick={() => handleOAuthClick('google')}
-          disabled={pending}
-        >
-       
-          Continue with Google
-        </button>
-        <button
-          className='flex items-center justify-center gap-2 rounded-md bg-fuchsia-500 py-4 font-medium text-black transition-all hover:bg-fuchsia-400 disabled:bg-neutral-700'
-          onClick={() => handleOAuthClick('github')}
-          disabled={pending}
-        >
-    
-          Continue with GitHub
-        </button>
-
-        <Collapsible open={emailFormOpen} onOpenChange={setEmailFormOpen}>
-          <CollapsibleTrigger asChild>
-            <button
-              className='text-neutral6 flex w-full items-center justify-center gap-2 rounded-md bg-zinc-900 py-4 font-medium transition-all hover:bg-zinc-800 disabled:bg-neutral-700 disabled:text-black'
-              disabled={pending}
-            >
-              Continue with Email
-            </button>
-          </CollapsibleTrigger>
-          <CollapsibleContent>
-            <div className='mt-[-2px] w-full rounded-b-md bg-zinc-900 p-8'>
-              
-            </div>
-          </CollapsibleContent>
-        </Collapsible>
-      </div> */}
+      {/* ...OAuth and Collapsible code omitted for brevity... */}
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -190,20 +139,12 @@ export function LoginUserForm() {
             <label htmlFor='password' className='block text-sm font-medium text-gray-700'>
               {tAuthTerms('password')}
             </label>
-            <button
-              type='button'
-              onClick={() => setShowPassword(!showPassword)}
-              className='text-gray-500 hover:text-gray-700'
-              aria-label={showPassword ? 'Hide password' : 'Show password'}
-            >
-              {showPassword ? <EyeOff className='h-4 w-4' /> : <Eye className='h-4 w-4' />}
-            </button>
           </div>
           <div className='mt-2'>
             <input
               id='password'
               name='password'
-              type={showPassword ? 'text' : 'password'}
+              type='password'
               required
               autoComplete='current-password'
               className='block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-700 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600'
@@ -211,11 +152,25 @@ export function LoginUserForm() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {/* The attention message is now only shown as an error, not here */}
         </div>
-        
-        {/* Show error message directly (not wrapped in another box) */}
-        {errorMsg}
+
+        {/* Show the resend activation message when needed */}
+        <div className={showEmailNotConfirmed ? 'block' : 'hidden'}>
+          <div className='sc-message sc-message-attention mt-4'>
+            {tAuthTerms('sendNewAuthEmailLabel')}
+            <div className='mt-3'>
+              <SaveButton
+                type="button"
+                onClick={handleResendActivation}
+                isLoading={isSaveLoading}
+                isSuccess={isSaveSuccess}
+                initialLabel={tAuthTerms('sendNewAuthEmailButtonLabel')}
+                savingLabel={tAuthTerms('sendNewAuthEmailSendingButtonLabel')}
+                completeLabel={tAuthTerms('sendNewAuthEmailSentButtonLabel')}
+              />
+            </div>
+          </div>
+        </div>
 
         <div className='flex items-center justify-between'>
           <div className='flex gap-3'>
@@ -229,7 +184,7 @@ export function LoginUserForm() {
               {tAuthTerms('rememberMe')}
             </label>
           </div>
-          <a href='#' className='text-sm font-semibold  hover:text-indigo-500'>
+          <a href='/account/reset-password' className='text-sm font-semibold  hover:text-indigo-500'>
             {tAuthTerms('forgotPassword')}
           </a>
         </div>

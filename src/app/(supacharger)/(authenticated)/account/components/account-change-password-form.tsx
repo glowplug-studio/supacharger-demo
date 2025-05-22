@@ -13,7 +13,7 @@ import PasswordValidationIndicator from '@/supacharger/components/forms/password
 export default function AccountChangePasswordForm() {
   const tAuthTerms = useTranslations('AuthTerms');
   const tGlobalUI = useTranslations('GlobalUI');
-  const tPassReset = useTranslations('PasswordResetFormComponent');
+  const tPassReset = useTranslations('PasswordUpdateFormComponent');
   const tEvaluatePasswordStrengthErrorCodes = useTranslations('evaluatePasswordStrengthErrorCodes');
 
   const formRef = useRef<HTMLFormElement>(null);
