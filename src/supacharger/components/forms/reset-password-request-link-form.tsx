@@ -12,7 +12,7 @@
  *
  * ========================================================================= */
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
@@ -22,7 +22,6 @@ import { SC_CONFIG } from '@/supacharger/supacharger-config';
 
 import SaveButton from '../buttons/form-save-button';
 
-// Local POST helper
 async function post<T = any>(url: string, data: any): Promise<T> {
   const res = await fetch(url, {
     method: 'POST',
@@ -39,15 +38,18 @@ export default function ResetPasswordForm() {
   const tPasswordResetPage = useTranslations('PasswordResetPage');
   const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
 
-  const formRef = useRef<HTMLFormElement>(null);
+  const searchParams = useSearchParams();
+  const [email, setEmail] = useState(() => searchParams.get('email') || '');
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [hideEmailField, setHideEmailField] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
-  // Get email from query param if present
-  const searchParams = useSearchParams();
-  const emailFromQuery = searchParams.get('email') || '';
-  const [email, setEmail] = useState(emailFromQuery);
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,9 +58,9 @@ export default function ResetPasswordForm() {
     try {
       await post('/api/account/request-password-reset', { email });
       toast.success(tPasswordResetPage('emailSent'), SC_CONFIG.TOAST_CONFIG);
-      setHideEmailField(true); // Slide up immediately!
+      setHideEmailField(true);
       setIsSuccess(true);
-      setTimeout(() => setIsSuccess(false), 24 * 60 * 60 * 1000);
+      timeoutRef.current = setTimeout(() => setIsSuccess(false), 24 * 60 * 60 * 1000);
     } catch (error: any) {
       const errorMsg =
         error?.error_description || error?.error || error?.message || tSupabaseErrorCodes('genericError');
@@ -69,7 +71,7 @@ export default function ResetPasswordForm() {
   };
 
   return (
-    <form ref={formRef} className='max-w-md' onSubmit={handleSubmit}>
+    <form className='max-w-md' onSubmit={handleSubmit}>
       <div
         className={`
           overflow-hidden transition-all duration-500 ease-in-out
@@ -79,7 +81,7 @@ export default function ResetPasswordForm() {
         <label htmlFor='email' className='text-md block'>
           {tPasswordResetPage('description')}
         </label>
-        <div className='space-mt-2'>
+        <div className='mt-2'>
           <input
             type='email'
             name='email'
@@ -101,7 +103,7 @@ export default function ResetPasswordForm() {
           initialLabel={tPasswordResetPage('getResetLink')}
           savingLabel={tAuthTerms('sendNewAuthEmailSendingButtonLabel')}
           completeLabel={tAuthTerms('sendNewAuthEmailSentButtonLabel')}
-          disabled={isSuccess}
+          disabled={isSuccess || isLoading}
         />
         <Link className='text-sm font-semibold' href='/account/login'>
           {tAuthTerms('backToSignIn')}
