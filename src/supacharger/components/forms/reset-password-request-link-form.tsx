@@ -90,7 +90,6 @@ export default function ResetPasswordForm() {
             aria-label={tPasswordResetPage('enterEmailPlaceholder')}
             autoFocus
             required
-            className='input w-full'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={isSuccess}

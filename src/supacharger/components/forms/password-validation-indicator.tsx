@@ -150,7 +150,6 @@ export default function PasswordValidationIndicator({
           type={type}
           value={value}
           onChange={onChange}
-          className="input"
           maxLength={30}
           onFocus={() => setShowTooltip(true)}
           onBlur={() => setShowTooltip(false)}

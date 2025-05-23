@@ -123,7 +123,6 @@ export function LoginUserForm() {
             autoFocus
             autoComplete='email'
             placeholder='me@example.com'
-            className='input'
             value={email}
             onChange={handleEmailChange}
           />
@@ -150,7 +149,6 @@ export function LoginUserForm() {
               placeholder={`${'•'.repeat(SC_CONFIG.PASSWORD_MINIMUM_LENGTH)}`}
               required
               autoComplete='current-password'
-              className='input'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

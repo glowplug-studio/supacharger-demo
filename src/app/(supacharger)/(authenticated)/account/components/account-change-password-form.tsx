@@ -75,7 +75,7 @@ export default function AccountChangePasswordForm() {
             <Label htmlFor='oldPassword' className='mb-2'>
               {tAuthTerms('oldPassword')}
             </Label>
-            <Input id='oldPassword' name='oldPassword' type='password' className='w-full' maxLength={30} />
+            <Input id='oldPassword' name='oldPassword' type='password' maxLength={30} />
           </div>
         </div>
 
@@ -91,7 +91,7 @@ export default function AccountChangePasswordForm() {
             <Label htmlFor='confirmPassword' className='mb-2'>
               {tAuthTerms('retypeNewPassword')}
             </Label>
-            <Input id='confirmPassword' name='confirmPassword' type='password' className='w-full' maxLength={30} />
+            <Input id='confirmPassword' name='confirmPassword' type='password'  maxLength={30} />
           </div>
         </div>
       </div>
