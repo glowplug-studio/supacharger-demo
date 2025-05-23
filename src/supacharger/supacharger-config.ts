@@ -1,3 +1,4 @@
+import { Flip, type ToastPosition } from 'react-toastify';
 /**
  * ==========
  *    ___
@@ -22,7 +23,7 @@ export const SC_CONFIG = {
    */
 
   //@toto this should be translatable! this has been done using en.json Global and in  src/app/(supacharger)/(unauthenticated)/account/login/page.tsx
-  SITE_TITLE: 'DealTree',
+  SITE_TITLE: 'Tāmaki',
   SITE_DESCRIPTION: 'Start your next project without reinventing the wheel.',
 
   /**
@@ -34,7 +35,7 @@ export const SC_CONFIG = {
    */
   // protect all routes except the exceptions in NO_SESSION_USER_ALLOWED_PATHS
   AUTH_ONLY_APP: true,
-   // paths users without auth sessions can acess
+  // paths users without auth sessions can acess
   NO_SESSION_USER_ALLOWED_PATHS: [
     '/account/login',
     '/account/create',
@@ -57,37 +58,33 @@ export const SC_CONFIG = {
     '/auth/confirm',
     '/auth/callback',
   ],
-   // Paths authenticated users can not access
-  SESSION_USER_DISALLOWED_PATHS: [
-    '/account/login',
-    '/account/create',
-    '/account/login-magic',
-  ],
-   // Which path users are redirected to when requesting an auth protected page
+  // Paths authenticated users can not access
+  SESSION_USER_DISALLOWED_PATHS: ['/account/login', '/account/create', '/account/login-magic'],
+  // Which path users are redirected to when requesting an auth protected page
   NO_SESSION_USER_REDIRECT_DESTINATION: '/account/login',
-   // Where to go after successful authentication flow
+  // Where to go after successful authentication flow
   LOGIN_REDIRECT_DESTINATON: '/',
-   // Which path is considered "home" for unauthenticated users
+  // Which path is considered "home" for unauthenticated users
   NO_SESSION_HOME_PATH: '/',
   // Which path is considered "home" for authenticated users
   SESSION_HOME_PATH: '/',
 
-
-    /**
+  /**
    * ==========
    * Registration Settings
    * ==========
    *
    */
 
-    // set to false if you turn off email verification in Supabase.
-    /// @todo this does nothing yet!
+  // set to false if you turn off email verification in Supabase.
+  /// @todo this does nothing yet!
   EMAIL_VERIFY_ENABLED: true,
 
-  // where to redirect the user when their account is confirmed via OTP or link - keep the parameter ?account_confirmed=1 
+  // where to redirect the user when their account is confirmed via OTP or link - keep the parameter ?account_confirmed=1
   // an example handler is in src/components/sc_demo/sc_user-dash.tsx
   ACCOUNT_CONFIRMED_PATH: '/?account_confirmed=1',
-      /**
+
+  /**
    * ==========
    * Secuirty
    * ==========
@@ -122,4 +119,23 @@ export const SC_CONFIG = {
     google: true,
     facebook: false,
   },
+
+  /**
+   * ==========
+   * UI
+   * ==========
+   */
+
+  TOAST_CONFIG: {
+    position: 'bottom-center' as ToastPosition,
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'dark',
+    transition: Flip,
+  },
+  //Toast config
 };
