@@ -34,7 +34,7 @@ export default function LoginPage() {
         <h1 className='mb-2 text-2xl/9 font-bold tracking-tight'>{tLoginPage('title')}</h1>
       </div>
       <LoginUserForm />
-      <UIDivider />
+      <UIDivider className="my-6" />
       {/* Social Buttons */}
       <AuthProviderButtons />
     </main>

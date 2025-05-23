@@ -101,7 +101,8 @@
     "orCreateAccountWithEmail": "Or create an account with Email",
     "iAlreadyHaveAnAccount": "I already have an account",
     "showEmailFormButtonText": "Continue with Email",
-    "hideEmailFormButtonText": "Use Social Account"
+    "hideEmailFormButtonText": "Use Social Account",
+    "signInWithSocialLabel": "Sing in with a social account"
   },
   "PasswordUpdateFormComponent": {
     "title": "Update your Password"
