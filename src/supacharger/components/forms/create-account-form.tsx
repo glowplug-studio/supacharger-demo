@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { ArrowLeft, CircleArrowRight, Eye, EyeOff, Mail } from 'lucide-react';
-import type React from 'react';
 import { toast } from 'react-toastify';
 
 import { Input } from '@/components/ui/input';
@@ -90,10 +89,7 @@ export function CreateAccountForm() {
               <AuthProviderButtons />
             </div>
           )}
-          
           <UIDivider text={tCreateAccountFormComponent('orCreateAccountWithEmail')} className="my-6" />
-    
-          
         </div>
       )}
 
@@ -187,8 +183,8 @@ export function CreateAccountForm() {
       </div>
 
       <div>
-
-        <OtpInput></OtpInput>
+        {/* Pass the up-to-date email from state */}
+        <OtpInput email={email} />
       </div>
 
       <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
