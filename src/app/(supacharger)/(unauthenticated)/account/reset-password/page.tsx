@@ -1,5 +1,17 @@
 'use client';
 
+/** =========================================================================
+ *
+ *  Supacharger - Password Reset page account/reset-password
+ *
+ *  Description: User can request a linkt to reset their password
+ *
+ *  Author: J Sharp <j@glowplug.studio>
+ *
+ *  License: CC BY-NC-SA 4.0
+ *
+ * ========================================================================= */
+
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
@@ -8,13 +20,11 @@ import ResetPasswordForm from '@/supacharger/components/forms/reset-password-req
 
 export default function LoginPage() {
   const tPasswordResetPage = useTranslations('PasswordResetPage');
-  const tGlobal = useTranslations('Global');
-  const tAuthTerms = useTranslations('AuthTerms');
 
   return (
-    <div className='account-password-reset-page'>
+    <main itemID='account-password-reset-page'>
       <div className='flex items-center gap-2 lg:hidden'>
-        <div className='w-6'>
+        <div className='mb-6 w-6'>
           <Link href='/'>
             <SCSiteLogo showSiteTitle={true} darkMode={false} />
           </Link>
@@ -24,8 +34,7 @@ export default function LoginPage() {
       <div className='flex flex-col gap-2'>
         <h1 className='mb-6 text-2xl/9 font-bold tracking-tight'>{tPasswordResetPage('title')}</h1>
       </div>
-
       <ResetPasswordForm></ResetPasswordForm>
-    </div>
+    </main>
   );
 }

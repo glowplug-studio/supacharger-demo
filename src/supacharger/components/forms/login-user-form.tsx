@@ -1,3 +1,5 @@
+'use client';
+
 /** =========================================================================
  *
  *  Supacharger - Login User Form Component
@@ -9,8 +11,6 @@
  *  License: CC BY-NC-SA 4.0
  *
  * ========================================================================= */
-
-'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -27,6 +27,7 @@ export function LoginUserForm() {
   // Translations
   const tAuthTerms = useTranslations('AuthTerms');
   const tGlobal = useTranslations('Global');
+  const tLoginPage = useTranslations('LoginPage');
   const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
 
   // State
@@ -105,23 +106,23 @@ export function LoginUserForm() {
   const showLoginFields = emailTouched && email;
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form onSubmit={handleSubmit} className='space-y-3'>
       {/* Email */}
       <div>
-        <label htmlFor="email" className="text-md block px-1">
+        <label htmlFor='email' className='text-md block px-1'>
           {tAuthTerms('emailAddress')}
         </label>
-        <div className="mt-2 px-1">
+        <div className='mt-2 px-1'>
           <input
-            id="email"
-            type="email"
-            name="email"
+            id='email'
+            type='email'
+            name='email'
             maxLength={40}
             required
             autoFocus
-            autoComplete="email"
-            placeholder="me@example.com"
-            className="input"
+            autoComplete='email'
+            placeholder='me@example.com'
+            className='input'
             value={email}
             onChange={handleEmailChange}
           />
@@ -130,40 +131,38 @@ export function LoginUserForm() {
 
       {/* Password and Submit Button: Slide Down on Email Change */}
       <div
-        className={`transition-all duration-300 ease-in-out overflow-hidden px-1 ${
-          showLoginFields
-            ? 'max-h-[500px] opacity-100 mt-0'
-            : 'max-h-0 opacity-0'
+        className={`overflow-hidden px-1 transition-all duration-300 ease-in-out ${
+          showLoginFields ? 'mt-0 max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         {/* Password */}
         <div>
-          <label htmlFor="password" className="block text-sm font-medium mb-2">
+          <label htmlFor='password' className='mb-2 block text-sm font-medium'>
             {tAuthTerms('password')}
           </label>
           <div>
             <input
-              id="password"
-              name="password"
+              id='password'
+              name='password'
               maxLength={40}
-              type="password"
+              type='password'
               placeholder={`${'•'.repeat(SC_CONFIG.PASSWORD_MINIMUM_LENGTH)}`}
               required
-              autoComplete="current-password"
-              className="input"
+              autoComplete='current-password'
+              className='input'
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
         </div>
 
         {/* Resend Activation */}
         {showEmailNotConfirmed && (
-          <div className="sc-message sc-message-attention mt-4">
+          <div className='sc-message sc-message-attention mt-4'>
             {tAuthTerms('sendNewAuthEmailLabel')}
-            <div className="mt-3">
+            <div className='mt-3'>
               <SaveButton
-                type="button"
+                type='button'
                 onClick={handleResendActivation}
                 isLoading={resendLoading}
                 isSuccess={resendSuccess}
@@ -175,38 +174,35 @@ export function LoginUserForm() {
           </div>
         )}
 
-        {/* Submit Button */}
-        <div className="mt-4">
+        {/* Submit */}
+        <div className='mt-4'>
           <button
-            type="submit"
+            type='submit'
             disabled={isLoading}
-            className="btn flex w-full justify-center rounded-md bg-primary text-white h-12"
+            className='btn flex h-12 w-full justify-center rounded-md bg-primary text-white'
           >
-            {isLoading ? (
-              <InlineLoader className="-ml-1 mr-3 h-4 w-4 animate-spin text-white" />
-            ) : (
-              tAuthTerms('logIn')
-            )}
+            {isLoading ? <InlineLoader className='-ml-1 mr-3 h-4 w-4 animate-spin text-white' /> : tAuthTerms('logIn')}
           </button>
         </div>
       </div>
 
-      {/* Links: Always Visible */}
-      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between md:gap-0 px-1">
+      {/* Links */}
+      <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
         <div>
-          <span className="text-sm font-normal">
-            New to {tGlobal('siteTitle')}?{' '}
+          <span className='text-sm font-normal'>
+            {tLoginPage('newTo')} {tGlobal('siteTitle')}?{' '}
           </span>
-          <Link href="/account/create" className="text-sm font-normal">
-            <span className="font-bold">{tAuthTerms('createAnAccount')}</span>
+          <Link href='/account/create' className='text-sm font-normal'>
+            <span className='font-semibold'>{tAuthTerms('createAnAccount')}</span>
           </Link>
         </div>
-        <a
-          href="/account/reset-password"
-          className="text-sm font-semibold hover:text-indigo-500"
+        <Link
+          href={`/account/reset-password${email ? `?email=${encodeURIComponent(email)}` : ''}`}
+          title={tAuthTerms('forgotPassword')}
+          className='text-sm font-semibold hover:text-indigo-500'
         >
           {tAuthTerms('forgotPassword')}
-        </a>
+        </Link>
       </div>
     </form>
   );

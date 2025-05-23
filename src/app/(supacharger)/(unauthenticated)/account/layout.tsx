@@ -20,7 +20,7 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         <SCAccountLoginLeft></SCAccountLoginLeft>
 
         <div className='flex w-full flex-1 flex-col items-center justify-center px-4 lg:px-0'>
-          <div className='flex w-full max-w-md flex-col gap-8 py-8 lg:py-20'>
+          <div className='flex w-full max-w-md flex-col gap-6 py-6 lg:py-20'>
             {children}
 
 

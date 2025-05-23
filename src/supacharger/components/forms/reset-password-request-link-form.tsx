@@ -1,7 +1,20 @@
 "use client";
 
+/** =========================================================================
+ *
+ *  Supacharger - Password Reset Link Request Form Component
+ *
+ *  Description: User can request a password reset link
+ *
+ *  Author: J Sharp <j@glowplug.studio>
+ *
+ *  License: CC BY-NC-SA 4.0
+ *
+ * ========================================================================= */
+
 import { useRef, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from 'next-intl';
 import { toast } from "react-toastify";
 
@@ -28,21 +41,22 @@ export default function ResetPasswordForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
+  // Get email from query param if present
+  const searchParams = useSearchParams();
+  const emailFromQuery = searchParams.get('email') || '';
+  const [email, setEmail] = useState(emailFromQuery);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus(null);
     setIsLoading(true);
 
-    const form = e.currentTarget;
-    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
-
     try {
       await post("/api/account/request-password-reset", { email });
       toast.success(tPasswordResetPage('emailSent'));
       setStatus(null);
-      form.reset();
+      formRef.current?.reset();
       setIsSuccess(true);
-      // You can adjust or remove this timeout as needed
       setTimeout(() => setIsSuccess(false), 24 * 60 * 60 * 1000);
     } catch (error: any) {
       const errorMsg =
@@ -71,6 +85,8 @@ export default function ResetPasswordForm() {
           autoFocus
           required
           className="input w-full"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
         />
       </div>
       {status && <div className="sc-message-error">{status}</div>}

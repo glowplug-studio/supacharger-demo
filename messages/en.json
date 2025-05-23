@@ -78,7 +78,8 @@
     "title": "Billing"
   },
   "LoginPage": {
-    "title": "Sign In"
+    "title": "Sign In",
+    "newTo": "New to"
   },
   "PasswordResetPage": {
     "title": "Reset your Password",
