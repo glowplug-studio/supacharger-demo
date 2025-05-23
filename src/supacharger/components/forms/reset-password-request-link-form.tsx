@@ -18,6 +18,8 @@ import { useSearchParams } from "next/navigation";
 import { useTranslations } from 'next-intl';
 import { toast } from "react-toastify";
 
+import { supabaseErrorCodeLocalisation } from "@/supacharger/utils/helpers";
+
 import SaveButton from "../buttons/form-save-button";
 
 // Local POST helper
@@ -35,6 +37,7 @@ async function post<T = any>(url: string, data: any): Promise<T> {
 export default function ResetPasswordForm() {
   const tAuthTerms = useTranslations('AuthTerms');
   const tPasswordResetPage = useTranslations('PasswordResetPage');
+  const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
 
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<string | null>(null);
@@ -63,7 +66,7 @@ export default function ResetPasswordForm() {
         error?.error_description ||
         error?.error ||
         error?.message ||
-        "Failed to request password reset.";
+        tSupabaseErrorCodes('genericError');
       setStatus(errorMsg);
       toast.error(errorMsg);
     } finally {
