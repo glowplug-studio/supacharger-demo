@@ -9,6 +9,7 @@ import { ArrowLeft, CircleArrowRight, Eye, EyeOff, Mail } from 'lucide-react';
 import type React from 'react';
 import { toast } from 'react-toastify';
 
+import { Input } from '@/components/ui/input';
 import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
 import { createUserByEmailPassword } from '@/supacharger/libs/supabase/supabase-auth';
 import { SCP_REGISTRY } from '@/supacharger/plugins/registry';
@@ -155,7 +156,7 @@ export function CreateAccountForm() {
                   {tAuthTerms('emailAddress')}
                 </label>
                 <div className='mt-2'>
-                  <input
+                  <Input
                     id='email'
                     name='email'
                     type='email'
@@ -203,7 +204,7 @@ export function CreateAccountForm() {
                       {tAuthTerms('retypePassword')}
                     </label>
                     <div>
-                      <input
+                      <Input
                         id='password-again'
                         name='password-again'
                         type='password'
@@ -234,17 +235,12 @@ export function CreateAccountForm() {
 
       <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
         <div>
-          <span className='text-sm font-normal'>
-            {tCreateAccountFormComponent('iAlreadyHaveAnAccount')}{" "}
-          </span>
+          <span className='text-sm font-normal'>{tCreateAccountFormComponent('iAlreadyHaveAnAccount')} </span>
           <Link href='/account/login' className='text-sm font-normal'>
             <span className='font-semibold'>{tAuthTerms('logIn')}</span>
           </Link>
         </div>
-      
       </div>
-
-      
     </>
   );
 }

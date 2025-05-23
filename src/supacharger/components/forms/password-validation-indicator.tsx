@@ -143,7 +143,7 @@ export default function PasswordValidationIndicator({
       </label>
 
       {/* Password Input */}
-      <div className="relative">
+      <div className="relative px-1">
         <Input
           id={id}
           name={name}
@@ -165,7 +165,7 @@ export default function PasswordValidationIndicator({
 
       {/* Requirements bar (bars under input) */}
       <div
-        className="flex w-full gap-2 mt-2 hover:cursor-pointer"
+        className="flex w-full gap-2 mt-2 hover:cursor-pointer px-4"
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         aria-label={tStrengthComponent("passwordRequirementsLabel")}
