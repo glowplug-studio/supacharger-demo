@@ -14,6 +14,8 @@ import { createUserByEmailPassword } from "@/supacharger/libs/supabase/supabase-
 import { SCP_REGISTRY } from "@/supacharger/plugins/registry";
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 
+import { UIDivider } from "../ui/divider";
+
 const renderAuthProviderButtons = Object.values(
   SC_CONFIG.AUTH_PROVDERS_ENABLED,
 ).some((enabled) => enabled);
@@ -124,19 +126,9 @@ export function CreateAccountForm() {
               </div>
             )}
 
-            <div className="my-4 py-2 font-medium text-gray-700">
-              <div className="flex w-full items-center justify-between">
-                <div className="flex-1">
-                  <hr className="border-gray-300"></hr>
-                </div>
-                <div className="px-4 text-gray-400 text-sm">
-                  {tCreateAccountFormComponent("orCreateAccountWithEmail")}
-                </div>
-                <div className="flex-1">
-                  <hr className="border-gray-300"></hr>
-                </div>
-              </div>
-            </div>
+<UIDivider text={tCreateAccountFormComponent("orCreateAccountWithEmail")} />
+
+            
           </motion.div>
         )}
       </AnimatePresence>

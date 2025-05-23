@@ -22,7 +22,7 @@ export default function LoginPage() {
   const tPasswordResetPage = useTranslations('PasswordResetPage');
 
   return (
-    <main itemID='account-password-reset-page'>
+    <main id='sc_account-password-reset-page'>
       <div className='flex items-center gap-2 lg:hidden'>
         <div className='mb-6 w-6'>
           <Link href='/'>
