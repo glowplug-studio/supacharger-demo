@@ -1,4 +1,4 @@
-import { createClient } from '@/supacharger/libs/supabase/server';
+import { createClient } from '@/supacharger/lib/server';
 
 export async function getSubscription() {
   const supabase = await createClient();

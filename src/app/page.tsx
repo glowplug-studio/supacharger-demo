@@ -4,7 +4,7 @@ import { SCMarketingMenu } from  "@/components/sc_demo/sc_header-marketing";
 import { SCHeaderSession } from '@/components/sc_demo/sc_header-session';
 import SCMarketngLanding from '@/components/sc_demo/sc_marketing-landing';
 import SCUserDash from '@/components/sc_demo/sc_user-dash';
-import { isLoggedIn } from '@/supacharger/libs/supabase/supabase-auth';
+import { isLoggedIn } from '@/supacharger/lib/supabase/supabase-auth';
 
 export default async function RootPage() {
 

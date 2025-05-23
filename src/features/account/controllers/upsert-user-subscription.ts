@@ -1,8 +1,8 @@
 import Stripe from 'stripe';
 
-import { stripeAdmin } from '@/supacharger/libs/stripe/stripe-admin';
-import { supabaseAdminClient } from '@/supacharger/libs/supabase/supabase-admin';
-import type { Database } from '@/supacharger/libs/supabase/types';
+import { stripeAdmin } from '@/supacharger/lib/stripe/stripe-admin';
+import { supabaseAdminClient } from '@/supacharger/lib/supabase/supabase-admin';
+import type { Database } from '@/supacharger/lib/supabase/types';
 import { toDateTime } from '@/supacharger/utils/helpers';
 import { AddressParam } from '@stripe/stripe-js';
 

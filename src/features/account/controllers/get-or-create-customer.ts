@@ -1,5 +1,5 @@
-import { stripeAdmin } from '@/supacharger/libs/stripe/stripe-admin';
-import { supabaseAdminClient } from '@/supacharger/libs/supabase/supabase-admin';
+import { stripeAdmin } from '@/supacharger/lib/stripe/stripe-admin';
+import { supabaseAdminClient } from '@/supacharger/lib/supabase/supabase-admin';
 
 export async function getOrCreateCustomer({ userId, email }: { userId: string; email: string }) {
   const { data, error } = await supabaseAdminClient

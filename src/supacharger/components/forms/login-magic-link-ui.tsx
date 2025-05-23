@@ -9,7 +9,7 @@
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 
-import { signInWithEmail } from "@/supacharger/libs/supabase/supabase-auth";
+import { signInWithEmail } from "@/supacharger/lib/supabase/supabase-auth";
 
 export function LoginMagicLinkUI() {
   const [pending, setPending] = useState(false);

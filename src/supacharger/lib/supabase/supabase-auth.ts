@@ -9,7 +9,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { createClient } from '@/supacharger/libs/supabase/server';
+import { createClient } from '@/supacharger/lib/server';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 import { getURL } from '@/supacharger/utils/helpers';
 import { ActionResponse } from '@/types/action-response';

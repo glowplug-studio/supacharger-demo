@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
-import { createClient } from '@/supacharger/libs/supabase/server';
+import { createClient } from '@/supacharger/lib/server';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 import { type EmailOtpType } from '@supabase/supabase-js';
 
