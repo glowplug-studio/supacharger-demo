@@ -31,7 +31,7 @@ export default function LoginPage() {
         </div>
       </div>
 
-      <div className='flex flex-col gap-2'>
+      <div className='flex flex-col gap-2 px-1'>
         <h1 className='mb-6 text-2xl/9 font-bold tracking-tight'>{tPasswordResetPage('title')}</h1>
       </div>
       <ResetPasswordForm></ResetPasswordForm>

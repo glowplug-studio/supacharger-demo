@@ -21,14 +21,7 @@ export default function SCAccountLoginLeft() {
           </a>
           <span className='text-xl font-bold text-white'>Tengr.ai</span>
         </div>
-        <div className='flex gap-4'>
-          <a href='#' className='text-base text-white hover:underline'>
-            Privacy Policy
-          </a>
-          <a href='#' className='text-base text-white hover:underline'>
-            Terms of Service
-          </a>
-        </div>
+        
       </div>
     </div>
   );

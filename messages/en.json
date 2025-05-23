@@ -89,7 +89,8 @@
     "verifyingCode": "Verifying code...",
     "noCode": "There is no activation code, or the code is invalid",
     "getResetLink": "Send link",
-    "emailSent": "Link sent, check your inbox"
+    "emailSent": "Link sent, check your inbox",
+    "enterEmailPlaceholder": "Enter your email"
   },
   "CreateAccountPage": {
     "title": "Create an Account",

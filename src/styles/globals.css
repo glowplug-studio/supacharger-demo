@@ -129,15 +129,9 @@
     @apply font-medium;
   }
 
-
-         
-
-
   .sc-message {
     @apply mt-2;
     @apply text-sm;
-    @apply border;
-    @apply border-yellow-200;
     @apply rounded-md;
     @apply p-4;
   }
@@ -146,6 +140,8 @@
     @apply bg-red-100;
     @apply font-bold;
     @apply text-gray-600;
+    @apply border-yellow-200;
+    @apply border;
   }
 
   .sc-message-attention {
@@ -155,9 +151,10 @@
   }
 
   .sc-message-positive {
-    @apply bg-green-100;
+    @apply border-green-300;
+    @apply border;
     @apply font-bold;
-    @apply text-gray-600;
+    @apply text-green-700;
   }
 
 

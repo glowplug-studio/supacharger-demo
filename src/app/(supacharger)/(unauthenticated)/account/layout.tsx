@@ -22,23 +22,6 @@ export default async function RootLayout({ children }: PropsWithChildren) {
         <div className='flex w-full flex-1 flex-col items-center justify-center px-4 lg:px-0'>
           <div className='flex w-full max-w-md flex-col gap-6 py-6 lg:py-20'>
             {children}
-
-
-            
-            {/* Login Form */}
-            
-          
-            {/* Social Buttons */}
-            
-            {/* Mobile Footer */}
-            <div className='flex w-full justify-between pt-6 text-xs text-gray-400 lg:hidden'>
-              <a href='#' className='hover:text-blue-400'>
-                Privacy Policy
-              </a>
-              <a href='#' className='hover:text-blue-400'>
-                Terms of Service
-              </a>
-            </div>
           </div>
         </div>
       </div>
