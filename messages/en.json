@@ -104,6 +104,10 @@
     "hideEmailFormButtonText": "Use Social Account",
     "signInWithSocialLabel": "Sing in with a social account"
   },
+  "OTPFormComponent": {
+    "title": "Enter Code",
+    "description": "Enter the code we sent to your email. Alternatively click the link."
+  },
   "PasswordUpdateFormComponent": {
     "title": "Update your Password"
   }

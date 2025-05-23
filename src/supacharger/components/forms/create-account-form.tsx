@@ -16,6 +16,8 @@ import { SC_CONFIG } from '@/supacharger/supacharger-config';
 
 import { UIDivider } from '../ui/divider';
 
+import OtpInput from './account-otp-code-form';
+
 const renderAuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some((enabled) => enabled);
 
 const AuthProviderButtons = renderAuthProviderButtons
@@ -70,9 +72,9 @@ export function CreateAccountForm() {
     }
   };
 
-  // CSS classes for transitions
+  // Updated CSS classes for slower, ease-in transitions
   const sectionBase =
-    'transition-all duration-500 ease-in-out overflow-hidden';
+    'transition-all duration-700 ease-in overflow-hidden';
   const sectionVisible = 'max-h-[1000px] opacity-100 pointer-events-auto';
   const sectionHidden = 'max-h-0 opacity-0 pointer-events-none';
 
@@ -182,6 +184,11 @@ export function CreateAccountForm() {
             </button>
           </div>
         </form>
+      </div>
+
+      <div>
+
+        <OtpInput></OtpInput>
       </div>
 
       <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>

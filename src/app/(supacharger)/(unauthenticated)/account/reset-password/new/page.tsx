@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
 import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
+import { createClient } from '@/lib/client';
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
-import { createClient } from '@/supacharger/lib/client';
 import { supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
 
 export default function LoginPage() {

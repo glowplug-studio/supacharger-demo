@@ -195,3 +195,25 @@ export async function isLoggedIn() {
 
   return data.user.aud == 'authenticated' ? true : false; // (data == 'authenticated')? true : false;
 }
+
+/**
+ * Verify OTP (One-Time Password) for email verification
+ * @param {string} email - The email address to verify
+ * @param {string} token - The OTP token received via email
+ * @returns {Promise<ActionResponse>} The verification response
+ */
+export async function verifyOtp(email: string, token: string): Promise<ActionResponse> {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.auth.verifyOtp({
+    email,
+    token,
+    type: 'email'
+  });
+
+  if (error) {
+    return { data: null, error };
+  }
+
+  return { data, error: null };
+}
