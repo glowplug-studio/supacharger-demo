@@ -4,7 +4,7 @@ import { type ChangeEvent, type ClipboardEvent, type KeyboardEvent,useEffect, us
 import { useTranslations } from 'next-intl';
 
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
-import { verifyOtp } from '@/lib/supabase/supabase-auth';
+import { verifyOtp } from '@/lib/supabase/supacharger/supabase-auth';
 
 interface OtpInputProps {
   email: string;

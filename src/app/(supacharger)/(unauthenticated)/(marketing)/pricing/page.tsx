@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation'
 
-import { createClient } from '@/supacharger/lib/server'
+import { createClient } from '@/lib/supabase/server'
 
 export default async function Pricing() {
 

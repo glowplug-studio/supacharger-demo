@@ -1,4 +1,4 @@
-import type { Database } from '@/supacharger/lib/supabase/types';
+import type { Database } from '@/lib/supabase/types';
 import { getEnvVar } from '@/supacharger/utils/helpers';
 import { createClient } from '@supabase/supabase-js';
 

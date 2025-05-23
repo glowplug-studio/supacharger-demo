@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getUser, getUserSession } from '@/supacharger/lib/supabase/supabase-auth';
+import { getUser, getUserSession } from '@/lib/supabase/supacharger/supabase-auth';
 import { evaluatePasswordStrength } from '@/supacharger/utils/helpers';
 import { createClient } from '@supabase/supabase-js';
 
