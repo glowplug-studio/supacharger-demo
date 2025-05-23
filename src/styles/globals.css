@@ -129,14 +129,14 @@
     @apply font-medium;
   }
 
-  .sc-message {
+  .sc_message {
     @apply mt-2;
     @apply text-sm;
     @apply rounded-md;
     @apply p-4;
   }
 
-  .sc-message-error {
+  .sc_message-error {
     @apply bg-red-100;
     @apply font-bold;
     @apply text-gray-600;
@@ -144,13 +144,13 @@
     @apply border;
   }
 
-  .sc-message-attention {
+  .sc_message-attention {
     background-color: #fffcde;
     @apply font-bold;
     @apply text-gray-600;
   }
 
-  .sc-message-positive {
+  .sc_message-positive {
     @apply border-green-300;
     @apply border;
     @apply font-bold;

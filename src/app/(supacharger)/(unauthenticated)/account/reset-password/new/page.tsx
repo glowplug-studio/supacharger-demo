@@ -115,7 +115,7 @@ export default function LoginPage() {
 
           {/* If there is no code and not pending, show message and link */}
           {!pending && !code && (
-            <div className='sc-message sc-message-error flex flex-col gap-2'>
+            <div className='sc_message sc_message-error flex flex-col gap-2'>
               <span>
                 {tPasswordResetPage('noCode') || 'No reset code found. Please request a new password reset link.'}
               </span>
@@ -129,7 +129,7 @@ export default function LoginPage() {
           {!pending && code && (
             <div className='space-y-4'>
               {!isCodeValid && status && (
-                <div className='sc-message sc-message-error flex flex-col gap-2'>
+                <div className='sc_message sc_message-error flex flex-col gap-2'>
                   <span>{status}</span>
                   <Link className='text-sm font-semibold hover:text-indigo-500' href='/account/login'>
                     {tAuthTerms('backToSignIn')}

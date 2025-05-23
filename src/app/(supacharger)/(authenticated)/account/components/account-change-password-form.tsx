@@ -96,7 +96,7 @@ export default function AccountChangePasswordForm() {
         </div>
       </div>
 
-      {status && <div className='sc-message-error'>{status}</div>}
+      {status && <div className='sc_message-error'>{status}</div>}
 
       <SaveButton
         isLoading={isLoading}

@@ -150,7 +150,7 @@ export default function PasswordValidationIndicator({
           type={type}
           value={value}
           onChange={onChange}
-          className="w-full pr-10"
+          className="input"
           maxLength={30}
           onFocus={() => setShowTooltip(true)}
           onBlur={() => setShowTooltip(false)}
@@ -166,7 +166,7 @@ export default function PasswordValidationIndicator({
 
       {/* Requirements bar (bars under input) */}
       <div
-        className="flex w-full gap-2 mt-2"
+        className="flex w-full gap-2 mt-2 hover:cursor-pointer"
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         aria-label={tStrengthComponent("passwordRequirementsLabel")}

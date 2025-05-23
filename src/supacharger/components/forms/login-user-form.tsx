@@ -159,7 +159,7 @@ export function LoginUserForm() {
 
         {/* Resend Activation */}
         {showEmailNotConfirmed && (
-          <div className='sc-message sc-message-attention mt-4'>
+          <div className='sc_message sc_message-attention mt-4'>
             {tAuthTerms('sendNewAuthEmailLabel')}
             <div className='mt-3'>
               <SaveButton
