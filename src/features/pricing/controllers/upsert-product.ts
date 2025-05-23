@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 
-import { supabaseAdminClient } from '@/supacharger/lib/supabase/supabase-admin';
-import type { Database } from '@/supacharger/lib/supabase/types';
+import { supabaseAdminClient } from '@/lib/supabase/supacharger/supabase-admin';
+import type { Database } from '@/lib/supabase/types';
 
 type Product = Database['public']['Tables']['products']['Row'];
 

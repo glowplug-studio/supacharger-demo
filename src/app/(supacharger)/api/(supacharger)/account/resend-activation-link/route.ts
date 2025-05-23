@@ -2,7 +2,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 
-import { resendAccountConfirmEmail } from '@/supacharger/lib/supabase/supabase-auth';
+import { resendAccountConfirmEmail } from '@/lib/supabase/supacharger/supabase-auth';
 import { isValidEmail } from '@/supacharger/utils/helpers';
 
 export async function POST(req: NextRequest) {

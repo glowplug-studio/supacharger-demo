@@ -19,7 +19,7 @@ import { toast } from 'react-toastify';
 
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
 import { Input } from "@/components/ui/input";
-import { loginUser } from '@/lib/supabase/supabase-auth';
+import { loginUser } from '@/lib/supabase/supacharger/supabase-auth';
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 import { isValidEmail, supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';

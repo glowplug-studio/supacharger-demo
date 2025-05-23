@@ -3,7 +3,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { createClient } from '@/supacharger/lib/server';
+import { createClient } from '@/lib/supabase/server';
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { getURL } from '@/supacharger/utils/helpers';
 
