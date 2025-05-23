@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
+import { createCheckoutAction } from '@/features/pricing/actions/create-checkout-action';
 import { PricingCard } from '@/features/pricing/components/price-card';
 import { getProducts } from '@/features/pricing/controllers/get-products';
-
-import { createCheckoutAction } from '../actions/create-checkout-action';
 
 export async function PricingSection({ isPricingPage }: { isPricingPage?: boolean }) {
   const products = await getProducts();

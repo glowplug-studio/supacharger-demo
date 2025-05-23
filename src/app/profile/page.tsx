@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import {getTranslations} from 'next-intl/server';
 
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/supacharger/lib/server'
 
 export default async function Dashboard() {
 

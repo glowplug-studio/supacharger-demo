@@ -12,7 +12,7 @@ export default function SCMarketngLanding() {
           <div className='mx-auto max-w-7xl px-6 py-12 sm:py-5 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-20'>
             <div className='mx-auto max-w-2xl lg:mx-0 lg:flex-auto'>
               <h1 className='mt-10 text-5xl font-semibold tracking-tight text-primary sm:text-7xl'>
-                Grow deals together, thrive collaboratively
+              The complete community platform
               </h1>
               <p className='font-mediu mt-8 text-pretty sm:text-xl/8'>
                 Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet

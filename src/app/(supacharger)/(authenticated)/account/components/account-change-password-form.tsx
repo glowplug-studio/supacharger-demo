@@ -13,7 +13,7 @@ import PasswordValidationIndicator from '@/supacharger/components/forms/password
 export default function AccountChangePasswordForm() {
   const tAuthTerms = useTranslations('AuthTerms');
   const tGlobalUI = useTranslations('GlobalUI');
-  const tPassReset = useTranslations('PasswordResetFormComponent');
+  const tPassReset = useTranslations('PasswordUpdateFormComponent');
   const tEvaluatePasswordStrengthErrorCodes = useTranslations('evaluatePasswordStrengthErrorCodes');
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -75,11 +75,10 @@ export default function AccountChangePasswordForm() {
             <Label htmlFor='oldPassword' className='mb-2'>
               {tAuthTerms('oldPassword')}
             </Label>
-            <Input id='oldPassword' name='oldPassword' type='password' className='w-full' maxLength={30} />
+            <Input id='oldPassword' name='oldPassword' type='password' maxLength={30} />
           </div>
         </div>
 
-        {/* New Password Indicator moved below Old Password */}
         <PasswordValidationIndicator
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
@@ -92,12 +91,12 @@ export default function AccountChangePasswordForm() {
             <Label htmlFor='confirmPassword' className='mb-2'>
               {tAuthTerms('retypeNewPassword')}
             </Label>
-            <Input id='confirmPassword' name='confirmPassword' type='password' className='w-full' maxLength={30} />
+            <Input id='confirmPassword' name='confirmPassword' type='password'  maxLength={30} />
           </div>
         </div>
       </div>
 
-      {status && <div className='sc-error-message'>{status}</div>}
+      {status && <div className='sc_message-error'>{status}</div>}
 
       <SaveButton
         isLoading={isLoading}

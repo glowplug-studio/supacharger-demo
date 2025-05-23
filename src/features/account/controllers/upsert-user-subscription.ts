@@ -1,9 +1,9 @@
 import Stripe from 'stripe';
 
-import { stripeObject } from '@/libs/stripe/stripe-object';
-import { supabaseDatabaseClient } from '@/libs/supabase/supabase-database-client';
-import type { Database } from '@/libs/supabase/types';
-import { toDateTime } from '@/utils/to-date-time';
+import { stripeAdmin } from '@/supacharger/lib/stripe/stripe-admin';
+import { supabaseAdminClient } from '@/supacharger/lib/supabase/supabase-admin';
+import type { Database } from '@/supacharger/lib/supabase/types';
+import { toDateTime } from '@/supacharger/utils/helpers';
 import { AddressParam } from '@stripe/stripe-js';
 
 export async function upsertUserSubscription({
@@ -16,7 +16,7 @@ export async function upsertUserSubscription({
   isCreateAction?: boolean;
 }) {
   // Get customer's userId from mapping table.
-  const { data: customerData, error: noCustomerError } = await supabaseDatabaseClient
+  const { data: customerData, error: noCustomerError } = await supabaseAdminClient
     .from('customers')
     .select('id')
     .eq('stripe_customer_id', customerId)
@@ -25,7 +25,7 @@ export async function upsertUserSubscription({
 
   const { id: userId } = customerData!;
 
-  const subscription = await stripeObject.subscriptions.retrieve(subscriptionId, {
+  const subscription = await stripeAdmin.subscriptions.retrieve(subscriptionId, {
     expand: ['default_payment_method'],
   });
 
@@ -47,7 +47,7 @@ export async function upsertUserSubscription({
     trial_end: subscription.trial_end ? toDateTime(subscription.trial_end).toISOString() : null,
   };
 
-  const { error } = await supabaseDatabaseClient.from('subscriptions').upsert([subscriptionData]);
+  const { error } = await supabaseAdminClient.from('subscriptions').upsert([subscriptionData]);
   if (error) {
     throw error;
   }
@@ -69,9 +69,9 @@ const copyBillingDetailsToCustomer = async (userId: string, paymentMethod: Strip
   const { name, phone, address } = paymentMethod.billing_details;
   if (!name || !phone || !address) return;
 
-  await stripeObject.customers.update(customer, { name, phone, address: address as AddressParam });
+  await stripeAdmin.customers.update(customer, { name, phone, address: address as AddressParam });
 
-  const { error } = await supabaseDatabaseClient
+  const { error } = await supabaseAdminClient
     .from('users')
     .update({
       billing_address: { ...address },

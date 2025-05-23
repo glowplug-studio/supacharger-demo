@@ -73,10 +73,8 @@
     @apply bg-cyan-400;
   }
   *:focus-visible {
-    @apply outline;
-    @apply outline-2;
-    @apply outline-offset-2;
-    @apply outline-pink-500;
+    @apply shadow-inner;
+    @apply transition;
   }
   * {
     @apply border-border;
@@ -103,37 +101,62 @@
     @apply justify-between;
     @apply items-center;
     @apply rounded-md;
-    @apply hover:bg-teal-500;
+    @apply hover:bg-secondary;
+    @apply hover:text-gray-950;
     @apply px-5;
     @apply py-3;
     @apply focus-visible:outline-2;
     @apply focus-visible:outline-offset-2;
     @apply focus-visible:outline-indigo-600;
     @apply hover:cursor-pointer;
+    @apply font-medium;
+    @apply h-10;
   }
 
   .input {
-    @apply appearance-none;
-    @apply rounded;
-    @apply border;
-    @apply px-3;
-    @apply py-2;
-    @apply leading-tight;
-    @apply text-gray-700;
-    @apply bg-white;
+    @apply block;
+    @apply w-full;
+    @apply rounded-md;
+    @apply py-3;
+    @apply px-4;
+    @apply outline;
+    @apply outline-1;
+    @apply outline-gray-300;
+    @apply placeholder:text-gray-400;
+    @apply focus:outline-2;
+    @apply focus:outline-secondary;
+    @apply text-sm;
+    @apply font-medium;
   }
 
-  .sc-error-message {
+  .sc_message {
     @apply mt-2;
     @apply text-sm;
-    @apply rounded;
-    @apply rounded-sm;
+    @apply rounded-md;
+    @apply p-4;
+  }
+
+  .sc_message-error {
     @apply bg-red-100;
-    @apply px-6;
-    @apply py-4;
+    @apply font-bold;
+    @apply text-gray-600;
+    @apply border-yellow-200;
+    @apply border;
+  }
+
+  .sc_message-attention {
+    background-color: #fffcde;
     @apply font-bold;
     @apply text-gray-600;
   }
+
+  .sc_message-positive {
+    @apply border-green-300;
+    @apply border;
+    @apply font-bold;
+    @apply text-green-700;
+  }
+
 
   /* Authenticated Header Dropdown Menu @todo this shouldnt be here! */
   /* Dropdown behavior for user menu */

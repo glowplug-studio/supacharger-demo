@@ -8,10 +8,9 @@
 
 import { NextResponse } from "next/server";
 
+import { logoutUser } from "@/supacharger/lib/supabase/supabase-auth";
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { getURL } from "@/supacharger/utils/helpers";
-
-import { logoutUser } from "../../../auth-actions";
 
 export async function GET(): Promise<NextResponse> {
   const logoutResult = await logoutUser();

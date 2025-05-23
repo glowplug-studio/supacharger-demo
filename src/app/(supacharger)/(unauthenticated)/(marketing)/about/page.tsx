@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 
 import SCFooter from '@/components/sc_demo/sc_footer'
-import { createClient } from '@/utils/supabase/server'
+import { createClient } from '@/supacharger/lib/server'
 
 export default async function About() {
 

@@ -1,7 +1,7 @@
-import { supabaseDatabaseClient } from '@/libs/supabase/supabase-database-client';
+import { supabaseAdminClient } from '@/supacharger/lib/supabase/supabase-admin';
 
 export async function getCustomerId({ userId }: { userId: string }) {
-  const { data, error } = await supabaseDatabaseClient
+  const { data, error } = await supabaseAdminClient
     .from('customers')
     .select('stripe_customer_id')
     .eq('id', userId)

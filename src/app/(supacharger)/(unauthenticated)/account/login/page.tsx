@@ -1,41 +1,42 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useTranslations } from "next-intl";
+/** =========================================================================
+ *
+ *  Supacharger - Account Login Page
+ *
+ *  Description: User can sign in here with SOME social accounts or email.
+ *
+ *  Author: J Sharp <j@glowplug.studio>
+ *
+ *  License: CC BY-NC-SA 4.0
+ *
+ * ========================================================================= */
 
-import SCSiteLogo from "@/components/sc_demo/sc_site-logo";
-import { LoginUserForm } from "@/supacharger/components/forms/login-user-form";
-import { SC_CONFIG } from "@/supacharger/supacharger-config";
+import { useTranslations } from 'next-intl';
+
+import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
+import AuthProviderButtons from '@/supacharger/components/buttons/auth-provider-buttons';
+import { LoginUserForm } from '@/supacharger/components/forms/login-user-form';
+import { UIDivider } from '@/supacharger/components/ui/divider';
 
 export default function LoginPage() {
-  const tLoginPage= useTranslations("LoginPage");
-  const tGlobal = useTranslations('Global');
-  const tAuthTerms = useTranslations('AuthTerms');
+  const tLoginPage = useTranslations('LoginPage');
 
   return (
-    <div className="flex h-screen flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 bg-sc-gradient">
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
-          <div className="mb-28 block">
-            <SCSiteLogo showSiteTitle={false} darkMode={false} />
-          </div>
-          <h1 className="mb-8 text-2xl/9 font-bold tracking-tight text-gray-700">
-            {tLoginPage("title")}{" "}
-          </h1>
-
-          <LoginUserForm></LoginUserForm>
-
-          <div className="mt-6">
-            <Link
-              href="/account/create"
-              className="flex w-full appearance-none justify-between rounde px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-100 hover:no-underline border border-gray-200 rounded-3xl"
-            >
-              <span className="font-normal">New to{" "}{tGlobal("siteTitle")}?</span>
-              <span className="font-bold">{tAuthTerms("createAnAccount")}</span>
-            </Link>
-          </div>
+    <main id='sc_login-page'>
+      {/* Mobile only logo */}
+      <div className='flex items-center gap-2 lg:hidden'>
+        <div className='w-6'>
+          <SCSiteLogo showSiteTitle={true} darkMode={false} />
         </div>
       </div>
-    </div>
+      <div className='flex flex-col gap-2'>
+        <h1 className='mb-2 text-2xl/9 font-bold tracking-tight'>{tLoginPage('title')}</h1>
+      </div>
+      <LoginUserForm />
+      <UIDivider className="my-6" />
+      {/* Social Buttons */}
+      <AuthProviderButtons />
+    </main>
   );
 }
