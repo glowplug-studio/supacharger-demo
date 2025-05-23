@@ -19,8 +19,8 @@ import { toast } from 'react-toastify';
 
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
 import { Input } from "@/components/ui/input";
+import { loginUser } from '@/lib/supabase/supabase-auth';
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
-import { loginUser } from '@/supacharger/lib/supabase/supabase-auth';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 import { isValidEmail, supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
 

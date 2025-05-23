@@ -9,8 +9,8 @@ import type React from 'react';
 import { toast } from 'react-toastify';
 
 import { Input } from '@/components/ui/input';
+import { createUserByEmailPassword } from '@/lib/supabase/supabase-auth';
 import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
-import { createUserByEmailPassword } from '@/supacharger/lib/supabase/supabase-auth';
 import { SCP_REGISTRY } from '@/supacharger/plugins/registry';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 
