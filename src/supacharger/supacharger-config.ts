@@ -117,7 +117,7 @@ export const SC_CONFIG = {
    */
   AUTH_PROVDERS_ENABLED: {
     google: true,
-    facebook: false,
+    facebook: true,
   },
 
   /**
