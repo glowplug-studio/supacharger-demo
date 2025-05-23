@@ -18,6 +18,7 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
 
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
+import { Input } from "@/components/ui/input";
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
 import { loginUser } from '@/supacharger/libs/supabase/supabase-auth';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
@@ -113,7 +114,7 @@ export function LoginUserForm() {
           {tAuthTerms('emailAddress')}
         </label>
         <div className='mt-2 px-1'>
-          <input
+          <Input
             id='email'
             type='email'
             name='email'
@@ -141,7 +142,7 @@ export function LoginUserForm() {
             {tAuthTerms('password')}
           </label>
           <div>
-            <input
+            <Input
               id='password'
               name='password'
               maxLength={40}

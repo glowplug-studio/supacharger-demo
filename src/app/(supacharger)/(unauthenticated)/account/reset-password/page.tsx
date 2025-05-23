@@ -12,7 +12,6 @@
  *
  * ========================================================================= */
 
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
@@ -25,12 +24,9 @@ export default function LoginPage() {
     <main id='sc_account-password-reset-page'>
       <div className='flex items-center gap-2 lg:hidden'>
         <div className='mb-6 w-6'>
-          <Link href='/'>
-            <SCSiteLogo showSiteTitle={true} darkMode={false} />
-          </Link>
+          <SCSiteLogo showSiteTitle={true} darkMode={false} />
         </div>
       </div>
-
       <div className='flex flex-col gap-2 px-1'>
         <h1 className='mb-6 text-2xl/9 font-bold tracking-tight'>{tPasswordResetPage('title')}</h1>
       </div>
