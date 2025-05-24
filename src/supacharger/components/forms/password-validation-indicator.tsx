@@ -41,7 +41,10 @@ export default function PasswordValidationIndicator({
 
   const [showTooltip, setShowTooltip] = useState(false);
 
-  // Dynamically build validation items based on config
+  // Use central validation function for overall result
+  const validationResult = evaluatePasswordStrength(value);
+
+  // Dynamically build validation items based on config (for the checklist UI only)
   const getValidationItems = (): ValidationItem[] => {
     const minLength = SC_CONFIG.PASSWORD_MINIMUM_LENGTH;
     const requirements = SC_CONFIG.PASSWORD_REQUIREMENTS;
@@ -133,7 +136,7 @@ export default function PasswordValidationIndicator({
 
   const validationItems = getValidationItems();
   const validations = validationItems.map((item) => item.test(value));
-  const allValid = validations.every(Boolean);
+  const allValid = validationResult.valid;
 
   return (
     <div className="space-y-2 relative">

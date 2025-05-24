@@ -97,7 +97,7 @@ export function CreateAccountForm() {
                 type='email'
                 required
                 autoComplete='email'
-                className='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
+                className='input'
                 value={email}
                 onChange={handleEmailChange}
               />
@@ -106,8 +106,8 @@ export function CreateAccountForm() {
           <div
             id="sc_passwords-submit"
             className={`
-              transition-all duration-500 overflow-hidden
-              ${passwordSectionOpen ? 'max-h-[1000px]' : 'max-h-0'}
+              transition-all duration-500
+              ${passwordSectionOpen ? 'max-h-[1000px]' : 'max-h-0 overflow-hidden'}
             `}
           >
             <div className='my-2'>
