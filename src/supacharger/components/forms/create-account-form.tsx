@@ -32,16 +32,14 @@ export function CreateAccountForm() {
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [accountCreated, setAccountCreated] = useState(false);
   const [passwordSectionOpen, setPasswordSectionOpen] = useState(false);
-
-  // Track password validation state
   const [passwordIsValid, setPasswordIsValid] = useState(false);
-
-  // SaveButton state renamed
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
+
+  // Error state for inline feedback (optional)
+  const [formError, setFormError] = useState<string | null>(null);
 
   // Translations
   const tAuthTerms = useTranslations('AuthTerms');
@@ -60,35 +58,32 @@ export function CreateAccountForm() {
     }
   };
 
-  const handleCreateAccountRequest = async () => {
-    // Always require email
-    if (!email) {
-      toast.error(tCreateAccountFormComponent('missingEmail'), SC_CONFIG.TOAST_CONFIG);
-      return;
-    }
-    // Validate email format
-    if (!isValidEmail(email)) {
+  // Best practice: Use onSubmit, not button click!
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormError(null);
+
+    // Use FormData for robust value extraction
+    const formData = new FormData(e.currentTarget);
+    const emailVal = formData.get('email') as string;
+    const passwordVal = formData.get('password') as string;
+    const retypePasswordVal = formData.get('password-again') as string;
+
+    // Basic browser validation (required, type="email") already runs!
+    // Custom checks:
+    if (!isValidEmail(emailVal)) {
+      setFormError(tCreateAccountFormComponent('invalidEmail'));
       toast.error(tCreateAccountFormComponent('invalidEmail'), SC_CONFIG.TOAST_CONFIG);
       return;
     }
-
-    // Always require password strength
     if (!passwordIsValid) {
+      setFormError(tEvaluatePasswordStrengthComponent('passwordNotStrongEnough'));
       toast.error(tEvaluatePasswordStrengthComponent('passwordNotStrongEnough'), SC_CONFIG.TOAST_CONFIG);
       return;
     }
-
-    // Only validate retype/match if the eye is NOT toggled on
     if (!showPassword) {
-      if (!password) {
-        toast.error(tCreateAccountFormComponent('missingPassword'), SC_CONFIG.TOAST_CONFIG);
-        return;
-      }
-      if (!retypePassword) {
-        toast.error(tCreateAccountFormComponent('missingRetypePassword'), SC_CONFIG.TOAST_CONFIG);
-        return;
-      }
-      if (password !== retypePassword) {
+      if (passwordVal !== retypePasswordVal) {
+        setFormError(tCreateAccountFormComponent('passwordMismatch'));
         toast.error(tCreateAccountFormComponent('passwordMismatch'), SC_CONFIG.TOAST_CONFIG);
         return;
       }
@@ -96,17 +91,18 @@ export function CreateAccountForm() {
 
     setIsSubmitting(true);
     setIsSubmitSuccess(false);
-    setError(null);
 
     try {
-      const formData = new FormData();
-      formData.append('email', email);
-      formData.append('password', password);
+      const apiFormData = new FormData();
+      apiFormData.append('email', emailVal);
+      apiFormData.append('password', passwordVal);
 
-      const result = await createUserByEmailPassword(formData);
+      const result = await createUserByEmailPassword(apiFormData);
+
       setIsSubmitting(false);
 
       if (result?.error) {
+        setFormError(tSupabaseErrorCodes(supabaseErrorCodeLocalisation('signup_auth_api_error')));
         toast.error(
           tSupabaseErrorCodes(supabaseErrorCodeLocalisation('signup_auth_api_error')),
           SC_CONFIG.TOAST_CONFIG
@@ -128,6 +124,7 @@ export function CreateAccountForm() {
     } catch (error: any) {
       setIsSubmitting(false);
       setIsSubmitSuccess(false);
+      setFormError(tSupabaseErrorCodes('genericError'));
       toast.error(tSupabaseErrorCodes('genericError'), SC_CONFIG.TOAST_CONFIG);
     }
   };
@@ -143,7 +140,7 @@ export function CreateAccountForm() {
 
       {/* Email Signup Form */}
       {!accountCreated && (
-        <form onSubmit={(e) => e.preventDefault()} className={AuthProviderButtons ? 'mt-6' : ''}>
+        <form onSubmit={handleSubmit} className={AuthProviderButtons ? 'mt-6' : ''} noValidate>
           <div className='my-2'>
             <label htmlFor='email' className='text-md block px-1'>
               {tAuthTerms('emailAddress')}
@@ -213,11 +210,13 @@ export function CreateAccountForm() {
               </div>
             )}
             {BrevoNewsletterRegistrationCheckbox && <BrevoNewsletterRegistrationCheckbox />}
-            <div className='mt-4'>
+            {formError && (
+              <div className="sc_message sc_message-error mt-4 mx-1">{formError}</div>
+            )}
+            <div className='mt-4 px-1'>
               <SaveButton
-                type='button'
+                type='submit'
                 className='w-full h-12'
-                onClick={handleCreateAccountRequest}
                 isLoading={isSubmitting}
                 isSuccess={isSubmitSuccess}
                 initialLabel={tAuthTerms('signUp')}
