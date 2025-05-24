@@ -18,7 +18,7 @@ import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
 
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 
 import SaveButton from '../buttons/form-save-button';
@@ -88,7 +88,6 @@ export default function ResetPasswordForm() {
             name='email'
             placeholder={tPasswordResetPage('enterEmailPlaceholder')}
             aria-label={tPasswordResetPage('enterEmailPlaceholder')}
-            autoFocus
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}

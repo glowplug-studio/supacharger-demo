@@ -102,7 +102,6 @@
     @apply items-center;
     @apply rounded-md;
     @apply hover:bg-secondary;
-    @apply hover:text-gray-950;
     @apply px-5;
     @apply py-3;
     @apply focus-visible:outline-2;
@@ -111,6 +110,7 @@
     @apply hover:cursor-pointer;
     @apply font-medium;
     @apply h-10;
+    @apply capitalize;
   }
 
   .input {

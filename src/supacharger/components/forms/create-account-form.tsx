@@ -110,7 +110,7 @@ export function CreateAccountForm() {
               ${passwordSectionOpen ? 'max-h-[1000px]' : 'max-h-0 overflow-hidden'}
             `}
           >
-            <div className='my-2'>
+            <div className='mt-2 mb-4'>
               {/* FLEX ROW: PasswordValidationIndicator left, Eye icon right */}
               <div className="mt-2 flex items-center">
                 <div className="flex-1">
@@ -136,10 +136,10 @@ export function CreateAccountForm() {
             {/* Retype password field (hide when showPassword is true) */}
             {!showPassword && (
               <div className='my-2'>
-                <label htmlFor='password-again' className='block text-gray-700'>
+                <label htmlFor='password-again' className='text-md block px-1'>
                   {tAuthTerms('retypePassword')}
                 </label>
-                <div>
+                <div className="mt-2">
                   <Input
                     id='password-again'
                     name='password-again'

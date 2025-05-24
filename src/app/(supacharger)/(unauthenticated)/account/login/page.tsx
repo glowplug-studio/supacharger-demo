@@ -19,7 +19,7 @@ import AuthProviderButtons from '@/supacharger/components/buttons/auth-provider-
 import { LoginUserForm } from '@/supacharger/components/forms/login-user-form';
 import { UIDivider } from '@/supacharger/components/ui/divider';
 
-export default function LoginPage() {
+export default function SignInPage() {
   const tLoginPage = useTranslations('LoginPage');
 
   return (
@@ -33,10 +33,9 @@ export default function LoginPage() {
         <div className='flex flex-col gap-2 px-1'>
           <h1 className='mb-6 text-2xl/9 font-bold tracking-tight'>{tLoginPage('title')}</h1>
         </div>
-      <LoginUserForm />
-      <UIDivider className="my-6" />
-      {/* Social Buttons */}
+        {/* Social Buttons */}
       <AuthProviderButtons />
+      <LoginUserForm />
     </main>
   );
 }
