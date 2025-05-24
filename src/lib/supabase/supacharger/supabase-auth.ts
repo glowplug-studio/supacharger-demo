@@ -217,3 +217,4 @@ export async function verifyOtp(email: string, token: string): Promise<ActionRes
 
   return { data, error: null };
 }
+

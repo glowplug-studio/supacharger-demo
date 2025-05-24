@@ -122,19 +122,20 @@ export function evaluatePasswordStrength(password: string): PasswordValidationRe
  * Returns a next-intl Message string based on the current locale.
  */
 export function supabaseErrorCodeLocalisation(response: string) {
-  let messageId = 'genericError';
+  const errorMap: Record<string, string> = {
+    invalid_credentials: 'invalidCredentials',
+    email_not_confirmed: 'emailNotConfirmed',
+    email_address_invalid: 'invalidEmail',
+    user_not_found: 'userNotFound',
+    over_request_rate_limit: 'overLimit',
+    user_banned: 'userBanned',
+    otp_expired: 'otpExpired',
+    same_password: 'samePassword',
+    AuthApiError: 'tokenAuthApiError',
+    unexpected_failure: 'genericError',
+    request_timeout: 'genericError',
+    // Add more mappings as needed
+  };
 
-  if (response == 'invalid_credentials') messageId = 'invalidCredentials';
-  if (response === 'email_not_confirmed') messageId = 'emailNotConfirmed';
-  if (response === 'email_address_invalid') messageId = 'invalidEmail';
-  if (response === 'user_not_found') messageId = 'userNotFound';
-  if (response === 'over_request_rate_limit') messageId = 'overLimit';
-  if (response === 'user_banned') messageId = 'userBanned';
-  if (response === 'otp_expired') messageId = 'otpExpired';
-  if (response === 'same_password') messageId = 'samePassword';
-  if (response === 'unexpected_failure' || response === 'request_timeout') messageId = 'genericError';
-
-  //@TODO theres a lot more to handle! and this doesnt currently work
-
-  return messageId; // Pass the variable directly
+  return errorMap[response] || 'genericError';
 }

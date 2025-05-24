@@ -1,18 +1,26 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { toast } from 'react-toastify';
 
+import InlineLoaderDark from '@/assets/images/ui/InlineLoaderDark.svg';
 import OTPField from '@/components/ui/otp-field';
 import { verifyOtp } from '@/lib/supabase/supacharger/supabase-auth';
-import { isValidEmail } from '@/supacharger/utils/helpers';
+import { SC_CONFIG } from '@/supacharger/supacharger-config';
+import { isValidEmail, supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
+import * as LabelPrimitive from '@radix-ui/react-label';
 
 export function OtpFieldsForm({ email }: { email: string }) {
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
+  const tOTPFormComponent = useTranslations('OTPFormComponent');
+  const tAuthTerms = useTranslations('AuthTerms');
+  const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
 
   const handleVerifyOtp = async (email: string, otpValue: string) => {
     if (!isValidEmail(email)) {
-      alert('Please enter a valid email before verifying OTP.');
+      toast.error(tOTPFormComponent('invalidEmail'), SC_CONFIG.TOAST_CONFIG);
       return;
     }
 
@@ -20,16 +28,16 @@ export function OtpFieldsForm({ email }: { email: string }) {
     try {
       const result = await verifyOtp(email, otpValue);
       if (!result) {
-        alert('Verification failed');
+        toast.error(tAuthTerms('loginSuccess'), SC_CONFIG.TOAST_CONFIG);
         return;
       }
       if (result.error) {
-        alert(result.error.message || String(result.error));
+        toast.error(tSupabaseErrorCodes(supabaseErrorCodeLocalisation('AuthApiError')), SC_CONFIG.TOAST_CONFIG);
       } else {
-        alert('OTP verified!');
+        toast.success(tAuthTerms('accountEmailVerified'), SC_CONFIG.TOAST_CONFIG);
       }
     } catch (err: any) {
-      alert(err?.message || 'Unknown error');
+      toast.error(tSupabaseErrorCodes(supabaseErrorCodeLocalisation('genericError')), SC_CONFIG.TOAST_CONFIG);
     } finally {
       setLoading(false);
     }
@@ -43,11 +51,25 @@ export function OtpFieldsForm({ email }: { email: string }) {
   };
 
   return (
-    <div>
-      <OTPField length={6} onValueChange={handleOtpChange} disabled={loading} />
-      {loading && (
-        <div className="mt-2 text-sm text-gray-500">Verifying...</div>
-      )}
-    </div>
+    <div id='sc_otp-fields-verification-form' className='space-y-3'>
+  <h2 className='mb-2 text-2xl/9 font-bold tracking-tight'>{tOTPFormComponent('title')}</h2>
+  <p className='text-xs'>{tOTPFormComponent('description')}</p>
+
+  <LabelPrimitive.Root htmlFor='otp-group' className='mb-2 block font-medium'>
+    {tOTPFormComponent('fieldLabel')}
+  </LabelPrimitive.Root>
+
+  <div className='flex flex-col items-center justify-center rounded-md border bg-gray-100 p-5 h-28'>
+    {loading ? (
+      <div className='flex flex-col items-center'>
+        <InlineLoaderDark />
+        <span className="mt-2 text-sm text-gray-500"></span>
+      </div>
+    ) : (
+      <OTPField length={6} onValueChange={handleOtpChange} />
+    )}
+  </div>
+</div>
+
   );
 }

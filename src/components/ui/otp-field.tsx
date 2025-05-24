@@ -7,8 +7,8 @@ import * as OTPPrimitive from '@radix-ui/react-one-time-password-field';
 const OTPField = React.forwardRef<
   React.ElementRef<typeof OTPPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof OTPPrimitive.Root> & { length?: number }
->(({ length = 6, className, ...props }, ref) => (
-  <OTPPrimitive.Root ref={ref} {...props} className={className}>
+>(({ length = 6, className, id, ...props }, ref) => (
+  <OTPPrimitive.Root ref={ref} id={id} {...props} className={className}>
     {Array.from({ length }).map((_, i) => (
       <OTPPrimitive.Input
         key={i}

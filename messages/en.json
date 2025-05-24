@@ -29,8 +29,9 @@
     "createAnAccount": "Create an account",
     "signUp": "Sign Up",
     "retypePassword": "Retype Password",
-    "sendNewAuthEmailLabel": "Your need to activate your account",
-    "sendNewAuthEmailButtonLabel": "Resend activation link",
+    "sendNewAuthEmailLabel": "Send another verification email",
+    "sendNewAuthEmailButtonLabel": "Resend verification email",
+    "accountEmailVerified": "Resend verification email",
     "sendNewAuthEmailSendingButtonLabel": "Sending",
     "sendNewAuthEmailSentButtonLabel": "Sent",
     "resendConfirmationEmailSent": "Confirm email link resent, check your email",
@@ -61,14 +62,15 @@
   },
   "SupabaseErrorCodes": {
     "invalidCredentials": "Login Failed. Please check your email and password and try again",
-    "emailNotConfirmed": "Whooops, account not activated",
+    "emailNotConfirmed": "Whooops, email not verified",
     "invalidEmail": "Invalid email address. Please use a valid email address",
     "userNotFound": "Account not found. Please double-check your email and password and try again",
     "overLimit": "Too many requests. Please wait a few minutes and try again",
     "userBanned": "This account has been suspended",
     "genericError": "There was an unexpected problem",
     "otpExpired": "The One Time Passcode has expired or is invalid",
-    "samePassword": "New password should be different from the old password"
+    "samePassword": "New password should be different from the old password",
+    "tokenAuthApiError": "Token has expired or is invalid"
   },
   "Toasts": {
     "logoutFailed": "There was a problem logging you out",
@@ -87,7 +89,7 @@
     "description": "We will send a password reset link to your email",
     "expiredCode": "The reset code is invalid or expired",
     "verifyingCode": "Verifying code...",
-    "noCode": "There is no activation code, or the code is invalid",
+    "noCode": "There is no verification code, or the code is invalid",
     "getResetLink": "Send link",
     "emailSent": "Link sent, check your inbox",
     "enterEmailPlaceholder": "Enter your email"
@@ -105,8 +107,10 @@
     "signInWithSocialLabel": "Sing in with a social account"
   },
   "OTPFormComponent": {
-    "title": "Enter Code",
-    "description": "Enter the code we sent to your email. Alternatively click the link."
+    "title": "Verification Code",
+    "description": "Enter the code we sent to you, or click the verification button in the email.",
+    "fieldLabel": "Enter Code",
+    "invalidEmail": "Enter a valid email before verifying code"
   },
   "PasswordUpdateFormComponent": {
     "title": "Update your Password"
