@@ -17,54 +17,53 @@ import { UIDivider } from '../ui/divider';
 
 import { OtpFieldsForm } from './otp-fields-verify-form';
 
-const renderAuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some((enabled) => enabled);
-
-const AuthProviderButtons = renderAuthProviderButtons
-  ? dynamic(() => import('@/supacharger/components/buttons/auth-provider-buttons'), {
-      ssr: true,
-    })
+// Dynamically import social and Brevo components if enabled
+const AuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some(Boolean)
+  ? dynamic(() => import('@/supacharger/components/buttons/auth-provider-buttons'), { ssr: true })
   : null;
 
-/**
- * BREVOCODE
- */
-const BrevoNewsletterRegistrationCheckbox = dynamic(
-  () => import('@/supacharger/plugins/scp_brevo/brevoNewsletterRegistrationCheckbox'),
-  {
-    ssr: true,
-  }
-);
+const BrevoNewsletterRegistrationCheckbox = SCP_REGISTRY.BREVO.ENABLED
+  ? dynamic(() => import('@/supacharger/plugins/scp_brevo/brevoNewsletterRegistrationCheckbox'), { ssr: true })
+  : null;
 
 export function CreateAccountForm() {
+  // State
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [accountCreated, setAccountCreated] = useState(false);
+  const [passwordSectionOpen, setPasswordSectionOpen] = useState(false);
 
+  // Translations
   const tAuthTerms = useTranslations('AuthTerms');
   const tCreateAccountFormComponent = useTranslations('CreateAccountFormComponent');
 
-  const handleToggle = () => {
-    setShowPassword(!showPassword);
+  // Handlers
+  const handleTogglePassword = () => setShowPassword((v) => !v);
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    if (!passwordSectionOpen && e.target.value.length > 0) {
+      setPasswordSectionOpen(true);
+    }
+    // If user deletes all, keep open (do nothing)
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     try {
       const formData = new FormData();
       formData.append('email', email);
       formData.append('password', password);
-
       const result = await createUserByEmailPassword(formData);
       if (result?.error) {
         toast.error('Failed to create account: ' + result.error);
         setError(result.error.message || String(result.error));
       } else {
         toast.success('Account created successfully');
-        setAccountCreated(true); // Show OTP form
+        setAccountCreated(true);
         setError(null);
       }
     } catch (error: any) {
@@ -76,23 +75,19 @@ export function CreateAccountForm() {
 
   return (
     <>
-      {/* Social Auth Buttons + Divider, always visible */}
-      {renderAuthProviderButtons && (
+      {/* Social Auth Buttons + Divider */}
+      {AuthProviderButtons && (
         <div className="social-auth-container">
-          {AuthProviderButtons && (
-            <div>
-              <AuthProviderButtons />
-            </div>
-          )}
+          <AuthProviderButtons />
           <UIDivider text={tCreateAccountFormComponent('orCreateAccountWithEmail')} className="my-6" />
         </div>
       )}
 
-      {/* Email Signup Form, always visible unless account is created */}
+      {/* Email Signup Form */}
       {!accountCreated && (
-        <form onSubmit={handleSubmit} className={renderAuthProviderButtons ? 'mt-6' : ''}>
+        <form onSubmit={handleSubmit} className={AuthProviderButtons ? 'mt-6' : ''}>
           <div className='my-2'>
-            <label htmlFor='email' className='block text-gray-700'>
+            <label htmlFor='email' className='text-md block px-1'>
               {tAuthTerms('emailAddress')}
             </label>
             <div className='mt-2'>
@@ -102,70 +97,80 @@ export function CreateAccountForm() {
                 type='email'
                 required
                 autoComplete='email'
-                className='focus:shadow-outline focus focus:outline-hidden w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
+                className='focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
               />
             </div>
           </div>
-          <div className='my-2'>
-            <div className='flex items-center justify-between'>
-              <button
-                type='button'
-                className='text-gray-500 hover:text-gray-700'
-                aria-label='Show password'
-                onClick={handleToggle}
-              >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
-            </div>
-            <div className='mt-2'>
-              <PasswordValidationIndicator
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                name='password'
-                id='password'
-                type={showPassword ? 'text' : 'password'}
-              />
-            </div>
-          </div>
-          {/* Retype password field (hide when showPassword is true) */}
-          {!showPassword && (
+          <div
+            id="sc_passwords-submit"
+            className={`
+              transition-all duration-500 overflow-hidden
+              ${passwordSectionOpen ? 'max-h-[1000px]' : 'max-h-0'}
+            `}
+          >
             <div className='my-2'>
-              <label htmlFor='password-again' className='block text-gray-700'>
-                {tAuthTerms('retypePassword')}
-              </label>
-              <div>
-                <Input
-                  id='password-again'
-                  name='password-again'
-                  type='password'
-                  required
-                  className='focus:shadow-outline focus focus:outline-hidden mt-2 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
-                  value={retypePassword}
-                  onChange={(e) => setRetypePassword(e.target.value)}
-                />
+              {/* FLEX ROW: PasswordValidationIndicator left, Eye icon right */}
+              <div className="mt-2 flex items-center">
+                <div className="flex-1">
+                  <PasswordValidationIndicator
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    name='password'
+                    id='password'
+                    type={showPassword ? 'text' : 'password'}
+                  />
+                </div>
+                <button
+                  type='button'
+                  className='ml-2 text-gray-500 hover:text-gray-700'
+                  aria-label='Show password'
+                  onClick={handleTogglePassword}
+                  tabIndex={0}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
               </div>
             </div>
-          )}
-          {error && <p className='error'>{error}</p>}
-          {/* BREVOCODE */}
-          {SCP_REGISTRY.BREVO.ENABLED && <BrevoNewsletterRegistrationCheckbox />}
-          <div className='mt-4'>
-            <button type='submit' className='btn w-full bg-primary text-white hover:bg-teal-800'>
-              {tAuthTerms('signUp')} <CircleArrowRight size={18} className='' />
-            </button>
+            {/* Retype password field (hide when showPassword is true) */}
+            {!showPassword && (
+              <div className='my-2'>
+                <label htmlFor='password-again' className='block text-gray-700'>
+                  {tAuthTerms('retypePassword')}
+                </label>
+                <div>
+                  <Input
+                    id='password-again'
+                    name='password-again'
+                    type='password'
+                    required
+                    className='focus:shadow-outline mt-2 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
+                    value={retypePassword}
+                    onChange={(e) => setRetypePassword(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+            {error && <p className='error'>{error}</p>}
+            {BrevoNewsletterRegistrationCheckbox && <BrevoNewsletterRegistrationCheckbox />}
+            <div className='mt-4'>
+              <button id='sc_signup-button' type='submit' className='btn w-full bg-primary text-white hover:bg-teal-800'>
+                {tAuthTerms('signUp')} <CircleArrowRight size={18} />
+              </button>
+            </div>
           </div>
         </form>
       )}
 
-      {/* OTP Form, only visible after account creation */}
+      {/* OTP Form */}
       {accountCreated && (
         <div id='sc_otp-fields'>
           <OtpFieldsForm email={email} />
         </div>
       )}
 
+      {/* Login Link */}
       <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
         <div>
           <span className='text-sm font-normal'>{tCreateAccountFormComponent('iAlreadyHaveAnAccount')} </span>

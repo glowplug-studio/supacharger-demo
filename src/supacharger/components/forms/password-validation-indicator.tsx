@@ -138,7 +138,7 @@ export default function PasswordValidationIndicator({
   return (
     <div className="space-y-2 relative">
       {/* Label */}
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+      <label htmlFor={id} className="text-md block px-1">
         {tAuthTerms("newPassword")}
       </label>
 
