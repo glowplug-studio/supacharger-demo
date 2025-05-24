@@ -6,14 +6,14 @@ import { Check, SquareDashed } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
-import { evaluatePasswordStrength } from "@/supacharger/utils/helpers";
-
-// Individual validators
-const hasLowercase = (newPassword: string) => /[a-z]/.test(newPassword);
-const hasUppercase = (newPassword: string) => /[A-Z]/.test(newPassword);
-const hasDigit = (newPassword: string) => /\d/.test(newPassword);
-const hasLetter = (newPassword: string) => /[A-Za-z]/.test(newPassword);
-const hasSpecial = (newPassword: string) => /[^A-Za-z0-9]/.test(newPassword);
+import {
+  evaluatePasswordStrength,
+  hasDigit,
+  hasLetter,
+  hasLowercase,
+  hasSpecial,
+  hasUppercase,
+} from "@/supacharger/utils/helpers";
 
 interface ValidationItem {
   key: string;

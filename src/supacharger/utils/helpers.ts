@@ -10,12 +10,9 @@ import { SC_CONFIG } from '@/supacharger/supacharger-config';
  *  Returns the full URL by appending the provided path to the base URL.
  * */
 export function getURL(path = '') {
-  // Get the base URL, defaulting to localhost if not set.
   const baseURL = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') || 'http://localhost:3000';
-  // Ensure HTTPS for non-localhost URLs and format the path.
   const formattedURL = baseURL.startsWith('http') ? baseURL : `https://${baseURL}`;
   const cleanPath = path.replace(/^\/+/, '');
-  // Return the full URL.
   return cleanPath ? `${formattedURL}/${cleanPath}` : formattedURL;
 }
 
@@ -36,7 +33,6 @@ export function getEnvVar(varValue: string | undefined, varName: string): string
 /**
  *  Email Validation
  * */
-
 export function isValidEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -51,6 +47,12 @@ interface PasswordValidationResult {
 }
 
 // --- Individual Validators (return boolean only) ---
+
+export const hasLowercase = (password: string) => /[a-z]/.test(password);
+export const hasUppercase = (password: string) => /[A-Z]/.test(password);
+export const hasDigit = (password: string) => /\d/.test(password);
+export const hasLetter = (password: string) => /[A-Za-z]/.test(password);
+export const hasSpecial = (password: string) => /[^A-Za-z0-9]/.test(password);
 
 function validateNoRequired(_password: string): boolean {
   return true;
@@ -72,7 +74,8 @@ export {
   validateLettersDigits,
   validateLowerUpperLettersDigits,
   validateLowerUpperLettersDigitsSymbols,
-  validateNoRequired};
+  validateNoRequired
+};
 
 // --- Main Pass Eval Function ---
 
@@ -115,8 +118,6 @@ export function evaluatePasswordStrength(password: string): PasswordValidationRe
       return { valid: false, message: 'Invalid password requirements configuration.' };
   }
 }
-
-
 
 /**
  * Returns a next-intl Message string based on the current locale.
