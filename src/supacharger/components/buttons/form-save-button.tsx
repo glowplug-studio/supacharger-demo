@@ -24,7 +24,7 @@ export default function SaveButton({
   onClick,
   type = 'submit',
   disabled = false,
-  className = '',
+  className = 'btn ',
 }: SaveButtonProps) {
   return (
     <Button

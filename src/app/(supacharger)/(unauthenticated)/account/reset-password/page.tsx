@@ -17,7 +17,7 @@ import { useTranslations } from 'next-intl';
 import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
 import ResetPasswordForm from '@/supacharger/components/forms/reset-password-request-link-form';
 
-export default function LoginPage() {
+export default function ResetPasswordRequestEmailPage() {
   const tPasswordResetPage = useTranslations('PasswordResetPage');
 
   return (

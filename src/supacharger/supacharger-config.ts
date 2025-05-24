@@ -23,7 +23,7 @@ export const SC_CONFIG = {
    */
 
   //@toto this should be translatable! this has been done using en.json Global and in  src/app/(supacharger)/(unauthenticated)/account/login/page.tsx
-  SITE_TITLE: 'Kiekie',
+  SITE_TITLE: 'TāmakiChat',
   SITE_DESCRIPTION: 'Start your next project without reinventing the wheel.',
 
   /**
@@ -90,6 +90,8 @@ export const SC_CONFIG = {
    * ==========
    */
 
+  // Allow emails with a + in them eg test+1@gmail.com
+  EMAIL_ALLOW_PLUSADDRESSING: false,
   /**
    *
    * Password Strength Settings
@@ -116,8 +118,8 @@ export const SC_CONFIG = {
    * Only the providers listed here are supported at this point in time.
    */
   AUTH_PROVDERS_ENABLED: {
-    google: true,
-    facebook: true,
+    google: false,
+    facebook: false,
   },
 
   /**

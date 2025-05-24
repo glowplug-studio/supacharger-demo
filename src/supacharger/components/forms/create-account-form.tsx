@@ -1,200 +1,300 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { ArrowLeft, CircleArrowRight, Eye, EyeOff, Mail } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { Input } from '@/components/ui/input';
 import { createUserByEmailPassword } from '@/lib/supabase/supacharger/supabase-auth';
+import SaveButton from '@/supacharger/components/buttons/form-save-button';
 import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
 import { SCP_REGISTRY } from '@/supacharger/plugins/registry';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
+import { isValidEmail, supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
 
-import { UIDivider } from '../ui/divider';
+import { OtpFieldsForm } from './otp-fields-verify-form';
 
-import OtpInput from './account-otp-code-form';
-
-const renderAuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some((enabled) => enabled);
-
-const AuthProviderButtons = renderAuthProviderButtons
-  ? dynamic(() => import('@/supacharger/components/buttons/auth-provider-buttons'), {
-      ssr: true,
-    })
+// Dynamically import social and Brevo components if enabled
+const AuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some(Boolean)
+  ? dynamic(() => import('@/supacharger/components/buttons/auth-provider-buttons'), { ssr: true })
   : null;
 
-/**
- * BREVOCODE
- */
-const BrevoNewsletterRegistrationCheckbox = dynamic(
-  () => import('@/supacharger/plugins/scp_brevo/brevoNewsletterRegistrationCheckbox'),
-  {
-    ssr: true,
-  }
-);
+const BrevoNewsletterRegistrationCheckbox = SCP_REGISTRY.BREVO.ENABLED
+  ? dynamic(() => import('@/supacharger/plugins/scp_brevo/brevoNewsletterRegistrationCheckbox'), { ssr: true })
+  : null;
 
 export function CreateAccountForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [retypePassword, setRetypePassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(null);
-  // If no social auth buttons, show the email form by default
-  const [showForm, setShowForm] = useState(!renderAuthProviderButtons);
+  const [accountCreated, setAccountCreated] = useState(false);
+  const [passwordSectionOpen, setPasswordSectionOpen] = useState(false);
+  const [passwordIsValid, setPasswordIsValid] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const tAuthTerms = useTranslations('AuthTerms');
+  const tGlobalUI = useTranslations('GlobalUI');
   const tCreateAccountFormComponent = useTranslations('CreateAccountFormComponent');
+  const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
+  const tEvaluatePasswordStrengthComponent = useTranslations('evaluatePasswordStrengthComponent');
 
-  const handleToggle = () => {
-    setShowPassword(!showPassword);
-  };
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: 'onSubmit', // only validate on submit
+    defaultValues: {
+      email: '',
+      password: '',
+      retypePassword: '',
+    },
+  });
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const email = watch('email');
+  const password = watch('password');
+  const retypePassword = watch('retypePassword');
 
-    try {
-      const formData = new FormData();
-      formData.append('email', email);
-      formData.append('password', password);
-
-      const result = await createUserByEmailPassword(formData);
-      if (result?.error) {
-        toast.error('Failed to create account' + result.error);
-      } else {
-        toast.success('Account created successfully');
-      }
-    } catch (error) {
-      console.error('Error creating user:', error);
-      toast.error('Failed to create account');
+  // Open password section when email is typed
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue('email', e.target.value);
+    if (!passwordSectionOpen && e.target.value.length > 0) {
+      setPasswordSectionOpen(true);
     }
   };
 
-  // Updated CSS classes for slower, ease-in transitions
-  const sectionBase =
-    'transition-all duration-700 ease-in overflow-hidden';
-  const sectionVisible = 'max-h-[1000px] opacity-100 pointer-events-auto';
-  const sectionHidden = 'max-h-0 opacity-0 pointer-events-none';
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue('password', e.target.value);
+  };
+
+  const handleRetypePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue('retypePassword', e.target.value);
+  };
+
+  // Helper: which field is in error? (for aria-describedby)
+  const getAriaError = (field: string) => {
+    if (!formError) return undefined;
+    const err = formError.toLowerCase();
+    if (field === "email" && err.includes("email")) return "email-error";
+    if (field === "password" && err.includes("password") && !err.includes("retype")) return "password-error";
+    if (field === "retypePassword" && err.includes("retype")) return "retypePassword-error";
+    return undefined;
+  };
+
+  // Form submit
+  const onSubmit = async (data: any) => {
+    setFormError(null);
+
+    // Required fields
+    if (!data.email) {
+      toast.error(tCreateAccountFormComponent('missingEmail'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tCreateAccountFormComponent('missingEmail'));
+      return;
+    }
+    if (!data.password) {
+      toast.error(tCreateAccountFormComponent('missingPassword'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tCreateAccountFormComponent('missingPassword'));
+      return;
+    }
+    if (!showPassword && !data.retypePassword) {
+      toast.error(tCreateAccountFormComponent('missingRetypePassword'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tCreateAccountFormComponent('missingRetypePassword'));
+      return;
+    }
+
+    // Email format
+    if (!isValidEmail(data.email)) {
+      toast.error(tCreateAccountFormComponent('invalidEmail'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tCreateAccountFormComponent('invalidEmail'));
+      return;
+    }
+
+    // Password strength
+    if (!passwordIsValid) {
+      toast.error(tEvaluatePasswordStrengthComponent('passwordNotStrongEnough'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tEvaluatePasswordStrengthComponent('passwordNotStrongEnough'));
+      return;
+    }
+
+    // Password match
+    if (!showPassword && data.password !== data.retypePassword) {
+      toast.error(tCreateAccountFormComponent('passwordMismatch'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tCreateAccountFormComponent('passwordMismatch'));
+      return;
+    }
+
+    setIsSubmitting(true);
+    setIsSubmitSuccess(false);
+
+    try {
+      const apiFormData = new FormData();
+      apiFormData.append('email', data.email);
+      apiFormData.append('password', data.password);
+
+      const result = await createUserByEmailPassword(apiFormData);
+
+      setIsSubmitting(false);
+
+      if (result?.error) {
+        setFormError(tSupabaseErrorCodes(supabaseErrorCodeLocalisation('signup_auth_api_error')));
+        toast.error(
+          tSupabaseErrorCodes(supabaseErrorCodeLocalisation('signup_auth_api_error')),
+          SC_CONFIG.TOAST_CONFIG
+        );
+        setIsSubmitSuccess(false);
+      } else {
+        if (
+          result?.data?.user?.id &&
+          Array.isArray(result.data.user.identities) &&
+          result.data.user.identities.length === 0
+        ) {
+          toast.warning(tAuthTerms('accountAlreadyExists'), SC_CONFIG.TOAST_CONFIG);
+        } else {
+          toast.success(tAuthTerms('createAccountSuccess'), SC_CONFIG.TOAST_CONFIG);
+          setAccountCreated(true);
+          setIsSubmitSuccess(true);
+          reset();
+        }
+      }
+    } catch (error: any) {
+      setIsSubmitting(false);
+      setIsSubmitSuccess(false);
+      setFormError(tSupabaseErrorCodes('genericError'));
+      toast.error(tSupabaseErrorCodes('genericError'), SC_CONFIG.TOAST_CONFIG);
+    }
+  };
 
   return (
     <>
-      {/* Social Auth Buttons + Divider, always mounted */}
-      {renderAuthProviderButtons && (
-        <div
-          className={`${sectionBase} ${!showForm ? sectionVisible : sectionHidden} social-auth-container`}
-        >
-          {AuthProviderButtons && (
-            <div>
-              <AuthProviderButtons />
-            </div>
-          )}
-          <UIDivider text={tCreateAccountFormComponent('orCreateAccountWithEmail')} className="my-6" />
+      {!accountCreated && AuthProviderButtons && (
+        <div className='social-auth-container'>
+          <AuthProviderButtons />
         </div>
       )}
 
-      {/* Only show the toggle button if we have social auth buttons */}
-      {renderAuthProviderButtons && (
-        <button
-          type='button'
-          onClick={() => setShowForm(!showForm)}
-          className={`btn w-full ${showForm ? 'bg-gray-100 text-gray-700' : 'bg-primary text-white'}`}
-        >
-          {showForm
-            ? tCreateAccountFormComponent('hideEmailFormButtonText')
-            : tCreateAccountFormComponent('showEmailFormButtonText')}
-          {showForm ? <ArrowLeft size={18} /> : <Mail size={18} />}
-        </button>
-      )}
-
-      {/* Email Form, always mounted */}
-      <div className={`${sectionBase} ${showForm ? sectionVisible : sectionHidden}`}>
-        <form onSubmit={handleSubmit} className={renderAuthProviderButtons ? 'mt-6' : ''}>
+      {!accountCreated && (
+        <form onSubmit={handleSubmit(onSubmit)} className={AuthProviderButtons ? 'mt-6' : ''} noValidate>
           <div className='my-2'>
-            <label htmlFor='email' className='block text-gray-700'>
+            <label htmlFor='email' className='text-md block px-1'>
               {tAuthTerms('emailAddress')}
             </label>
-            <div className='mt-2'>
+            <div className='mt-2 px-1'>
               <Input
                 id='email'
-                name='email'
                 type='email'
+                maxLength={30}
                 required
                 autoComplete='email'
-                className='focus:shadow-outline focus focus:outline-hidden w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                className='input'
+                aria-invalid={!!formError && formError.toLowerCase().includes("email")}
+                aria-describedby={getAriaError("email")}
+                {...register('email', {
+                  onChange: handleEmailChange,
+                })}
               />
+              {formError && formError.toLowerCase().includes("email") && (
+                <div id="email-error" className="sc_message sc_message-error">{formError}</div>
+              )}
             </div>
           </div>
-          <div className='my-2'>
-            <div className='flex items-center justify-between'>
-              <button
-                type='button'
-                className='text-gray-500 hover:text-gray-700'
-                aria-label='Show password'
-                onClick={handleToggle}
-              >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
-            </div>
-            <div className='mt-2'>
-              <PasswordValidationIndicator
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                name='password'
-                id='password'
-                type={showPassword ? 'text' : 'password'}
-              />
-            </div>
-          </div>
-          {/* Retype password field (hide when showPassword is true) */}
           <div
-            className={`${sectionBase} ${!showPassword ? sectionVisible : sectionHidden} my-2`}
+            id='sc_passwords-submit'
+            className={`
+              transition-all duration-500
+              ${passwordSectionOpen ? 'max-h-[1000px]' : 'max-h-0 overflow-hidden'}
+            `}
           >
-            {!showPassword && (
-              <>
-                <label htmlFor='password-again' className='block text-gray-700'>
-                  {tAuthTerms('retypePassword')}
-                </label>
-                <div>
-                  <Input
-                    id='password-again'
-                    name='password-again'
-                    type='password'
-                    required
-                    className='focus:shadow-outline focus focus:outline-hidden mt-2 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
-                    value={retypePassword}
-                    onChange={(e) => setRetypePassword(e.target.value)}
+            <div className='mb-4 mt-2'>
+              <div className='mt-2 flex items-center'>
+                <div className='flex-1'>
+                  <PasswordValidationIndicator
+                    value={password}
+                    onChange={handlePasswordChange}
+                    name='password'
+                    id='password'
+                    type={showPassword ? 'text' : 'password'}
+                    onValidationChange={(isValid) => setPasswordIsValid(isValid)}
                   />
                 </div>
-              </>
+                <button
+                  type='button'
+                  className='ml-2 mt-4 text-gray-400 hover:text-gray-800'
+                  aria-label='Show password'
+                  onClick={() => setShowPassword((v) => !v)}
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+            </div>
+            {!showPassword && (
+              <div className='my-2'>
+                <label htmlFor='retypePassword' className='text-md block px-1'>
+                  {tAuthTerms('retypePassword')}
+                </label>
+                <div className='mt-2 px-1'>
+                  <Input
+                    id='retypePassword'
+                    type='password'
+                    maxLength={30}
+                    required
+                    autoComplete='new-password'
+                    aria-invalid={!!formError && formError.toLowerCase().includes("retype")}
+                    aria-describedby={getAriaError("retypePassword")}
+                    {...register('retypePassword', {
+                      onChange: handleRetypePasswordChange,
+                    })}
+                  />
+                  {formError && formError.toLowerCase().includes("retype") && (
+                    <div id="retypePassword-error" className="sc_message sc_message-error">{formError}</div>
+                  )}
+                </div>
+              </div>
             )}
-          </div>
-          {error && <p className='error'>{error}</p>}
-          {/* BREVOCODE */}
-          {SCP_REGISTRY.BREVO.ENABLED && <BrevoNewsletterRegistrationCheckbox />}
-          <div className='mt-4'>
-            <button type='submit' className='btn w-full bg-primary text-white hover:bg-teal-800'>
-              {tAuthTerms('signUp')} <CircleArrowRight size={18} className='' />
-            </button>
+            {BrevoNewsletterRegistrationCheckbox && <BrevoNewsletterRegistrationCheckbox />}
+            {/* General password errors */}
+            {formError && formError.toLowerCase().includes("password") && !formError.toLowerCase().includes("retype") && (
+              <div id="password-error" className="sc_message sc_message-error mx-1">{formError}</div>
+            )}
+            <div className='mt-4 px-1'>
+              <SaveButton
+                type='submit'
+                className='w-full h-12'
+                isLoading={isSubmitting}
+                isSuccess={isSubmitSuccess}
+                initialLabel={tAuthTerms('signUp')}
+                savingLabel={tGlobalUI('buttonThinking')}
+                completeLabel={tGlobalUI('buttonSaved')}
+              />
+            </div>
           </div>
         </form>
-      </div>
+      )}
 
-      <div>
-        {/* Pass the up-to-date email from state */}
-        <OtpInput email={email} />
-      </div>
-
-      <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
-        <div>
-          <span className='text-sm font-normal'>{tCreateAccountFormComponent('iAlreadyHaveAnAccount')} </span>
-          <Link href='/account/login' className='text-sm font-normal'>
-            <span className='font-semibold'>{tAuthTerms('logIn')}</span>
-          </Link>
+      {accountCreated && (
+        <div id='sc_otp-fields'>
+          <OtpFieldsForm email={email} />
         </div>
-      </div>
+      )}
+
+      {!accountCreated && (
+        <div className='mt-4 flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
+          <div>
+            <span className='text-sm font-normal'>{tCreateAccountFormComponent('iAlreadyHaveAnAccount')} </span>
+            <Link href='/account/login' className='text-sm font-normal'>
+              <span className='font-semibold'>{tAuthTerms('logIn')}</span>
+            </Link>
+          </div>
+        </div>
+      )}
     </>
   );
 }

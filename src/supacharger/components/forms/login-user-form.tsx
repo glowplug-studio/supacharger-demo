@@ -120,7 +120,6 @@ export function LoginUserForm() {
             name='email'
             maxLength={40}
             required
-            autoFocus
             autoComplete='email'
             placeholder='me@example.com'
             value={email}

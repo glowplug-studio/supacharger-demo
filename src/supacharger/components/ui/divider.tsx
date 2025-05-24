@@ -6,8 +6,8 @@ interface UIDividerProps {
 }
 
 export function UIDivider({ text, className }: UIDividerProps) {
-  const tGlobal = useTranslations('Global');
-  const displayText = text || tGlobal('or');
+  const tAuthTerms = useTranslations('AuthTerms');
+  const displayText = text || tAuthTerms('createAccountWithEmail');
 
   return (
     <div className={`flex items-center gap-4${className ? ` ${className}` : ''}`}>
