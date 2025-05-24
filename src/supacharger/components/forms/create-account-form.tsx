@@ -76,18 +76,23 @@ export function CreateAccountForm() {
     }
   };
 
-  // Updated CSS classes for slower, ease-in transitions
+  // Only height transition, no fade
   const sectionBase =
-    'transition-all duration-700 ease-in overflow-hidden';
-  const sectionVisible = 'max-h-[1000px] opacity-100 pointer-events-auto';
-  const sectionHidden = 'max-h-0 opacity-0 pointer-events-none';
+    'transition-all duration-700 ease-in overflow-hidden absolute top-0 left-0 w-full';
+  const sectionVisible = 'max-h-[1000px] pointer-events-auto';
+  const sectionHidden = 'max-h-0 pointer-events-none';
+
+  // For stacking the forms
+  const containerBase = 'relative min-h-[420px]'; // Adjust min-h as needed
 
   return (
     <>
       {/* Social Auth Buttons + Divider, always mounted */}
       {renderAuthProviderButtons && (
         <div
-          className={`${sectionBase} ${!showForm ? sectionVisible : sectionHidden} social-auth-container`}
+          className={`transition-all duration-700 ease-in overflow-hidden ${
+            !showForm ? 'max-h-[1000px] pointer-events-auto' : 'max-h-0 pointer-events-none'
+          } social-auth-container`}
         >
           {AuthProviderButtons && (
             <div>
@@ -112,9 +117,13 @@ export function CreateAccountForm() {
         </button>
       )}
 
-      {/* Conditional rendering: Show signup form OR OTP form */}
-      {!accountCreated ? (
-        <div className={`${sectionBase} ${showForm ? sectionVisible : sectionHidden}`}>
+      {/* Both forms are always in the DOM, transitions fire simultaneously */}
+      <div className={containerBase} style={{ minHeight: 420, position: 'relative' }}>
+        {/* Signup Form */}
+        <div
+          className={`${sectionBase} ${!accountCreated && showForm ? sectionVisible : sectionHidden}`}
+          style={{ zIndex: !accountCreated && showForm ? 2 : 1 }}
+        >
           <form onSubmit={handleSubmit} className={renderAuthProviderButtons ? 'mt-6' : ''}>
             <div className='my-2'>
               <label htmlFor='email' className='block text-gray-700'>
@@ -156,7 +165,9 @@ export function CreateAccountForm() {
             </div>
             {/* Retype password field (hide when showPassword is true) */}
             <div
-              className={`${sectionBase} ${!showPassword ? sectionVisible : sectionHidden} my-2`}
+              className={`transition-all duration-700 ease-in overflow-hidden ${
+                !showPassword ? 'max-h-[1000px] pointer-events-auto' : 'max-h-0 pointer-events-none'
+              } my-2`}
             >
               {!showPassword && (
                 <>
@@ -187,11 +198,15 @@ export function CreateAccountForm() {
             </div>
           </form>
         </div>
-      ) : (
-        <div id='sc_otp-fields'>
+        {/* OTP Form */}
+        <div
+          id='sc_otp-fields'
+          className={`${sectionBase} ${accountCreated ? sectionVisible : sectionHidden}`}
+          style={{ zIndex: accountCreated ? 2 : 1 }}
+        >
           <OtpFieldsForm email={email} />
         </div>
-      )}
+      </div>
 
       <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
         <div>
