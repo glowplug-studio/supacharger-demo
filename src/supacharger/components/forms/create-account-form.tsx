@@ -112,7 +112,6 @@ export function CreateAccountForm() {
           SC_CONFIG.TOAST_CONFIG
         );
         setIsSubmitSuccess(false);
-        console.log(result);
       } else {
         if (
           result?.data?.user?.id &&
@@ -125,7 +124,6 @@ export function CreateAccountForm() {
           setAccountCreated(true);
           setIsSubmitSuccess(true);
         }
-        console.log(result);
       }
     } catch (error: any) {
       setIsSubmitting(false);
