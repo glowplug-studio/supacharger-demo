@@ -31,7 +31,7 @@
     "retypePassword": "Retype Password",
     "sendNewAuthEmailLabel": "Send another verification email",
     "sendNewAuthEmailButtonLabel": "Resend verification email",
-    "accountEmailVerified": "Resend verification email",
+    "accountEmailVerified": "Email Verified",
     "sendNewAuthEmailSendingButtonLabel": "Sending",
     "sendNewAuthEmailSentButtonLabel": "Sent",
     "resendConfirmationEmailSent": "Confirm email link resent, check your email",

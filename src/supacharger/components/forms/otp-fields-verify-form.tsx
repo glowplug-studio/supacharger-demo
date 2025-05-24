@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
 
@@ -17,6 +18,7 @@ export function OtpFieldsForm({ email }: { email: string }) {
   const tOTPFormComponent = useTranslations('OTPFormComponent');
   const tAuthTerms = useTranslations('AuthTerms');
   const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
+  const router = useRouter();
 
   const handleVerifyOtp = async (email: string, otpValue: string) => {
     if (!isValidEmail(email)) {
@@ -35,6 +37,8 @@ export function OtpFieldsForm({ email }: { email: string }) {
         toast.error(tSupabaseErrorCodes(supabaseErrorCodeLocalisation('AuthApiError')), SC_CONFIG.TOAST_CONFIG);
       } else {
         toast.success(tAuthTerms('accountEmailVerified'), SC_CONFIG.TOAST_CONFIG);
+        // Redirect to session home path
+        router.push(SC_CONFIG.SESSION_HOME_PATH);
       }
     } catch (err: any) {
       toast.error(tSupabaseErrorCodes(supabaseErrorCodeLocalisation('genericError')), SC_CONFIG.TOAST_CONFIG);
@@ -52,24 +56,23 @@ export function OtpFieldsForm({ email }: { email: string }) {
 
   return (
     <div id='sc_otp-fields-verification-form' className='space-y-3'>
-  <h2 className='mb-2 text-2xl/9 font-bold tracking-tight'>{tOTPFormComponent('title')}</h2>
-  <p className='text-xs'>{tOTPFormComponent('description')}</p>
+      <h2 className='mb-2 text-2xl/9 font-bold tracking-tight'>{tOTPFormComponent('title')}</h2>
+      <p className='text-xs'>{tOTPFormComponent('description')}</p>
 
-  <LabelPrimitive.Root htmlFor='otp-group' className='mb-2 block font-medium'>
-    {tOTPFormComponent('fieldLabel')}
-  </LabelPrimitive.Root>
+      <LabelPrimitive.Root htmlFor='otp-group' className='mb-2 block font-medium'>
+        {tOTPFormComponent('fieldLabel')}
+      </LabelPrimitive.Root>
 
-  <div className='flex flex-col items-center justify-center rounded-md border bg-gray-100 p-5 h-28'>
-    {loading ? (
-      <div className='flex flex-col items-center'>
-        <InlineLoaderDark />
-        <span className="mt-2 text-sm text-gray-500"></span>
+      <div className='flex flex-col items-center justify-center rounded-md border bg-gray-100 p-5 h-28'>
+        {loading ? (
+          <div className='flex flex-col items-center'>
+            <InlineLoaderDark />
+            <span className="mt-2 text-sm text-gray-500"></span>
+          </div>
+        ) : (
+          <OTPField length={6} onValueChange={handleOtpChange} />
+        )}
       </div>
-    ) : (
-      <OTPField length={6} onValueChange={handleOtpChange} />
-    )}
-  </div>
-</div>
-
+    </div>
   );
 }

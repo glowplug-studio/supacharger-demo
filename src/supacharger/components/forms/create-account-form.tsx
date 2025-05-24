@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -40,7 +40,8 @@ export function CreateAccountForm() {
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [accountCreated, setAccountCreated] = useState(false);
   // If no social auth buttons, show the email form by default
   const [showForm, setShowForm] = useState(!renderAuthProviderButtons);
 
@@ -61,13 +62,17 @@ export function CreateAccountForm() {
 
       const result = await createUserByEmailPassword(formData);
       if (result?.error) {
-        toast.error('Failed to create account' + result.error);
+        toast.error('Failed to create account: ' + result.error);
+        setError(result.error.message || String(result.error));
       } else {
         toast.success('Account created successfully');
+        setAccountCreated(true); // Show OTP form
+        setError(null);
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error creating user:', error);
       toast.error('Failed to create account');
+      setError(error?.message || 'Unknown error');
     }
   };
 
@@ -107,89 +112,86 @@ export function CreateAccountForm() {
         </button>
       )}
 
-      {/* Email Form, always mounted */}
-      <div className={`${sectionBase} ${showForm ? sectionVisible : sectionHidden}`}>
-        <form onSubmit={handleSubmit} className={renderAuthProviderButtons ? 'mt-6' : ''}>
-          <div className='my-2'>
-            <label htmlFor='email' className='block text-gray-700'>
-              {tAuthTerms('emailAddress')}
-            </label>
-            <div className='mt-2'>
-              <Input
-                id='email'
-                name='email'
-                type='email'
-                required
-                autoComplete='email'
-                className='focus:shadow-outline focus focus:outline-hidden w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+      {/* Conditional rendering: Show signup form OR OTP form */}
+      {!accountCreated ? (
+        <div className={`${sectionBase} ${showForm ? sectionVisible : sectionHidden}`}>
+          <form onSubmit={handleSubmit} className={renderAuthProviderButtons ? 'mt-6' : ''}>
+            <div className='my-2'>
+              <label htmlFor='email' className='block text-gray-700'>
+                {tAuthTerms('emailAddress')}
+              </label>
+              <div className='mt-2'>
+                <Input
+                  id='email'
+                  name='email'
+                  type='email'
+                  required
+                  autoComplete='email'
+                  className='focus:shadow-outline focus focus:outline-hidden w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
             </div>
-          </div>
-          <div className='my-2'>
-            <div className='flex items-center justify-between'>
-              <button
-                type='button'
-                className='text-gray-500 hover:text-gray-700'
-                aria-label='Show password'
-                onClick={handleToggle}
-              >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            <div className='my-2'>
+              <div className='flex items-center justify-between'>
+                <button
+                  type='button'
+                  className='text-gray-500 hover:text-gray-700'
+                  aria-label='Show password'
+                  onClick={handleToggle}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+              <div className='mt-2'>
+                <PasswordValidationIndicator
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  name='password'
+                  id='password'
+                  type={showPassword ? 'text' : 'password'}
+                />
+              </div>
+            </div>
+            {/* Retype password field (hide when showPassword is true) */}
+            <div
+              className={`${sectionBase} ${!showPassword ? sectionVisible : sectionHidden} my-2`}
+            >
+              {!showPassword && (
+                <>
+                  <label htmlFor='password-again' className='block text-gray-700'>
+                    {tAuthTerms('retypePassword')}
+                  </label>
+                  <div>
+                    <Input
+                      id='password-again'
+                      name='password-again'
+                      type='password'
+                      required
+                      className='focus:shadow-outline focus focus:outline-hidden mt-2 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
+                      value={retypePassword}
+                      onChange={(e) => setRetypePassword(e.target.value)}
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+            {error && <p className='error'>{error}</p>}
+            {/* BREVOCODE */}
+            {SCP_REGISTRY.BREVO.ENABLED && <BrevoNewsletterRegistrationCheckbox />}
+            <div className='mt-4'>
+              <button type='submit' className='btn w-full bg-primary text-white hover:bg-teal-800'>
+                {tAuthTerms('signUp')} <CircleArrowRight size={18} className='' />
               </button>
             </div>
-            <div className='mt-2'>
-              <PasswordValidationIndicator
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                name='password'
-                id='password'
-                type={showPassword ? 'text' : 'password'}
-              />
-            </div>
-          </div>
-          {/* Retype password field (hide when showPassword is true) */}
-          <div
-            className={`${sectionBase} ${!showPassword ? sectionVisible : sectionHidden} my-2`}
-          >
-            {!showPassword && (
-              <>
-                <label htmlFor='password-again' className='block text-gray-700'>
-                  {tAuthTerms('retypePassword')}
-                </label>
-                <div>
-                  <Input
-                    id='password-again'
-                    name='password-again'
-                    type='password'
-                    required
-                    className='focus:shadow-outline focus focus:outline-hidden mt-2 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
-                    value={retypePassword}
-                    onChange={(e) => setRetypePassword(e.target.value)}
-                  />
-                </div>
-              </>
-            )}
-          </div>
-          {error && <p className='error'>{error}</p>}
-          {/* BREVOCODE */}
-          {SCP_REGISTRY.BREVO.ENABLED && <BrevoNewsletterRegistrationCheckbox />}
-          <div className='mt-4'>
-            <button type='submit' className='btn w-full bg-primary text-white hover:bg-teal-800'>
-              {tAuthTerms('signUp')} <CircleArrowRight size={18} className='' />
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div id='sc_otp-fields'>
-        {/* Pass the up-to-date email from state */}
-
-        <form>
-          <OtpFieldsForm email={email}></OtpFieldsForm>
-        </form>
-
-      </div>
+          </form>
+        </div>
+      ) : (
+        <div id='sc_otp-fields'>
+          <OtpFieldsForm email={email} />
+        </div>
+      )}
 
       <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
         <div>
