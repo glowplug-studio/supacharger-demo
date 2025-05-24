@@ -145,7 +145,6 @@ export function CreateAccountForm() {
                     name='password-again'
                     type='password'
                     required
-                    className='focus:shadow-outline mt-2 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700'
                     value={retypePassword}
                     onChange={(e) => setRetypePassword(e.target.value)}
                   />
