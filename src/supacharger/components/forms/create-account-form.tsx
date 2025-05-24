@@ -72,7 +72,7 @@ export function CreateAccountForm() {
 
       if (result?.error) {
         toast.error(
-          tSupabaseErrorCodes(supabaseErrorCodeLocalisation('signup_auth_api_error')),
+          tSupabaseErrorCodes(supabaseErrorCodeLocalisation('signup_auth_api_error')), // generic catch all
           SC_CONFIG.TOAST_CONFIG
         );
         setIsSubmitSuccess(false);
