@@ -169,15 +169,17 @@ export function CreateAccountForm() {
         </div>
       )}
 
-      {/* Login Link */}
-      <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
-        <div>
-          <span className='text-sm font-normal'>{tCreateAccountFormComponent('iAlreadyHaveAnAccount')} </span>
-          <Link href='/account/login' className='text-sm font-normal'>
-            <span className='font-semibold'>{tAuthTerms('logIn')}</span>
-          </Link>
+      {/* Login instead Link */}
+      {!accountCreated && (
+        <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0 mt-4'>
+          <div>
+            <span className='text-sm font-normal'>{tCreateAccountFormComponent('iAlreadyHaveAnAccount')} </span>
+            <Link href='/account/login' className='text-sm font-normal'>
+              <span className='font-semibold'>{tAuthTerms('logIn')}</span>
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
