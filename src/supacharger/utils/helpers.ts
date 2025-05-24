@@ -1,3 +1,5 @@
+import * as EmailValidator from 'email-validator';
+
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 
 /** ==========
@@ -34,8 +36,9 @@ export function getEnvVar(varValue: string | undefined, varName: string): string
  *  Email Validation
  * */
 export function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
+  if (!EmailValidator.validate(email)) return false;
+  if (!SC_CONFIG.EMAIL_ALLOW_PLUSADDRESSING && email.includes('+')) return false;
+  return true;
 }
 
 /**

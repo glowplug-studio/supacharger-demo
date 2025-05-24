@@ -13,7 +13,7 @@ import SaveButton from '@/supacharger/components/buttons/form-save-button';
 import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
 import { SCP_REGISTRY } from '@/supacharger/plugins/registry';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
-import { supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
+import { isValidEmail, supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
 
 import { OtpFieldsForm } from './otp-fields-verify-form';
 
@@ -56,8 +56,34 @@ export function CreateAccountForm() {
     }
   };
 
-  // SaveButton handler renamed
   const handleCreateAccountRequest = async () => {
+    // Always require email
+    if (!email) {
+      toast.error(tCreateAccountFormComponent('missingEmail'), SC_CONFIG.TOAST_CONFIG);
+      return;
+    }
+    // Validate email format
+    if (!isValidEmail(email)) {
+      toast.error(tCreateAccountFormComponent('invalidEmail'), SC_CONFIG.TOAST_CONFIG);
+      return;
+    }
+
+    // Only validate password fields if the eye is NOT toggled on
+    if (!showPassword) {
+      if (!password) {
+        toast.error(tCreateAccountFormComponent('missingPassword'), SC_CONFIG.TOAST_CONFIG);
+        return;
+      }
+      if (!retypePassword) {
+        toast.error(tCreateAccountFormComponent('missingRetypePassword'), SC_CONFIG.TOAST_CONFIG);
+        return;
+      }
+      if (password !== retypePassword) {
+        toast.error(tCreateAccountFormComponent('passwordMismatch'), SC_CONFIG.TOAST_CONFIG);
+        return;
+      }
+    }
+
     setIsSubmitting(true);
     setIsSubmitSuccess(false);
     setError(null);
@@ -70,6 +96,8 @@ export function CreateAccountForm() {
       const result = await createUserByEmailPassword(formData);
       setIsSubmitting(false);
 
+      console.log(result);
+
       if (result?.error) {
         toast.error(
           tSupabaseErrorCodes(supabaseErrorCodeLocalisation('signup_auth_api_error')), // generic catch all
@@ -78,16 +106,17 @@ export function CreateAccountForm() {
         setIsSubmitSuccess(false);
         console.log(result);
       } else {
-        if (result?.data?.user?.id &&
+        if (
+          result?.data?.user?.id &&
           Array.isArray(result.data.user.identities) &&
-          result.data.user.identities.length === 0) {
+          result.data.user.identities.length === 0
+        ) {
           toast.warning(tAuthTerms('accountAlreadyExists'), SC_CONFIG.TOAST_CONFIG);
         } else {
           toast.success(tAuthTerms('createAccountSuccess'), SC_CONFIG.TOAST_CONFIG);
           setAccountCreated(true);
           setIsSubmitSuccess(true);
         }
-        console.log(result);
       }
     } catch (error: any) {
       setIsSubmitting(false);
@@ -117,6 +146,7 @@ export function CreateAccountForm() {
                 id='email'
                 name='email'
                 type='email'
+                maxLength={30}
                 required
                 autoComplete='email'
                 className='input'
@@ -166,6 +196,7 @@ export function CreateAccountForm() {
                     id='password-again'
                     name='password-again'
                     type='password'
+                    maxLength={30}
                     required
                     value={retypePassword}
                     onChange={(e) => setRetypePassword(e.target.value)}

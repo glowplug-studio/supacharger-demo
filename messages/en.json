@@ -106,7 +106,12 @@
   "CreateAccountFormComponent": {
     "title": "Create an Account",
     "orCreateAccountWithEmail": "Or create an account with Email",
-    "iAlreadyHaveAnAccount": "I already have an account"
+    "iAlreadyHaveAnAccount": "I already have an account",
+    "invalidEmail": "Enter a valid email",
+    "missingEmail": "Email is required",
+    "missingPassword": "Password is required",
+    "missingRetypePassword": "Retyped password is required",
+    "passwordMismatch": "Passwords do not match"
   },
   "OTPFormComponent": {
     "title": "Verification Code",
