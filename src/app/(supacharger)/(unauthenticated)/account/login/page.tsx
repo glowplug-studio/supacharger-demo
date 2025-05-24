@@ -26,13 +26,13 @@ export default function LoginPage() {
     <main id='sc_login-page'>
       {/* Mobile only logo */}
       <div className='flex items-center gap-2 lg:hidden'>
-        <div className='w-6'>
-          <SCSiteLogo showSiteTitle={true} darkMode={false} />
+          <div className='mb-6 w-6'>
+            <SCSiteLogo showSiteTitle={true} darkMode={false} />
+          </div>
         </div>
-      </div>
-      <div className='flex flex-col gap-2'>
-        <h1 className='mb-2 text-2xl/9 font-bold tracking-tight'>{tLoginPage('title')}</h1>
-      </div>
+        <div className='flex flex-col gap-2 px-1'>
+          <h1 className='mb-6 text-2xl/9 font-bold tracking-tight'>{tLoginPage('title')}</h1>
+        </div>
       <LoginUserForm />
       <UIDivider className="my-6" />
       {/* Social Buttons */}

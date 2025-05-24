@@ -10,9 +10,10 @@ import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
 import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
 import { createClient } from '@/lib/supabase/client';
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
+import { SC_CONFIG } from '@/supacharger/supacharger-config';
 import { supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
 
-export default function LoginPage() {
+export default function ResetPasswordFormPage() {
   const tPasswordResetPage = useTranslations('PasswordResetPage');
   const tGlobal = useTranslations('Global');
   const tGlobalUI = useTranslations('GlobalUI');
@@ -93,19 +94,23 @@ export default function LoginPage() {
       return () => clearInterval(interval);
     }
     if (success && timer === 0) {
-      router.push('/');
+      router.push(SC_CONFIG.SESSION_HOME_PATH);
     }
   }, [success, timer, router]);
 
   return (
-    <div className='flex h-screen flex-col justify-center bg-sc-gradient px-4 py-12 sm:px-6 lg:px-8'>
-      <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]'>
-        <div className='bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12'>
-          <div className='mb-6 block'>
-            <SCSiteLogo showSiteTitle={false} darkMode={false} />
+    <>
+      <main id='sc_account-password-reset-page'>
+        <div className='flex items-center gap-2 lg:hidden'>
+          <div className='mb-6 w-6'>
+            <SCSiteLogo showSiteTitle={true} darkMode={false} />
           </div>
-          <h1 className='mb-8 text-2xl/9 font-bold tracking-tight text-gray-700'>{tPasswordResetPage('title')} </h1>
+        </div>
+        <div className='flex flex-col gap-2 px-1'>
+          <h1 className='mb-6 text-2xl/9 font-bold tracking-tight'>{tPasswordResetPage('title')}</h1>
+        </div>
 
+        <div>
           {pending && (
             <div className='flex items-center gap-3 rounded bg-gray-100 px-4 py-3'>
               <InlineLoader className='h-5 w-5 animate-spin text-gray-500' />
@@ -167,7 +172,7 @@ export default function LoginPage() {
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 }
