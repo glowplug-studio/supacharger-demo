@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect,useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
@@ -23,13 +23,12 @@ export function OtpFieldsForm({ email }: { email: string }) {
   // Ref for OTP input
   const otpRef = useRef<HTMLInputElement | null>(null);
 
-  // Autofocus OTP field when form is shown
+  // Autofocus OTP field when form is shown or when loading is toggled off (error case)
   useEffect(() => {
-    // If OTPField supports ref forwarding to the first input
-    if (otpRef.current) {
+    if (!loading && otpRef.current) {
       otpRef.current.focus();
     }
-  }, []);
+  }, [loading]);
 
   const handleVerifyOtp = async (email: string, otpValue: string) => {
     if (!isValidEmail(email)) {
@@ -42,19 +41,21 @@ export function OtpFieldsForm({ email }: { email: string }) {
       const result = await verifyOtp(email, otpValue);
       if (!result) {
         toast.error(tAuthTerms('loginSuccess'), SC_CONFIG.TOAST_CONFIG);
+        setLoading(false); // Show form again
         return;
       }
       if (result.error) {
         toast.error(tSupabaseErrorCodes(supabaseErrorCodeLocalisation('AuthApiError')), SC_CONFIG.TOAST_CONFIG);
+        setLoading(false); // Show form again
       } else {
         toast.success(tAuthTerms('accountEmailVerified'), SC_CONFIG.TOAST_CONFIG);
-        // Redirect to session home path
+        // Success: keep loading spinner, redirect
+        // Do NOT setLoading(false) here!
         router.push(SC_CONFIG.SESSION_HOME_PATH);
       }
     } catch (err: any) {
       toast.error(tSupabaseErrorCodes(supabaseErrorCodeLocalisation('genericError')), SC_CONFIG.TOAST_CONFIG);
-    } finally {
-      setLoading(false);
+      setLoading(false); // Show form again
     }
   };
 
@@ -81,7 +82,6 @@ export function OtpFieldsForm({ email }: { email: string }) {
             <span className="mt-2 text-sm text-gray-500"></span>
           </div>
         ) : (
-          // If OTPField supports ref, pass ref. Otherwise, try autoFocus prop.
           <OTPField
             length={6}
             onValueChange={handleOtpChange}
