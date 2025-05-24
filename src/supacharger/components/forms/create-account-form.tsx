@@ -4,16 +4,16 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { CircleArrowRight, Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import { Input } from '@/components/ui/input';
 import { createUserByEmailPassword } from '@/lib/supabase/supacharger/supabase-auth';
+import SaveButton from '@/supacharger/components/buttons/form-save-button';
 import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
 import { SCP_REGISTRY } from '@/supacharger/plugins/registry';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
-
-import { UIDivider } from '../ui/divider';
+import { supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
 
 import { OtpFieldsForm } from './otp-fields-verify-form';
 
@@ -36,9 +36,15 @@ export function CreateAccountForm() {
   const [accountCreated, setAccountCreated] = useState(false);
   const [passwordSectionOpen, setPasswordSectionOpen] = useState(false);
 
+  // SaveButton state renamed
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
+
   // Translations
   const tAuthTerms = useTranslations('AuthTerms');
+  const tGlobalUI = useTranslations('GlobalUI');
   const tCreateAccountFormComponent = useTranslations('CreateAccountFormComponent');
+  const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
 
   // Handlers
   const handleTogglePassword = () => setShowPassword((v) => !v);
@@ -48,49 +54,65 @@ export function CreateAccountForm() {
     if (!passwordSectionOpen && e.target.value.length > 0) {
       setPasswordSectionOpen(true);
     }
-    // If user deletes all, keep open (do nothing)
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  // SaveButton handler renamed
+  const handleCreateAccountRequest = async () => {
+    setIsSubmitting(true);
+    setIsSubmitSuccess(false);
+    setError(null);
+
     try {
       const formData = new FormData();
       formData.append('email', email);
       formData.append('password', password);
+
       const result = await createUserByEmailPassword(formData);
+      setIsSubmitting(false);
+
       if (result?.error) {
-        toast.error('Failed to create account: ' + result.error);
-        setError(result.error.message || String(result.error));
+        toast.error(
+          tSupabaseErrorCodes(supabaseErrorCodeLocalisation('signup_auth_api_error')),
+          SC_CONFIG.TOAST_CONFIG
+        );
+        setIsSubmitSuccess(false);
+        console.log(result);
       } else {
-        toast.success('Account created successfully');
-        setAccountCreated(true);
-        setError(null);
+        if (result?.data?.user?.id &&
+          Array.isArray(result.data.user.identities) &&
+          result.data.user.identities.length === 0) {
+          toast.warning(tAuthTerms('accountAlreadyExists'), SC_CONFIG.TOAST_CONFIG);
+        } else {
+          toast.success(tAuthTerms('createAccountSuccess'), SC_CONFIG.TOAST_CONFIG);
+          setAccountCreated(true);
+          setIsSubmitSuccess(true);
+        }
+        console.log(result);
       }
     } catch (error: any) {
-      console.error('Error creating user:', error);
-      toast.error('Failed to create account');
-      setError(error?.message || 'Unknown error');
+      setIsSubmitting(false);
+      setIsSubmitSuccess(false);
+      toast.error(tSupabaseErrorCodes('genericError'), SC_CONFIG.TOAST_CONFIG);
     }
   };
 
   return (
     <>
       {/* Social Auth Buttons + Divider */}
-      {AuthProviderButtons && (
-        <div className="social-auth-container">
+      {!accountCreated && AuthProviderButtons && (
+        <div className='social-auth-container'>
           <AuthProviderButtons />
-          <UIDivider text={tCreateAccountFormComponent('orCreateAccountWithEmail')} className="my-6" />
         </div>
       )}
 
       {/* Email Signup Form */}
       {!accountCreated && (
-        <form onSubmit={handleSubmit} className={AuthProviderButtons ? 'mt-6' : ''}>
+        <form onSubmit={(e) => e.preventDefault()} className={AuthProviderButtons ? 'mt-6' : ''}>
           <div className='my-2'>
             <label htmlFor='email' className='text-md block px-1'>
               {tAuthTerms('emailAddress')}
             </label>
-            <div className='mt-2'>
+            <div className='mt-2 px-1'>
               <Input
                 id='email'
                 name='email'
@@ -104,16 +126,16 @@ export function CreateAccountForm() {
             </div>
           </div>
           <div
-            id="sc_passwords-submit"
+            id='sc_passwords-submit'
             className={`
               transition-all duration-500
               ${passwordSectionOpen ? 'max-h-[1000px]' : 'max-h-0 overflow-hidden'}
             `}
           >
-            <div className='mt-2 mb-4'>
+            <div className='mb-4 mt-2'>
               {/* FLEX ROW: PasswordValidationIndicator left, Eye icon right */}
-              <div className="mt-2 flex items-center">
-                <div className="flex-1">
+              <div className='mt-2 flex items-center'>
+                <div className='flex-1'>
                   <PasswordValidationIndicator
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -124,10 +146,10 @@ export function CreateAccountForm() {
                 </div>
                 <button
                   type='button'
-                  className='ml-2 text-gray-500 hover:text-gray-700'
+                  className='ml-2 mt-4 text-gray-400 hover:text-gray-800'
                   aria-label='Show password'
                   onClick={handleTogglePassword}
-                  tabIndex={0}
+                  tabIndex={-1}
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
@@ -139,7 +161,7 @@ export function CreateAccountForm() {
                 <label htmlFor='password-again' className='text-md block px-1'>
                   {tAuthTerms('retypePassword')}
                 </label>
-                <div className="mt-2">
+                <div className='mt-2 px-1'>
                   <Input
                     id='password-again'
                     name='password-again'
@@ -151,12 +173,19 @@ export function CreateAccountForm() {
                 </div>
               </div>
             )}
-            {error && <p className='error'>{error}</p>}
+            {/* Error message removed from UI */}
             {BrevoNewsletterRegistrationCheckbox && <BrevoNewsletterRegistrationCheckbox />}
             <div className='mt-4'>
-              <button id='sc_signup-button' type='submit' className='btn w-full bg-primary text-white hover:bg-teal-800'>
-                {tAuthTerms('signUp')} <CircleArrowRight size={18} />
-              </button>
+              <SaveButton
+                type='button'
+                className='w-full h-12'
+                onClick={handleCreateAccountRequest}
+                isLoading={isSubmitting}
+                isSuccess={isSubmitSuccess}
+                initialLabel={tAuthTerms('signUp')}
+                savingLabel={tGlobalUI('buttonThinking')}
+                completeLabel={tGlobalUI('buttonSaved')}
+              />
             </div>
           </div>
         </form>
@@ -171,7 +200,7 @@ export function CreateAccountForm() {
 
       {/* Login instead Link */}
       {!accountCreated && (
-        <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0 mt-4'>
+        <div className='mt-4 flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
           <div>
             <span className='text-sm font-normal'>{tCreateAccountFormComponent('iAlreadyHaveAnAccount')} </span>
             <Link href='/account/login' className='text-sm font-normal'>

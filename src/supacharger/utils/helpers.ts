@@ -135,6 +135,7 @@ export function supabaseErrorCodeLocalisation(response: string) {
     AuthApiError: 'tokenAuthApiError',
     unexpected_failure: 'genericError',
     request_timeout: 'genericError',
+    signup_auth_api_error: 'signupApiAuthError', // generic catch all for sign up errors.
     // Add more mappings as needed
   };
 

@@ -40,7 +40,9 @@
     "passwordUpdated": "Your password has been updated",
     "backToSignIn": "Back to Sign In page",
     "backToRequestLink": "Get another link",
-    "createAccountWithEmail": "Continue with Email"
+    "createAccountWithEmail": "Continue with Email",
+    "createAccountSuccess": "Account created successfully",
+    "accountAlreadyExists": "Account already exists, sign in instead"
   },
   "evaluatePasswordStrengthErrorCodes": {
     "oldPasswordIncorrect": "Incorrect current password",
@@ -72,7 +74,8 @@
     "genericError": "There was an unexpected problem",
     "otpExpired": "The One Time Passcode has expired or is invalid",
     "samePassword": "New password should be different from the old password",
-    "tokenAuthApiError": "Token has expired or is invalid"
+    "tokenAuthApiError": "Token has expired or is invalid",
+    "signupApiAuthError": "Email address and password do not meet security requirements"
   },
   "Toasts": {
     "logoutFailed": "There was a problem logging you out",
