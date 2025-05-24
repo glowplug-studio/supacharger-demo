@@ -23,7 +23,7 @@ export const SC_CONFIG = {
    */
 
   //@toto this should be translatable! this has been done using en.json Global and in  src/app/(supacharger)/(unauthenticated)/account/login/page.tsx
-  SITE_TITLE: 'Kiekie',
+  SITE_TITLE: 'TāmakiChat',
   SITE_DESCRIPTION: 'Start your next project without reinventing the wheel.',
 
   /**
