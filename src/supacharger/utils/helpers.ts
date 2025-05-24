@@ -95,7 +95,7 @@ export function evaluatePasswordStrength(password: string): PasswordValidationRe
 
   // Minimum length check
   if (password.length < minLength) {
-    return { valid: false, message: 'password_too_short' };
+    return { valid: false, message: 'passwordTooShort' };
   }
 
   // Dispatch to the right validator
@@ -105,15 +105,15 @@ export function evaluatePasswordStrength(password: string): PasswordValidationRe
     case 'letters_digits':
       return validateLettersDigits(password)
         ? { valid: true, message: 'valid' }
-        : { valid: false, message: 'must_contain_letter_digit' };
+        : { valid: false, message: 'mustContainLetterDigit' };
     case 'lower_upper_letters_digits':
       return validateLowerUpperLettersDigits(password)
         ? { valid: true, message: 'valid' }
-        : { valid: false, message: 'must_contain_lower_letter_upper_letter_digit' };
+        : { valid: false, message: 'mustContainLowerLetterUpperLetterDigit' };
     case 'lower_upper_letters_digits_symbols':
       return validateLowerUpperLettersDigitsSymbols(password)
         ? { valid: true, message: 'valid' }
-        : { valid: false, message: 'must_contain_lower_letter_upper_letter_digit_symbol' };
+        : { valid: false, message: 'mustContainLowerLetterUpperLetterDigitSymbol' };
     default:
       return { valid: false, message: 'Invalid password requirements configuration.' };
   }

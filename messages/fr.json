@@ -26,13 +26,13 @@
     "passwordUpdated": "Mot de passe mis à jour avec succès"
   },
   "evaluatePasswordStrengthErrorCodes": {
-    "old_password_required": "Vous devez entrer un nouveau mot de passe",
+    "oldPasswordRequired": "Vous devez entrer un nouveau mot de passe",
     "provided_password_mismatch": "Les mots de passe fournis ne correspondent pas",
-    "password_too_short": "Le mot de passe fourni est trop court",
+    "passwordTooShort": "Le mot de passe fourni est trop court",
     "password_failed_regex_evaluation": "Le mot de passe fourni n'est pas assez fort",
-    "must_contain_letter_digit": "Le mot de passe doit contenir au moins une lettre et au moins un chiffre",
-    "must_contain_lower_letter_upper_letter_digit": "Le mot de passe doit contenir au moins une lettre majuscule, au moins une lettre minuscule et au moins un chiffre",
-    "must_contain_lower_letter_upper_letter_digit_symbol": "Le mot de passe doit contenir au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre et au moins un caractère spécial"
+    "mustContainLetterDigit": "Le mot de passe doit contenir au moins une lettre et au moins un chiffre",
+    "mustContainLowerLetterUpperLetterDigit": "Le mot de passe doit contenir au moins une lettre majuscule, au moins une lettre minuscule et au moins un chiffre",
+    "mustContainLowerLetterUpperLetterDigitSymbol": "Le mot de passe doit contenir au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre et au moins un caractère spécial"
   },
   "SupabaseErrorCodes": {
     "invalidCredentials": "Échec de la connexion. Veuillez vérifier votre e-mail et votre mot de passe et réessayer",

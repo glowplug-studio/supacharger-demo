@@ -10,8 +10,8 @@
       "buttonSaved": "Done"
   },
   "PageMeta": {
-    "account_AccountSecuritySettings_sectionTitle": "Account Config",
-    "account_AccountSecuritySettings_pageTitle": "Account & Security Settings"
+    "accountAccountSecuritySettingsSectionTitle": "Account Config",
+    "accountAccountSecuritySettingsPageTitle": "Account & Security Settings"
   },
 
   "AuthTerms": {
@@ -41,14 +41,14 @@
     "backToRequestLink": "Get another link"
   },
   "evaluatePasswordStrengthErrorCodes": {
-    "old_password_incorrect": "Incorrect current password",
-    "old_password_required": "You must enter the current password",
+    "oldPasswordIncorrect": "Incorrect current password",
+    "oldPasswordRequired": "You must enter the current password",
     "provided_password_mismatch": "Provided passwords do not match",
-    "password_too_short": "The password provided is too short",
+    "passwordTooShort": "The password provided is too short",
     "password_failed_regex_evaluation": "The password provided is not strong enough",
-    "must_contain_letter_digit": "The password must contain at least one letter and at least one digit",
-    "must_contain_lower_letter_upper_letter_digit": "The password must contain at least 1 uppercase letter, at least 1 lowercase letter and at least one digit",
-    "must_contain_lower_letter_upper_letter_digit_symbol": "The password must contain at least 1 uppercase letter, at least 1 lowercase letter, at least one digit and at least one special character"
+    "mustContainLetterDigit": "The password must contain at least one letter and at least one digit",
+    "mustContainLowerLetterUpperLetterDigit": "The password must contain at least 1 uppercase letter, at least 1 lowercase letter and at least one digit",
+    "mustContainLowerLetterUpperLetterDigitSymbol": "The password must contain at least 1 uppercase letter, at least 1 lowercase letter, at least one digit and at least one special character"
   },
   "evaluatePasswordStrengthComponent": {
     "passwordLetter": "Has a letter (Aa-Zz)",

@@ -17,7 +17,7 @@ const site_title = SC_CONFIG.SITE_TITLE;
 // @todo fix these page titles so they load from intl
 
 export const metadata: Metadata = {
-  title: site_title,//+ tPageMeta("account_AccountSecuritySettings_sectionTitle"),
+  title: site_title,//+ tPageMeta("accountAccountSecuritySettingsSectionTitle"),
   description: 'Start your next project without reinventing the wheel. REPLACE_ME',
 };
 
