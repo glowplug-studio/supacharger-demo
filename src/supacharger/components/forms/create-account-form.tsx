@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Eye, EyeOff } from 'lucide-react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { Input } from '@/components/ui/input';
@@ -27,66 +28,107 @@ const BrevoNewsletterRegistrationCheckbox = SCP_REGISTRY.BREVO.ENABLED
   : null;
 
 export function CreateAccountForm() {
-  // State
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [retypePassword, setRetypePassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [accountCreated, setAccountCreated] = useState(false);
   const [passwordSectionOpen, setPasswordSectionOpen] = useState(false);
   const [passwordIsValid, setPasswordIsValid] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
-
-  // Error state for inline feedback (optional)
   const [formError, setFormError] = useState<string | null>(null);
 
-  // Translations
   const tAuthTerms = useTranslations('AuthTerms');
   const tGlobalUI = useTranslations('GlobalUI');
   const tCreateAccountFormComponent = useTranslations('CreateAccountFormComponent');
   const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
   const tEvaluatePasswordStrengthComponent = useTranslations('evaluatePasswordStrengthComponent');
 
-  // Handlers
-  const handleTogglePassword = () => setShowPassword((v) => !v);
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: 'onSubmit', // only validate on submit
+    defaultValues: {
+      email: '',
+      password: '',
+      retypePassword: '',
+    },
+  });
 
+  const email = watch('email');
+  const password = watch('password');
+  const retypePassword = watch('retypePassword');
+
+  // Open password section when email is typed
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+    setValue('email', e.target.value);
     if (!passwordSectionOpen && e.target.value.length > 0) {
       setPasswordSectionOpen(true);
     }
   };
 
-  // Best practice: Use onSubmit, not button click!
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue('password', e.target.value);
+  };
+
+  const handleRetypePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue('retypePassword', e.target.value);
+  };
+
+  // Helper: which field is in error? (for aria-describedby)
+  const getAriaError = (field: string) => {
+    if (!formError) return undefined;
+    const err = formError.toLowerCase();
+    if (field === "email" && err.includes("email")) return "email-error";
+    if (field === "password" && err.includes("password") && !err.includes("retype")) return "password-error";
+    if (field === "retypePassword" && err.includes("retype")) return "retypePassword-error";
+    return undefined;
+  };
+
+  // Form submit
+  const onSubmit = async (data: any) => {
     setFormError(null);
 
-    // Use FormData for robust value extraction
-    const formData = new FormData(e.currentTarget);
-    const emailVal = formData.get('email') as string;
-    const passwordVal = formData.get('password') as string;
-    const retypePasswordVal = formData.get('password-again') as string;
+    // Required fields
+    if (!data.email) {
+      toast.error(tCreateAccountFormComponent('missingEmail'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tCreateAccountFormComponent('missingEmail'));
+      return;
+    }
+    if (!data.password) {
+      toast.error(tCreateAccountFormComponent('missingPassword'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tCreateAccountFormComponent('missingPassword'));
+      return;
+    }
+    if (!showPassword && !data.retypePassword) {
+      toast.error(tCreateAccountFormComponent('missingRetypePassword'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tCreateAccountFormComponent('missingRetypePassword'));
+      return;
+    }
 
-    // Basic browser validation (required, type="email") already runs!
-    // Custom checks:
-    if (!isValidEmail(emailVal)) {
-      setFormError(tCreateAccountFormComponent('invalidEmail'));
+    // Email format
+    if (!isValidEmail(data.email)) {
       toast.error(tCreateAccountFormComponent('invalidEmail'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tCreateAccountFormComponent('invalidEmail'));
       return;
     }
+
+    // Password strength
     if (!passwordIsValid) {
-      setFormError(tEvaluatePasswordStrengthComponent('passwordNotStrongEnough'));
       toast.error(tEvaluatePasswordStrengthComponent('passwordNotStrongEnough'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tEvaluatePasswordStrengthComponent('passwordNotStrongEnough'));
       return;
     }
-    if (!showPassword) {
-      if (passwordVal !== retypePasswordVal) {
-        setFormError(tCreateAccountFormComponent('passwordMismatch'));
-        toast.error(tCreateAccountFormComponent('passwordMismatch'), SC_CONFIG.TOAST_CONFIG);
-        return;
-      }
+
+    // Password match
+    if (!showPassword && data.password !== data.retypePassword) {
+      toast.error(tCreateAccountFormComponent('passwordMismatch'), SC_CONFIG.TOAST_CONFIG);
+      setFormError(tCreateAccountFormComponent('passwordMismatch'));
+      return;
     }
 
     setIsSubmitting(true);
@@ -94,8 +136,8 @@ export function CreateAccountForm() {
 
     try {
       const apiFormData = new FormData();
-      apiFormData.append('email', emailVal);
-      apiFormData.append('password', passwordVal);
+      apiFormData.append('email', data.email);
+      apiFormData.append('password', data.password);
 
       const result = await createUserByEmailPassword(apiFormData);
 
@@ -119,6 +161,7 @@ export function CreateAccountForm() {
           toast.success(tAuthTerms('createAccountSuccess'), SC_CONFIG.TOAST_CONFIG);
           setAccountCreated(true);
           setIsSubmitSuccess(true);
+          reset();
         }
       }
     } catch (error: any) {
@@ -131,16 +174,14 @@ export function CreateAccountForm() {
 
   return (
     <>
-      {/* Social Auth Buttons + Divider */}
       {!accountCreated && AuthProviderButtons && (
         <div className='social-auth-container'>
           <AuthProviderButtons />
         </div>
       )}
 
-      {/* Email Signup Form */}
       {!accountCreated && (
-        <form onSubmit={handleSubmit} className={AuthProviderButtons ? 'mt-6' : ''} noValidate>
+        <form onSubmit={handleSubmit(onSubmit)} className={AuthProviderButtons ? 'mt-6' : ''} noValidate>
           <div className='my-2'>
             <label htmlFor='email' className='text-md block px-1'>
               {tAuthTerms('emailAddress')}
@@ -148,15 +189,20 @@ export function CreateAccountForm() {
             <div className='mt-2 px-1'>
               <Input
                 id='email'
-                name='email'
                 type='email'
                 maxLength={30}
                 required
                 autoComplete='email'
                 className='input'
-                value={email}
-                onChange={handleEmailChange}
+                aria-invalid={!!formError && formError.toLowerCase().includes("email")}
+                aria-describedby={getAriaError("email")}
+                {...register('email', {
+                  onChange: handleEmailChange,
+                })}
               />
+              {formError && formError.toLowerCase().includes("email") && (
+                <div id="email-error" className="sc_message sc_message-error">{formError}</div>
+              )}
             </div>
           </div>
           <div
@@ -167,12 +213,11 @@ export function CreateAccountForm() {
             `}
           >
             <div className='mb-4 mt-2'>
-              {/* FLEX ROW: PasswordValidationIndicator left, Eye icon right */}
               <div className='mt-2 flex items-center'>
                 <div className='flex-1'>
                   <PasswordValidationIndicator
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={handlePasswordChange}
                     name='password'
                     id='password'
                     type={showPassword ? 'text' : 'password'}
@@ -183,35 +228,41 @@ export function CreateAccountForm() {
                   type='button'
                   className='ml-2 mt-4 text-gray-400 hover:text-gray-800'
                   aria-label='Show password'
-                  onClick={handleTogglePassword}
+                  onClick={() => setShowPassword((v) => !v)}
                   tabIndex={-1}
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
             </div>
-            {/* Retype password field (hide when showPassword is true) */}
             {!showPassword && (
               <div className='my-2'>
-                <label htmlFor='password-again' className='text-md block px-1'>
+                <label htmlFor='retypePassword' className='text-md block px-1'>
                   {tAuthTerms('retypePassword')}
                 </label>
                 <div className='mt-2 px-1'>
                   <Input
-                    id='password-again'
-                    name='password-again'
+                    id='retypePassword'
                     type='password'
                     maxLength={30}
                     required
-                    value={retypePassword}
-                    onChange={(e) => setRetypePassword(e.target.value)}
+                    autoComplete='new-password'
+                    aria-invalid={!!formError && formError.toLowerCase().includes("retype")}
+                    aria-describedby={getAriaError("retypePassword")}
+                    {...register('retypePassword', {
+                      onChange: handleRetypePasswordChange,
+                    })}
                   />
+                  {formError && formError.toLowerCase().includes("retype") && (
+                    <div id="retypePassword-error" className="sc_message sc_message-error">{formError}</div>
+                  )}
                 </div>
               </div>
             )}
             {BrevoNewsletterRegistrationCheckbox && <BrevoNewsletterRegistrationCheckbox />}
-            {formError && (
-              <div className="sc_message sc_message-error mt-4 mx-1">{formError}</div>
+            {/* General password errors */}
+            {formError && formError.toLowerCase().includes("password") && !formError.toLowerCase().includes("retype") && (
+              <div id="password-error" className="sc_message sc_message-error mx-1">{formError}</div>
             )}
             <div className='mt-4 px-1'>
               <SaveButton
@@ -228,14 +279,12 @@ export function CreateAccountForm() {
         </form>
       )}
 
-      {/* OTP Form */}
       {accountCreated && (
         <div id='sc_otp-fields'>
           <OtpFieldsForm email={email} />
         </div>
       )}
 
-      {/* Login instead Link */}
       {!accountCreated && (
         <div className='mt-4 flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
           <div>

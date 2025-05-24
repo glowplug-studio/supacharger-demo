@@ -91,7 +91,7 @@ export const SC_CONFIG = {
    */
 
   // Allow emails with a + in them eg test+1@gmail.com
-  EMAIL_ALLOW_PLUSADDRESSING: true,
+  EMAIL_ALLOW_PLUSADDRESSING: false,
   /**
    *
    * Password Strength Settings

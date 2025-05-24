@@ -130,18 +130,17 @@
   }
 
   .sc_message {
-    @apply mt-2;
-    @apply text-sm;
+    @apply my-2;
+    @apply text-xs;
     @apply rounded-md;
-    @apply p-4;
+    @apply py-2;
+    @apply px-4;
   }
 
   .sc_message-error {
     @apply bg-red-100;
-    @apply font-bold;
     @apply text-gray-600;
-    @apply border-red-200;
-    @apply border;
+    @apply font-semibold;
   }
 
   .sc_message-attention {
