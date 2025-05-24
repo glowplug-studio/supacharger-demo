@@ -62,7 +62,8 @@
     "passwordSymbol": "Has a special Character eg (%@$^£)",
     "passwordRequirementsLabel": "Requirements",
     "passwordMinLength": "Characters minimum",
-    "passwordCustomRegexDescription": "REPLACE_ME"
+    "passwordCustomRegexDescription": "REPLACE_ME",
+    "passwordNotStrongEnough": "Password not strong enough"
   },
   "SupabaseErrorCodes": {
     "invalidCredentials": "Login Failed. Please check your email and password and try again",

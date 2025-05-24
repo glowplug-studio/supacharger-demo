@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useTranslations } from "next-intl";
 import { Check, SquareDashed } from "lucide-react";
 
@@ -27,6 +27,7 @@ interface PasswordValidationIndicatorProps {
   name?: string;
   id?: string;
   type?: string;
+  onValidationChange?: (isValid: boolean, details?: { [key: string]: boolean }) => void;
 }
 
 export default function PasswordValidationIndicator({
@@ -35,6 +36,7 @@ export default function PasswordValidationIndicator({
   name = "newPassword",
   id = "newPassword",
   type = "password",
+  onValidationChange,
 }: PasswordValidationIndicatorProps) {
   const tStrengthComponent = useTranslations("evaluatePasswordStrengthComponent");
   const tAuthTerms = useTranslations("AuthTerms");
@@ -137,6 +139,18 @@ export default function PasswordValidationIndicator({
   const validationItems = getValidationItems();
   const validations = validationItems.map((item) => item.test(value));
   const allValid = validationResult.valid;
+
+  // Notify parent of validation state
+  useEffect(() => {
+    if (onValidationChange) {
+      const details: { [key: string]: boolean } = {};
+      validationItems.forEach((item, idx) => {
+        details[item.key] = validations[idx];
+      });
+      onValidationChange(allValid, details);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, allValid, onValidationChange]);
 
   return (
     <div className="space-y-2 relative">

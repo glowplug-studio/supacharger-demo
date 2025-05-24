@@ -36,6 +36,9 @@ export function CreateAccountForm() {
   const [accountCreated, setAccountCreated] = useState(false);
   const [passwordSectionOpen, setPasswordSectionOpen] = useState(false);
 
+  // Track password validation state
+  const [passwordIsValid, setPasswordIsValid] = useState(false);
+
   // SaveButton state renamed
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
@@ -45,6 +48,7 @@ export function CreateAccountForm() {
   const tGlobalUI = useTranslations('GlobalUI');
   const tCreateAccountFormComponent = useTranslations('CreateAccountFormComponent');
   const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
+  const tEvaluatePasswordStrengthComponent = useTranslations('evaluatePasswordStrengthComponent');
 
   // Handlers
   const handleTogglePassword = () => setShowPassword((v) => !v);
@@ -68,7 +72,13 @@ export function CreateAccountForm() {
       return;
     }
 
-    // Only validate password fields if the eye is NOT toggled on
+    // Always require password strength
+    if (!passwordIsValid) {
+      toast.error(tEvaluatePasswordStrengthComponent('passwordNotStrongEnough'), SC_CONFIG.TOAST_CONFIG);
+      return;
+    }
+
+    // Only validate retype/match if the eye is NOT toggled on
     if (!showPassword) {
       if (!password) {
         toast.error(tCreateAccountFormComponent('missingPassword'), SC_CONFIG.TOAST_CONFIG);
@@ -96,11 +106,9 @@ export function CreateAccountForm() {
       const result = await createUserByEmailPassword(formData);
       setIsSubmitting(false);
 
-      console.log(result);
-
       if (result?.error) {
         toast.error(
-          tSupabaseErrorCodes(supabaseErrorCodeLocalisation('signup_auth_api_error')), // generic catch all
+          tSupabaseErrorCodes(supabaseErrorCodeLocalisation('signup_auth_api_error')),
           SC_CONFIG.TOAST_CONFIG
         );
         setIsSubmitSuccess(false);
@@ -117,6 +125,7 @@ export function CreateAccountForm() {
           setAccountCreated(true);
           setIsSubmitSuccess(true);
         }
+        console.log(result);
       }
     } catch (error: any) {
       setIsSubmitting(false);
@@ -172,6 +181,7 @@ export function CreateAccountForm() {
                     name='password'
                     id='password'
                     type={showPassword ? 'text' : 'password'}
+                    onValidationChange={(isValid) => setPasswordIsValid(isValid)}
                   />
                 </div>
                 <button
@@ -204,7 +214,6 @@ export function CreateAccountForm() {
                 </div>
               </div>
             )}
-            {/* Error message removed from UI */}
             {BrevoNewsletterRegistrationCheckbox && <BrevoNewsletterRegistrationCheckbox />}
             <div className='mt-4'>
               <SaveButton
