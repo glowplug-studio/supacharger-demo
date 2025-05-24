@@ -7,6 +7,7 @@
   "GlobalUI": {
       "buttonSaveChanges": "Save Changes",
       "buttonSaving": "Saving",
+      "buttonThinking": "Thinking...",
       "buttonSaved": "Done"
   },
   "PageMeta": {
@@ -38,7 +39,8 @@
     "resendConfirmationEmailFail": "Failed to send. Wait and retry",
     "passwordUpdated": "Your password has been updated",
     "backToSignIn": "Back to Sign In page",
-    "backToRequestLink": "Get another link"
+    "backToRequestLink": "Get another link",
+    "createAccountWithEmail": "Continue with Email"
   },
   "evaluatePasswordStrengthErrorCodes": {
     "oldPasswordIncorrect": "Incorrect current password",
@@ -74,7 +76,7 @@
   },
   "Toasts": {
     "logoutFailed": "There was a problem logging you out",
-    "logoutSucceeded": "Logged out"
+    "logoutSucceeded": "See you later!"
   },
   "Billing": {
     "title": "Billing"
@@ -101,10 +103,7 @@
   "CreateAccountFormComponent": {
     "title": "Create an Account",
     "orCreateAccountWithEmail": "Or create an account with Email",
-    "iAlreadyHaveAnAccount": "I already have an account",
-    "showEmailFormButtonText": "Continue with Email",
-    "hideEmailFormButtonText": "Use Social Account",
-    "signInWithSocialLabel": "Sing in with a social account"
+    "iAlreadyHaveAnAccount": "I already have an account"
   },
   "OTPFormComponent": {
     "title": "Verification Code",
