@@ -8,7 +8,6 @@ import { ArrowLeft, CircleArrowRight, Eye, EyeOff, Mail } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import { Input } from '@/components/ui/input';
-import  OTPField  from '@/components/ui/otp-field';
 import { createUserByEmailPassword } from '@/lib/supabase/supacharger/supabase-auth';
 import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
 import { SCP_REGISTRY } from '@/supacharger/plugins/registry';
@@ -16,7 +15,7 @@ import { SC_CONFIG } from '@/supacharger/supacharger-config';
 
 import { UIDivider } from '../ui/divider';
 
-import { OtpFieldsForm } from './otp-fields-form';
+import { OtpFieldsForm } from './otp-fields-verify-form';
 
 const renderAuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some((enabled) => enabled);
 
@@ -187,7 +186,7 @@ export function CreateAccountForm() {
         {/* Pass the up-to-date email from state */}
 
         <form>
-          <OtpFieldsForm ></OtpFieldsForm>
+          <OtpFieldsForm email={email}></OtpFieldsForm>
         </form>
 
       </div>
