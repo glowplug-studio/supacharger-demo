@@ -11,12 +11,12 @@ interface LogoProps {
 export default function SCSiteLogo({ showSiteTitle, darkMode }: LogoProps) {
   return (
     //@TODO handle session state - of theres a sesson then switch this href value based on the src/supacharger/supacharger-config.ts SC_CONFIG.NO_SESSION_HOME_PATH and SC_CONFIG.SESSION_HOME_PATH
-    <Link href='/' className='flex w-fit items-center gap-2'>
+    <Link href='/' className='flex w-fit items-center gap-2  hover:no-underline'>
       <SiteLogoSVG></SiteLogoSVG>
       {
         showSiteTitle ? (
           <span
-          className={`${darkMode ? 'text-white' : 'text-gray-700'} text-xl font-semibold`}
+          className={`${darkMode ? 'text-white' : 'text-gray-700'} text-xl font-semibold hover:text-gray-900`}
         >
           {SC_CONFIG.SITE_TITLE}
         </span>

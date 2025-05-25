@@ -8,7 +8,7 @@ export default function SCAccountLoginLeft() {
     <div
       className='relative hidden flex-1 flex-col bg-cover bg-center bg-no-repeat lg:flex'
       style={{
-        backgroundImage: 'url(https://images.unsplash.com/photo-1577505600222-d55cc091414c?q=80&w=1964)',
+        backgroundImage: 'url(https://images.unsplash.com/photo-1599148401005-fe6d7497cb5e?q=80&w=1964)',
       }}
     >
       <div className='absolute top-0 flex w-full justify-between gap-4 py-6 pl-8 pr-6 xl:pl-24 '>

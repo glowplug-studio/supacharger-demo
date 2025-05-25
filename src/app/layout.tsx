@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { NextIntlClientProvider } from 'next-intl';
 import { ToastContainer } from 'react-toastify';
@@ -13,8 +13,8 @@ import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';
 
-const manrope = Manrope({
-   variable: '--font-manrope',
+const plusJakartaSans = Plus_Jakarta_Sans({
+   variable: '--font-plusJakartaSans',
    subsets: ['latin'],
 });
 
@@ -32,10 +32,9 @@ export default async function RootLayout({ children }: PropsWithChildren) {
 
    return (
       <html lang={currentLocale}>
-         <body className={cn('font-sans antialiased', manrope.variable)}>
+         <body className={cn('font-sans antialiased', plusJakartaSans.variable)}>
             <NextIntlClientProvider messages={messages}>
             {children}
-       
                <Analytics />
             </NextIntlClientProvider>
             <ToastContainer position="bottom-right" autoClose={3000} hideProgressBar={true} />

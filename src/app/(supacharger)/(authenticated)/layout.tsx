@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { NextIntlClientProvider } from 'next-intl';
@@ -13,14 +12,7 @@ import { SC_CONFIG } from '@/supacharger/supacharger-config';
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
 
-import '@/styles/globals.css';
-
 export const dynamic = 'force-dynamic';
-
-const manrope = Manrope({
-  variable: '--font-manrope',
-  subsets: ['latin'],
-});
 
 const site_title = SC_CONFIG.SITE_TITLE;
 

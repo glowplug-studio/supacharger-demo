@@ -19,10 +19,10 @@
     --card: 0 0% 100%;
     --card-foreground: 222.2 47.4% 11.2%;
 
-    --primary: 244 53% 23%;
+    --primary: 146 100% 32%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 174 49% 50%;
+    --secondary: 146 61% 73%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --accent: 210 40% 96.1%;
@@ -111,6 +111,9 @@
     @apply font-medium;
     @apply h-10;
     @apply capitalize;
+    @apply bg-primary;
+    @apply text-white;
+    @apply hover:text-gray-900;
   }
 
   .input {
