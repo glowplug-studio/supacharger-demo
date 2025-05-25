@@ -1,13 +1,10 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
 import { cookies } from 'next/headers';
 import { useTranslations } from 'next-intl';
 
 import { AccountLayout } from  '@/app/(supacharger)/(authenticated)/account/account-layout';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
-
-import '@/styles/globals.css';
 
 export const dynamic = 'force-dynamic';
 

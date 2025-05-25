@@ -58,8 +58,8 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: ['var(--font-manrope)', ...fontFamily.sans],
-        alt: ['var(--font-manrope-alternates)'],
+        sans: ['var(--font-plusJakartaSans)', ...fontFamily.sans],
+        alt: ['var(--font-plusJakartaSans-alternates)'],
       },
       keyframes: {
         'accordion-down': {
