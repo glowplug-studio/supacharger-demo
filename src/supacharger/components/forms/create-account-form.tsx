@@ -1,5 +1,17 @@
 'use client';
 
+/** =========================================================================
+ *
+ *  Supacharger - Account - Create Account Form
+ *
+ *  Description: Main form component showing enabled login methods including OTP verification
+ *
+ *  Author: J Sharp <j@glowplug.studio>
+ *
+ *  License: CC BY-NC-SA 4.0
+ *
+ * ========================================================================= */
+
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
