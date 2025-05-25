@@ -1,5 +1,4 @@
 import Link from 'next/link';
-//import SiteLogoSVG from "@/assets/images/SiteLogoSVG.svg";
 
 export default function SCMarketingAbout() {
   return (
@@ -26,7 +25,7 @@ export default function SCMarketingAbout() {
               </div>
             </div>
             <div className='mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow'>
-              <img src='/images/sample/sample-marketing-app-single.webp'></img>
+              <img src='/images/sample/sample-marketing-app-single.webp' className='max-h-[60vh] w-auto'></img>
             </div>
           </div>
         </div>
