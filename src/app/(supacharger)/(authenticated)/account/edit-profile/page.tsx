@@ -26,12 +26,6 @@ export default function EditProfilePage() {
     aboutMe: '',
     avatarFile: null,
   });
-  const [initialProfile, setInitialProfile] = useState<Profile>({
-    firstName: '',
-    lastName: '',
-    aboutMe: '',
-    avatarFile: null,
-  });
 
   // Simulate loading initial data
   useEffect(() => {
@@ -45,7 +39,6 @@ export default function EditProfilePage() {
       };
 
       setProfile(mockData);
-      setInitialProfile(mockData);
     };
 
     loadProfile();
@@ -68,8 +61,6 @@ export default function EditProfilePage() {
     setIsLoading(true);
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    // Update the initial state to match current state
-    setInitialProfile(profile);
     setIsLoading(false);
     toast.success('Your profile has been successfully updated.');
   };
