@@ -2,7 +2,7 @@
 import * as ResizablePrimitive from "react-resizable-panels"
 
 import { cn } from "@/utils/cn"
-import { DragHandleDots2Icon } from "@radix-ui/react-icons"
+import { GripVertical } from "lucide-react"
 
 const ResizablePanelGroup = ({
   className,
@@ -35,7 +35,7 @@ const ResizableHandle = ({
   >
     {withHandle && (
       <div className="z-10 flex h-4 w-3 items-center justify-center rounded-sm border border-neutral-200 bg-neutral-200 dark:border-neutral-800 dark:bg-neutral-800">
-        <DragHandleDots2Icon className="h-2.5 w-2.5" />
+        <GripVertical className="h-2.5 w-2.5" />
       </div>
     )}
   </ResizablePrimitive.PanelResizeHandle>
