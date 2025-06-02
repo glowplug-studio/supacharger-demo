@@ -61,6 +61,8 @@ export default function EditProfilePage() {
       profile.aboutMe !== initialProfile.aboutMe ||
       profile.avatarFile !== initialProfile.avatarFile;
 
+      alert('change');
+
     setHasChanges(hasChanged);
   }, [profile, initialProfile, setHasChanges]);
 

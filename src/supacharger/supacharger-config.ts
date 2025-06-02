@@ -91,7 +91,7 @@ export const SC_CONFIG = {
    */
 
   // Allow emails with a + in them eg test+1@gmail.com
-  EMAIL_ALLOW_PLUSADDRESSING: false,
+  EMAIL_ALLOW_PLUSADDRESSING: true,
   /**
    *
    * Password Strength Settings
@@ -118,8 +118,8 @@ export const SC_CONFIG = {
    * Only the providers listed here are supported at this point in time.
    */
   AUTH_PROVDERS_ENABLED: {
-    google: false,
-    facebook: false,
+    google: true,
+    facebook: true,
   },
 
   /**
