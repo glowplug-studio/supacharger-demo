@@ -9,8 +9,8 @@ import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { cn } from '@/utils/cn';
 import { Analytics } from '@vercel/analytics/react';
 
-import '@/supacharger/styles/globals.css';
-import '@/styles/globals.css';
+import '@/supacharger/styles/globals.scss';
+import '@/styles/globals.scss';
 
 export const dynamic = 'force-dynamic';
 
