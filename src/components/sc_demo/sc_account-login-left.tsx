@@ -12,7 +12,7 @@ export default function SCAccountLoginLeft() {
       }}
     >
       <div className='absolute top-0 flex w-full justify-between gap-4 py-6 pl-8 pr-6 xl:pl-24 '>
-        <div className='m-4 flex items-center gap-4 rounded-md bg-white p-6'>
+        <div className='m-4 flex items-center gap-4 rounded-md bg-white dark:bg-slate-800 p-6'>
           <SCSiteLogo showSiteTitle={true} />
         </div>
       </div>

@@ -3,169 +3,244 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useLocale } from "next-intl";
-import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import { Menu } from 'lucide-react';
+import { Book, Menu, Sunset, Trees, Zap } from 'lucide-react';
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 import LocaleSwitcher from './sc_locale-switcher';
 import SCSiteLogo from './sc_site-logo';
 
+// MenuItem and Navbar1Props interfaces
+interface MenuItem {
+  title: string;
+  url: string;
+  description?: string;
+  icon?: React.ReactNode;
+  items?: MenuItem[];
+}
+
+interface Navbar1Props {
+  logo?: {
+    url: string;
+    src: string;
+    alt: string;
+    title: string;
+  };
+  menu?: MenuItem[];
+  auth?: {
+    login: {
+      title: string;
+      url: string;
+    };
+    signup: {
+      title: string;
+      url: string;
+    };
+  };
+}
+
+// Example menu data
+const menu: MenuItem[] = [
+  { title: "About", url: "/about" },
+  {
+    title: "Applications",
+    url: "#",
+    items: [
+      {
+        title: "Blog",
+        description: "The latest industry news, updates, and info",
+        icon: <Book className="size-5 shrink-0" />,
+        url: "#",
+      },
+      {
+        title: "Company",
+        description: "Our mission is to innovate and empower the world",
+        icon: <Trees className="size-5 shrink-0" />,
+        url: "#",
+      },
+      {
+        title: "Careers",
+        description: "Browse job listing and discover our workspace",
+        icon: <Sunset className="size-5 shrink-0" />,
+        url: "#",
+      },
+      {
+        title: "Support",
+        description: "Get in touch with our support team or visit our community forums",
+        icon: <Zap className="size-5 shrink-0" />,
+        url: "#",
+      },
+    ],
+  },
+  {
+    title: "Pricing",
+    url: "/pricing",
+  }
+];
+
+const SubMenuLink = ({ item }: { item: MenuItem }) => {
+  return (
+    <Link
+      className="flex flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground"
+      href={item.url}
+    >
+      <div className="text-foreground">{item.icon}</div>
+      <div>
+        <div className="text-sm font-semibold">{item.title}</div>
+        {item.description && (
+          <p className="text-sm leading-snug text-muted-foreground">
+            {item.description}
+          </p>
+        )}
+      </div>
+    </Link>
+  );
+};
+
+const renderMenuItem = (item: MenuItem) => {
+  if (item.items) {
+    return (
+      <NavigationMenuItem key={item.title}>
+        <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+        <NavigationMenuContent className="bg-popover text-popover-foreground">
+          {item.items.map((subItem) => (
+            <NavigationMenuLink asChild key={subItem.title} className="w-80">
+              <SubMenuLink item={subItem} />
+            </NavigationMenuLink>
+          ))}
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+    );
+  }
+
+  return (
+    <NavigationMenuItem key={item.title}>
+      <NavigationMenuLink
+        href={item.url}
+        className="group inline-flex h-10 w-max items-center justify-center p-1 font-medium transition-colors hover:text-primary"
+      >
+        {item.title}
+      </NavigationMenuLink>
+    </NavigationMenuItem>
+  );
+};
+
+const renderMobileMenuItem = (item: MenuItem) => {
+  if (item.items) {
+    return (
+      <AccordionItem key={item.title} value={item.title} className="border-b-0">
+        <AccordionTrigger className="text-md py-0 font-semibold hover:no-underline">
+          {item.title}
+        </AccordionTrigger>
+        <AccordionContent className="mt-2">
+          {item.items.map((subItem) => (
+            <SubMenuLink key={subItem.title} item={subItem} />
+          ))}
+        </AccordionContent>
+      </AccordionItem>
+    );
+  }
+
+  return (
+    <Link key={item.title} href={item.url} className="text-md font-semibold">
+      {item.title}
+    </Link>
+  );
+};
+
 export function SCMarketingMenu() {
   const currentLocale = useLocale();
   const [isMobileMenuExpanded, setIsMobileMenuExpanded] = useState(false);
-  const [dropdownStates, setDropdownStates] = useState<{ [key: string]: boolean }>({
-    dropdown1: false,
-  });
-
-  const handleMobileMenuToggle = () => {
-    setIsMobileMenuExpanded(!isMobileMenuExpanded);
-  };
-
-  const handleDropdownToggle = (dropdownName: string) => {
-    if (dropdownName in dropdownStates) {
-      setDropdownStates((prevStates) => ({
-        ...prevStates,
-        [dropdownName]: !prevStates[dropdownName],
-      }));
-    }
-  };
 
   return (
-    <>
-      <header className="bg-white">
-        <nav className="bg-white shadow-lg">
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-            <div className="relative flex items-center justify-between h-16">
-              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex-shrink-0 flex items-center">
-                  <SCSiteLogo showSiteTitle={true}></SCSiteLogo>
-                </div>
-                <div className="hidden sm:block sm:ml-6">
-                  <div className="flex space-x-4">
-                    <div className="relative inline-block">
-                      <button
-                        className="text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium flex items-center"
-                        onClick={() => handleDropdownToggle('dropdown1')}
-                      >
-                        Products
-                        <ChevronDown size={16} />
-                      </button>
-
-                      {dropdownStates.dropdown1 && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          transition={{
-                            duration: 0.3,
-                            ease: 'circInOut',
-                          }}
-                          className="absolute left-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
-                        >
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6">
-                            <div>
-                              <h3 className="text-lg font-semibold text-gray-900 mb-4">Software</h3>
-                              <ul className="space-y-3">
-                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Web Development</a></li>
-                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Mobile Apps</a></li>
-                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Desktop Software</a></li>
-                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Enterprise Solutions</a></li>
-                              </ul>
-                            </div>
-                            <div>
-                              <h3 className="text-lg font-semibold text-gray-900 mb-4">Hardware</h3>
-                              <ul className="space-y-3">
-                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Laptops</a></li>
-                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Desktops</a></li>
-                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Tablets</a></li>
-                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Accessories</a></li>
-                                <li><a href="#" className="text-gray-600 hover:text-indigo-600">Networking</a></li>
-                              </ul>
-                            </div>
-                            <div>
-                              <h3 className="text-lg font-semibold text-gray-900 mb-4">Featured</h3>
-                              <div className="bg-gray-100 p-4 rounded-lg">
-                                <h4 className="font-medium text-gray-900">New Release</h4>
-                                <p className="text-sm text-gray-600 mb-2">Check out our latest product offering with advanced features.</p>
-                                <a href="#" className="text-indigo-600 hover:text-indigo-800 text-sm font-medium">Learn more →</a>
-                              </div>
-                            </div>
-                          </div>
-                        </motion.div>
-                      )}
-                    </div>
-                    <Link href='/about' className='text-gray-900 hover:bg-gray-100 px-3 py-2 rounded-md text-sm font-medium'>About</Link>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <div className="hidden sm:flex sm:items-center">
-                  <Link
-                    className="btn w-full bg-white text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto"
-                    href="account/login"
-                  >
-                    Sign in
-                  </Link>
-
-                  <Link
-                    className="btn w-full bg-teal-300 text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto"
-                    href="account/create"
-                  >
-                    Get Started
-                  </Link>
-                  <div className='btn w-full bg-gray-100 text-gray-800 shadow-xs hover:bg-gray-50 sm:ml-4 sm:w-auto'>
-                  <LocaleSwitcher currentLocale={currentLocale} />
-                  </div>
-                </div>
-
-                <div className="sm:hidden">
-                  <button
-                    type="button"
-                    className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
-                    aria-expanded={isMobileMenuExpanded}
-                    onClick={handleMobileMenuToggle}
-                    id="mobile-menu-button"
-                  >
-                    <span className="sr-only">Open main menu</span>
-                    <Menu />
-                  </button>
-                </div>
-              </div>
+    <header className="mx-auto max-w-7xl px-6 lg:px-8 py-6">
+      <div className="container">
+        {/* Desktop Menu */}
+        <nav className="hidden justify-between lg:flex">
+          <div className="flex items-center gap-10">
+            {/* Logo */}
+            <SCSiteLogo showSiteTitle={true}></SCSiteLogo>
+            <div className="flex items-center">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  {menu.map((item) => renderMenuItem(item))}
+                </NavigationMenuList>
+              </NavigationMenu>
             </div>
           </div>
+          <div className="flex gap-2">
+            <Button asChild variant="outline" size="md">
+              <Link href="account/login">Login</Link>
+            </Button>
+            <Button asChild size="sm">
+              <Link href="account/create">Create Account</Link>
+            </Button>
+            <LocaleSwitcher />
+          </div>
+        </nav>
 
-          {isMobileMenuExpanded && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, ease: 'circInOut' }}
-              className="top-0 left-0 w-screen h-screen bg-gray-100 z-50"
-            >
-              <div className="px-2 pt-2 pb-3 space-y-1">
-                <Link href="/" className="bg-gray-100 text-gray-900 block px-3 py-2 rounded-md text-base font-medium">Home</Link>
+        {/* Mobile Menu */}
+        <div className="block lg:hidden">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <SCSiteLogo showSiteTitle={false}></SCSiteLogo>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="icon">
+                  <Menu className="size-4" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent className="overflow-y-auto">
+                <SheetHeader>
+                  <SheetTitle>
+                    <SCSiteLogo showSiteTitle={true}></SCSiteLogo>
+                  </SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col gap-6 p-4">
+                  <Accordion
+                    type="single"
+                    collapsible
+                    className="flex w-full flex-col gap-4"
+                  >
+                    {menu.map((item) => renderMobileMenuItem(item))}
+                  </Accordion>
 
-                <Link href="/about" className="text-gray-900 hover:bg-gray-100 block px-3 py-2 rounded-md text-base font-medium">About</Link>
-
-                <div className="pt-4 pb-3 border-t border-gray-200">
-                  <div className="flex items-center px-3 space-y-2 flex-col">
-                    <Link
-                      href="/account/login"
-                      className="btn w-full text-center text-gray-900 bg-gray-100 px-3 py-2 rounded-md text-base font-medium"
-                    >
-                      Login
-                    </Link>
-                    <Link
-                      href="/account/create"
-                      className="btn bg-primary w-full text-center bg-indigo-600 text-white px-3 py-2 rounded-md text-base font-medium"
-                    >
-                      Sign Up
-                    </Link>
+                  <div className="flex flex-col gap-3">
+                    <Button asChild variant="outline">
+                    <Link href="account/login">Login</Link>
+                    </Button>
+                    <Button asChild>
+                      <Link href="account/create">Create Account</Link>
+                    </Button>
+                    <LocaleSwitcher />
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          )}
-        </nav>
-      </header>
-    </>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+      </div>
+    </header>
   );
 }

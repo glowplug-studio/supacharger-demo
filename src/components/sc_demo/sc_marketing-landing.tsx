@@ -19,7 +19,7 @@ export default function SCMarketngLanding() {
                 </p>
                 <div className='mt-10 flex items-center justify-center gap-x-6'>
                   <Link href='/account/create' className='btn bg-primary hover:bg-secondary'>
-                    Get started
+                    Sign Up
                   </Link>
                   <Link href='/about' className='text-sm font-semibold'>
                     Learn more <span aria-hidden='true'>→</span>
