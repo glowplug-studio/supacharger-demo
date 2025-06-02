@@ -12,16 +12,16 @@ export default function SCAccountMenu() {
   return (
     <div className="dropdown-container relative">
       <button className="dropdown-trigger flex items-center rounded-md px-2 py-1">
-        <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-          <span className="text-sm font-medium text-gray-600">JD</span>
+        <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center">
+          <span className="text-sm font-medium">JD</span>
         </div>
       </button>
 
       {/* Dropdown Content */}
-      <div className="dropdown-content absolute right-0 mt-1 w-56 rounded-md border border-gray-200 bg-white py-2 shadow-lg">
+      <div className="dropdown-content absolute right-0 mt-1 w-56 rounded-md border border-muted bg-muted py-2 shadow-lg">
         {/* Username at the top with divider */}
         <div className="px-4 py-2 mb-1">
-          <p className="font-medium text-gray-900">@{username}</p>
+          <p className="font-medium">@{username}</p>
         </div>
         <div className="my-1 border-t border-gray-200"></div>
 

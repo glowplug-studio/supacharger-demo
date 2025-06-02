@@ -95,7 +95,7 @@
     "description": "We will send a password reset link to your email",
     "expiredCode": "The reset code is invalid or expired",
     "verifyingCode": "Verifying code...",
-    "noCode": "There is no verification code, or the code is invalid",
+    "noCode": "The verification link has expired, or the code is invalid",
     "getResetLink": "Send link",
     "emailSent": "Link sent, check your inbox",
     "enterEmailPlaceholder": "Enter your email"

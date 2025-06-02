@@ -98,9 +98,9 @@ export default function SCUserDash() {
 
   return (
     <div className='container'>
-      <div className='m-4 flex min-h-screen flex-col items-stretch rounded-md p-2 sm:m-8 sm:p-4'>
+      <div className='m-4 flex min-h-screen flex-col items-stretch rounded-md p-2 sm:m-8 sm:p-4 border'>
         <div className='flex flex-1 flex-col gap-6 lg:flex-row lg:items-start'>
-          <div className='mx-auto w-full rounded-lg bg-gray-100 p-6 lg:mx-0 lg:w-[400px]'>
+          <div className='bg-muted mx-auto w-full rounded-lg p-6 lg:mx-0 lg:w-[400px]'>
             <h1 className='mb-4 text-lg font-bold'>Compose a new Post</h1>
             <div className='flex items-start gap-4'>
               <div className='flex-1'>
