@@ -36,7 +36,7 @@ export default function LocaleSwitcher() {
       focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-950 disabled:pointer-events-none 
       disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:focus-visible:ring-neutral-300 
       border border-neutral-200 hover:bg-neutral-100 hover:text-neutral-900 dark:border-gray-600 dark:hover:bg-neutral-800 
-      dark:hover:text-neutral-50 h-9 px-3 bg-white dark:bg-gray-800'>
+      dark:hover:text-neutral-50 h-9 px-3 bg-white dark:bg-slate-800'>
 
         <Globe size={16} className='inline-block' /> {currentLocale === 'en' ? 'EN' : 'FR'}
 

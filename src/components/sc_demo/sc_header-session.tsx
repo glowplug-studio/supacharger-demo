@@ -34,9 +34,9 @@ export function SCHeaderSession() {
                   aria-label='Open navigation menu'
                   aria-expanded={mobileMenuOpen}
                 >
-                  <span className='h-0.5 w-4 bg-gray-800' />
-                  <span className='h-0.5 w-4 bg-gray-800' />
-                  <span className='h-0.5 w-4 bg-gray-800' />
+                  <span className='h-0.5 w-4 bg-slate-800' />
+                  <span className='h-0.5 w-4 bg-slate-800' />
+                  <span className='h-0.5 w-4 bg-slate-800' />
                 </button>
               </SheetTrigger>
               <SheetContent side='left' className='w-[240px] p-0' aria-label='Navigation menu'>

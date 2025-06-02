@@ -168,7 +168,7 @@ const renderMobileMenuItem = (item: MenuItem) => {
 export function SCMarketingMenu() {
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 border-border shadow-lg shadow-slate-800/40 bg-gray-900/90 backdrop-blur-lg">
+    <header className="fixed top-0 left-0 w-full z-50 border-border shadow-slate-400/10 shadow-lg bg-white/80 dark:shadow-slate-800/40 dark:bg-gray-900/90 backdrop-blur-lg">
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-6">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">

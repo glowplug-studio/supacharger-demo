@@ -14,12 +14,9 @@ export default function SCMarketingAbout() {
                 Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
                 fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt.
               </p>
-              <div className='mt-10 flex items-center gap-x-6'>
-                <Link className='btn' href='account/login'>
-                  Sign in
-                </Link>
-
-                <Link className='btn bg-secondary text-gray-700' href='account/create'>
+              <div className='mt-10'>
+            
+                <Link className='btn bg-primary' href='account/create'>
                   Create a free account
                 </Link>
               </div>
