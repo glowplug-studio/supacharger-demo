@@ -23,7 +23,7 @@ export default function SCMarketingAbout() {
               </div>
             </div>
             <div className='mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow'>
-              <Image src='/images/sample/sample-marketing-app-single.webp' alt="" className='max-h-[60vh] w-auto' width="600" height='1000'> </Image>
+              <Image src='/images/sample/sample-marketing-app-single.webp' alt="" className='max-h-[60vh] w-auto' width="600" height='1000' />
             </div>
           </div>
         </div>

@@ -7,7 +7,8 @@ export default function SCMarketngLanding() {
     <>
       <section id='hero'>
         <div className='relative isolate pt-14'>
-          <div className='py-12 sm:py-16 lg:pb-12'>
+          <div className="pt-12 sm:pt-16  
+          bg-no-repeat bg-cover bg-[url('/images/sample/sample-marketing-hero-bg.svg')] dark:bg-slate-800 dark:bg-[url('/images/sample/sample-marketing-hero-bg-dark.svg')]">
             <div className='mx-auto max-w-7xl px-6 lg:px-8'>
               <div className='mx-auto max-w-2xl text-center'>
                 <h1 className='text-balance text-5xl font-semibold tracking-tight sm:text-7xl'>
@@ -28,7 +29,7 @@ export default function SCMarketngLanding() {
               </div>
 
               <div className='mt-16 flow-root sm:mt-24'>
-                <div className='-m-2 rounded-xl bg-gray-900/5 lg:-m-4 lg:rounded-2xl lg:p-4'>
+                <div className=' rounded-xl rounded-b-none bg-gray-900/5  lg:rounded-t-2xl lg:p-4 pb-0 lg:pb-0'>
                   <Image
                     alt='App screenshot'
                     src='/images/sample/sample-marketing-desktop-hero.webp'
@@ -41,7 +42,7 @@ export default function SCMarketngLanding() {
             </div>
           </div>
 
-          <div className=''>
+          <div className='pt-12 '>
             <div className='mx-auto max-w-7xl px-6 lg:px-8'>
               <h2 className='text-center text-lg/8 font-semibold text-gray-700'>
                 Connecting 10,000 companies worldwide
@@ -236,9 +237,9 @@ export default function SCMarketngLanding() {
       </section>
 
       <section>
-        <div className='container mx-auto px-4'>
-          <div className='px-4 py-32 sm:px-24'>
-            <p className='text-sweetGreen-300 mb-4 text-xs uppercase tracking-widest'>How it works</p>
+        <div className='mx-auto max-w-7xl py-12 sm:py-5 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-16'>
+          <div className='w-full px-4'>
+            <p className='text-secondary mb-4 text-xs uppercase tracking-widest'>How it works</p>
             <h1 className='font-heading mb-20 text-4xl font-bold text-primary md:text-5xl'>
               Plant the seeds of growth
             </h1>
