@@ -79,6 +79,25 @@
     --ring: 216 34% 17%;
 
     --radius: 0.5rem;
+    
+    .btn {
+      @apply inline-flex;
+      @apply justify-between;
+      @apply items-center;
+      @apply rounded-md;
+      @apply px-5;
+      @apply py-3;
+      @apply focus-visible:outline-2;
+      @apply focus-visible:outline-offset-2;
+      @apply focus-visible:outline-indigo-600;
+      @apply hover:cursor-pointer;
+      @apply font-medium;
+      @apply h-10;
+      @apply capitalize;
+      @apply text-white;
+      @apply hover:text-gray-900;
+    }
+
   }
 
   ::selection {
@@ -104,32 +123,6 @@
     @apply h-full;
     font-feature-settings: 'rlig' 1, 'calt' 1;
     background: hsl(var(--background));
-  }
-
-  a {
-    @apply text-blue-600;
-    @apply hover:underline;
-    @apply font-bold;
-  }
-
-  .btn {
-    @apply inline-flex;
-    @apply justify-between;
-    @apply items-center;
-    @apply rounded-md;
-    @apply hover:bg-secondary;
-    @apply px-5;
-    @apply py-3;
-    @apply focus-visible:outline-2;
-    @apply focus-visible:outline-offset-2;
-    @apply focus-visible:outline-indigo-600;
-    @apply hover:cursor-pointer;
-    @apply font-medium;
-    @apply h-10;
-    @apply capitalize;
-    @apply bg-primary;
-    @apply text-white;
-    @apply hover:text-gray-900;
   }
 
   .input {

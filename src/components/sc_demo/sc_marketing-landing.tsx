@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 //import SiteLogoSVG from "@/assets/images/SiteLogoSVG.svg";
@@ -10,17 +11,17 @@ export default function SCMarketngLanding() {
             <div className='mx-auto max-w-7xl px-6 lg:px-8'>
               <div className='mx-auto max-w-2xl text-center'>
                 <h1 className='text-balance text-5xl font-semibold tracking-tight sm:text-7xl'>
-                  Connect and grow together
+                  Connect locally and grow together
                 </h1>
                 <p className='mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8'>
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
                   amet fugiat veniam occaecat.
                 </p>
                 <div className='mt-10 flex items-center justify-center gap-x-6'>
-                  <Link href='/account/create' className='btn bg-primary'>
+                  <Link href='/account/create' className='btn bg-primary hover:bg-secondary'>
                     Get started
                   </Link>
-                  <Link href='/about' className='text-sm/6 font-semibold text-gray-800'>
+                  <Link href='/about' className='text-sm font-semibold'>
                     Learn more <span aria-hidden='true'>→</span>
                   </Link>
                 </div>
@@ -28,7 +29,7 @@ export default function SCMarketngLanding() {
 
               <div className='mt-16 flow-root sm:mt-24'>
                 <div className='-m-2 rounded-xl bg-gray-900/5 lg:-m-4 lg:rounded-2xl lg:p-4'>
-                  <img
+                  <Image
                     alt='App screenshot'
                     src='/images/sample/sample-marketing-desktop-hero.webp'
                     width={2432}
@@ -237,7 +238,7 @@ export default function SCMarketngLanding() {
       <section>
         <div className='container mx-auto px-4'>
           <div className='px-4 py-32 sm:px-24'>
-            <p className='text-sweetGreen-300 mb-4 text-xs uppercase tracking-widest'>HOW IT WORKS</p>
+            <p className='text-sweetGreen-300 mb-4 text-xs uppercase tracking-widest'>How it works</p>
             <h1 className='font-heading mb-20 text-4xl font-bold text-primary md:text-5xl'>
               Plant the seeds of growth
             </h1>
@@ -282,11 +283,13 @@ export default function SCMarketngLanding() {
                 </p>
               </div>
               <div className='w-full p-4 lg:w-2/3'>
-                <img
+                <Image
                   className='w-full rounded-3xl object-cover'
                   style={{ height: '600px' }}
                   src='/images/sample/sample-marketing-app-multi.webp'
                   alt=''
+                  width={1600}
+                  height={1600}
                 />
               </div>
             </div>

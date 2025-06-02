@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, ThumbsUp } from 'lucide-react';
 import { toast } from 'react-toastify';
+
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
 
@@ -101,6 +102,9 @@ export default function SCUserDash() {
   return (
     <div className='container'>
       <div className='m-4 flex min-h-screen flex-col items-stretch rounded-md p-2 sm:m-8 sm:p-4 border border-border'>
+
+      <h1 className='mt-4 mb-8 text-4xl font-semibold'>Updates from your Network</h1>
+
         <div className='flex flex-1 flex-col gap-6 lg:flex-row lg:items-start'>
           <div className='bg-muted mx-auto w-full rounded-lg p-6 lg:mx-0 lg:w-[400px]'>
             <h1 className='mb-4 text-lg font-bold'>Compose a new Post</h1>
@@ -116,7 +120,6 @@ export default function SCUserDash() {
           </div>
           {/* Right: Posts Container */}
           <div className='w-full flex-1'>
-            <h1 className='mb-8 text-4xl font-semibold'>Updates from your Network</h1>
             <div className='space-y-6'>
               {posts.map((post) => (
                 <div key={post.id} className='flex gap-4 rounded-lg bg-muted p-4 shadow-sm'>

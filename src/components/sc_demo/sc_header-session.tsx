@@ -1,84 +1,96 @@
-import { cookies } from 'next/headers';
+'use client';
+
+import {  useState } from 'react';
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
 
 import SCAccountMenu from '@/components/sc_demo/sc_account-menu';
-import { isLoggedIn } from '@/lib/supabase/supacharger/supabase-auth';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import ModeToggle from '@/supacharger/components/buttons/mode-toggle-button';
 
 import LocaleSwitcher from './sc_locale-switcher';
 import SCSiteLogo from './sc_site-logo';
 
-export async function SCHeaderSession() {
-  const session = await isLoggedIn();
-  // Get the current locale from cookies
-  const cookieStore = await cookies();
-  const currentLocale = cookieStore.get('supacharger_locale')?.value || 'en'; // Default to 'en' if not set
-  const username = 'johsimpsons';
+export function SCHeaderSession() {
+
+  const focusClasses = 'focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2';
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const linkClasses =
+    'flex h-full items-center border-b-2 border-transparent px-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700';
+  const mobileLinkClasses =
+    'flex items-center px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900';
 
   return (
     <>
-      <header className='flex items-center justify-between border-b border-gray-200 bg-background px-4 shadow-sm'>
-        <div className='flex h-14 items-center'>
-          <div className='mobile-menu mr-4 md:hidden'>
-            <input type='checkbox' id='menu-toggle' className='hidden' />
-            <label htmlFor='menu-toggle' className='block cursor-pointer'>
-              <div className='flex h-5 w-6 flex-col justify-between'>
-                <span className='h-0.5 w-full rounded-sm bg-gray-800'></span>
-                <span className='h-0.5 w-full rounded-sm bg-gray-800'></span>
-                <span className='h-0.5 w-full rounded-sm bg-gray-800'></span>
-              </div>
-            </label>
-
-            <div className='mobile-menu-dropdown absolute left-0 top-14 z-50 w-full border-b border-gray-200 bg-white shadow-md'>
-              <Link href='/dashboard' className='block border-l-4 border-gray-800 bg-gray-50 px-4 py-3 font-medium'>
-                Dashboard
-              </Link>
-              <Link href='/deals' className='block border-l-4 border-transparent px-4 py-3 hover:bg-gray-50'>
-                Deals
-              </Link>
-              <Link href='/connections' className='block border-l-4 border-transparent px-4 py-3 hover:bg-gray-50'>
-                Connections
-              </Link>
-            </div>
+      <header className='flex h-14 items-center justify-between border-b border-border px-8 py-6 shadow-sm'>
+        <div className='flex h-full items-center'>
+          {/* Mobile Menu */}
+          <div className='mr-4 lg:hidden'>
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <button
+                  className={`flex h-8 w-8 flex-col items-center justify-center space-y-1 rounded-md border border-gray-200 ${focusClasses}`}
+                  aria-label='Open navigation menu'
+                  aria-expanded={mobileMenuOpen}
+                >
+                  <span className='h-0.5 w-4 bg-gray-800' />
+                  <span className='h-0.5 w-4 bg-gray-800' />
+                  <span className='h-0.5 w-4 bg-gray-800' />
+                </button>
+              </SheetTrigger>
+              <SheetContent side='left' className='w-[240px] p-0' aria-label='Navigation menu'>
+                <div className='flex flex-col py-2'>
+                  <div className='px-4 py-2' role='banner'>
+                  <SCSiteLogo showSiteTitle={true}></SCSiteLogo>
+                  </div>
+                  <nav className='mt-2 border-t border-gray-100 pt-4' role='navigation' aria-label='Main navigation'>
+                    <Link
+                      href='/#'
+                      className={`${mobileLinkClasses} ${focusClasses}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                    <Link
+                      href='/#'
+                      className={`${mobileLinkClasses} ${focusClasses}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Deals
+                    </Link>
+                    <Link
+                      href='/#'
+                      className={`${mobileLinkClasses} ${focusClasses}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Connections
+                    </Link>
+                  </nav>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
 
           {/* Logo */}
-          <div className='mr-8'>
+          <div className='mr-8' role='banner'>
             <SCSiteLogo></SCSiteLogo>
           </div>
 
-          {/* Desktop Tabbed Menu (hidden on small screens) */}
-          <nav className='hidden h-full md:flex'>
-            <Link
-              href='/#'
-              className='flex h-full items-center border-b-2 border-gray-500 px-4 font-medium text-neutral-900'
-            >
-              Feed
+          {/* Desktop Navigation */}
+          <nav className='hidden h-full lg:flex' role='navigation' aria-label='Main navigation'>
+            <Link href='/dashboard' className={`${linkClasses} ${focusClasses}`}>
+              Dashboard
             </Link>
-            <Link
-              href='/#'
-              className='flex h-full items-center border-b-2 border-transparent px-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:no-underline'
-            >
-              Negotiations
+            <Link href='/deals' className={`${linkClasses} ${focusClasses}`}>
+              Deals
             </Link>
-            <Link
-              href='/#'
-              className='flex h-full items-center border-b-2 border-transparent px-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700 hover:no-underline'
-            >
+            <Link href='/connections' className={`${linkClasses} ${focusClasses}`}>
               Connections
             </Link>
           </nav>
         </div>
-        <div className='flex items-center gap-4'>
-
-          {/* Lang Switcher */}
-          <div className=''>
-            <LocaleSwitcher currentLocale={currentLocale}></LocaleSwitcher>
-          </div>
-          <div>
-            <ModeToggle></ModeToggle>
-          </div>
+        <div className=''>
           <SCAccountMenu></SCAccountMenu>
         </div>
       </header>

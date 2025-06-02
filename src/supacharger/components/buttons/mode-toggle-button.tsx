@@ -1,8 +1,9 @@
 'use client';
 
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { Moon, Sun } from 'lucide-react';
+import { MonitorCog,Moon, Sun } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -15,6 +16,8 @@ import {
 export default function ModeToggle() {
   const { setTheme } = useTheme();
 
+  const tThemeChangerMenu = useTranslations('ThemeChangerMenu');
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,9 +28,15 @@ export default function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
-        <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>
+      <DropdownMenuItem className='text-xs  hover:cursor-pointer' onClick={() => setTheme('light')}>
+                <Sun size={14} /> {tThemeChangerMenu('light')}
+              </DropdownMenuItem>
+              <DropdownMenuItem className='text-xs  hover:cursor-pointer' onClick={() => setTheme('dark')}>
+                <Moon size={14} /> {tThemeChangerMenu('dark')}
+              </DropdownMenuItem>
+              <DropdownMenuItem className='text-xs hover:cursor-pointer' onClick={() => setTheme('system')}>
+                <MonitorCog size={14} />  {tThemeChangerMenu('system')}
+              </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -27,6 +27,7 @@
     "forgotPassword": "Forgot Password",
     "loginSuccess": "You have been logged in",
     "logIn": "Sign In",
+    "logOut": "Sign Out",
     "createAnAccount": "Create an account",
     "signUp": "Sign Up",
     "retypePassword": "Retype Password",
@@ -122,5 +123,16 @@
   },
   "PasswordUpdateFormComponent": {
     "title": "Update your Password"
+  },
+  "AccountDropdownMenu": {
+    "accountSettings": "Account Settings",
+    "billing": "Billing",
+    "myProfile": "Profile"
+  },
+  "ThemeChangerMenu": {
+    "title": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   }
 }

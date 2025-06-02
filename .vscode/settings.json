@@ -11,6 +11,9 @@
         {
             "folderPath": "supacharger/src/app/(supacharger)/(unauthenticated)/account/logout/route.ts/",
             "color": "foldercolorizer.color_00cccc"
+        },
+        {
+            "folderPath": "supacharger/"
         }
     ],
     "search.exclude": {
