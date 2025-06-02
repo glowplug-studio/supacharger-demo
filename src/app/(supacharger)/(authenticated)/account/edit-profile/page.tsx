@@ -1,16 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { Loader2, X } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import { Avatar } from '@/app/(supacharger)/(authenticated)/account/edit-profile/account-profile-edit-avatar';
 import { Button } from '@/components/ui/button';
+import { Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger } from "@/components/ui/dialog"
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/seperator';
 import { Textarea } from '@/components/ui/textarea';
-import * as Dialog from '@radix-ui/react-dialog';
 
 interface Profile {
   firstName: string;
@@ -73,17 +78,21 @@ export default function EditProfilePage() {
         <Separator className='my-4' />
       </div>
 
-      <div>TESTING
+      <div>
 
-      <Dialog.Root>
-      <Dialog.Trigger>Open Dialog</Dialog.Trigger>
-      <Dialog.Overlay />
-      <Dialog.Content>
-        <Dialog.Title>My Dialog</Dialog.Title>
-        <Dialog.Description>This is a simple dialog example.</Dialog.Description>
-        <Dialog.Close>Close</Dialog.Close>
-      </Dialog.Content>
-    </Dialog.Root>
+      <Dialog>
+  <DialogTrigger>Open</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Are you absolutely sure?</DialogTitle>
+      <DialogDescription>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+</Dialog>
+
       <div>
 
 </div>
