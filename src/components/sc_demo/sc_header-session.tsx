@@ -4,6 +4,7 @@ import { Menu } from 'lucide-react';
 
 import SCAccountMenu from '@/components/sc_demo/sc_account-menu';
 import { isLoggedIn } from '@/lib/supabase/supacharger/supabase-auth';
+import ModeToggle from '@/supacharger/components/buttons/mode-toggle-button';
 
 import LocaleSwitcher from './sc_locale-switcher';
 import SCSiteLogo from './sc_site-logo';
@@ -17,7 +18,7 @@ export async function SCHeaderSession() {
 
   return (
     <>
-      <header className='flex items-center justify-between border-b border-gray-200 bg-white px-4 shadow-sm'>
+      <header className='flex items-center justify-between border-b border-gray-200 bg-background px-4 shadow-sm'>
         <div className='flex h-14 items-center'>
           <div className='mobile-menu mr-4 md:hidden'>
             <input type='checkbox' id='menu-toggle' className='hidden' />
@@ -69,10 +70,14 @@ export async function SCHeaderSession() {
             </Link>
           </nav>
         </div>
-        <div className='flex items-center'>
+        <div className='flex items-center gap-4'>
+
           {/* Lang Switcher */}
-          <div className='mr-4 '>
+          <div className=''>
             <LocaleSwitcher currentLocale={currentLocale}></LocaleSwitcher>
+          </div>
+          <div>
+            <ModeToggle></ModeToggle>
           </div>
           <SCAccountMenu></SCAccountMenu>
         </div>

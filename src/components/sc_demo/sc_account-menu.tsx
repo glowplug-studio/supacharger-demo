@@ -35,12 +35,14 @@ export default function SCAccountMenu() {
           <CreditCard size={18} /> Billing
         </Link>
         <div className="my-1 border-t border-gray-200"></div>
+
         <div className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer">
           <LogOut size={18} />
           <LogoutButton className="p-0 bg-transparent m-0 text-sm text-gray-700 hover:bg-gray-10 transition-colors">
             Log Out
           </LogoutButton>
         </div>
+
       </div>
     </div>
   );
