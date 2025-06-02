@@ -72,14 +72,6 @@ export default function SCFooter() {
                     Retail Owners
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href='#'
-                    className='text-sm/6 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
-                  >
-                    Sports Group
-                  </Link>
-                </li>
               </ul>
             </div>
             {/* Support */}

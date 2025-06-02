@@ -1,9 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
-import { useLocale } from "next-intl";
-import { Book, Menu, Sunset, Trees, Zap } from 'lucide-react';
+import {  Calendar, Component, Landmark, Menu, Trees, Warehouse } from 'lucide-react';
 
 import {
   Accordion,
@@ -62,50 +60,48 @@ interface Navbar1Props {
 
 // Example menu data
 const menu: MenuItem[] = [
-  { title: "About", url: "/about" },
   {
-    title: "Applications",
+    title: "Use Cases",
     url: "#",
     items: [
       {
-        title: "Blog",
-        description: "The latest industry news, updates, and info",
-        icon: <Book className="size-5 shrink-0" />,
+        title: "Advocacy Groups",
+        description: "Mobilize members and campaigns",
+        icon: <Component className="size-6 shrink-0 text-secondary mt-2" />,
         url: "#",
       },
       {
-        title: "Company",
-        description: "Our mission is to innovate and empower the world",
-        icon: <Trees className="size-5 shrink-0" />,
+        title: "Interest Meetups",
+        description: "Organize and grow your community",
+        icon: <Calendar className="size-6 shrink-0 text-secondary mt-2" />,
         url: "#",
       },
       {
-        title: "Careers",
-        description: "Browse job listing and discover our workspace",
-        icon: <Sunset className="size-5 shrink-0" />,
+        title: "Aligned Businesses",
+        description: "Connect with like-minded partners",
+        icon: <Landmark className="size-6 shrink-0 text-secondary mt-2" />,
         url: "#",
       },
       {
-        title: "Support",
-        description: "Get in touch with our support team or visit our community forums",
-        icon: <Zap className="size-5 shrink-0" />,
+        title: "Retail Owners",
+        description: "Engage local customers and networks",
+        icon: <Warehouse className="size-6 shrink-0 text-secondary mt-2" />,
         url: "#",
       },
     ],
   },
-  {
-    title: "Pricing",
-    url: "/pricing",
-  }
+  { title: "About", url: "/about" },
+  { title: "Pricing", url: "/pricing" }
+  
 ];
 
 const SubMenuLink = ({ item }: { item: MenuItem }) => {
   return (
     <Link
-      className="flex flex-row gap-4 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground"
+      className="flex flex-row gap-6 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-muted hover:text-accent-foreground"
       href={item.url}
     >
-      <div className="text-foreground">{item.icon}</div>
+      <div className="text-foreground mr-1">{item.icon}</div>
       <div>
         <div className="text-sm font-semibold">{item.title}</div>
         {item.description && (
@@ -170,12 +166,10 @@ const renderMobileMenuItem = (item: MenuItem) => {
 };
 
 export function SCMarketingMenu() {
-  const currentLocale = useLocale();
-  const [isMobileMenuExpanded, setIsMobileMenuExpanded] = useState(false);
 
   return (
-    <header className="mx-auto max-w-7xl px-6 lg:px-8 py-6">
-      <div className="container">
+    <header className="fixed top-0 left-0 w-full z-50 border-border shadow-lg shadow-slate-800/40 bg-gray-900/90 backdrop-blur-lg">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-6">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">
           <div className="flex items-center gap-10">
@@ -190,7 +184,7 @@ export function SCMarketingMenu() {
             </div>
           </div>
           <div className="flex gap-2">
-            <Button asChild variant="outline" size="md">
+            <Button asChild variant="outline">
               <Link href="account/login">Login</Link>
             </Button>
             <Button asChild size="sm">
