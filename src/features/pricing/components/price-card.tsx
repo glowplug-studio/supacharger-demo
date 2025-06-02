@@ -43,9 +43,9 @@ export function PricingCard({
   const isBillingIntervalYearly = billingInterval === 'year';
   const metadata = productMetadataSchema.parse(product.metadata);
   const buttonVariantMap = {
-    basic: 'default',
-    pro: 'default',
-    enterprise: 'orange',
+    basic: 'secondary',
+    pro: 'secondary',
+    enterprise: 'default',
   } as const;
 
   function handleBillingIntervalChange(billingInterval: BillingInterval) {

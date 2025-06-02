@@ -1,4 +1,5 @@
 import { Check } from 'lucide-react';
+
 import { Input } from '../ui/input';
 
 export default function SCPricingSubscription() {
