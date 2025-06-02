@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, ThumbsUp } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { Button } from '../ui/button';
+import { Textarea } from '../ui/textarea';
 
 const posts = [
   {
@@ -98,19 +100,17 @@ export default function SCUserDash() {
 
   return (
     <div className='container'>
-      <div className='m-4 flex min-h-screen flex-col items-stretch rounded-md p-2 sm:m-8 sm:p-4 border'>
+      <div className='m-4 flex min-h-screen flex-col items-stretch rounded-md p-2 sm:m-8 sm:p-4 border border-border'>
         <div className='flex flex-1 flex-col gap-6 lg:flex-row lg:items-start'>
           <div className='bg-muted mx-auto w-full rounded-lg p-6 lg:mx-0 lg:w-[400px]'>
             <h1 className='mb-4 text-lg font-bold'>Compose a new Post</h1>
             <div className='flex items-start gap-4'>
               <div className='flex-1'>
-                <textarea
-                  className='mb-4 h-24 w-full resize-none rounded border border-gray-300 p-2'
+                <Textarea
+                  className='mb-4 h-24 w-full resize-none rounded border p-2'
                   placeholder='Enter your post here'
-                ></textarea>
-                <button className='flex w-full justify-center rounded-md bg-primary py-2 font-bold text-white'>
-                  Publish
-                </button>
+                ></Textarea>
+                <Button>Publish</Button>
               </div>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default function SCUserDash() {
             <h1 className='mb-8 text-4xl font-semibold'>Updates from your Network</h1>
             <div className='space-y-6'>
               {posts.map((post) => (
-                <div key={post.id} className='flex gap-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm'>
+                <div key={post.id} className='flex gap-4 rounded-lg bg-muted p-4 shadow-sm'>
                   {/* Thumbnail */}
                   <div className='flex-shrink-0'>
                     <Image
@@ -134,12 +134,12 @@ export default function SCUserDash() {
                   <div className='flex flex-1 flex-col'>
                     <div>
                       <h3 className='text-base font-semibold sm:text-lg'>{post.title}</h3>
-                      <div className='mb-1 text-xs text-gray-500 sm:text-sm'>By {post.author}</div>
-                      <p className='text-xs text-gray-600'>{post.summary}</p>
+                      <div className='mb-1 text-xs sm:text-sm'>By {post.author}</div>
+                      <p className='text-xs '>{post.summary}</p>
                     </div>
                     <div className='mt-2 flex flex-1 items-end justify-between'>
                       {/* View & Upvote counts */}
-                      <div className='flex items-center gap-3 text-xs text-gray-400'>
+                      <div className='flex items-center gap-3 text-xs'>
                         <span className='flex items-center gap-1'>
                           <Eye size={16} className='inline' />
                           {post.views}
@@ -150,7 +150,7 @@ export default function SCUserDash() {
                         </span>
                       </div>
                       {/* View more link */}
-                      <Link href='#' className='text-xs font-medium text-blue-600 hover:underline'>
+                      <Link href='#' className='text-xs'>
                         View more &rarr;
                       </Link>
                     </div>
