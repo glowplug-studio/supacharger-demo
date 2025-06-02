@@ -7,14 +7,14 @@ export default function SCMarketngLanding() {
     <>
       <section id='hero'>
         <div className='relative isolate pt-14'>
-          <div className="pt-12 sm:pt-16  
+          <div className="pt-24 sm:pt-32 
           bg-no-repeat bg-cover bg-[url('/images/sample/sample-marketing-hero-bg.svg')] dark:bg-slate-800 dark:bg-[url('/images/sample/sample-marketing-hero-bg-dark.svg')]">
             <div className='mx-auto max-w-7xl px-6 lg:px-8'>
               <div className='mx-auto max-w-2xl text-center'>
                 <h1 className='text-balance text-5xl font-semibold tracking-tight sm:text-7xl'>
                   Connect locally and grow together
                 </h1>
-                <p className='mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8'>
+                <p className='mt-8 text-pretty text-lg font-medium  sm:text-xl/8'>
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
                   amet fugiat veniam occaecat.
                 </p>
