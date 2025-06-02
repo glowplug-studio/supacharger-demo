@@ -10,7 +10,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/seperator';
 import { Textarea } from '@/components/ui/textarea';
-import { useUnsavedChanges } from '@/hooks/use-unsaved-changes';
 
 interface Profile {
   firstName: string;
@@ -20,7 +19,6 @@ interface Profile {
 }
 
 export default function EditProfilePage() {
-  const { setHasChanges } = useUnsavedChanges();
   const [isLoading, setIsLoading] = useState(false);
   const [profile, setProfile] = useState<Profile>({
     firstName: '',
@@ -53,19 +51,6 @@ export default function EditProfilePage() {
     loadProfile();
   }, []);
 
-  // Check for changes in form
-  useEffect(() => {
-    const hasChanged =
-      profile.firstName !== initialProfile.firstName ||
-      profile.lastName !== initialProfile.lastName ||
-      profile.aboutMe !== initialProfile.aboutMe ||
-      profile.avatarFile !== initialProfile.avatarFile;
-
-      alert('change');
-
-    setHasChanges(hasChanged);
-  }, [profile, initialProfile, setHasChanges]);
-
   // Handle form field changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -77,12 +62,6 @@ export default function EditProfilePage() {
     setProfile((prev) => ({ ...prev, avatarFile: file }));
   };
 
-  // Check if form has any changes
-  const hasChanges =
-    profile.firstName !== initialProfile.firstName ||
-    profile.lastName !== initialProfile.lastName ||
-    profile.aboutMe !== initialProfile.aboutMe ||
-    profile.avatarFile !== initialProfile.avatarFile;
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,7 +70,6 @@ export default function EditProfilePage() {
     await new Promise((resolve) => setTimeout(resolve, 1500));
     // Update the initial state to match current state
     setInitialProfile(profile);
-    setHasChanges(false);
     setIsLoading(false);
     toast.success('Your profile has been successfully updated.');
   };
@@ -132,7 +110,7 @@ export default function EditProfilePage() {
               <Textarea id='aboutMe' name='aboutMe' value={profile.aboutMe} onChange={handleChange} rows={6} />
             </div>
 
-            <Button type='submit' disabled={isLoading || !hasChanges}>
+            <Button type='submit' disabled={isLoading}>
               {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
               Save Changes
             </Button>

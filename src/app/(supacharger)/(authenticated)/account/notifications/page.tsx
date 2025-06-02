@@ -9,8 +9,6 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/seperator';
 import { Switch } from '@/components/ui/switch';
-//import { useToast } from '@/hooks/use-toast';
-import { useUnsavedChanges } from '@/hooks/use-unsaved-changes';
 
 interface NotificationSettings {
   pushEnabled: boolean;
@@ -20,8 +18,6 @@ interface NotificationSettings {
 }
 
 export default function NotificationsPage() {
-  const { setHasChanges } = useUnsavedChanges();
-  //const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
   const [settings, setSettings] = useState<NotificationSettings>({
@@ -55,17 +51,6 @@ export default function NotificationsPage() {
 
     loadSettings();
   }, []);
-
-  // Check for changes
-  useEffect(() => {
-    const hasChanges =
-      settings.pushEnabled !== initialSettings.pushEnabled ||
-      settings.emailDaily !== initialSettings.emailDaily ||
-      settings.emailWeekly !== initialSettings.emailWeekly ||
-      settings.emailMarketing !== initialSettings.emailMarketing;
-
-    setHasChanges(hasChanges);
-  }, [settings, initialSettings, setHasChanges]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -156,7 +141,7 @@ export default function NotificationsPage() {
           </div>
 
           <div className='pt-4'>
-            <Button type='submit' disabled={isLoading || JSON.stringify(settings) === JSON.stringify(initialSettings)}>
+            <Button type='submit' disabled={isLoading}>
               {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
               Save Preferences
             </Button>
