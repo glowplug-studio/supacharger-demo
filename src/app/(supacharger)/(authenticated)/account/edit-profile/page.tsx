@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/seperator';
 import { Textarea } from '@/components/ui/textarea';
+import * as Dialog from '@radix-ui/react-dialog';
 
 interface Profile {
   firstName: string;
@@ -70,6 +71,22 @@ export default function EditProfilePage() {
       <div>
         <h2 className='text-2xl font-bold tracking-tight'>Edit Profile</h2>
         <Separator className='my-4' />
+      </div>
+
+      <div>TESTING
+
+      <Dialog.Root>
+      <Dialog.Trigger>Open Dialog</Dialog.Trigger>
+      <Dialog.Overlay />
+      <Dialog.Content>
+        <Dialog.Title>My Dialog</Dialog.Title>
+        <Dialog.Description>This is a simple dialog example.</Dialog.Description>
+        <Dialog.Close>Close</Dialog.Close>
+      </Dialog.Content>
+    </Dialog.Root>
+      <div>
+
+</div>
       </div>
 
       <form onSubmit={handleSubmit} className='space-y-8'>
