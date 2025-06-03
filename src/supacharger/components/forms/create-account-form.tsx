@@ -73,7 +73,6 @@ export function CreateAccountForm() {
 
   const email = watch('email');
   const password = watch('password');
-  const retypePassword = watch('retypePassword');
 
   // Open password section when email is typed
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
