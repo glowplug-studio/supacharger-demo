@@ -17,7 +17,7 @@ export async function GET(): Promise<NextResponse> {
   if (!logoutResult.success) {
     return NextResponse.json(logoutResult, { status: 500 });
   }
-  const redirectURL = getURL(SC_CONFIG.LOGIN_REDIRECT_DESTINATON);
+  const redirectURL = getURL(SC_CONFIG.USER_REDIRECTS.UNAUTHED_USER.LOGOUT_REDIRECT_DESTINATON);
   return NextResponse.redirect(redirectURL);
 }
 

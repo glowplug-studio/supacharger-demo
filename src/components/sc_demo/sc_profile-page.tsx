@@ -1,15 +1,14 @@
 'use client';
-
 import { useParams } from 'next/navigation';
 
-export default function UserPage() {
+export default function SCProfilePage() {
   const params = useParams();
   const username = params?.username;
   const avatarUrl = 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=100';
   const bannerUrl = 'https://images.unsplash.com/photo-1688236043901-603c0e16f3ae?q=80&w=1600';
-  const bio = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exer.';
+  const bio =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exer.';
 
-  // Use the username parameter
   return (
     <>
       <div className='mx-auto w-full max-w-6xl overflow-hidden rounded-lg bg-white shadow-md'>
@@ -42,9 +41,7 @@ export default function UserPage() {
                 </div>
               </div>
 
-              <button className='btn w-full text-white bg-primary'>
-                Follow
-              </button>
+              <button className='btn w-full bg-primary text-white'>Follow</button>
             </div>
           </div>
 

@@ -22,8 +22,14 @@ export async function GET(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (!user?.id) {
-      return NextResponse.redirect( getURL(SC_CONFIG.NO_SESSION_USER_REDIRECT_DESTINATION) );
+      return NextResponse.redirect( getURL(SC_CONFIG.USER_REDIRECTS.UNAUTHED_USER.AUTHGUARD_REDIRECT_DESTINATION) );
     }
+
+    // if theres a wizard
+    if(SC_CONFIG.ACCOUNT_CREATION_STEPS_URL !== null){
+      return NextResponse.redirect(siteUrl+SC_CONFIG.ACCOUNT_CREATION_STEPS_URL);
+    }
+
 
     // Check if user is subscribed, if not redirect to pricing page
     const { data: userSubscription } = await supabase

@@ -34,6 +34,7 @@ export default function SCFooter() {
                 <LinkedinLogo height='26' width='26' />
               </Link>
             </div>
+            <Link className="mt-6 block" href="/legal">Terms of Use</Link>
           </div>
           <div className='mt-16 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-8 lg:grid-cols-4 xl:col-span-2 xl:mt-0'>
             {/* Applications */}
@@ -159,7 +160,7 @@ export default function SCFooter() {
         </div>
         <div className='mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24'>
           <p className='text-xs/6 text-gray-600'>
-            &copy; {SC_CONFIG.SITE_TITLE} {new Date().getFullYear()}, All rights reserved.
+            &copy; {SC_CONFIG.SITE_TITLE} {new Date().getFullYear()}, All rights reserved. 
           </p>
         </div>
       </div>
