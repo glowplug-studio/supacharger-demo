@@ -121,7 +121,7 @@ export default function ResetPasswordFormPage() {
           {/* If there is no code and not pending, show message and link */}
           {!pending && !code && (
             <div className='sc_message sc_message-error flex flex-col gap-2'>
-              <span>
+              <span className='text-sm'>
                 {tPasswordResetPage('noCode') || 'No reset code found. Please request a new password reset link.'}
               </span>
               <Link className='text-sm font-semibold hover:text-indigo-500' href='/account/reset-password'>

@@ -126,7 +126,26 @@ export async function sendPasswordReset(email: string) {
 
 //// @TODO the rest is questionable
 
-export async function signInWithOAuth(provider: 'github' | 'google'): Promise<ActionResponse> {
+export type SupabaseOAuthProvider =
+  | 'apple'
+  | 'azure'
+  | 'bitbucket'
+  | 'discord'
+  | 'facebook'
+  | 'github'
+  | 'gitlab'
+  | 'google'
+  | 'keycloak'
+  | 'linkedin'
+  | 'notion'
+  | 'slack'
+  | 'spotify'
+  | 'twitch'
+  | 'twitter'
+  | 'workos'
+  | 'zoom';
+
+export async function signInWithOAuth(provider: SupabaseOAuthProvider): Promise<ActionResponse> {
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signInWithOAuth({

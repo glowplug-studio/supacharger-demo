@@ -27,6 +27,7 @@
     "forgotPassword": "Forgot Password",
     "loginSuccess": "You have been logged in",
     "logIn": "Sign In",
+    "logOut": "Sign Out",
     "createAnAccount": "Create an account",
     "signUp": "Sign Up",
     "retypePassword": "Retype Password",
@@ -95,7 +96,7 @@
     "description": "We will send a password reset link to your email",
     "expiredCode": "The reset code is invalid or expired",
     "verifyingCode": "Verifying code...",
-    "noCode": "There is no verification code, or the code is invalid",
+    "noCode": "The verification link has expired, or the code is invalid",
     "getResetLink": "Send link",
     "emailSent": "Link sent, check your inbox",
     "enterEmailPlaceholder": "Enter your email"
@@ -122,5 +123,16 @@
   },
   "PasswordUpdateFormComponent": {
     "title": "Update your Password"
+  },
+  "AccountDropdownMenu": {
+    "accountSettings": "Account Settings",
+    "billing": "Billing",
+    "myProfile": "Profile"
+  },
+  "ThemeChangerMenu": {
+    "title": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
   }
 }
