@@ -24,7 +24,7 @@ export default function SaveButton({
   onClick,
   type = 'submit',
   disabled = false,
-  className = '',
+  className = 'btn ',
 }: SaveButtonProps) {
   return (
     <Button
@@ -38,7 +38,7 @@ export default function SaveButton({
     >
       {isLoading ? (
         <span className='flex items-center justify-center'>
-          <InlineLoader className='-ml-1 mr-3 h-5 w-5 animate-spin text-white' />
+          <InlineLoader className='-ml-1 mr-3 h-5 w-5' />
           {savingLabel}
         </span>
       ) : isSuccess ? (

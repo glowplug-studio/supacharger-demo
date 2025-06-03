@@ -1,31 +1,36 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useTranslations } from "next-intl";
+/** =========================================================================
+ *
+ *  Supacharger - Password Reset page account/reset-password
+ *
+ *  Description: User can request a linkt to reset their password
+ *
+ *  Author: J Sharp <j@glowplug.studio>
+ *
+ *  License: CC BY-NC-SA 4.0
+ *
+ * ========================================================================= */
 
-import SCSiteLogo from "@/components/sc_demo/sc_site-logo";
-import ResetPasswordForm from "@/supacharger/components/forms/reset-password-request-link-form";
+import { useTranslations } from 'next-intl';
 
-export default function LoginPage() {
-  const tPasswordResetPage= useTranslations("PasswordResetPage");
-  const tGlobal = useTranslations('Global');
-  const tAuthTerms = useTranslations('AuthTerms');
+import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
+import ResetPasswordForm from '@/supacharger/components/forms/reset-password-request-link-form';
+
+export default function ResetPasswordRequestEmailPage() {
+  const tPasswordResetPage = useTranslations('PasswordResetPage');
 
   return (
-    <div className="flex h-screen flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 bg-sc-gradient">
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
-          <div className="mb-6 block">
-            <SCSiteLogo showSiteTitle={false} darkMode={false} />
-          </div>
-          <h1 className="mb-8 text-2xl/9 font-bold tracking-tight text-gray-700">
-            {tPasswordResetPage("title")}{" "}
-          </h1>
-
-          <ResetPasswordForm></ResetPasswordForm>
-
+    <main id='sc_account-password-reset-page'>
+      <div className='flex items-center gap-2 lg:hidden'>
+        <div className='mb-6 w-6'>
+          <SCSiteLogo showSiteTitle={true} darkMode={false} />
         </div>
       </div>
-    </div>
+      <div className='flex flex-col gap-2 px-1'>
+        <h1 className='mb-6 text-2xl/9 font-bold tracking-tight'>{tPasswordResetPage('title')}</h1>
+      </div>
+      <ResetPasswordForm></ResetPasswordForm>
+    </main>
   );
 }

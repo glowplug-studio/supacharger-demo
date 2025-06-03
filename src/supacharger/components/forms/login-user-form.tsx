@@ -1,209 +1,207 @@
 'use client';
 
-/** ==========
+/** =========================================================================
  *
- * Supacharger - Create Account Form
+ *  Supacharger - Login User Form Component
  *
- * ========== */
+ *  Description: Login form functionality along with activation link request UI
+ *
+ *  Author: J Sharp <j@glowplug.studio>
+ *
+ *  License: CC BY-NC-SA 4.0
+ *
+ * ========================================================================= */
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { Eye, EyeOff } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
+import { Input } from "@/components/ui/input";
+import { loginUser } from '@/lib/supabase/supacharger/supabase-auth';
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
-import { loginUser } from '@/supacharger/libs/supabase/supabase-auth';
+import { SC_CONFIG } from '@/supacharger/supacharger-config';
 import { isValidEmail, supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
 
 export function LoginUserForm() {
+  // Translations
   const tAuthTerms = useTranslations('AuthTerms');
+  const tGlobal = useTranslations('Global');
+  const tLoginPage = useTranslations('LoginPage');
   const tSupabaseErrorCodes = useTranslations('SupabaseErrorCodes');
-  const tGlobalUI = useTranslations('GlobalUI');
+
+  // State
   const [isLoading, setIsLoading] = useState(false);
-  const [isSaveLoading, setIsSaveLoading] = useState(false);
-  const [isSaveSuccess, setIsSaveSuccess] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showEmailNotConfirmed, setShowEmailNotConfirmed] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
+  const [resendSuccess, setResendSuccess] = useState(false);
+  const [emailTouched, setEmailTouched] = useState(false);
 
-  async function handleSubmit(formData: FormData) {
+  // Submit handler
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     setIsLoading(true);
     setShowEmailNotConfirmed(false);
 
+    const formData = new FormData(e.currentTarget);
     const result = await loginUser(formData);
+
+    setIsLoading(false);
+
     if (result?.error) {
-      setIsLoading(false);
-      // If the error is "email_not_confirmed", show the special message
       const localisedCode = supabaseErrorCodeLocalisation(result.error);
       if (result.error === 'email_not_confirmed') {
         setShowEmailNotConfirmed(true);
-      } else {
-        setShowEmailNotConfirmed(false);
       }
-
-      toast.error(tSupabaseErrorCodes(localisedCode)); // Display error toast
-      return false; // Prevent form reset
+      toast.error(tSupabaseErrorCodes(localisedCode), SC_CONFIG.TOAST_CONFIG);
+      return;
     }
-    setIsLoading(false);
-    toast.success(tAuthTerms('loginSuccess')); // Display success toast
+
+    toast.success(tAuthTerms('loginSuccess'), SC_CONFIG.TOAST_CONFIG);
   }
 
+  // Resend activation email handler
   async function handleResendActivation(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    setIsSaveLoading(true);
-    setIsSaveSuccess(false);
-
-    if(!isValidEmail(email)){
+    if (!isValidEmail(email)) {
       toast.error(tAuthTerms('resendConfirmationEmailFail'));
       return;
     }
 
+    setResendLoading(true);
+    setResendSuccess(false);
+
     try {
       const response = await fetch('/api/account/resend-activation-link', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
       });
 
       const result = await response.json();
+      setResendLoading(false);
 
-      setIsSaveLoading(false);
-
-      // Check for error in the response body
-      if (result?.error) {
+      if (result?.error || !response.ok) {
         toast.error(tAuthTerms('resendConfirmationEmailFail'));
         return;
       }
 
-      // Check for HTTP 200 and no error
-      if (response.ok) {
-        setIsSaveSuccess(true);
-        toast.success(tAuthTerms('resendConfirmationEmailSent'));
-        setTimeout(() => setIsSaveSuccess(false), 1500);
-        return;
-      }
-
-      // Fallback for any other case
-      toast.error(tAuthTerms('resendConfirmationEmailFail'));
-    } catch (error) {
-      setIsSaveLoading(false);
+      setResendSuccess(true);
+      toast.success(tAuthTerms('resendConfirmationEmailSent'));
+      setTimeout(() => setResendSuccess(false), 1500);
+    } catch {
+      setResendLoading(false);
       toast.error(tAuthTerms('resendConfirmationEmailFail'));
     }
   }
 
-  // async function handleOAuthClick(provider: 'google' | 'github') {
-  //   setPending(true);
-  //   const response = await signInWithOAuth(provider);
-  //   if (response?.error) {
-  //     toast({
-  //       variant: 'destructive',
-  //       description: 'An error occurred while authenticating. Please try again.',
-  //     });
-  //     setPending(false);
-  //   }
-  // }
+  // Handler for email field
+  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setEmail(e.target.value);
+    if (!emailTouched) setEmailTouched(true);
+  }
+
+  const showLoginFields = emailTouched && email;
 
   return (
-    <>
-      {/* ...OAuth and Collapsible code omitted for brevity... */}
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          await handleSubmit(new FormData(e.currentTarget));
-        }}
-        className='space-y-6'
-      >
-        <div>
-          <label htmlFor='email' className='block text-sm font-medium text-gray-700'>
-            {tAuthTerms('emailAddress')}
-          </label>
-          <div className='mt-2'>
-            <input
-              id='email'
-              type='email'
-              name='email'
-              required
-              autoComplete='email'
-              className='block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-700 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+    <form onSubmit={handleSubmit} className='space-y-3'>
+      {/* Email */}
+      <div>
+        <label htmlFor='email' className='text-md block px-1'>
+          {tAuthTerms('emailAddress')}
+        </label>
+        <div className='mt-2 px-1'>
+          <Input
+            id='email'
+            type='email'
+            name='email'
+            maxLength={40}
+            required
+            autoComplete='email'
+            placeholder='me@example.com'
+            value={email}
+            onChange={handleEmailChange}
+          />
         </div>
+      </div>
+
+      {/* Password and Submit Button: Slide Down on Email Change */}
+      <div
+        className={`overflow-hidden px-1 transition-all duration-300 ease-in-out ${
+          showLoginFields ? 'mt-0 max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        {/* Password */}
         <div>
-          <div className='flex items-center justify-between'>
-            <label htmlFor='password' className='block text-sm font-medium text-gray-700'>
-              {tAuthTerms('password')}
-            </label>
-          </div>
-          <div className='mt-2'>
-            <input
+          <label htmlFor='password' className='mb-2 block text-sm font-medium'>
+            {tAuthTerms('password')}
+          </label>
+          <div>
+            <Input
               id='password'
               name='password'
+              maxLength={40}
               type='password'
+              placeholder={`${'•'.repeat(SC_CONFIG.PASSWORD_MINIMUM_LENGTH)}`}
               required
               autoComplete='current-password'
-              className='block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-700 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-indigo-600'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
         </div>
 
-        {/* Show the resend activation message when needed */}
-        <div className={showEmailNotConfirmed ? 'block' : 'hidden'}>
-          <div className='sc-message sc-message-attention mt-4'>
+        {/* Resend Activation */}
+        {showEmailNotConfirmed && (
+          <div className='sc_message sc_message-attention mt-4'>
             {tAuthTerms('sendNewAuthEmailLabel')}
             <div className='mt-3'>
               <SaveButton
-                type="button"
+                type='button'
                 onClick={handleResendActivation}
-                isLoading={isSaveLoading}
-                isSuccess={isSaveSuccess}
+                isLoading={resendLoading}
+                isSuccess={resendSuccess}
                 initialLabel={tAuthTerms('sendNewAuthEmailButtonLabel')}
                 savingLabel={tAuthTerms('sendNewAuthEmailSendingButtonLabel')}
                 completeLabel={tAuthTerms('sendNewAuthEmailSentButtonLabel')}
               />
             </div>
           </div>
-        </div>
+        )}
 
-        <div className='flex items-center justify-between'>
-          <div className='flex gap-3'>
-            <input
-              id='remember-me'
-              name='remember-me'
-              type='checkbox'
-              className='h-4 w-4 rounded border-gray-300  focus:ring-indigo-500'
-            />
-            <label htmlFor='remember-me' className='block text-sm text-gray-700'>
-              {tAuthTerms('rememberMe')}
-            </label>
-          </div>
-          <a href='/account/reset-password' className='text-sm font-semibold  hover:text-indigo-500'>
-            {tAuthTerms('forgotPassword')}
-          </a>
-        </div>
-
-        <div>
+        {/* Submit */}
+        <div className='mt-4'>
           <button
             type='submit'
             disabled={isLoading}
-            className='btn flex w-full justify-center rounded-md bg-primary text-white'
+            className='btn flex h-12 w-full justify-center rounded-md bg-primary text-white'
           >
-            {isLoading ? (
-              <>
-                <InlineLoader className='-ml-1 mr-3 h-5 w-5 animate-spin text-white'></InlineLoader>
-              </>
-            ) : (
-              tAuthTerms('logIn')
-            )}
+            {isLoading ? <InlineLoader className='-ml-1 mr-3 h-4 w-4 animate-spin text-white' /> : tAuthTerms('logIn')}
           </button>
         </div>
-      </form>
-    </>
+      </div>
+
+      {/* Links */}
+      <div className='flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
+        <div>
+          <span className='text-sm font-normal'>
+            {tLoginPage('newTo')} {tGlobal('siteTitle')}?{' '}
+          </span>
+          <Link href='/account/create' className='text-sm font-normal'>
+            <span className='font-semibold'>{tAuthTerms('createAnAccount')}</span>
+          </Link>
+        </div>
+        <Link
+          href={`/account/reset-password${email ? `?email=${encodeURIComponent(email)}` : ''}`}
+          title={tAuthTerms('forgotPassword')}
+          className='text-sm font-semibold hover:text-indigo-500'
+        >
+          {tAuthTerms('forgotPassword')}
+        </Link>
+      </div>
+    </form>
   );
 }

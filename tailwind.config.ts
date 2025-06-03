@@ -12,8 +12,8 @@ const config: Config = {
         '2xl': '1600px',
       },
       padding: {
-        DEFAULT: '0rem', // 16px for mobile (or 0 if you want no padding on mobile)
-        sm: '2rem',      // 32px for sm and above
+        DEFAULT: '0rem',
+        sm: '2rem',
       },
     },
     extend: {
@@ -51,37 +51,56 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        sidebar: {
+          DEFAULT: 'hsl(var(--sidebar-background))',
+          foreground: 'hsl(var(--sidebar-foreground))',
+          primary: 'hsl(var(--sidebar-primary))',
+          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+          accent: 'hsl(var(--sidebar-accent))',
+          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+          border: 'hsl(var(--sidebar-border))',
+          ring: 'hsl(var(--sidebar-ring))',
+        },
       },
       borderRadius: {
-        lg: `var(--radius)`,
-        md: `calc(var(--radius) - 2px)`,
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: ['var(--font-manrope)', ...fontFamily.sans],
-        alt: ['var(--font-manrope-alternates)'],
+        sans: ['var(--font-plusJakartaSans)', ...fontFamily.sans],
+        alt: ['var(--font-plusJakartaSans-alternates)'],
       },
       keyframes: {
         'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+          from: {
+            height: '0',
+          },
+          to: {
+            height: 'var(--radix-accordion-content-height)',
+          },
         },
         'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
+          from: {
+            height: 'var(--radix-accordion-content-height)',
+          },
+          to: {
+            height: '0',
+          },
         },
         'spin-slow': {
-          '0%': { rotate: '0deg' },
-          '100%': { rotate: '360deg' },
+          '0%': {
+            rotate: '0deg',
+          },
+          '100%': {
+            rotate: '360deg',
+          },
         },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'spin-slow': 'spin 10s linear infinite',
-      },
-      backgroundImage: {
-        'sc-gradient': 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
       },
     },
   },

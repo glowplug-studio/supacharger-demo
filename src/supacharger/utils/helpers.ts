@@ -1,3 +1,5 @@
+import * as EmailValidator from 'email-validator';
+
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 
 /** ==========
@@ -10,12 +12,9 @@ import { SC_CONFIG } from '@/supacharger/supacharger-config';
  *  Returns the full URL by appending the provided path to the base URL.
  * */
 export function getURL(path = '') {
-  // Get the base URL, defaulting to localhost if not set.
   const baseURL = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') || 'http://localhost:3000';
-  // Ensure HTTPS for non-localhost URLs and format the path.
   const formattedURL = baseURL.startsWith('http') ? baseURL : `https://${baseURL}`;
   const cleanPath = path.replace(/^\/+/, '');
-  // Return the full URL.
   return cleanPath ? `${formattedURL}/${cleanPath}` : formattedURL;
 }
 
@@ -36,10 +35,10 @@ export function getEnvVar(varValue: string | undefined, varName: string): string
 /**
  *  Email Validation
  * */
-
 export function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
+  if (!EmailValidator.validate(email)) return false;
+  if (!SC_CONFIG.EMAIL_ALLOW_PLUSADDRESSING && email.includes('+')) return false;
+  return true;
 }
 
 /**
@@ -51,6 +50,12 @@ interface PasswordValidationResult {
 }
 
 // --- Individual Validators (return boolean only) ---
+
+export const hasLowercase = (password: string) => /[a-z]/.test(password);
+export const hasUppercase = (password: string) => /[A-Z]/.test(password);
+export const hasDigit = (password: string) => /\d/.test(password);
+export const hasLetter = (password: string) => /[A-Za-z]/.test(password);
+export const hasSpecial = (password: string) => /[^A-Za-z0-9]/.test(password);
 
 function validateNoRequired(_password: string): boolean {
   return true;
@@ -72,7 +77,8 @@ export {
   validateLettersDigits,
   validateLowerUpperLettersDigits,
   validateLowerUpperLettersDigitsSymbols,
-  validateNoRequired};
+  validateNoRequired
+};
 
 // --- Main Pass Eval Function ---
 
@@ -92,7 +98,7 @@ export function evaluatePasswordStrength(password: string): PasswordValidationRe
 
   // Minimum length check
   if (password.length < minLength) {
-    return { valid: false, message: 'password_too_short' };
+    return { valid: false, message: 'passwordTooShort' };
   }
 
   // Dispatch to the right validator
@@ -102,39 +108,39 @@ export function evaluatePasswordStrength(password: string): PasswordValidationRe
     case 'letters_digits':
       return validateLettersDigits(password)
         ? { valid: true, message: 'valid' }
-        : { valid: false, message: 'must_contain_letter_digit' };
+        : { valid: false, message: 'mustContainLetterDigit' };
     case 'lower_upper_letters_digits':
       return validateLowerUpperLettersDigits(password)
         ? { valid: true, message: 'valid' }
-        : { valid: false, message: 'must_contain_lower_letter_upper_letter_digit' };
+        : { valid: false, message: 'mustContainLowerLetterUpperLetterDigit' };
     case 'lower_upper_letters_digits_symbols':
       return validateLowerUpperLettersDigitsSymbols(password)
         ? { valid: true, message: 'valid' }
-        : { valid: false, message: 'must_contain_lower_letter_upper_letter_digit_symbol' };
+        : { valid: false, message: 'mustContainLowerLetterUpperLetterDigitSymbol' };
     default:
       return { valid: false, message: 'Invalid password requirements configuration.' };
   }
 }
 
-
-
 /**
  * Returns a next-intl Message string based on the current locale.
  */
 export function supabaseErrorCodeLocalisation(response: string) {
-  let messageId = 'genericError';
+  const errorMap: Record<string, string> = {
+    invalid_credentials: 'invalidCredentials',
+    email_not_confirmed: 'emailNotConfirmed',
+    email_address_invalid: 'invalidEmail',
+    user_not_found: 'userNotFound',
+    over_request_rate_limit: 'overLimit',
+    user_banned: 'userBanned',
+    otp_expired: 'otpExpired',
+    same_password: 'samePassword',
+    AuthApiError: 'tokenAuthApiError',
+    unexpected_failure: 'genericError',
+    request_timeout: 'genericError',
+    signup_auth_api_error: 'signupApiAuthError', // generic catch all for sign up errors.
+    // Add more mappings as needed
+  };
 
-  if (response == 'invalid_credentials') messageId = 'invalidCredentials';
-  if (response === 'email_not_confirmed') messageId = 'emailNotConfirmed';
-  if (response === 'email_address_invalid') messageId = 'invalidEmail';
-  if (response === 'user_not_found') messageId = 'userNotFound';
-  if (response === 'over_request_rate_limit') messageId = 'overLimit';
-  if (response === 'user_banned') messageId = 'userBanned';
-  if (response === 'otp_expired') messageId = 'otpExpired';
-  if (response === 'same_password') messageId = 'samePassword';
-  if (response === 'unexpected_failure' || response === 'request_timeout') messageId = 'genericError';
-
-  //@TODO theres a lot more to handle! and this doesnt currently work
-
-  return messageId; // Pass the variable directly
+  return errorMap[response] || 'genericError';
 }

@@ -3,7 +3,7 @@ import Stripe from 'stripe';
 import { upsertUserSubscription } from '@/features/account/controllers/upsert-user-subscription';
 import { upsertPrice } from '@/features/pricing/controllers/upsert-price';
 import { upsertProduct } from '@/features/pricing/controllers/upsert-product';
-import { stripeAdmin } from '@/supacharger/libs/stripe/stripe-admin';
+import { stripeAdmin } from '@/lib/stripe/stripe-admin';
 import { getEnvVar } from '@/supacharger/utils/helpers';
 
 export const config = {

@@ -1,32 +1,54 @@
 import { useTranslations } from 'next-intl';
-import type React from "react";
+import type React from 'react';
 
 import FacebookLogo from '@/assets/images/socialAuthIcons/FacebookLogo.svg';
 import GoogleLogo from '@/assets/images/socialAuthIcons/GoogleLogo.svg';
-import { SC_CONFIG } from "@/supacharger/supacharger-config"; // Corrected import
+import { SC_CONFIG } from '@/supacharger/supacharger-config';
+
+import { UIDivider } from '../ui/divider';
 
 export default function AuthProviderButtons() {
-  return (
-    <div className='grid grid-cols-2 gap-4'>
-      {SC_CONFIG.AUTH_PROVDERS_ENABLED.google ? (
-        <a
-          href='#'
-          className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
-        >
-          <GoogleLogo className="w-4 flex h-4" />
-          <span className=' font-semibold'>Google</span>
-        </a>
-      ) : null}
+  const anyProviderEnabled = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some(Boolean);
 
-      {SC_CONFIG.AUTH_PROVDERS_ENABLED.facebook ? (
-        <a
-          href='#'
-          className='shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent'
-        >
-          <FacebookLogo className="w-4 flex h-4" />
-          <span className=' font-semibold'>Facebook</span>
-        </a>
-      ) : null}
-    </div>
+  const anchorClasses =
+    'shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white dark:bg-slate-800 px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-300 ring-1 ring-inset ring-gray-300 transition-all hover:bg-gray-50 focus-visible:ring-transparent';
+
+  // Array of provider configs
+  const providers = [
+    {
+      key: 'google',
+      enabled: SC_CONFIG.AUTH_PROVDERS_ENABLED.google,
+      label: 'Google',
+      Logo: GoogleLogo,
+    },
+    {
+      key: 'facebook',
+      enabled: SC_CONFIG.AUTH_PROVDERS_ENABLED.facebook,
+      label: 'Facebook',
+      Logo: FacebookLogo,
+    },
+    // Add more providers here as needed
+  ];
+
+  if (!anyProviderEnabled) {
+    return null;
+  }
+
+  return (
+    <>
+      <div className="w-full">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {providers
+            .filter((provider) => provider.enabled)
+            .map(({ key, label, Logo }) => (
+              <a href="#" className={anchorClasses} key={key}>
+                <Logo className="h-4 w-4" />
+                <span className="font-semibold">{label}</span>
+              </a>
+            ))}
+        </div>
+      </div>
+      <UIDivider className="my-6" />
+    </>
   );
 }

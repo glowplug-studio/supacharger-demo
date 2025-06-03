@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { Tab, tabs } from '@/app/(supacharger)/(authenticated)/account/account-menu';
 import { useDraggableScroll } from '@/hooks/use-draggable-scroll'
-import { useUnsavedChanges } from '@/hooks/use-unsaved-changes';
 import { cn } from '@/utils/cn';
 
 interface TabMenuProps {
@@ -20,7 +19,6 @@ export function TabMenu({
 }: TabMenuProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const { hasChanges, setPendingPath } = useUnsavedChanges();
   const [isMobile, setIsMobile] = useState(false);
 
   // Detect if we're in mobile view for responsive behavior
@@ -46,11 +44,9 @@ export function TabMenu({
     containerStyles,
   } = useDraggableScroll();
 
-  // Handle tab click with unsaved changes check
+  // Handle tab click (no unsaved changes logic)
   const handleTabClick = (tab: Tab) => {
-    if (hasChanges && tab.path !== pathname) {
-      setPendingPath(tab.path);
-    } else {
+    if (tab.path !== pathname) {
       router.push(tab.path);
     }
   };
@@ -118,7 +114,7 @@ export function TabMenu({
       >
         {tabs.map((tab) => {
           const active = isTabActive(tab);
-          
+
           return (
             <button
               key={tab.id}

@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getUser, getUserSession } from '@/supacharger/libs/supabase/supabase-auth';
+import { getUser, getUserSession } from '@/lib/supabase/supacharger/supabase-auth';
 import { evaluatePasswordStrength } from '@/supacharger/utils/helpers';
 import { createClient } from '@supabase/supabase-js';
 
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
 
   // Evaluate passwords
   if (!password) {
-    return NextResponse.json({ error: 'old_password_required' }, { status: 400 });
+    return NextResponse.json({ error: 'oldPasswordRequired' }, { status: 400 });
   }
   if (newPassword !== newPasswordRetype) {
     return NextResponse.json({ error: 'provided_password_mismatch' }, { status: 400 });
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (!data?.matched) {
-    return NextResponse.json({ error: 'old_password_incorrect' }, { status: 400 });
+    return NextResponse.json({ error: 'oldPasswordIncorrect' }, { status: 400 });
   }
 
   // data.matched == true

@@ -1,19 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useTranslations } from "next-intl";
 import { Check, SquareDashed } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
-import { evaluatePasswordStrength } from "@/supacharger/utils/helpers";
-
-// Individual validators
-const hasLowercase = (newPassword: string) => /[a-z]/.test(newPassword);
-const hasUppercase = (newPassword: string) => /[A-Z]/.test(newPassword);
-const hasDigit = (newPassword: string) => /\d/.test(newPassword);
-const hasLetter = (newPassword: string) => /[A-Za-z]/.test(newPassword);
-const hasSpecial = (newPassword: string) => /[^A-Za-z0-9]/.test(newPassword);
+import {
+  evaluatePasswordStrength,
+  hasDigit,
+  hasLetter,
+  hasLowercase,
+  hasSpecial,
+  hasUppercase,
+} from "@/supacharger/utils/helpers";
 
 interface ValidationItem {
   key: string;
@@ -26,7 +26,8 @@ interface PasswordValidationIndicatorProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   id?: string;
-  type?: string; // <-- Added type prop
+  type?: string;
+  onValidationChange?: (isValid: boolean, details?: { [key: string]: boolean }) => void;
 }
 
 export default function PasswordValidationIndicator({
@@ -34,20 +35,23 @@ export default function PasswordValidationIndicator({
   onChange,
   name = "newPassword",
   id = "newPassword",
-  type = "password", // <-- Default to "password"
+  type = "password",
+  onValidationChange,
 }: PasswordValidationIndicatorProps) {
   const tStrengthComponent = useTranslations("evaluatePasswordStrengthComponent");
   const tAuthTerms = useTranslations("AuthTerms");
 
   const [showTooltip, setShowTooltip] = useState(false);
 
-  // Dynamically build validation items based on config
+  // Use central validation function for overall result
+  const validationResult = evaluatePasswordStrength(value);
+
+  // Dynamically build validation items based on config (for the checklist UI only)
   const getValidationItems = (): ValidationItem[] => {
     const minLength = SC_CONFIG.PASSWORD_MINIMUM_LENGTH;
     const requirements = SC_CONFIG.PASSWORD_REQUIREMENTS;
     const customRegex = SC_CONFIG.PASSWORD_CUSTOM_REGEX;
 
-    // Custom regex: show only one requirement with custom description
     if (customRegex) {
       return [
         {
@@ -64,7 +68,6 @@ export default function PasswordValidationIndicator({
       ];
     }
 
-    // Always include length
     const items: ValidationItem[] = [
       {
         key: "length",
@@ -73,7 +76,6 @@ export default function PasswordValidationIndicator({
       },
     ];
 
-    // Add requirements as per config
     switch (requirements) {
       case "letters_digits":
         items.push({
@@ -136,72 +138,38 @@ export default function PasswordValidationIndicator({
 
   const validationItems = getValidationItems();
   const validations = validationItems.map((item) => item.test(value));
-  const allValid = validations.every(Boolean);
+  const allValid = validationResult.valid;
+
+  // Notify parent of validation state
+  useEffect(() => {
+    if (onValidationChange) {
+      const details: { [key: string]: boolean } = {};
+      validationItems.forEach((item, idx) => {
+        details[item.key] = validations[idx];
+      });
+      onValidationChange(allValid, details);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, allValid, onValidationChange]);
 
   return (
-    <div className="space-y-2">
-      {/* Label + requirements row, stacks on mobile, right-aligned on desktop */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <label
-          htmlFor={id}
-          className="block text-sm font-medium text-gray-700"
-        >
-          {tAuthTerms("newPassword")}
-        </label>
-        <div
-          className="flex items-center group relative mt-1 sm:mt-0 sm:text-right sm:justify-end hover:cursor-pointer"
-          onMouseEnter={() => setShowTooltip(true)}
-          onMouseLeave={() => setShowTooltip(false)}
-        >
-          <span className="text-xs text-gray-500">
-            {tStrengthComponent("passwordRequirementsLabel")}
-          </span>
-          {/* Dots */}
-          <div className="flex items-center space-x-2 ml-2">
-            {validations.map((isValid, idx) => (
-              <div
-                key={validationItems[idx].key}
-                className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                  isValid ? "bg-green-500" : "bg-gray-300"
-                }`}
-              />
-            ))}
-          </div>
-          {/* Tooltip */}
-          {showTooltip && (
-            <div className="absolute right-0 top-full mt-2 w-72 p-3 bg-white rounded-md shadow-lg border border-gray-200 text-sm z-50">
-              <ul className="space-y-1">
-                {validationItems.map((item, idx) => (
-                  <li key={item.key} className="flex items-center">
-                    <span
-                      className={`mr-2 ${
-                        validations[idx] ? "text-green-500" : "text-gray-400"
-                      }`}
-                    >
-                      {validations[idx] ? (
-                        <Check size={15} />
-                      ) : (
-                        <SquareDashed size={15} />
-                      )}
-                    </span>
-                    {item.label}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      </div>
+    <div className="space-y-2 relative">
+      {/* Label */}
+      <label htmlFor={id} className="text-md block px-1">
+        {tAuthTerms("newPassword")}
+      </label>
+
       {/* Password Input */}
-      <div className="relative">
+      <div className="relative px-1">
         <Input
           id={id}
           name={name}
-          type={type}      // <-- Use the type prop here!
+          type={type}
           value={value}
           onChange={onChange}
-          className="w-full pr-10"
           maxLength={30}
+          onFocus={() => setShowTooltip(true)}
+          onBlur={() => setShowTooltip(false)}
         />
         {allValid && value.length > 0 && (
           <span className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
@@ -211,6 +179,48 @@ export default function PasswordValidationIndicator({
           </span>
         )}
       </div>
+
+      {/* Requirements bar (bars under input) */}
+      <div
+        className="flex w-full gap-2 mt-2 hover:cursor-pointer px-4"
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+        aria-label={tStrengthComponent("passwordRequirementsLabel")}
+      >
+        {validations.map((isValid, idx) => (
+          <div
+            key={validationItems[idx].key}
+            className={`
+              flex-1 h-2 rounded-full transition-colors duration-300
+              ${isValid ? "bg-green-500" : "bg-gray-300"}
+            `}
+          />
+        ))}
+      </div>
+
+      {/* Tooltip */}
+      {showTooltip && (
+        <div className="absolute z-50 mt-2 w-72 p-3 bg-white rounded-md shadow-lg border border-gray-200 text-sm">
+          <ul className="space-y-1">
+            {validationItems.map((item, idx) => (
+              <li key={item.key} className="flex items-center">
+                <span
+                  className={`mr-2 ${
+                    validations[idx] ? "text-green-500" : "text-gray-400"
+                  }`}
+                >
+                  {validations[idx] ? (
+                    <Check size={15} />
+                  ) : (
+                    <SquareDashed size={15} />
+                  )}
+                </span>
+                {item.label}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
