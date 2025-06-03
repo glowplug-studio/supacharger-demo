@@ -4,6 +4,7 @@ import type React from 'react';
 import FacebookLogo from '@/assets/images/socialAuthIcons/FacebookLogo.svg';
 import GoogleLogo from '@/assets/images/socialAuthIcons/GoogleLogo.svg';
 import { signInWithOAuth } from '@/lib/supabase/supacharger/supabase-auth';
+import { SupabaseOAuthProvider } from '@/lib/supabase/supacharger/supabase-auth';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 
 import { UIDivider } from '../ui/divider';
@@ -18,7 +19,7 @@ export default function AuthProviderButtons() {
   }
 
   const anchorClasses =
-    'shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white dark:bg-slate-800 px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-300 ring-1 ring-inset ring-gray-300 transition-all hover:bg-gray-50 focus-visible:ring-transparent';
+    'shadow-2xs flex w-full items-center justify-center gap-3 rounded-md bg-white dark:bg-slate-800 px-4 py-3 text-sm font-semibold text-gray-700 dark:text-gray-300 ring-1 ring-inset ring-gray-300 transition-all hover:bg-gray-50 focus-visible:ring-transparent hover:cursor-pointer';
 
   // Array of provider configs
   const providers = [
@@ -48,7 +49,7 @@ export default function AuthProviderButtons() {
                 type="button"
                 className={anchorClasses}
                 key={key}
-                onClick={() => signInWithOAuth(key)}
+                onClick={() => signInWithOAuth(key  as SupabaseOAuthProvider)}
               >
                 <Logo className="h-4 w-4" />
                 <span className="font-semibold">{label}</span>

@@ -1,12 +1,10 @@
 "use client";
 
-import Link from "next/link";
+import { useState } from "react";
 import { useTranslations } from 'next-intl';
-import type React from "react";
 import { toast } from "react-toastify";
 
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
-
 interface LogoutLinkProps {
   className?: string | null;
   children?: React.ReactNode;
@@ -17,9 +15,13 @@ export default function LogoutLink({
   children = "Logout",
 }: LogoutLinkProps) {
   const t = useTranslations('Toasts');
+  const [isRequesting, setIsRequesting] = useState(false);
 
-  const handleLogout = async (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault(); // Prevent default link navigation
+  const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (isRequesting) return;
+
+    setIsRequesting(true);
 
     try {
       const response = await fetch("/account/logout", {
@@ -36,21 +38,30 @@ export default function LogoutLink({
         }, 800);
       } else {
         toast.error(t('logoutFailed'));
+        setIsRequesting(false); 
       }
     } catch (error) {
       toast.error(t('logoutFailed'));
+      setIsRequesting(false);
     }
   };
 
   return (
-    <Link
-      href="/account/logout"
+    <button
+      type="button"
       onClick={handleLogout}
       className={className || ""}
-      prefetch={false}
-      passHref
+      disabled={isRequesting}
+      style={{
+        background: "none",
+        border: "none",
+        color: "inherit",
+        cursor: isRequesting ? "wait" : "pointer",
+        padding: 0,
+        textDecoration: "none",
+      }}
     >
       {children}
-    </Link>
+    </button>
   );
 }

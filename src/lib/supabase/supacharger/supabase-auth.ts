@@ -126,7 +126,7 @@ export async function sendPasswordReset(email: string) {
 
 //// @TODO the rest is questionable
 
-type SupabaseOAuthProvider =
+export type SupabaseOAuthProvider =
   | 'apple'
   | 'azure'
   | 'bitbucket'
