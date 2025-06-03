@@ -79,13 +79,13 @@ export function SCHeaderSession() {
 
           {/* Desktop Navigation */}
           <nav className='hidden h-full lg:flex' role='navigation' aria-label='Main navigation'>
-            <Link href='/dashboard' className={`${linkClasses} ${focusClasses}`}>
+            <Link href='/' className={`${linkClasses} ${focusClasses}`}>
               Dashboard
             </Link>
-            <Link href='/deals' className={`${linkClasses} ${focusClasses}`}>
+            <Link href='/#' className={`${linkClasses} ${focusClasses}`}>
               Deals
             </Link>
-            <Link href='/connections' className={`${linkClasses} ${focusClasses}`}>
+            <Link href='/#' className={`${linkClasses} ${focusClasses}`}>
               Connections
             </Link>
           </nav>

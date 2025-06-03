@@ -32,42 +32,68 @@ export const SC_CONFIG = {
    * ==========
    *
    * Always include the leading slash!
+   * for wildcard routes add /:path*
    */
   // protect all routes except the exceptions in NO_SESSION_USER_ALLOWED_PATHS
   AUTH_ONLY_APP: true,
-  // paths users without auth sessions can acess
-  NO_SESSION_USER_ALLOWED_PATHS: [
-    '/account/login',
-    '/account/create',
-    '/account/login-magic',
-    '/account/reset-password',
-    // API
-    '/api/webhooks',
-    '/api/account/request-password-reset',
-    '/api/account/resend-activation-link',
-    '/api/account/update-password',
-    // Marketing
-    '/pricing',
-    '/about',
-    // Directory and Profiles
-    '/user/:username',
-    // Root - remove if all routes are protected.
-    '/',
-    // Add any other paths you want to allow
-    // Don't touch below - auth endpoints
-    '/auth/confirm',
-    '/auth/callback',
-  ],
-  // Paths authenticated users can not access
-  SESSION_USER_DISALLOWED_PATHS: ['/account/login', '/account/create', '/account/login-magic'],
-  // Which path users are redirected to when requesting an auth protected page
-  NO_SESSION_USER_REDIRECT_DESTINATION: '/account/login',
-  // Where to go after successful authentication flow
-  LOGIN_REDIRECT_DESTINATON: '/',
-  // Which path is considered "home" for unauthenticated users
-  NO_SESSION_HOME_PATH: '/',
-  // Which path is considered "home" for authenticated users
-  SESSION_HOME_PATH: '/',
+
+  PATH_AUTH_GARD: {
+      UNAUTHED_USER: {
+         // Users without auth sessions can acess
+        ALLOWED: [
+
+          // Custom
+          "/pricing",
+          "/about",
+          "/user/:username",
+          "/legal",
+
+          // Defaults
+          "/",
+          "/account/login",
+          "/account/create",
+          "/account/login-magic",
+          "/account/reset-password",
+          "/api/webhooks",
+          "/api/account/request-password-reset",
+          "/api/account/resend-activation-link",
+          "/api/account/update-password",
+          "/auth/confirm",
+          "/auth/callback"
+        ],
+        // Unauthenticated users cant visit these paths, important if AUTH_ONLY_APP is false.
+        DISALLOWED: [
+           //"/about"
+        ],
+      },
+      AUTHED_USER:{
+        // Paths authenticated users can not access
+        DISALLOWED: [
+          '/account/login',
+          '/account/create',
+          '/account/login-magic',
+          '/account/reset-password',
+          '/account/reset-password/:path*',
+        ]
+      }
+    },
+  USER_REDIRECTS: {
+    UNAUTHED_USER: {
+        // Which path is considered "home" for unauthenticated users
+      HOME_PATH: '/',
+      // Which path unauthenticated users are redirected to when requesting an auth protected page
+      AUTHGUARD_REDIRECT_DESTINATION: '/account/login',
+      LOGOUT_REDIRECT_DESTINATON: '/',
+    },
+    AUTHED_USER: {
+      // Where to go after successful authentication flow, the path considered "home" for authenticated users
+      HOME_PATH: '/',
+      // Which path authenticated users are redirected to when requesting an auth protected page
+      AUTHGUARD_REDIRECT_DESTINATION: '/',
+        // Where to go after successful authentication flow
+      LOGIN_REDIRECT_DESTINATON: '/',
+    },
+  },
 
   /**
    * ==========
@@ -75,15 +101,19 @@ export const SC_CONFIG = {
    * ==========
    *
    */
-
-  // set to false if you turn off email verification in Supabase.
-  /// @todo this does nothing yet!
-  EMAIL_VERIFY_ENABLED: true,
-
   // where to redirect the user when their account is confirmed via OTP or link - keep the parameter ?account_confirmed=1
   // an example handler is in src/components/sc_demo/sc_user-dash.tsx
   ACCOUNT_CONFIRMED_PATH: '/?account_confirmed=1',
 
+  // are there steps a user must go through before they can access the application
+  // null to disable
+  ACCOUNT_CREATION_STEPS_URL: '/account/setup/1',
+      // Is a valid subscription required to use the authed area?
+  ACCOUNT_FORCE_SUBSCRIPTION: true,
+  // Where to send authed users who haven't got a subscription
+  ACCOUNT_ENFORCE_SUBSCRIPTION_PATH: '/account/billing/subscribe?full=1',
+    // Is there a required terms checkbox? null if not needed
+  ACCOUNT_REQUIRED_TERMS_AGREEMENT_PATH: null,
   /**
    * ==========
    * Secuirty

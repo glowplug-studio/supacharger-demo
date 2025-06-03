@@ -43,7 +43,7 @@ export async function loginUser(formData: FormData) {
   }
 
   revalidatePath('/', 'layout');
-  redirect(SC_CONFIG.LOGIN_REDIRECT_DESTINATON);
+  redirect(SC_CONFIG.USER_REDIRECTS.AUTHED_USER.LOGIN_REDIRECT_DESTINATON);
 }
 
 /**
