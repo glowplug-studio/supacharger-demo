@@ -1,16 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import { Loader2, X } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 import { Avatar } from '@/app/(supacharger)/(authenticated)/account/edit-profile/account-profile-edit-avatar';
 import { Button } from '@/components/ui/button';
+import { Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger } from "@/components/ui/dialog"
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/seperator';
 import { Textarea } from '@/components/ui/textarea';
-import { useUnsavedChanges } from '@/hooks/use-unsaved-changes';
 
 interface Profile {
   firstName: string;
@@ -20,15 +25,8 @@ interface Profile {
 }
 
 export default function EditProfilePage() {
-  const { setHasChanges } = useUnsavedChanges();
   const [isLoading, setIsLoading] = useState(false);
   const [profile, setProfile] = useState<Profile>({
-    firstName: '',
-    lastName: '',
-    aboutMe: '',
-    avatarFile: null,
-  });
-  const [initialProfile, setInitialProfile] = useState<Profile>({
     firstName: '',
     lastName: '',
     aboutMe: '',
@@ -47,24 +45,10 @@ export default function EditProfilePage() {
       };
 
       setProfile(mockData);
-      setInitialProfile(mockData);
     };
 
     loadProfile();
   }, []);
-
-  // Check for changes in form
-  useEffect(() => {
-    const hasChanged =
-      profile.firstName !== initialProfile.firstName ||
-      profile.lastName !== initialProfile.lastName ||
-      profile.aboutMe !== initialProfile.aboutMe ||
-      profile.avatarFile !== initialProfile.avatarFile;
-
-      alert('change');
-
-    setHasChanges(hasChanged);
-  }, [profile, initialProfile, setHasChanges]);
 
   // Handle form field changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -77,21 +61,12 @@ export default function EditProfilePage() {
     setProfile((prev) => ({ ...prev, avatarFile: file }));
   };
 
-  // Check if form has any changes
-  const hasChanges =
-    profile.firstName !== initialProfile.firstName ||
-    profile.lastName !== initialProfile.lastName ||
-    profile.aboutMe !== initialProfile.aboutMe ||
-    profile.avatarFile !== initialProfile.avatarFile;
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    // Update the initial state to match current state
-    setInitialProfile(profile);
-    setHasChanges(false);
     setIsLoading(false);
     toast.success('Your profile has been successfully updated.');
   };
@@ -101,6 +76,26 @@ export default function EditProfilePage() {
       <div>
         <h2 className='text-2xl font-bold tracking-tight'>Edit Profile</h2>
         <Separator className='my-4' />
+      </div>
+
+      <div>
+
+      <Dialog>
+  <DialogTrigger>Open</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Are you absolutely sure?</DialogTitle>
+      <DialogDescription>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
+</Dialog>
+
+      <div>
+
+</div>
       </div>
 
       <form onSubmit={handleSubmit} className='space-y-8'>
@@ -132,7 +127,7 @@ export default function EditProfilePage() {
               <Textarea id='aboutMe' name='aboutMe' value={profile.aboutMe} onChange={handleChange} rows={6} />
             </div>
 
-            <Button type='submit' disabled={isLoading || !hasChanges}>
+            <Button type='submit' disabled={isLoading}>
               {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
               Save Changes
             </Button>

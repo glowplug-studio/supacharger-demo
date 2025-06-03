@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/seperator';
 import { Switch } from '@/components/ui/switch';
-import { useUnsavedChanges } from '@/hooks/use-unsaved-changes';
 
 interface PrivacySettings {
   profileVisible: boolean;
@@ -17,7 +16,6 @@ interface PrivacySettings {
 }
 
 export default function PrivacyPage() {
-  const { setHasChanges } = useUnsavedChanges();
   //const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,16 +47,6 @@ export default function PrivacyPage() {
 
     loadSettings();
   }, []);
-
-  // Check for changes
-  useEffect(() => {
-    const hasChanges =
-      settings.profileVisible !== initialSettings.profileVisible ||
-      settings.activityVisible !== initialSettings.activityVisible ||
-      settings.searchable !== initialSettings.searchable;
-
-    setHasChanges(hasChanges);
-  }, [settings, initialSettings, setHasChanges]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -124,7 +112,7 @@ export default function PrivacyPage() {
           </div>
 
           <div className='pt-4'>
-            <Button type='submit' disabled={isLoading || JSON.stringify(settings) === JSON.stringify(initialSettings)}>
+            <Button type='submit' disabled={isLoading}>
               {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
               Save Privacy Settings
             </Button>

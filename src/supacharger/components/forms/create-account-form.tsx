@@ -238,7 +238,7 @@ export function CreateAccountForm() {
                 </div>
                 <button
                   type='button'
-                  className='ml-2 mt-4 text-gray-400 hover:text-gray-800'
+                  className='ml-2 mt-4 text-gray-400 hover:text-slate-800'
                   aria-label='Show password'
                   onClick={() => setShowPassword((v) => !v)}
                   tabIndex={-1}

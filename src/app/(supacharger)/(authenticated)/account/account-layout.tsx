@@ -4,14 +4,11 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import { getTabIdFromPath } from '@/app/(supacharger)/(authenticated)/account/account-menu';
-import { UnsavedChangesModal } from '@/components/shared/unsaved-changes-modal';
 import { Separator } from '@/components/ui/seperator';
 import { TabMenu } from '@/components/ui/tab-menu';
-import { useUnsavedChanges } from '@/hooks/use-unsaved-changes';
 
 export function AccountLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { hasChanges, setHasChanges } = useUnsavedChanges();
   const [activeTabId, setActiveTabId] = useState<string>('');
   const [isMobile, setIsMobile] = useState(false);
 
@@ -30,9 +27,6 @@ export function AccountLayout({ children }: { children: React.ReactNode }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  // Context provider for unsaved changes and tab state
-  const childrenWithProps = children;
 
   return (
     <main className='container mx-auto px-4 py-6'>
@@ -53,11 +47,8 @@ export function AccountLayout({ children }: { children: React.ReactNode }) {
         </div>
 
         {/* Main content area */}
-        <div className='flex-1'>{childrenWithProps}</div>
+        <div className='flex-1'>{children}</div>
       </div>
-
-      {/* Modal for unsaved changes */}
-      <UnsavedChangesModal />
     </main>
   );
 }
