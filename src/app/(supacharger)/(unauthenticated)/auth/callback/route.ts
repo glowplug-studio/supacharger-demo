@@ -25,10 +25,13 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect( getURL(SC_CONFIG.USER_REDIRECTS.UNAUTHED_USER.AUTHGUARD_REDIRECT_DESTINATION) );
     }
 
-    // if theres a wizard
+    // if theres a wizard - 
+    // @todo - check if the user has done this with claims
     if(SC_CONFIG.ACCOUNT_CREATION_STEPS_URL !== null){
       return NextResponse.redirect(siteUrl+SC_CONFIG.ACCOUNT_CREATION_STEPS_URL);
     }
+
+
 
 
     // Check if user is subscribed, if not redirect to pricing page

@@ -109,9 +109,11 @@ export const SC_CONFIG = {
   // null to disable
   ACCOUNT_CREATION_STEPS_URL: '/account/setup/1',
       // Is a valid subscription required to use the authed area?
-  ACCOUNT_ENFORCE_SUBSCRIPTION: true,
+  ACCOUNT_FORCE_SUBSCRIPTION: true,
   // Where to send authed users who haven't got a subscription
   ACCOUNT_ENFORCE_SUBSCRIPTION_PATH: '/account/billing/subscribe?full=1',
+    // Is there a required terms checkbox? null if not needed
+  ACCOUNT_REQUIRED_TERMS_AGREEMENT_PATH: null,
   /**
    * ==========
    * Secuirty
