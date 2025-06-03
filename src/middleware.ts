@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+
 import { updateSession } from './lib/supabase/middleware';
-import { SC_CONFIG } from './supacharger/supacharger-config';
 import { isLoggedIn } from './lib/supabase/supacharger/supabase-auth';
+import { SC_CONFIG } from './supacharger/supacharger-config';
 
 // Utility to match wildcards (simple version)
 function pathMatches(path: string, patterns: string[]) {

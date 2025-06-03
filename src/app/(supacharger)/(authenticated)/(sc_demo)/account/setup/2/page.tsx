@@ -1,8 +1,9 @@
 'use client';
 
-import FullScreenDialog from '@/supacharger/components/ui/fullscreen-dialog';
-import Link from 'next/link';
 import { useState } from 'react';
+import Link from 'next/link';
+
+import FullScreenDialog from '@/supacharger/components/ui/fullscreen-dialog';
 
 export default function SetupStep2() {
   const [open, setOpen] = useState(true);
