@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { toast } from "react-toastify";
 
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
-
 interface LogoutLinkProps {
   className?: string | null;
   children?: React.ReactNode;
@@ -39,11 +38,11 @@ export default function LogoutLink({
         }, 800);
       } else {
         toast.error(t('logoutFailed'));
-        setIsRequesting(false); // Re-enable if failed
+        setIsRequesting(false); 
       }
     } catch (error) {
       toast.error(t('logoutFailed'));
-      setIsRequesting(false); // Re-enable if failed
+      setIsRequesting(false);
     }
   };
 
