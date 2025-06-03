@@ -51,7 +51,7 @@ export function OtpFieldsForm({ email }: { email: string }) {
         toast.success(tAuthTerms('accountEmailVerified'), SC_CONFIG.TOAST_CONFIG);
         // Success: keep loading spinner, redirect
         // Do NOT setLoading(false) here!
-        router.push(SC_CONFIG.SESSION_HOME_PATH);
+        router.push(SC_CONFIG.USER_REDIRECTS.AUTHED_USER.HOME_PATH);
       }
     } catch (err: any) {
       toast.error(tSupabaseErrorCodes(supabaseErrorCodeLocalisation('genericError')), SC_CONFIG.TOAST_CONFIG);

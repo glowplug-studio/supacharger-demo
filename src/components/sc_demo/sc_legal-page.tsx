@@ -43,7 +43,7 @@ export default function SCLegalPage() {
                   <h2 className='mb-2 text-2xl font-semibold'>2. Changes to Terms</h2>
                   <p>
                     Korunet reserves the right to modify these Terms of Use at any time. We will notify users of any
-                    changes by updating the "Last Updated" date. Continued use of the Services after changes constitutes
+                    changes by updating the &quot;Last Updated&quot; date. Continued use of the Services after changes constitutes
                     acceptance of the new terms.
                   </p>
                 </section>
@@ -110,7 +110,7 @@ export default function SCLegalPage() {
                 <section className='mb-8'>
                   <h2 className='mb-2 text-2xl font-semibold'>9. Disclaimers</h2>
                   <ul className='ml-4 list-inside list-disc'>
-                    <li>The Services are provided "as is" and "as available" without warranties of any kind.</li>
+                    <li>The Services are provided &quot;as is&quot; and &quot;as available&quot; without warranties of any kind.</li>
                     <li>
                       Korunet does not guarantee the accuracy, completeness, or reliability of any content or
                       information provided through the Services.
@@ -233,7 +233,7 @@ export default function SCLegalPage() {
                 </section>
 
                 <section className='mb-8'>
-                  <h2 className='mb-2 text-2xl font-semibold'>8. Children's Privacy</h2>
+                  <h2 className='mb-2 text-2xl font-semibold'>8. Children&apos;s Privacy</h2>
                   <p>
                     Korunet does not knowingly collect or solicit information from children under the age of 16. If you
                     believe we have collected such information, please contact us immediately.
@@ -244,7 +244,7 @@ export default function SCLegalPage() {
                   <h2 className='mb-2 text-2xl font-semibold'>9. Changes to This Policy</h2>
                   <p>
                     We may update this Privacy Policy from time to time. We will notify you of any changes by updating
-                    the "Last Updated" date at the top of this page.
+                    the &quot;Last Updated&quot; date at the top of this page.
                   </p>
                 </section>
 

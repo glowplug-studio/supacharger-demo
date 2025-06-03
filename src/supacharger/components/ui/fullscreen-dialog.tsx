@@ -1,7 +1,8 @@
 'use client';
 
-import * as Dialog from '@radix-ui/react-dialog';
 import Link from 'next/link';
+
+import * as Dialog from '@radix-ui/react-dialog';
 
 interface FullScreenDialogProps {
   open: boolean;

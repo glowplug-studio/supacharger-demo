@@ -94,7 +94,7 @@ export default function ResetPasswordFormPage() {
       return () => clearInterval(interval);
     }
     if (success && timer === 0) {
-      router.push(SC_CONFIG.SESSION_HOME_PATH);
+      router.push(SC_CONFIG.USER_REDIRECTS.AUTHED_USER.HOME_PATH);
     }
   }, [success, timer, router]);
 
