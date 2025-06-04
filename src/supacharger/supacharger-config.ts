@@ -114,6 +114,7 @@ export const SC_CONFIG = {
   ACCOUNT_ENFORCE_SUBSCRIPTION_PATH: '/account/billing/subscribe?full=1',
     // Is there a required terms checkbox? null if not needed
   ACCOUNT_REQUIRED_TERMS_AGREEMENT_PATH: null,
+
   /**
    * ==========
    * Secuirty
@@ -152,6 +153,14 @@ export const SC_CONFIG = {
     facebook: true,
   },
 
+    /**
+   * ==========
+   * Payments
+   * ==========
+   */
+  // where does the 
+  STRIPE_PORTAL_LOGO_RETURN_PATH: 'account/billing',
+
   /**
    * ==========
    * UI
@@ -169,5 +178,5 @@ export const SC_CONFIG = {
     theme: 'dark',
     transition: Flip,
   },
-  //Toast config
+
 };

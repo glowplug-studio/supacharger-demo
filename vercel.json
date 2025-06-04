@@ -3,9 +3,9 @@
   "git": {
     "deploymentEnabled": {
       "main": true,
-      "preview": true,
+      "preview": false,
       "development": false,
-      "**/feat*": false
+      "feat/*": false
     }
   }
 }
