@@ -4,7 +4,7 @@ import { updateSession } from './lib/supabase/middleware';
 import { isLoggedIn } from './lib/supabase/supacharger/supabase-auth';
 import { SC_CONFIG } from './supacharger/supacharger-config';
 
-// Utility to match wildcards (simple version)
+// Utility to match wildcards
 function pathMatches(path: string, patterns: string[]) {
   return patterns.some((pattern) => {
     // Convert /account/:path* to regex
