@@ -51,13 +51,15 @@ export default async function BillingPage() {
             {/* Left column */}
             <div className='flex-1'>
               <h2 className='mb-4 text-2xl font-semibold'>Subscriptions</h2>
-
+              <Link href='billing/portal'>Manage your subscription</Link>{' '}
               <Card
                 title='Your Plan'
                 footer={
                   subscription ? (
                     <Button size='sm' variant='secondary' asChild>
-                      <Link href='billing/manage-subscription'>Manage your subscription</Link>
+                      {/** Must stay as an anchor to resolvve CORS issues with stripe */}
+                      <a href='billing/portal'>Manage your subscription</a>
+                      {/** / Anchor */}
                     </Button>
                   ) : (
                     <Button size='sm' variant='secondary' asChild>
@@ -75,7 +77,7 @@ export default async function BillingPage() {
             </div>
             {/* Right column */}
             <div className='flex-1'>
-              <h2 className='mb-4 text-2xl font-semibold'>Payment Methods</h2>
+              <h2 className='mb-4 text-2xl font-semibold'>PTEst</h2>
               {/* Additional right column content can go here */}
             </div>
           </div>
