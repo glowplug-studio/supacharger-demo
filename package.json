@@ -94,7 +94,6 @@
     "postcss": "^8.4.49",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
-    "supabase": "^1.226.4",
     "typescript": "^5.7.3"
   },
   "overrides": {
