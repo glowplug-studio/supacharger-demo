@@ -5,9 +5,8 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-
-import { PriceCardVariant, productMetadataSchema } from '../models/product-metadata';
-import { BillingInterval, Price, ProductWithPrices } from '../types';
+import { PriceCardVariant, productMetadataSchema } from '@/features/pricing/models/product-metadata';
+import { BillingInterval, Price, ProductWithPrices } from '@/features/pricing/types';
 
 export function PricingCard({
   product,
@@ -44,9 +43,9 @@ export function PricingCard({
   const isBillingIntervalYearly = billingInterval === 'year';
   const metadata = productMetadataSchema.parse(product.metadata);
   const buttonVariantMap = {
-    basic: 'default',
-    pro: 'default',
-    enterprise: 'orange',
+    basic: 'secondary',
+    pro: 'secondary',
+    enterprise: 'default',
   } as const;
 
   function handleBillingIntervalChange(billingInterval: BillingInterval) {
@@ -87,7 +86,10 @@ export function PricingCard({
               <Button
                 variant={buttonVariantMap[metadata.priceCardVariant]}
                 className='w-full'
-                onClick={() => createCheckoutAction({ price: currentPrice })}
+                onClick={() => {
+                  console.log('Checkout price:', currentPrice);
+                  createCheckoutAction({ price: currentPrice });
+                }}
               >
                 Get Started
               </Button>
@@ -107,7 +109,6 @@ export function PricingCard({
 function CheckItem({ text }: { text: string }) {
   return (
     <div className='flex items-center gap-2'>
-     
       <p className='text-sm font-medium text-white first-letter:capitalize'>{text}</p>
     </div>
   );

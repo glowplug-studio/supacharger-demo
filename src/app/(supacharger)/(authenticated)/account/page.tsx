@@ -1,110 +1,131 @@
-import { PropsWithChildren, ReactNode } from 'react';
-import { redirect } from 'next/navigation';
+'use client';
 
-import { getSession } from '@/features/account/controllers/get-session';
-import { getSubscription } from '@/features/account/controllers/get-subscription';
-import { getProducts } from '@/features/pricing/controllers/get-products';
-import { Price, ProductWithPrices } from '@/features/pricing/types';
+import { useEffect, useState } from 'react';
 
+import AccountChangePasswordForm from '@/app/(supacharger)/(authenticated)/account/components/account-change-password-form';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
+import { Separator } from '@/components/ui/seperator';
 
-export default async function AccountPage() {
-  const [session, subscription, products] = await Promise.all([getSession(), getSubscription(), getProducts()]);
+export default function AccountPage() {
+    const [settings, setSettings] = useState({
+        email: '',
+        language: 'en',
+    });
 
-  
+    // Load initial data (mock)
+    useEffect(() => {
+        setSettings({
+            email: 'user@example.com',
+            language: 'fr',
+        });
+    }, []);
 
-  let userProduct: ProductWithPrices | undefined;
-  let userPrice: Price | undefined;
+    return (
+        <div className="space-y-6">
+            <div>
+                <h2 className="text-2xl font-bold tracking-tight">
+                    Account & Security Settings
+                </h2>
+                <Separator className="my-4" />
+            </div>
 
-  if (subscription) {
-    for (const product of products) {
-      for (const price of product.prices) {
-        if (price.id === subscription.price_id) {
-          userProduct = product;
-          userPrice = price;
-        }
-      }
-    }
-  }
+            {/* Authentication Provider */}
+            <div className="max-w-md space-y-4">
+                <h3 className="text-lg font-medium">You Authenticated with</h3>
+                <div className="flex items-center justify-between">
+                    <span>Google</span>
+                    <img
+                        src="https://www.google.com/favicon.ico"
+                        alt="Google"
+                        className="h-5 w-5"
+                    />
+                </div>
+            </div>
 
-  const navigation = [
-    { name: 'Account Settings', href: '/account', current: true },
-    { name: 'Edit Profile', href: '/account/profile', current: false },
-    { name: 'Billing', href: '/account/billing', current: false },
-  ]
+            <Separator />
 
-function classNames(...classes: string[]): string {
-  return classes.filter(Boolean).join(' ')
-}
+            {/* Email Section */}
+            <div className="max-w-md space-y-4">
+                <h3 className="text-lg font-medium">Email</h3>
+                <div className="space-y-2">
+                    <div className="flex flex-col">
+                        <Label htmlFor="email">Account Email Address</Label>
+                        <Input
+                            id="email"
+                            type="email"
+                            value={settings.email}
+                            className="w-full"
+                            onChange={(e) =>
+                                setSettings((prev) => ({ ...prev, email: e.target.value }))
+                            }
+                        />
+                    </div>
+                </div>
+                <Button variant="secondary">Save Changes</Button>
+            </div>
 
-  return (
-    <main className="flex-1 bg-gray-800 py-10">
-      <div className='container'>
-        <h1 className='mb-8 text-center lg:text-left text-4xl font-bold'>Account</h1>
-      </div>
-      <div className="container flex min-h-screen flex-col gap-8 py-8 lg:flex-row">
-        {/* Sidebar */}
-        <nav aria-label="Sidebar" className="w-full lg:w-64 shrink-0">
-          <ul role="list" className="space-y-1">
-            {navigation.map((item) => (
-              <li key={item.name}>
-                <a
-                  href={item.href}
-                  className={classNames(
-                    item.current ? 'bg-gray-50 ' : 'text-gray-700 hover:bg-gray-50 ',
-                    'group flex gap-x-3 rounded-md p-2 pl-3  font-semibold',
-                  )}
-                >
-                  {item.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+            <Separator />
 
-        <div className='flex flex-col gap-4 flex-1'>
-          <h2 className='text-xl'>You authenticated with</h2>
-          <p>Google</p>
-          <p>Email</p>
+            {/* Password Section */}
+            <AccountChangePasswordForm />
 
-          <hr></hr>
-          <h3 className='text-lg'>Change Password</h3>
+            <Separator />
 
-          <hr></hr>
-          <h3 className='text-lg'>Change Email address</h3>
+            {/* 2FA Section */}
+            <div className="max-w-md space-y-4">
+                <h3 className="text-lg font-medium">Two Factor Authentication</h3>
+                <p className="text-muted-foreground">No 2FA found.</p>
+                <Button variant="secondary">Set up 2FA</Button>
+            </div>
 
-          <hr></hr>
-          <h2 className='text-xl'>Privacy</h2>
+            <Separator />
 
-          
+            {/* Language Section */}
+            <div className="max-w-md space-y-4">
+                <h3 className="text-lg font-medium">Language</h3>
+                <div className="space-y-2">
+                    <div className="flex flex-col">
+                        <Label>Language Preference</Label>
+                        <Select
+                            value={settings.language}
+                            onValueChange={(value) =>
+                                setSettings((prev) => ({ ...prev, language: value }))
+                            }
+                        >
+                            <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Select a language" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="en">English</SelectItem>
+                                <SelectItem value="fr">Français (French)</SelectItem>
+                                <SelectItem value="es">Español (Spanish)</SelectItem>
+                                <SelectItem value="de">Deutsch (German)</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                </div>
+                <Button variant="secondary">Save Changes</Button>
+            </div>
 
-          <hr></hr>
-          <h2 className='text-xl'>Cancel Account</h2>
+            <Separator />
 
-          <hr></hr>
-          <h2 className='text-xl'>Deactivate Account</h2>
-
-      
+            {/* Cancel Account Section */}
+            <div className="max-w-md space-y-4">
+                <h3 className="text-lg font-medium">Cancel Account</h3>
+                <p className="text-muted-foreground">
+                    This is what happens when you cancel your account.
+                </p>
+                <Button variant="destructive">Cancel Account</Button>
+            </div>
         </div>
-      </div>
-    </main>
-  );
-}
-
-function Card({
-  title,
-  footer,
-  children,
-}: PropsWithChildren<{
-  title: string;
-  footer?: ReactNode;
-}>) {
-  return (
-    <div className='m-auto w-full max-w-3xl rounded-md bg-zinc-900'>
-      <div className='p-4'>
-        <h2 className='mb-1 text-xl font-bold'>{title}</h2>
-        <div className='py-4'>{children}</div>
-      </div>
-      <div className='flex justify-end rounded-b-md border-t border-zinc-800 p-4'>{footer}</div>
-    </div>
-  );
+    );
 }

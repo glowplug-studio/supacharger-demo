@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
+import { createCheckoutAction } from '@/features/pricing/actions/create-checkout-action';
 import { PricingCard } from '@/features/pricing/components/price-card';
 import { getProducts } from '@/features/pricing/controllers/get-products';
-
-import { createCheckoutAction } from '../actions/create-checkout-action';
 
 export async function PricingSection({ isPricingPage }: { isPricingPage?: boolean }) {
   const products = await getProducts();
@@ -19,7 +18,7 @@ export async function PricingSection({ isPricingPage }: { isPricingPage?: boolea
         <p className='text-center text-xl'>
           Find a plan that fits you. Upgrade at any time to enable additional features.
         </p>
-        <div className='flex w-full flex-col items-center justify-center gap-2 lg:flex-row lg:gap-8'>
+        <div className=''>
           {products.map((product) => {
             return <PricingCard key={product.id} product={product} createCheckoutAction={createCheckoutAction} />;
           })}

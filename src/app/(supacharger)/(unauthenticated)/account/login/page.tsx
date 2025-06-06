@@ -1,37 +1,41 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
-import { LoginUserForm } from "@/supacharger/components/forms/loginUserForm";
-import SiteLogo from "@/components/siteLogo";
-import Link from "next/link";
+/** =========================================================================
+ *
+ *  Supacharger - Account Login Page
+ *
+ *  Description: User can sign in here with SOME social accounts or email.
+ *
+ *  Author: J Sharp <j@glowplug.studio>
+ *
+ *  License: CC BY-NC-SA 4.0
+ *
+ * ========================================================================= */
 
-export default function LoginPage() {
-  const t = useTranslations("LoginPage");
+import { useTranslations } from 'next-intl';
+
+import SCSiteLogo from '@/components/sc_demo/sc_site-logo';
+import AuthProviderButtons from '@/supacharger/components/buttons/auth-provider-buttons';
+import { LoginUserForm } from '@/supacharger/components/forms/login-user-form';
+import { UIDivider } from '@/supacharger/components/ui/divider';
+
+export default function SignInPage() {
+  const tLoginPage = useTranslations('LoginPage');
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-sc-gradient">
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
-          <div className="mb-28 block">
-            <SiteLogo showSiteTitle={false} darkMode={false} />
-          </div>
-          <h1 className="mb-8 text-2xl/9 font-bold tracking-tight text-gray-700">
-            {t("title")}{" "}
-          </h1>
-
-          <LoginUserForm></LoginUserForm>
-
-          <div className="mt-6">
-            <Link
-              href="/account/create"
-              className="flex w-full appearance-none justify-between rounded bg-gray-100  px-6 py-3 text-sm leading-tight text-gray-700 hover:bg-gray-200 hover:no-underline"
-            >
-              <span className="text-normal">I don't have an account</span>
-              <span className="font-bold">Sign Up</span>
-            </Link>
+    <main id='sc_login-page'>
+      {/* Mobile only logo */}
+      <div className='flex items-center gap-2 lg:hidden'>
+          <div className='mb-6 w-6'>
+            <SCSiteLogo showSiteTitle={true} darkMode={false} />
           </div>
         </div>
-      </div>
-    </div>
+        <div className='flex flex-col gap-2 px-1'>
+          <h1 className='mb-6 text-2xl/9 font-bold tracking-tight'>{tLoginPage('title')}</h1>
+        </div>
+        {/* Social Buttons */}
+      <AuthProviderButtons />
+      <LoginUserForm />
+    </main>
   );
 }

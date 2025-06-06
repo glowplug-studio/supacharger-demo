@@ -8,11 +8,13 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   images: {
-    domains: ['images.unsplash.com'],
+    domains: [
+      'images.unsplash.com',
+      'images.pexels.com'
+    ],
   },
 
   experimental: {
-    appDir: true,
     turbo: {
       rules: {
         '*.svg': {
