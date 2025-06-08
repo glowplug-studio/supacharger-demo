@@ -3,7 +3,7 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-import { createSupabaseServerClient } from '@/libs/supabase/supabase-server-client';
+import { createClient } from '@/lib/supabase/server';
 import { SC_CONFIG } from "@/supacharger/supacharger-config";
 import { getURL } from '@/supacharger/utils/helpers';
 
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   const code = requestUrl.searchParams.get('code');
 
   if (code) {
-    const supabase = await createSupabaseServerClient();
+    const supabase = await createClient();
     await supabase.auth.exchangeCodeForSession(code);
 
     const {
@@ -22,8 +22,17 @@ export async function GET(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (!user?.id) {
-      return NextResponse.redirect( getURL(SC_CONFIG.NO_SESSION_USER_REDIRECT_DESTINATION) );
+      return NextResponse.redirect( getURL(SC_CONFIG.USER_REDIRECTS.UNAUTHED_USER.AUTHGUARD_REDIRECT_DESTINATION) );
     }
+
+    // if theres a wizard - 
+    // @todo - check if the user has done this with claims
+    if(SC_CONFIG.ACCOUNT_CREATION_STEPS_URL !== null){
+      return NextResponse.redirect(siteUrl+SC_CONFIG.ACCOUNT_CREATION_STEPS_URL);
+    }
+
+
+
 
     // Check if user is subscribed, if not redirect to pricing page
     const { data: userSubscription } = await supabase
