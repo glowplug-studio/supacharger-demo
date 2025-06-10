@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=default",
-    "generate-types": "npx supabase gen types typescript --project-id vdytepbsknevxtcfzvpp --schema public > src/libs/supabase/types.ts",
+    "generate-types": "npx supabase gen types typescript --project-id vdytepbsknevxtcfzvpp --schema public > src/lib/supabase/types.ts",
     "supabase:link": "env-cmd -f ./.env.local supabase link --project-ref vdytepbsknevxtcfzvpp",
     "migration:new": "supabase migration new",
     "migration:up": "supabase migration up --linked --debug && npm run generate-types",
