@@ -1,5 +1,6 @@
-import { brevoClient } from '@/lib/brevo/client';
 import { NextRequest, NextResponse } from 'next/server';
+
+import { brevoClient } from '@/lib/brevo/client';
 
 export async function GET(req: NextRequest) {
   try {

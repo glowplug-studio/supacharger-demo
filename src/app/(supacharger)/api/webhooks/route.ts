@@ -3,8 +3,8 @@ import Stripe from 'stripe';
 import { upsertUserSubscription } from '@/features/account/controllers/upsert-user-subscription';
 import { upsertPrice } from '@/features/pricing/controllers/upsert-price';
 import { upsertProduct } from '@/features/pricing/controllers/upsert-product';
-import { stripeAdmin } from '@/lib/stripe/stripe-admin';
 import { sendReceiptEmail } from '@/lib/brevo';
+import { stripeAdmin } from '@/lib/stripe/stripe-admin';
 import { getEnvVar } from '@/supacharger/utils/helpers';
 
 export const config = {
@@ -81,16 +81,17 @@ export async function POST(req: Request) {
           if (invoice.customer && invoice.customer_email) {
             try {
               const customer = await stripeAdmin.customers.retrieve(invoice.customer as string) as Stripe.Customer;
-              const nameParts = customer.name?.split(' ') || [];
-              const firstName = (nameParts[0] || 'Customer') as string;
+              const firstName = customer.name?.split(' ')[0];
               
-              await sendReceiptEmail({
+              const emailParams = {
                 to: invoice.customer_email,
-                firstName,
                 amount: `$${(invoice.amount_paid / 100).toFixed(2)}`,
-                invoiceId: invoice.number || invoice.id,
-                date: new Date(invoice.created * 1000).toLocaleDateString()
-              });
+                invoiceId: invoice.number || invoice.id || 'unknown',
+                date: new Date(invoice.created * 1000).toLocaleDateString(),
+                ...(firstName && { firstName })
+              };
+              
+              await sendReceiptEmail(emailParams);
             } catch (error) {
               console.error('Failed to send receipt email:', error);
             }
