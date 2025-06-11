@@ -4,6 +4,7 @@ import { upsertUserSubscription } from '@/features/account/controllers/upsert-us
 import { upsertPrice } from '@/features/pricing/controllers/upsert-price';
 import { upsertProduct } from '@/features/pricing/controllers/upsert-product';
 import { stripeAdmin } from '@/lib/stripe/stripe-admin';
+import { sendReceiptEmail } from '@/lib/brevo';
 import { getEnvVar } from '@/supacharger/utils/helpers';
 
 export const config = {
@@ -21,6 +22,7 @@ const relevantEvents = new Set([
   'customer.subscription.created',
   'customer.subscription.updated',
   'customer.subscription.deleted',
+  'invoice.payment_succeeded',
 ]);
 
 export async function POST(req: Request) {
@@ -71,6 +73,27 @@ export async function POST(req: Request) {
               customerId: checkoutSession.customer as string,
               isCreateAction: true,
             });
+          }
+          break;
+        case 'invoice.payment_succeeded':
+          const invoice = event.data.object as Stripe.Invoice;
+          
+          if (invoice.customer && invoice.customer_email) {
+            try {
+              const customer = await stripeAdmin.customers.retrieve(invoice.customer as string) as Stripe.Customer;
+              const nameParts = customer.name?.split(' ') || [];
+              const firstName = (nameParts[0] || 'Customer') as string;
+              
+              await sendReceiptEmail({
+                to: invoice.customer_email,
+                firstName,
+                amount: `$${(invoice.amount_paid / 100).toFixed(2)}`,
+                invoiceId: invoice.number || invoice.id,
+                date: new Date(invoice.created * 1000).toLocaleDateString()
+              });
+            } catch (error) {
+              console.error('Failed to send receipt email:', error);
+            }
           }
           break;
         default:
