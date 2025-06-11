@@ -56,6 +56,7 @@ export const SC_CONFIG = {
           "/account/reset-password",
           "/api/webhooks",
           "/api/brevo-test",
+          "/api/brevo-events",
           "/api/account/request-password-reset",
           "/api/account/resend-activation-link",
           "/api/account/update-password",
