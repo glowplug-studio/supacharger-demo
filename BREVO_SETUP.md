@@ -101,7 +101,198 @@ const verifyBrevoWebhook = (payload: string, signature: string): boolean => {
 
 ### 4. Testing Webhooks
 
-**Local Development:**
+#### **Local Development (Recommended for Full Logs)**
+
+**Why test locally?** Vercel's production logs may filter or truncate console.log output for security reasons. Local development shows complete webhook processing details.
+
+**Setup Local Testing:**
+
+1. **Run your app locally:**
+   ```bash
+   npm run dev
+   ```
+   Your app will be available at `http://localhost:3000`
+
+2. **Test the webhook endpoint:**
+   ```bash
+   curl -X POST http://localhost:3000/api/brevo-events \
+     -H "Content-Type: application/json" \
+     -d '{
+       "event": "delivered",
+       "email": "test@example.com",
+       "id": 123456,
+       "date": "2024-01-15",
+       "ts": 1642204800,
+       "message-id": "<test-message-id>",
+       "ts_event": 1642204800,
+       "subject": "Test Email Subject",
+       "tags": ["test", "webhook"],
+       "template_id": 1
+     }'
+   ```
+
+3. **Expected Response:**
+   ```json
+   {"received":true,"event":"delivered","messageId":"<test-message-id>"}
+   ```
+
+4. **View Full Logs in Terminal:**
+   ```
+   Brevo webhook endpoint hit!
+   Brevo Event: delivered {
+     email: 'test@example.com',
+     messageId: '<test-message-id>',
+     subject: 'Test Email Subject',
+     templateId: 1,
+     contactId: undefined,
+     timestamp: '2022-01-15T00:00:00.000Z',
+     eventTimestamp: '2022-01-15T00:00:00.000Z',
+     tags: ['test', 'webhook'],
+     link: undefined,
+     reason: undefined,
+     userAgent: undefined,
+     device: undefined,
+     sendingIp: undefined
+   }
+   POST /api/brevo-events 200 in 25ms
+   ```
+
+#### **Test Different Event Types**
+
+**Email Opened:**
+```bash
+curl -X POST http://localhost:3000/api/brevo-events \
+  -H "Content-Type: application/json" \
+  -d '{
+    "event": "opened",
+    "email": "user@example.com",
+    "id": 123457,
+    "date": "2024-01-15",
+    "ts": 1642204900,
+    "message-id": "<opened-test>",
+    "ts_event": 1642204900,
+    "subject": "Welcome Email",
+    "template_id": 1,
+    "user_agent": "Mozilla/5.0...",
+    "device_used": "Desktop"
+  }'
+```
+
+**Link Clicked:**
+```bash
+curl -X POST http://localhost:3000/api/brevo-events \
+  -H "Content-Type: application/json" \
+  -d '{
+    "event": "click",
+    "email": "user@example.com",
+    "id": 123458,
+    "date": "2024-01-15",
+    "ts": 1642205000,
+    "message-id": "<click-test>",
+    "ts_event": 1642205000,
+    "subject": "Newsletter",
+    "template_id": 2,
+    "link": "https://example.com/clicked-link",
+    "user_agent": "Mozilla/5.0...",
+    "device_used": "Mobile"
+  }'
+```
+
+**Hard Bounce:**
+```bash
+curl -X POST http://localhost:3000/api/brevo-events \
+  -H "Content-Type: application/json" \
+  -d '{
+    "event": "hard_bounce",
+    "email": "invalid@nonexistent.com",
+    "id": 123459,
+    "date": "2024-01-15",
+    "ts": 1642205100,
+    "message-id": "<bounce-test>",
+    "ts_event": 1642205100,
+    "subject": "Failed Email",
+    "template_id": 1,
+    "reason": "550 5.1.1 User unknown"
+  }'
+```
+
+#### **Production Testing with ngrok**
+
+For testing production-like webhook behavior:
+
+1. **Install and setup ngrok:**
+   ```bash
+   # Install ngrok (macOS)
+   brew install ngrok
+   
+   # Or download from https://ngrok.com/download
+   ```
+
+2. **Expose local server:**
+   ```bash
+   ngrok http 3000
+   ```
+   
+3. **Use ngrok URL in Brevo webhook settings:**
+   ```
+   https://abc123.ngrok-free.app/api/brevo-events
+   ```
+
+4. **Send test emails and watch real webhook events**
+
+#### **Troubleshooting Local Tests**
+
+**Common Issues:**
+
+1. **"Invalid webhook payload" error:**
+   - Check that you're sending a single object `{}`, not an array `[{}]`
+   - Ensure required fields are present: `event`, `email`, `message-id`
+
+2. **Connection refused:**
+   - Make sure your Next.js dev server is running (`npm run dev`)
+   - Verify you're using `http://localhost:3000` (not https)
+
+3. **No logs appearing:**
+   - Check that you're looking at the terminal where `npm run dev` is running
+   - Ensure the endpoint path is correct: `/api/brevo-events`
+
+**Debug Tips:**
+- **Full request logging**: The webhook logs the complete event object for debugging
+- **Timestamp conversion**: UNIX timestamps are automatically converted to ISO dates
+- **Event validation**: Missing required fields will return a 400 error with details
+- **Raw payload logging**: On errors, the raw request body is logged for debugging
+
+#### **Testing in CI/CD**
+
+For automated testing, you can create a simple test script:
+
+```javascript
+// test-brevo-webhook.js
+const response = await fetch('http://localhost:3000/api/brevo-events', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    event: 'delivered',
+    email: 'test@example.com',
+    id: 123456,
+    date: '2024-01-15',
+    ts: 1642204800,
+    'message-id': '<test-ci>',
+    ts_event: 1642204800,
+    subject: 'CI Test Email'
+  })
+});
+
+const result = await response.json();
+console.log('Webhook test result:', result);
+process.exit(response.ok ? 0 : 1);
+```
+
+Run with: `node test-brevo-webhook.js`
+
+---
+
+**Production Testing:**
 1. Use ngrok to expose your local server:
    ```bash
    ngrok http 3000
