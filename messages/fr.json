@@ -42,7 +42,8 @@
     "backToRequestLink": "Obtenir un autre lien",
     "createAccountWithEmail": "Continuer avec l'e-mail",
     "createAccountSuccess": "Compte créé avec succès",
-    "accountAlreadyExists": "Le compte existe déjà, connectez-vous à la place"
+    "accountAlreadyExists": "Le compte existe déjà, connectez-vous à la place",
+    "signUpTermsAgreement": "En vous inscrivant, vous acceptez les <termsLink>Conditions d'utilisation</termsLink> et la <privacyLink>Politique de confidentialité</privacyLink>."
   },
   "evaluatePasswordStrengthErrorCodes": {
     "oldPasswordIncorrect": "Mot de passe actuel incorrect",
@@ -101,13 +102,12 @@
     "enterEmailPlaceholder": "Entrez votre e-mail"
   },
   "CreateAccountPage": {
-    "title": "Créer un compte",
-    "iAlreadyHaveAnAccount": "J'ai déjà un compte"
+    "title": "Créer un compte"
   },
   "CreateAccountFormComponent": {
     "title": "Créer un compte",
     "orCreateAccountWithEmail": "Ou créer un compte avec l'e-mail",
-    "iAlreadyHaveAnAccount": "J'ai déjà un compte",
+    "alreadyHaveAnAccount": "J'ai déjà un compte",
     "invalidEmail": "Entrez un e-mail valide",
     "missingEmail": "L'e-mail est requis",
     "missingPassword": "Le mot de passe est requis",

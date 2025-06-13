@@ -35,7 +35,7 @@ export const SC_CONFIG = {
    * for wildcard routes add /:path*
    */
   // protect all routes except the exceptions in NO_SESSION_USER_ALLOWED_PATHS
-  AUTH_ONLY_APP: true,
+  AUTH_ONLY_APP: false,
 
   PATH_AUTH_GARD: {
       UNAUTHED_USER: {
@@ -47,6 +47,7 @@ export const SC_CONFIG = {
           "/about",
           "/user/:username",
           "/legal",
+          "/demos",
 
           // Defaults
           "/",
@@ -112,8 +113,8 @@ export const SC_CONFIG = {
   ACCOUNT_FORCE_SUBSCRIPTION: true,
   // Where to send authed users who haven't got a subscription
   ACCOUNT_ENFORCE_SUBSCRIPTION_PATH: '/account/billing/subscribe?full=1',
-    // Is there a required terms checkbox? null if not needed
-  ACCOUNT_REQUIRED_TERMS_AGREEMENT_PATH: null,
+    // Is there a Signup Terms statement on the account creation form?
+  ACCOUNT_REQUIRED_TERMS_CHECKBOX: true,
 
   /**
    * ==========
@@ -179,4 +180,4 @@ export const SC_CONFIG = {
     transition: Flip,
   },
 
-};
+}

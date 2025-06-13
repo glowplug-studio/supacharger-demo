@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -16,14 +18,19 @@ export default function SCMarketingAbout() {
                 fugiat veniam occaecat fugiat aliqua. Anim aute id magna aliqua ad ad non deserunt sunt.
               </p>
               <div className='mt-10'>
-
-                <Link className='btn bg-primary' href='account/create' >
+                <Link className='btn bg-primary' href='account/create'>
                   Create a free account
                 </Link>
               </div>
             </div>
             <div className='mt-16 sm:mt-24 lg:mt-0 lg:shrink-0 lg:grow'>
-              <Image src='/images/sample/sample-marketing-app-single.webp' alt="" className='max-h-[60vh] w-auto' width="600" height='1000' />
+              <Image
+                src='/images/sample/sample-marketing-app-single.webp'
+                alt=''
+                className='max-h-[60vh] w-auto'
+                width='600'
+                height='1000'
+              />
             </div>
           </div>
         </div>
@@ -35,7 +42,7 @@ export default function SCMarketingAbout() {
             <div className='mx-auto max-w-7xl px-6 lg:px-8'>
               <div className='mt-16 flow-root sm:mt-24'>
                 <div className='-m-2 rounded-xl bg-gray-900/5 lg:-m-4 lg:rounded-2xl lg:p-4'>
-                  <img
+                  <Image
                     alt='App screenshot'
                     src='/images/sample/sample-marketing-hero.webp'
                     width={2432}

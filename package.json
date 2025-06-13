@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS='--trace-deprecation' next dev --turbopack",
-    "build": "next build",
+    "build": "npm run generate:plugins && next build",
     "start": "next start",
     "lint": "next lint",
     "stripe:listen": "stripe listen --forward-to=localhost:3000/api/webhooks --project-name=default",
@@ -12,7 +12,8 @@
     "supabase:link": "env-cmd -f ./.env.local supabase link --project-ref vdytepbsknevxtcfzvpp",
     "migration:new": "supabase migration new",
     "migration:up": "supabase migration up --linked --debug && npm run generate-types",
-    "migration:squash": "supabase migration squash --linked"
+    "migration:squash": "supabase migration squash --linked",
+    "generate:plugins": "node \"src/app/(supacharger)/(plugins)/_registry/generate-plugin-registry.js\""
   },
   "dependencies": {
     "@getbrevo/brevo": "^2.2.0",
@@ -73,7 +74,7 @@
     "recharts": "^2.15.3",
     "sass": "^1.89.1",
     "sonner": "^2.0.4",
-    "stripe": "^18.1.0",
+    "stripe": "^18.2.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7",

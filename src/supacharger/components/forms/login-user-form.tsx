@@ -18,7 +18,7 @@ import { useTranslations } from 'next-intl';
 import { toast } from 'react-toastify';
 
 import InlineLoader from '@/assets/images/ui/InlineLoader.svg';
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input';
 import { loginUser } from '@/lib/supabase/supacharger/supabase-auth';
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
@@ -190,14 +190,14 @@ export function LoginUserForm() {
           <span className='text-sm font-normal'>
             {tLoginPage('newTo')} {tGlobal('siteTitle')}?{' '}
           </span>
-          <Link href='/account/create' className='text-sm font-normal'>
+          <Link href='/account/create' className='sclink text-sm font-normal'>
             <span className='font-semibold'>{tAuthTerms('createAnAccount')}</span>
           </Link>
         </div>
         <Link
           href={`/account/reset-password${email ? `?email=${encodeURIComponent(email)}` : ''}`}
           title={tAuthTerms('forgotPassword')}
-          className='text-sm font-semibold hover:text-indigo-500'
+          className='sclink text-sm font-semibold'
         >
           {tAuthTerms('forgotPassword')}
         </Link>

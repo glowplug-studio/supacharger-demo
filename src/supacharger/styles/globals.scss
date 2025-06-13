@@ -98,6 +98,12 @@
       @apply hover:text-gray-900;
     }
 
+    a.sclink {
+      @apply text-blue-500;
+      @apply hover:underline;
+      @apply hover:text-blue-300;
+    }
+
   }
 
   ::selection {
@@ -123,6 +129,12 @@
     @apply h-full;
     font-feature-settings: 'rlig' 1, 'calt' 1;
     background: hsl(var(--background));
+  }
+
+  a.sclink {
+    @apply text-blue-700;
+    @apply hover:underline;
+    @apply hover:text-blue-500;
   }
 
   .input {

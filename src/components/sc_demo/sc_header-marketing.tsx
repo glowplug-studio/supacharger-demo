@@ -91,8 +91,8 @@ const menu: MenuItem[] = [
     ],
   },
   { title: "About", url: "/about" },
-  { title: "Pricing", url: "/pricing" }
-  
+  { title: "Pricing", url: "/pricing" },
+  { title: "Demos", url: "/demos" }
 ];
 
 const SubMenuLink = ({ item }: { item: MenuItem }) => {

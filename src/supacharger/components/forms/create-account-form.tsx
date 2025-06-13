@@ -20,11 +20,12 @@ import { Eye, EyeOff } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import { plugins } from '@/app/(supacharger)/(plugins)/_registry/plugin-registry';
+import SignupTerms from '@/app/(supacharger)/(unauthenticated)/account/create/sc_signup-terms';
 import { Input } from '@/components/ui/input';
 import { createUserByEmailPassword } from '@/lib/supabase/supacharger/supabase-auth';
 import SaveButton from '@/supacharger/components/buttons/form-save-button';
 import PasswordValidationIndicator from '@/supacharger/components/forms/password-validation-indicator';
-import { SCP_REGISTRY } from '@/supacharger/plugins/registry';
 import { SC_CONFIG } from '@/supacharger/supacharger-config';
 import { isValidEmail, supabaseErrorCodeLocalisation } from '@/supacharger/utils/helpers';
 
@@ -35,9 +36,11 @@ const AuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some(
   ? dynamic(() => import('@/supacharger/components/buttons/auth-provider-buttons'), { ssr: true })
   : null;
 
-const BrevoNewsletterRegistrationCheckbox = SCP_REGISTRY.BREVO.ENABLED
-  ? dynamic(() => import('@/supacharger/plugins/scp_brevo/brevoNewsletterRegistrationCheckbox'), { ssr: true })
+  const brevoPlugin = plugins.find(p => p.name === 'brevo-newsletter' && p.enabled);
+  const BrevoNewsletterRegistrationCheckbox = brevoPlugin
+  ? dynamic(() => Promise.resolve(brevoPlugin.component), { ssr: true })
   : null;
+
 
 export function CreateAccountForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -94,9 +97,9 @@ export function CreateAccountForm() {
   const getAriaError = (field: string) => {
     if (!formError) return undefined;
     const err = formError.toLowerCase();
-    if (field === "email" && err.includes("email")) return "email-error";
-    if (field === "password" && err.includes("password") && !err.includes("retype")) return "password-error";
-    if (field === "retypePassword" && err.includes("retype")) return "retypePassword-error";
+    if (field === 'email' && err.includes('email')) return 'email-error';
+    if (field === 'password' && err.includes('password') && !err.includes('retype')) return 'password-error';
+    if (field === 'retypePassword' && err.includes('retype')) return 'retypePassword-error';
     return undefined;
   };
 
@@ -205,14 +208,16 @@ export function CreateAccountForm() {
                 required
                 autoComplete='email'
                 className='input'
-                aria-invalid={!!formError && formError.toLowerCase().includes("email")}
-                aria-describedby={getAriaError("email")}
+                aria-invalid={!!formError && formError.toLowerCase().includes('email')}
+                aria-describedby={getAriaError('email')}
                 {...register('email', {
                   onChange: handleEmailChange,
                 })}
               />
-              {formError && formError.toLowerCase().includes("email") && (
-                <div id="email-error" className="sc_message sc_message-error">{formError}</div>
+              {formError && formError.toLowerCase().includes('email') && (
+                <div id='email-error' className='sc_message sc_message-error'>
+                  {formError}
+                </div>
               )}
             </div>
           </div>
@@ -258,27 +263,32 @@ export function CreateAccountForm() {
                     maxLength={30}
                     required
                     autoComplete='new-password'
-                    aria-invalid={!!formError && formError.toLowerCase().includes("retype")}
-                    aria-describedby={getAriaError("retypePassword")}
+                    aria-invalid={!!formError && formError.toLowerCase().includes('retype')}
+                    aria-describedby={getAriaError('retypePassword')}
                     {...register('retypePassword', {
                       onChange: handleRetypePasswordChange,
                     })}
                   />
-                  {formError && formError.toLowerCase().includes("retype") && (
-                    <div id="retypePassword-error" className="sc_message sc_message-error">{formError}</div>
+                  {formError && formError.toLowerCase().includes('retype') && (
+                    <div id='retypePassword-error' className='sc_message sc_message-error'>
+                      {formError}
+                    </div>
                   )}
                 </div>
               </div>
             )}
-            {BrevoNewsletterRegistrationCheckbox && <BrevoNewsletterRegistrationCheckbox />}
             {/* General password errors */}
-            {formError && formError.toLowerCase().includes("password") && !formError.toLowerCase().includes("retype") && (
-              <div id="password-error" className="sc_message sc_message-error mx-1">{formError}</div>
-            )}
+            {formError &&
+              formError.toLowerCase().includes('password') &&
+              !formError.toLowerCase().includes('retype') && (
+                <div id='password-error' className='sc_message sc_message-error mx-1'>
+                  {formError}
+                </div>
+              )}
             <div className='mt-4 px-1'>
               <SaveButton
                 type='submit'
-                className='w-full h-12'
+                className='h-12 w-full'
                 isLoading={isSubmitting}
                 isSuccess={isSubmitSuccess}
                 initialLabel={tAuthTerms('signUp')}
@@ -287,6 +297,7 @@ export function CreateAccountForm() {
               />
             </div>
           </div>
+          {BrevoNewsletterRegistrationCheckbox && <BrevoNewsletterRegistrationCheckbox />}
         </form>
       )}
 
@@ -297,13 +308,15 @@ export function CreateAccountForm() {
       )}
 
       {!accountCreated && (
-        <div className='mt-4 flex flex-col gap-2 px-1 md:flex-row md:items-center md:justify-between md:gap-0'>
-          <div>
-            <span className='text-sm font-normal'>{tCreateAccountFormComponent('iAlreadyHaveAnAccount')} </span>
-            <Link href='/account/login' className='text-sm font-normal'>
-              <span className='font-semibold'>{tAuthTerms('logIn')}</span>
+        <div className=''>
+          <div className='my-4 text-sm font-normal'>
+            {tCreateAccountFormComponent('alreadyHaveAnAccount') + ' '}
+            <Link href='/account/login' className='sclink'>
+              {tAuthTerms('logIn')}
             </Link>
           </div>
+
+          {SC_CONFIG.ACCOUNT_REQUIRED_TERMS_CHECKBOX && <SignupTerms />}
         </div>
       )}
     </>
