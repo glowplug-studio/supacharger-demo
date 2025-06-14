@@ -12,6 +12,8 @@
  *
  * ========================================================================= */
 
+// [SCCLI_import_declarations]
+
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -31,6 +33,8 @@ import { isValidEmail, supabaseErrorCodeLocalisation } from '@/supacharger/utils
 
 import { OtpFieldsForm } from './otp-fields-verify-form';
 
+// [SCCLI_dynamic_imports]
+
 // Dynamically import social and Brevo components if enabled
 const AuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some(Boolean)
   ? dynamic(() => import('@/supacharger/components/buttons/auth-provider-buttons'), { ssr: true })
@@ -41,6 +45,7 @@ const AuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some(
   ? dynamic(() => Promise.resolve(brevoPlugin.component), { ssr: true })
   : null;
 
+  // [SCCLI_module_level_vars]
 
 export function CreateAccountForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -297,6 +302,8 @@ export function CreateAccountForm() {
               />
             </div>
           </div>
+
+          {/* [SCCLI_create_account_form_closing_tag]*/}
           {BrevoNewsletterRegistrationCheckbox && <BrevoNewsletterRegistrationCheckbox />}
         </form>
       )}

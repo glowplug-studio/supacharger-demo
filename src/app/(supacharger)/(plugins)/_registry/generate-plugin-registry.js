@@ -5,25 +5,41 @@ const path = require('path');
 const pluginsDir = path.resolve(__dirname, '..');
 const outputFile = path.join(__dirname, 'plugin-registry.ts');
 
+// Clear the registry file immediately on script start
+fs.writeFileSync(outputFile, '', 'utf8');
+
+/**
+ * Get all valid plugin folders:
+ * - Exclude '_registry' folder
+ * - Exclude hidden files/folders (starting with '.')
+ * - Only directories with index.* file and _config/config.js file
+ */
 function getPluginFolders() {
   return fs.readdirSync(pluginsDir).filter(folder => {
     if (folder === '_registry') return false;
+    if (folder.startsWith('.')) return false; // skip hidden files/folders like .DS_Store
 
     const folderPath = path.join(pluginsDir, folder);
-    const isDirectory = fs.statSync(folderPath).isDirectory();
 
-    // Check for any index.* file (e.g., index.js, index.jsx, index.ts, index.tsx)
+    // Skip if not a directory
+    if (!fs.statSync(folderPath).isDirectory()) return false;
+
+    // Check for index.* file (index.js, index.ts, etc.)
     const hasIndexFile = fs.readdirSync(folderPath).some(file => /^index\..+$/.test(file));
 
-    // Check for config.js file (CommonJS export)
-    const hasConfig = fs.existsSync(path.join(folderPath, 'config.js'));
+    // Check for config.js inside _config folder
+    const configPath = path.join(folderPath, '_config', 'config.js');
+    const hasConfig = fs.existsSync(configPath);
 
-    return isDirectory && hasIndexFile && hasConfig;
+    return hasIndexFile && hasConfig;
   });
 }
 
+/**
+ * Check dependencies listed in SC_PLUGIN_CONFIG.DEPENDENCIES
+ * Logs errors if dependencies are missing or incomplete
+ */
 function checkDependencies(plugin, config) {
-  // DEPENDENCIES is an object in your config, convert to array of keys or empty array
   const dependencies = config.SC_PLUGIN_CONFIG.DEPENDENCIES
     ? Object.keys(config.SC_PLUGIN_CONFIG.DEPENDENCIES)
     : [];
@@ -38,40 +54,63 @@ function checkDependencies(plugin, config) {
     }
 
     const hasIndex = fs.readdirSync(depPath).some(file => /^index\..+$/.test(file));
-    const hasConfig = fs.existsSync(path.join(depPath, 'config.js'));
+    const hasConfig = fs.existsSync(path.join(depPath, '_config', 'config.js'));
 
     if (!hasIndex) console.error(`  [!] Missing index.* file in dependency: '${dep}' (required by '${plugin}')`);
-    if (!hasConfig) console.error(`  [!] Missing config.js in dependency: '${dep}' (required by '${plugin}')`);
+    if (!hasConfig) console.error(`  [!] Missing _config/config.js in dependency: '${dep}' (required by '${plugin}')`);
   });
 }
 
+/**
+ * Generate the plugin registry file with imports and exports
+ * Also logs plugin statuses and dependency issues
+ */
 function generateRegistry() {
   const plugins = getPluginFolders();
   let enabledCount = 0;
 
-  // Generate imports and exports strings for the registry file
+  if (plugins.length === 0) {
+      // Write a valid empty plugins export so imports don't break
+      fs.writeFileSync(
+        outputFile,
+        `// This file is auto-generated. No plugins found.\n\n` +
+        `export interface Plugin {\n` +
+        `  name: string;\n` +
+        `  enabled: boolean;\n` +
+        `  component: React.ComponentType<any>;\n` +
+        `}\n\n` +
+        `export const plugins: Plugin[] = [];\n`,
+        'utf8'
+      );
+    console.log('No valid plugins found.');
+    return;
+  }
+
+  // Generate import statements for plugins and their configs
   const imports = plugins.map((plugin, i) =>
     `import Plugin${i} from '../${plugin}';\n` +
-    `import { SC_PLUGIN_CONFIG as Config${i} } from '../${plugin}/config';`
+    `import { SC_PLUGIN_CONFIG as Config${i} } from '../${plugin}/_config/config';`
   ).join('\n');
 
+  // Generate export array with plugin info
   const exports = `export const plugins = [\n${
     plugins.map((_, i) =>
       `  { name: Config${i}.PLUGIN_NAME, enabled: Config${i}.PLUGIN_ENABLED, component: Plugin${i} }`
     ).join(',\n')
   }\n];\n`;
 
+  // Write the registry file with new content
   fs.writeFileSync(outputFile, `${imports}\n\n${exports}`);
 
-  // Debug output
+  // Log plugin scan results
   console.log('\nPlugin scan results:');
   plugins.forEach(plugin => {
     try {
-      const config = require(path.join(pluginsDir, plugin, 'config.js'));
+      const config = require(path.join(pluginsDir, plugin, '_config', 'config.js'));
       const enabled = config.SC_PLUGIN_CONFIG.PLUGIN_ENABLED;
       const name = config.SC_PLUGIN_CONFIG.PLUGIN_NAME || plugin;
 
-      // Check dependencies first
+      // Check dependencies for this plugin
       checkDependencies(plugin, config);
 
       const status = enabled ? '\x1b[32mENABLED\x1b[0m' : '\x1b[31mDISABLED\x1b[0m';
@@ -83,13 +122,17 @@ function generateRegistry() {
     }
   });
 
-  // Enabled plugins summary
+  // Summary of enabled plugins
   if (enabledCount > 0) {
     console.log('\n\x1b[32mEnabled plugins included in build:\x1b[0m');
     plugins.forEach(plugin => {
-      const config = require(path.join(pluginsDir, plugin, 'config.js'));
-      if (config.SC_PLUGIN_CONFIG.PLUGIN_ENABLED) {
-        console.log(`  \x1b[32m\u2022 ${config.SC_PLUGIN_CONFIG.PLUGIN_NAME}\x1b[0m`);
+      try {
+        const config = require(path.join(pluginsDir, plugin, '_config', 'config.js'));
+        if (config.SC_PLUGIN_CONFIG.PLUGIN_ENABLED) {
+          console.log(`  \x1b[32m\u2022 ${config.SC_PLUGIN_CONFIG.PLUGIN_NAME}\x1b[0m`);
+        }
+      } catch {
+        // Ignore errors here, already logged above
       }
     });
   } else {
