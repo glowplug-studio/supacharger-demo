@@ -6,7 +6,7 @@
  *
  *  Description: Login form functionality along with activation link request UI
  *
- *  Author: J Sharp <j@glowplug.studio>
+ *  Author: sharpi_sh @ Glowplug <j@glowplug.studio>
  *
  *  License: CC BY-NC-SA 4.0
  *

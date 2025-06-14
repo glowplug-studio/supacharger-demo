@@ -6,7 +6,7 @@
  *
  *  Description: User can sign in here with SOME social accounts or email.
  *
- *  Author: J Sharp <j@glowplug.studio>
+ *  Author: sharpi_sh @ Glowplug <j@glowplug.studio>
  *
  *  License: CC BY-NC-SA 4.0
  *

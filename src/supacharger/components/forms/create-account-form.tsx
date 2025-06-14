@@ -6,7 +6,7 @@
  *
  *  Description: Main form component showing enabled login methods including OTP verification
  *
- *  Author: J Sharp <j@glowplug.studio>
+ *  Author: sharpi_sh @ Glowplug <j@glowplug.studio>
  *
  *  License: CC BY-NC-SA 4.0
  *
