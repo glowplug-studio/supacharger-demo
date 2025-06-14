@@ -21,8 +21,6 @@ import { useTranslations } from 'next-intl';
 import { Eye, EyeOff } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-
-import { plugins } from '@/app/(supacharger)/(plugins)/_registry/plugin-registry';
 import SignupTerms from '@/app/(supacharger)/(unauthenticated)/account/create/sc_signup-terms';
 import { Input } from '@/components/ui/input';
 import { createUserByEmailPassword } from '@/lib/supabase/supacharger/supabase-auth';
@@ -38,11 +36,6 @@ import { OtpFieldsForm } from './otp-fields-verify-form';
 // Dynamically import social and Brevo components if enabled
 const AuthProviderButtons = Object.values(SC_CONFIG.AUTH_PROVDERS_ENABLED).some(Boolean)
   ? dynamic(() => import('@/supacharger/components/buttons/auth-provider-buttons'), { ssr: true })
-  : null;
-
-  const brevoPlugin = plugins.find(p => p.name === 'brevo-newsletter' && p.enabled);
-  const BrevoNewsletterRegistrationCheckbox = brevoPlugin
-  ? dynamic(() => Promise.resolve(brevoPlugin.component), { ssr: true })
   : null;
 
   // [SCCLI_module_level_vars]
@@ -303,8 +296,7 @@ export function CreateAccountForm() {
             </div>
           </div>
 
-          {/* [SCCLI_create_account_form_closing_tag]*/}
-          {BrevoNewsletterRegistrationCheckbox && <BrevoNewsletterRegistrationCheckbox />}
+          {/* [SCCLI_create_account_form_closing_tag] */}
         </form>
       )}
 
