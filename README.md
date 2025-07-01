@@ -1,43 +1,106 @@
 <p align="center">
-  <h1 align="center">next-supabase-stripe-starter</h1>
+  <h1 align="center">Supacharger</h1>
   <p align="center">
-    <a href="https://supacharger.dev"><img src="/docs/gh-banner.png" /></a>
+    <a href="https://supacharger.dev"><img src="/docs/gh-banner.jpg"/></a>
   </p>
 </p>
 
 <p align="center">
-  <a href="https://twitter.com/kolbysisk" rel="nofollow"><img src="https://img.shields.io/badge/created%20by-@kolbysisk-e57060.svg" alt="Created by Kolby Sisk"></a>
-  <a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/github/license/kolbysisk/next-supabase-stripe-starter" alt="License"></a>
-</p>
-
-<p align="center">
-  <a href="https://next-supabase-stripe-starter-demo-mnqz.vercel.app" style="font-weight: bold; font-size: 20px; text-decoration: underline;">See the demo</a>
+  <a href="https://glowplug.studio/" rel="nofollow"><img src="https://img.shields.io/badge/created%20by-Glowplug Studio-e57060.svg" alt="Created by Glowplug Studio"></a>
+  <a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/github/license/glowplug-studio/supacharger" alt="License"></a>
 </p>
 
 ## Introduction
 
-Bootstrap your SaaS with a modern tech stack built to move quick. Follow the guide to get started.
+This is a SaaS starter built with modern technologies.
 
 ### What's included
 
 - Next.js 15
 - [Supabase](https://supabase.com) - Postgres database & user authentication
 - [Stripe](https://stripe.com) - [Checkout](https://stripe.com/docs/payments/checkout), [subscriptions](https://stripe.com/docs/billing/subscriptions/overview), and [customer portal](https://stripe.com/docs/customer-management)
-- [React Email](https://react.email/) - Easily build emails and send them with [Resend](https://resend.com)
+- [Brevo](https://brevo.com) - Marketing and transactional emails
 - [Tailwindcss](https://tailwindcss.com/) - CSS framework
 - [shadcn/ui](https://ui.shadcn.com) - Prebuilt accessible components
 - Webhooks to automatically synchronize Stripe with Supabase
 - Stripe fixture to bootstrap product data
 - Supabase migrations to bootstrap and manage your db schema
 - Responsive, performant, and accessible prebuilt pages
-- Animated button borders! Now you can look cool without nerds saying you shipped too late
+- Brevo email integration for welcome emails and payment receipts
+
+## Live Demo
+
+🚀 **[View Live Demo](https://demo.supacharger.dev/)**
+
+The demo includes:
+- User authentication with Supabase
+- Stripe payment integration (test mode)
+- Subscription management
+- Email notifications via Brevo
+- Responsive design with shadcn/ui components
+
+## Quick Start for Development
+
+### Prerequisites
+- Node.js 20.0.0+
+- Supabase account
+- Stripe account (test mode at least)
+- Brevo account
+
+### Environment Setup
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/glowplug-studio/supacharger.git
+   cd supacharger
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Copy environment variables:
+   ```bash
+   cp .env.local.example .env.local
+   ```
+
+4. Fill in your environment variables in `.env.local`
+
+5. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+### Node.js Version Management
+
+This project requires Node.js 20.0.0+. We've included version management files to ensure consistency:
+
+#### Using nvm (recommended)
+```bash
+# Install and use the correct Node version
+nvm use
+
+# Or install if you don't have Node 20
+nvm install
+```
+
+#### Using other version managers
+- **fnm**: `fnm use`
+- **nodenv**: `nodenv install && nodenv local`
+- **volta**: Volta will automatically use the correct version
+
+#### Manual installation
+If you don't use a version manager, ensure you have Node.js 20.0.0+ installed:
+```bash
+node --version  # Should show v20.x.x
+```
 
 ## Getting started
 
 ### 1. Setup Supabase
 
 1. Go to [supabase.com](https://supabase.com) and create a project
-1. Go to Project Settings → Database → Database password and click reset database password then click generate a new password. (I know you already made one, but this fixes a [bug with their CLI where it doesn't like special characters in the password](https://github.com/supabase/supabase/issues/15184))
+1. Go to Project Settings → Database → Database password and click reset database password then click generate a new password
 1. Save this password somewhere, you can't see it after closing the box
 
 ### 2. Setup Stripe
@@ -45,23 +108,21 @@ Bootstrap your SaaS with a modern tech stack built to move quick. Follow the gui
 1. Go to [stripe.com](https://stripe.com) and create a project
 1. Go to [Customer Portal Settings](https://dashboard.stripe.com/test/settings/billing/portal) and click the `Active test link` button
 
-### 3. Setup Resend
+### 3. Setup Brevo
 
-1. Go to [resend.com](https://resend.com) and create an account
-1. Go to the [API Keys page](https://resend.com/api-keys) and create an API Key
-1. Add the [Supabase Resend integration](https://supabase.com/partners/integrations/resend)
+1. Go to [brevo.com](https://brevo.com) and create an account
+1. Go to the [API Keys page](https://app.brevo.com/settings/keys/api) and create an API Key
+1. Create email templates for welcome and receipt emails (or use template IDs 1 and 2 in the code)
 
 ### 4. Deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FKolbySisk%2Fnext-supabase-stripe-starter&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,SUPABASE_DB_PASSWORD,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,RESEND_API_KEY&demo-title=AI%20Twitter%20Banner%20Demo&demo-url=https%3A%2F%2Fai-twitter-banner.vercel.app&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fglowplug-studio%2Fsupacharger&env=NEXT_PUBLIC_SUPABASE_URL,NEXT_PUBLIC_SUPABASE_ANON_KEY,SUPABASE_SERVICE_ROLE_KEY,SUPABASE_DB_PASSWORD,NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,STRIPE_SECRET_KEY,STRIPE_WEBHOOK_SECRET,BREVO_API_KEY,NEXT_PUBLIC_SITE_URL&demo-title=Supacharger%20SaaS%20Starter&demo-url=https%3A%2F%2Fdemo.supacharger.dev&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6)
 
-1. Next click the deploy button ⬆️
+1. Click the deploy button ⬆️
 1. On the form create a new repo and add the Supabase integration
-1. Add the environment variables that you have available. For the stripe webhook secret just put any value - we will come back to update this after configuring the webhook
+1. Add the environment variables that you have available
+1. Make sure to include `NEXT_PUBLIC_SITE_URL` with your production domain
 1. Click Deploy
-1. While you wait, clone your new repo and open it in your code editor. Then create a file named `.env.local`. Copy and pase the contents of `.env.local.example` into this file and add the correct values. They should be the same values you added in above.
-
-![Vercel env config](/delete-me/deplyoment-env.png)
 
 ### 5. Stripe Webhook
 
@@ -77,39 +138,27 @@ Bootstrap your SaaS with a modern tech stack built to move quick. Follow the gui
 
 ### 6. Run Supabase Migration
 
-Now we're going to run the initial [Supabase Migration](https://supabase.com/docs/reference/cli/supabase-migration-new) to create your database tables.
-
 1. Run `npx supabase login`
 1. Run `npx supabase init`
-1. Open your `package.json` and update both `UPDATE_THIS_WITH_YOUR_SUPABASE_PROJECT_ID` strings with your supabase project id
+1. Update your `package.json` with your Supabase project ID
 1. Run `npm run supabase:link`
 1. Run `npm run migration:up`
 
 ### 7. Run Stripe Fixture
 
-[Stripe fixtures](https://stripe.com/docs/cli/fixtures) are an easy way to configure your product offering without messing around in the Stripe UI.
+1. Install the [Stripe CLI](https://stripe.com/docs/stripe-cli#install)
+1. Run `stripe fixtures ./stripe-fixtures.json --api-key YOUR_STRIPE_SECRET_KEY`
 
-1. Install the [Stripe CLI](https://stripe.com/docs/stripe-cli#install). For Macs run: `brew install stripe/stripe-cli/stripe`
-1. Run (make sure to update the command with your Stripe sk) `stripe fixtures ./stripe-fixtures.json --api-key UPDATE_THIS_WITH_YOUR_STRIPE_SK`
-
-### 8. Last steps
-
-1. Do a `Search All` in your code editor for `UPDATE_THIS` and update all instances with the relevant value (**except for .env.local.example!**)
-1. Delete the `delete-me` dir
-
-### 9. Check it out!
-
-You did it! You should be able to look in your Stripe dashboard and see your products, and you should also see the same data has been populated in your Supabase database. Now let's test everything.
+### 8. Test Your Setup
 
 1. Run `npm i`
-1. Run `npm run dev`.
-1. Go to the app and click `Get started for free` - this will take you to the login page
-1. We haven't configured auth providers, so for now click `Continue with Email` and submit your email address
-1. Click the link sent to your email and you should be redirected back to your app - authenticated
-1. Click `Get Started` on one of the plans. This will take you to a Stripe checkout page (In test mode)
-1. Enter `4242424242424242` as your credit card number. Fill out the rest of the form with any valid data and click Subscribe
-1. You should be redirect to the Account page where you can see your active subscription
-1. Click the `Manage your subscription` button
+1. Run `npm run dev`
+1. Go to the app and test the complete user flow:
+   - Sign up with email
+   - Subscribe to a plan
+   - Check for welcome and receipt emails
+   - Manage subscription
+
 
 **That's the end of the setup. The following are guides to help you code in your new codebase.**
 
