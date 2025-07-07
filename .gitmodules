@@ -1,0 +1,3 @@
+[submodule "src/app/(supacharger)/(plugins)/brevo-newsletter"]
+	path = src/app/(supacharger)/(plugins)/brevo-newsletter
+	url = git@github.com:glowplug-studio/supacharger-ext-brevo-newsletter.git
