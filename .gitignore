@@ -38,3 +38,8 @@ next-env.d.ts
 # supabase
 /supabase/.temp/
 supabase/config.toml
+
+
+# cli
+.sc-core-update/
+.sc-core-install/
