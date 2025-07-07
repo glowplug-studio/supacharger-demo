@@ -242,7 +242,7 @@ Follow these steps when you're ready to go live:
 
 ## Support
 
-If you need help with the setup, or developing in the codebase, feel free to reach out to me on Twitter [@kolbysisk](https://twitter.com/KolbySisk) - I'm always happy to help.
+If you need help contact support@glowplug.studio.
 
 ## Contribute
 
@@ -250,4 +250,4 @@ PRs are always welcome.
 
 ---
 
-This project was inspired by Vercel's [nextjs-subscription-payments](https://github.com/vercel/nextjs-subscription-payments).
+This project was inspired by Kolby Sisk's [next-supabase-stripe-starter]([https://github.com/vercel/nextjs-subscription-payments](https://github.com/KolbySisk/next-supabase-stripe-starter/tree/main)).
