@@ -251,3 +251,5 @@ PRs are always welcome.
 ---
 
 This project was inspired by Kolby Sisk's [next-supabase-stripe-starter]([https://github.com/vercel/nextjs-subscription-payments](https://github.com/KolbySisk/next-supabase-stripe-starter/tree/main)).
+
+cli test
