@@ -202,8 +202,9 @@ export async function fetchFromDatabase<T extends DatabaseRecord>(
   const { data, error } = await query;
 
   if (error) {
-    console.error(`Failed to fetch from ${tableName}:`, error);
-    throw new Error(`Failed to fetch from ${tableName}: ${error.message}`);
+    const parsedError = parseSupabaseError(error, 'database');
+    logSupachargerError(parsedError, 'fetchFromDatabase');
+    throw parsedError;
   }
 
   return data || [];
