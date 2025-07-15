@@ -36,7 +36,7 @@ const ITEM_EXPIRY_TIME = 30 * 60 * 1000; // 30 minutes
  * Generate unique ID for items
  */
 export function generateUniqueId(): string {
-  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+  return Date.now().toString(36) + Math.random().toString(36).slice(2);
 }
 
 /**
