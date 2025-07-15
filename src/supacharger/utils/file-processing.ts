@@ -253,10 +253,6 @@ export function createCameraInput(): Promise<File | null> {
         resolve(file || null);
       };
       
-      input.oncancel = () => {
-        resolve(null);
-      };
-      
       // Trigger file selection
       input.click();
     } catch (error) {
@@ -280,11 +276,7 @@ export function createFileInput(multiple: boolean = true): Promise<FileList | nu
       input.onchange = (event) => {
         const target = event.target as HTMLInputElement;
         const files = target.files;
-        resolve(files);
-      };
-      
-      input.oncancel = () => {
-        resolve(null);
+        resolve(files && files.length > 0 ? files : null);
       };
       
       // Trigger file selection
