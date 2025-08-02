@@ -28,13 +28,13 @@ export default function SCLegalPage() {
             <section id='terms-of-use' className='mb-12 scroll-mt-20'>
               <h1 className='mb-4 text-2xl font-bold'>Terms of Use</h1>
               <div className='mx-auto max-w-3xl px-4 py-12'>
-                <h1 className='mb-4 text-3xl font-bold'>Korunet Terms of Use (2025)</h1>
+                <h1 className='mb-4 text-3xl font-bold'>Snapscreen Terms of Use (2025)</h1>
                 <p className='mb-8 text-gray-500'>Last Updated: June 4, 2025</p>
 
                 <section className='mb-8'>
                   <h2 className='mb-2 text-2xl font-semibold'>1. Acceptance of Terms</h2>
                   <p>
-                    By accessing or using Korunet, you agree to these Terms of Use and our Privacy Policy. If you do not
+                    By accessing or using Snapscreen, you agree to these Terms of Use and our Privacy Policy. If you do not
                     agree to these terms, you may not use our Services.
                   </p>
                 </section>
@@ -42,7 +42,7 @@ export default function SCLegalPage() {
                 <section className='mb-8'>
                   <h2 className='mb-2 text-2xl font-semibold'>2. Changes to Terms</h2>
                   <p>
-                    Korunet reserves the right to modify these Terms of Use at any time. We will notify users of any
+                    Snapscreen reserves the right to modify these Terms of Use at any time. We will notify users of any
                     changes by updating the &quot;Last Updated&quot; date. Continued use of the Services after changes constitutes
                     acceptance of the new terms.
                   </p>
@@ -51,7 +51,7 @@ export default function SCLegalPage() {
                 <section className='mb-8'>
                   <h2 className='mb-2 text-2xl font-semibold'>3. Eligibility</h2>
                   <p>
-                    You must be at least 16 years old to use Korunet. By using our Services, you represent and warrant
+                    You must be at least 16 years old to use Snapscreen. By using our Services, you represent and warrant
                     that you meet this age requirement.
                   </p>
                 </section>
@@ -68,7 +68,7 @@ export default function SCLegalPage() {
                 <section className='mb-8'>
                   <h2 className='mb-2 text-2xl font-semibold'>5. Acceptable Use</h2>
                   <ul className='ml-4 list-inside list-disc'>
-                    <li>Use Korunet for lawful purposes only and comply with all applicable laws.</li>
+                    <li>Use Snapscreen for lawful purposes only and comply with all applicable laws.</li>
                     <li>
                       Do not post or transmit any content that is infringing, defamatory, obscene, or otherwise
                       objectionable.
@@ -83,8 +83,8 @@ export default function SCLegalPage() {
                 <section className='mb-8'>
                   <h2 className='mb-2 text-2xl font-semibold'>6. Intellectual Property</h2>
                   <p>
-                    All content and materials on Korunet, including but not limited to text, graphics, logos, and
-                    software, are the property of Korunet or its licensors and are protected by intellectual property
+                    All content and materials on Snapscreen, including but not limited to text, graphics, logos, and
+                    software, are the property of Snapscreen or its licensors and are protected by intellectual property
                     laws. You may not use, reproduce, or distribute any content from our Services without our express
                     written permission.
                   </p>
@@ -93,7 +93,7 @@ export default function SCLegalPage() {
                 <section className='mb-8'>
                   <h2 className='mb-2 text-2xl font-semibold'>7. Third-Party Links</h2>
                   <p>
-                    Korunet may contain links to third-party websites or services. We are not responsible for the
+                    Snapscreen may contain links to third-party websites or services. We are not responsible for the
                     content, privacy policies, or practices of any third parties.
                   </p>
                 </section>
@@ -101,9 +101,9 @@ export default function SCLegalPage() {
                 <section className='mb-8'>
                   <h2 className='mb-2 text-2xl font-semibold'>8. Termination</h2>
                   <p>
-                    We reserve the right to suspend or terminate your access to Korunet at our discretion, without
+                    We reserve the right to suspend or terminate your access to Snapscreen at our discretion, without
                     notice, for conduct that we believe violates these Terms or is otherwise harmful to other users or
-                    Korunet.
+                    Snapscreen.
                   </p>
                 </section>
 
@@ -112,7 +112,7 @@ export default function SCLegalPage() {
                   <ul className='ml-4 list-inside list-disc'>
                     <li>The Services are provided &quot;as is&quot; and &quot;as available&quot; without warranties of any kind.</li>
                     <li>
-                      Korunet does not guarantee the accuracy, completeness, or reliability of any content or
+                      Snapscreen does not guarantee the accuracy, completeness, or reliability of any content or
                       information provided through the Services.
                     </li>
                   </ul>
@@ -121,7 +121,7 @@ export default function SCLegalPage() {
                 <section className='mb-8'>
                   <h2 className='mb-2 text-2xl font-semibold'>10. Limitation of Liability</h2>
                   <p>
-                    To the maximum extent permitted by law, Korunet and its affiliates shall not be liable for any
+                    To the maximum extent permitted by law, Snapscreen and its affiliates shall not be liable for any
                     indirect, incidental, special, consequential, or punitive damages, or any loss of profits or
                     revenues, whether incurred directly or indirectly.
                   </p>
@@ -131,7 +131,7 @@ export default function SCLegalPage() {
                   <h2 className='mb-2 text-2xl font-semibold'>11. Governing Law</h2>
                   <p>
                     These Terms of Use are governed by the laws of New Zealand. Any disputes arising from these terms or
-                    your use of Korunet will be subject to the exclusive jurisdiction of the courts of New Zealand.
+                    your use of Snapscreen will be subject to the exclusive jurisdiction of the courts of New Zealand.
                   </p>
                 </section>
 
@@ -139,15 +139,15 @@ export default function SCLegalPage() {
                   <h2 className='mb-2 text-2xl font-semibold'>12. Contact Us</h2>
                   <p>
                     If you have any questions about these Terms of Use, please contact us at{' '}
-                    <a href='mailto:support@korunet.com' className='text-blue-600 underline'>
-                      support@korunet.com
+                    <a href='mailto:support@Snapscreen.com' className='text-blue-600 underline'>
+                      support@Snapscreen.com
                     </a>
                     .
                   </p>
                 </section>
 
                 <p className='mt-8 italic text-gray-600'>
-                  By using Korunet, you acknowledge that you have read, understood, and agree to be bound by these Terms
+                  By using Snapscreen, you acknowledge that you have read, understood, and agree to be bound by these Terms
                   of Use.
                 </p>
               </div>
@@ -156,13 +156,13 @@ export default function SCLegalPage() {
             <section id='privacy-policy' className='mb-12 scroll-mt-20'>
               <h1 className='mb-4 text-2xl font-bold'>Privacy Policy</h1>
               <div className='mx-auto max-w-3xl px-4 py-12'>
-                <h1 className='mb-4 text-3xl font-bold'>Korunet Privacy Policy (2025)</h1>
+                <h1 className='mb-4 text-3xl font-bold'>Snapscreen Privacy Policy (2025)</h1>
                 <p className='mb-8 text-gray-500'>Last Updated: June 4, 2025</p>
 
                 <section className='mb-8'>
                   <h2 className='mb-2 text-2xl font-semibold'>1. Introduction</h2>
                   <p>
-                    At Korunet, your privacy is important to us. This Privacy Policy explains how we collect, use,
+                    At Snapscreen, your privacy is important to us. This Privacy Policy explains how we collect, use,
                     disclose, and safeguard your information when you use our website and services.
                   </p>
                 </section>
@@ -235,7 +235,7 @@ export default function SCLegalPage() {
                 <section className='mb-8'>
                   <h2 className='mb-2 text-2xl font-semibold'>8. Children&apos;s Privacy</h2>
                   <p>
-                    Korunet does not knowingly collect or solicit information from children under the age of 16. If you
+                    Snapscreen does not knowingly collect or solicit information from children under the age of 16. If you
                     believe we have collected such information, please contact us immediately.
                   </p>
                 </section>
@@ -252,15 +252,15 @@ export default function SCLegalPage() {
                   <h2 className='mb-2 text-2xl font-semibold'>10. Contact Us</h2>
                   <p>
                     If you have any questions or concerns about this Privacy Policy, please contact us at{' '}
-                    <a href='mailto:support@korunet.com' className='text-blue-600 underline'>
-                      support@korunet.com
+                    <a href='mailto:support@Snapscreen.com' className='text-blue-600 underline'>
+                      support@Snapscreen.com
                     </a>
                     .
                   </p>
                 </section>
 
                 <p className='mt-8 italic text-gray-600'>
-                  By using Korunet, you acknowledge that you have read and understood this Privacy Policy.
+                  By using Snapscreen, you acknowledge that you have read and understood this Privacy Policy.
                 </p>
               </div>
             </section>
