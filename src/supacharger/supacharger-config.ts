@@ -82,7 +82,7 @@ export const SC_CONFIG = {
         // Which path is considered "home" for unauthenticated users
       HOME_PATH: '/',
       // Which path unauthenticated users are redirected to when requesting an auth protected page
-      AUTHGUARD_REDIRECT_DESTINATION: '/account/login',
+      AUTHGUARD_REDIRECT_DESTINATION: '/account/create',
       LOGOUT_REDIRECT_DESTINATON: '/',
     },
     AUTHED_USER: {

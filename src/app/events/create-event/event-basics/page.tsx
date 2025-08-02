@@ -1,4 +1,4 @@
-import EventBasicsForm from '@/components/EventBasicsForm';
+import EventBasicsForm from "@/components/EventBasicsForm";
 
 export default function EventBasics() {
   return <EventBasicsForm />;
