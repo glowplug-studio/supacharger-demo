@@ -184,4 +184,10 @@ export const SC_CONFIG = {
    * ==========
    */
   CLI_INSTALL_HASH: 'c4bcd3fda8b7e68c5b33708930c62a626971f51c',
+  /**
+   * ==========
+   * CLI - do not edit
+   * ==========
+   */
+  CLI_INSTALL_HASH: 'f94e10549e2494b7259d3135b1629c2971c1ef82',
 };
