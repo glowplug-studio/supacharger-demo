@@ -2,13 +2,15 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
 import { Button } from '@/components/ui/button';
-import PhonePreviewContent from './PhonePreviewContent';
-import TVContainer from './tv/TVContainer';
-import TVExpandButton from './tv/TVExpandButton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TVPreviewModal from '@/components/ui/tv-preview-modal';
+
+import TVContainer from './tv/TVContainer';
 import TVContainerLarge from './tv/TVContainerLarge';
+import TVExpandButton from './tv/TVExpandButton';
+import PhonePreviewContent from './PhonePreviewContent';
 
 export default function PreviewTabs() {
   const router = useRouter();

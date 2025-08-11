@@ -1,8 +1,8 @@
 'use client';
 
-import { Camera, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Camera, LogOut } from 'lucide-react';
 
 export default function Header() {
   const router = useRouter();

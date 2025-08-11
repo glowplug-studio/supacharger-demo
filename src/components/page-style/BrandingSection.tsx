@@ -1,19 +1,20 @@
 'use client';
 
 import { X } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { UnifiedBadge } from '@/components/ui/unified-badge';
-import { Switch } from '@/components/ui/switch';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ColorPicker } from '@/components/ui/color-picker';
-import { Slider } from '@/components/ui/slider';
 import FontPicker from '@/components/ui/font-picker';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import PositionSelector from '@/components/ui/position-selector';
-import { cn } from '@/lib/utils';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { Switch } from '@/components/ui/switch';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { UnifiedBadge } from '@/components/ui/unified-badge';
 import { useGlobalState } from '@/hooks/useGlobalState';
+import { cn } from '@/lib/utils';
 
 interface BrandingSectionProps {
   needBrandingOptions: boolean;

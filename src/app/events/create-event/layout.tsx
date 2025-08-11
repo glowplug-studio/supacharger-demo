@@ -1,9 +1,10 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+
 import Header from '@/components/Header';
-import ProgressBar from '@/components/ProgressBar';
 import PhonePreview from '@/components/PhonePreview';
+import ProgressBar from '@/components/ProgressBar';
 import TVPreview from '@/components/TVPreview';
 
 interface EventLayoutProps {

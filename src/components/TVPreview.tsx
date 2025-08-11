@@ -1,10 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect,useState } from 'react';
+
+import TVPreviewModal from '@/components/ui/tv-preview-modal';
+
 import TVContainer from './tv/TVContainer';
 import TVContainerLarge from './tv/TVContainerLarge';
 import TVExpandButton from './tv/TVExpandButton';
-import TVPreviewModal from '@/components/ui/tv-preview-modal';
 
 export default function TVPreview() {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -1,16 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+import { ArrowLeft,ArrowRight } from 'lucide-react';
 
-import PageStyleHeader from '@/components/page-style/PageStyleHeader';
 import BackgroundSection from '@/components/page-style/BackgroundSection';
 import ColorAndFontSection from '@/components/page-style/ColorAndFontSection';
 import DesignStyleSection from '@/components/page-style/DesignStyleSection';
+import PageStyleHeader from '@/components/page-style/PageStyleHeader';
+import { Button } from '@/components/ui/button';
 import { NavigationButtons } from '@/components/ui/navigation-buttons';
+import { Separator } from '@/components/ui/separator';
 
 interface PageStyleData {
   backgroundColor: string;

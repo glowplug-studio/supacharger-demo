@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef,useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Check, Share2, Copy, Download, ExternalLink, Home, QrCode } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import * as QRCode from 'qrcode';
 import * as confetti from 'canvas-confetti';
+import { Check, Copy, Download, ExternalLink, Home, QrCode,Share2 } from 'lucide-react';
+import * as QRCode from 'qrcode';
+
+import { Button } from '@/components/ui/button';
 
 export default function TryItOut() {
   const router = useRouter();

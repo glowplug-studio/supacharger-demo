@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect,useState } from 'react';
+
 import PhonePreviewBackground from './PhonePreviewBackground';
-import PhonePreviewEventCard from './PhonePreviewEventCard';
 import PhonePreviewDescriptionCard from './PhonePreviewDescriptionCard';
+import PhonePreviewEventCard from './PhonePreviewEventCard';
 
 interface EventData {
   eventName: string;

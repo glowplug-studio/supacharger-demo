@@ -1,7 +1,7 @@
 'use client';
 
-import { Label } from '@/components/ui/label';
 import { ColorPicker } from '@/components/ui/color-picker';
+import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface ColorAndFontSectionProps {

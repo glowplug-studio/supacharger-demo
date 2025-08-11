@@ -1,8 +1,8 @@
 'use client';
 
-import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import FontPicker from '@/components/ui/font-picker';
+import { Label } from '@/components/ui/label';
 
 interface DesignStyleSectionProps {
   designStyle: string;

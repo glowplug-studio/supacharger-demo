@@ -2,21 +2,22 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Upload, Play, X, Eye, Radio, ArrowUpDown, Check, HelpCircle, Crown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
+import { ArrowLeft, ArrowUpDown, Check, Crown,Eye, HelpCircle, Play, Radio, Upload, X } from 'lucide-react';
+import { Trash2,X as XIcon } from 'lucide-react';
+
+import Header from '@/components/Header';
+import SubmissionsChart from '@/components/SubmissionsChart';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Switch } from '@/components/ui/switch';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { X as XIcon, Trash2 } from 'lucide-react';
+import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Switch } from '@/components/ui/switch';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { UnifiedBadge } from '@/components/ui/unified-badge';
-import SubmissionsChart from '@/components/SubmissionsChart';
-import Header from '@/components/Header';
 
 // Sample uploaded content data with comments
 const uploadedContent = [

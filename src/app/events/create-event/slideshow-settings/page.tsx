@@ -1,16 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, ArrowLeft, Maximize2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+import { ArrowLeft, ArrowRight, Maximize2 } from 'lucide-react';
 
-import PageStyleHeader from '@/components/page-style/PageStyleHeader';
 import BrandingSection from '@/components/page-style/BrandingSection';
-import SlideshowStyleSection from '@/components/page-style/SlideshowStyleSection';
+import PageStyleHeader from '@/components/page-style/PageStyleHeader';
 import SlideshowOptionsSection from '@/components/page-style/SlideshowOptionsSection';
+import SlideshowStyleSection from '@/components/page-style/SlideshowStyleSection';
+import { Button } from '@/components/ui/button';
 import { NavigationButtons } from '@/components/ui/navigation-buttons';
+import { Separator } from '@/components/ui/separator';
 
 interface SlideshowSettingsData {
   slideshowStyle: string;

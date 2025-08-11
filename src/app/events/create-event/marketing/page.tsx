@@ -1,14 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { ArrowLeft,ArrowRight } from 'lucide-react';
 
-import SecuritySharingSection from '@/components/marketing/SecuritySharingSection';
-import EmailsMarketingSection from '@/components/marketing/EmailsMarketingSection';
 import AdFreeSection from '@/components/marketing/AdFreeSection';
+import EmailsMarketingSection from '@/components/marketing/EmailsMarketingSection';
 import FileQualitySection from '@/components/marketing/FileQualitySection';
 import GalleryDownloadingSection from '@/components/marketing/GalleryDownloadingSection';
+import SecuritySharingSection from '@/components/marketing/SecuritySharingSection';
 import { NavigationButtons } from '@/components/ui/navigation-buttons';
 
 interface MarketingData {

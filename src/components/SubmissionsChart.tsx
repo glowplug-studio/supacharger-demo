@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Maximize2 } from 'lucide-react';
+import { CartesianGrid, Line, LineChart, ResponsiveContainer,Tooltip, XAxis, YAxis } from 'recharts';
+
 import { Button } from '@/components/ui/button';
-import submissionsData from '@/data/submissions-data.json';
 import SubmissionsChartModal from '@/components/ui/submissions-chart-modal';
+import submissionsData from '@/data/submissions-data.json';
 
 interface SubmissionsChartProps {
   className?: string;

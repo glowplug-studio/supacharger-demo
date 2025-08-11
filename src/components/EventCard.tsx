@@ -2,14 +2,15 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { MapPin, Image, Video, ClipboardCopy, ExternalLink, Calendar, QrCode, Play, Radio } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Calendar, ClipboardCopy, ExternalLink, Image, MapPin, Play, QrCode, Radio,Video } from 'lucide-react';
+import { toast } from 'react-toastify';
+
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { UnifiedBadge } from '@/components/ui/unified-badge';
-import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
 import QRModal from '@/components/ui/qr-modal';
+import { UnifiedBadge } from '@/components/ui/unified-badge';
 
 interface Event {
   id: string;

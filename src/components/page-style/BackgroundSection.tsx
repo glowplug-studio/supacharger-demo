@@ -1,9 +1,10 @@
 'use client';
 
-import { X, Image } from 'lucide-react';
+import { Image,X } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import { ColorPicker } from '@/components/ui/color-picker';
+import { Label } from '@/components/ui/label';
 
 interface BackgroundSectionProps {
   backgroundColor: string;

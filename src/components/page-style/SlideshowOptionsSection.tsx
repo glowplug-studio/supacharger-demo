@@ -1,9 +1,10 @@
 'use client';
 
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import PositionSelector from '@/components/ui/position-selector';
 import { ArrowUpDown, Shuffle } from 'lucide-react';
+
+import { Label } from '@/components/ui/label';
+import PositionSelector from '@/components/ui/position-selector';
+import { Switch } from '@/components/ui/switch';
 
 interface SlideshowOptionsSectionProps {
   showUploadQR: boolean;

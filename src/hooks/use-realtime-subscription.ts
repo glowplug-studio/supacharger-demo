@@ -1,10 +1,10 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useCallback,useEffect, useRef } from 'react';
+
 import { 
   createRealtimeSubscription, 
-  removeRealtimeSubscription,
+  type RealtimeCallback, 
   type RealtimeSubscriptionOptions,
-  type RealtimeCallback 
-} from '@/supacharger/utils/realtime';
+  removeRealtimeSubscription} from '@/supacharger/utils/realtime';
 import type { RealtimeChannel } from '@supabase/supabase-js';
 
 /** ==========

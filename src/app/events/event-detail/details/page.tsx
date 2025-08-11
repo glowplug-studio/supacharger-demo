@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Upload, Radio } from 'lucide-react';
+import { ArrowLeft, Radio,Upload } from 'lucide-react';
+
+import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { UnifiedBadge } from '@/components/ui/unified-badge';
-import Header from '@/components/Header';
 
 export default function EventDetailsTab() {
   const router = useRouter();

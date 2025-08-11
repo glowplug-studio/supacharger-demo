@@ -1,29 +1,29 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, Camera, X, CalendarIcon, Image, User } from 'lucide-react';
-import { validateImageFile, getFileValidationRequirements } from '@/lib/fileValidation';
 import { format } from 'date-fns';
-import { cn } from '@/lib/utils';
+import { ArrowRight, CalendarIcon, Camera, Image, User,X } from 'lucide-react';
 import { toast } from 'react-toastify';
 
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Switch } from '@/components/ui/switch';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { TimePicker } from '@/components/ui/time-picker';
-import { Separator } from '@/components/ui/separator';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { useGlobalState } from '@/hooks/useGlobalState';
-import { UnifiedBadge } from '@/components/ui/unified-badge';
 import { ContinueButton } from '@/components/ui/navigation-buttons';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
+import { Switch } from '@/components/ui/switch';
+import { Textarea } from '@/components/ui/textarea';
+import { TimePicker } from '@/components/ui/time-picker';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { UnifiedBadge } from '@/components/ui/unified-badge';
+import { useGlobalState } from '@/hooks/useGlobalState';
+import { getFileValidationRequirements,validateImageFile } from '@/lib/fileValidation';
+import { cn } from '@/lib/utils';
 
 interface EventBasicsData {
   eventName: string;

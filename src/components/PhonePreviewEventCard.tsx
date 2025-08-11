@@ -1,6 +1,6 @@
 'use client';
 
-import { Calendar, MapPin, Camera, Image } from 'lucide-react';
+import { Calendar, Camera, Image,MapPin } from 'lucide-react';
 
 interface EventCardProps {
   eventName: string;

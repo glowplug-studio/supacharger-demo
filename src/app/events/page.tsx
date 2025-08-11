@@ -1,16 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { SortAsc, SortDesc, Calendar, Type } from 'lucide-react';
+import { useEffect,useState } from 'react';
+import Link from 'next/link';
+import { Calendar, SortAsc, SortDesc, Type } from 'lucide-react';
+import { Plus } from 'lucide-react';
+
+import EventCard from '@/components/EventCard';
+import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import Header from '@/components/Header';
-import EventCard from '@/components/EventCard';
 import eventsData from '@/config/events.json';
-import { Plus } from 'lucide-react';
-import Link from 'next/link';
 
 interface Event {
   id: string;

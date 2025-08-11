@@ -1,11 +1,10 @@
 import { 
-  saveToMemory, 
   loadFromMemory, 
-  removeFromMemory, 
-  saveToSession, 
   loadFromSession, 
-  removeFromSession 
-} from './memory';
+  removeFromMemory, 
+  removeFromSession, 
+  saveToMemory, 
+  saveToSession} from './memory';
 
 /** ==========
  *

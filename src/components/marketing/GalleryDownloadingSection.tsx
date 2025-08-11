@@ -1,11 +1,12 @@
 'use client';
 
 import React from 'react';
-import { Label } from '@/components/ui/label';
+import { useState } from 'react';
+
 import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import { UnifiedBadge } from '@/components/ui/unified-badge';
 import { useGlobalState } from '@/hooks/useGlobalState';
-import { useState } from 'react';
 
 interface MarketingData {
   downloadOptions: string;
