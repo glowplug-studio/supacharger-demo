@@ -47,9 +47,11 @@ export const SC_CONFIG = {
           "/about",
           "/user/:username",
           "/legal",
+          "/events/create",
+          "/events/create/event-basics",
 
           // Defaults
-          "/",
+          //"/",
           "/account/login",
           "/account/create",
           "/account/login-magic",
