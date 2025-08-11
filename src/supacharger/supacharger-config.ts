@@ -23,7 +23,7 @@ export const SC_CONFIG = {
    */
 
   //@toto this should be translatable! this has been done using en.json Global and in  src/app/(supacharger)/(unauthenticated)/account/login/page.tsx
-  SITE_TITLE: 'Korunet',
+  SITE_TITLE: 'Snapscreen',
   SITE_DESCRIPTION: 'Start your next project without reinventing the wheel.',
 
   /**
@@ -82,7 +82,7 @@ export const SC_CONFIG = {
         // Which path is considered "home" for unauthenticated users
       HOME_PATH: '/',
       // Which path unauthenticated users are redirected to when requesting an auth protected page
-      AUTHGUARD_REDIRECT_DESTINATION: '/account/login',
+      AUTHGUARD_REDIRECT_DESTINATION: '/account/create',
       LOGOUT_REDIRECT_DESTINATON: '/',
     },
     AUTHED_USER: {
@@ -184,4 +184,10 @@ export const SC_CONFIG = {
    * ==========
    */
   CLI_INSTALL_HASH: 'c4bcd3fda8b7e68c5b33708930c62a626971f51c',
+  /**
+   * ==========
+   * CLI - do not edit
+   * ==========
+   */
+  CLI_INSTALL_HASH: 'f94e10549e2494b7259d3135b1629c2971c1ef82',
 };

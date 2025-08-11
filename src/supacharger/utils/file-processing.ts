@@ -1,9 +1,8 @@
 import { 
-  generateUniqueId, 
+  checkFileExists, 
   createTrackedObjectURL, 
-  saveFileToMemory, 
-  checkFileExists 
-} from './memory';
+  generateUniqueId, 
+  saveFileToMemory} from './memory';
 
 /** ==========
  *
