@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">Supacharger - Demo</h1>
+  <h1 align="center">Supacharger Demo</h1>
   <p align="center">
     <a href="https://supacharger.dev"><img src="/docs/gh-banner.jpg"/></a>
   </p>
