@@ -1,13 +1,14 @@
-import { useState, useCallback, useRef } from 'react';
+import { useCallback, useRef,useState } from 'react';
 import { useRouter } from 'next/navigation';
+
 import { 
-  processMultipleFiles, 
-  processCameraFile, 
   createCameraInput, 
   createFileInput,
+  type FileProcessingOptions, 
+  processCameraFile, 
   type ProcessedFile, 
-  type FileProcessingOptions 
-} from '@/supacharger/utils/file-processing';
+  processMultipleFiles} from '@/supacharger/utils/file-processing';
+
 import { 
   createArrayStateManager, 
   createKeyValueStateManager, 
